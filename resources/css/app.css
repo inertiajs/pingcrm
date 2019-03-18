@@ -1,0 +1,12 @@
+/* Reset */
+@import "tailwindcss/preflight";
+@import "reset";
+
+/* Components */
+@import "buttons";
+@import "form";
+@import "nprogress";
+@import "spinner";
+
+/* Utilities */
+@import "tailwindcss/utilities";

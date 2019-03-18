@@ -1,62 +1,81 @@
 {
     "name": "laravel/laravel",
-    "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
+    "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../inertia-laravel"
+        }
+    ],
     "require": {
-        "php": "^7.1.3",
+        "php": "~7.2.0",
+        "ext-redis": "*",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "openpsa/ranger": "^0.4.0",
+        "reinink/advanced-eloquent": "^0.2.0",
+        "reinink/inertia-laravel": "@dev",
+        "tightenco/ziggy": "^0.6.9"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7.5"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        },
         "classmap": [
             "database/seeds",
             "database/factories"
-        ]
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
     "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+        "compile": [
+            "npm run prod",
+            "@php artisan vendor:publish --provider=\"Laravel\\Horizon\\HorizonServiceProvider\"",
+            "@php artisan migrate --force"
+        ],
+        "reseed": [
+            "@php artisan migrate:fresh",
+            "@php artisan db:seed"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ]
-    }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

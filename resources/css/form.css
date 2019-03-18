@@ -1,0 +1,46 @@
+.form-label {
+  @apply .mb-2 .block .text-grey-darkest .select-none;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  @apply .p-2 .leading-normal .block .w-full .border .text-grey-darkest .bg-white .font-sans .rounded .text-left .appearance-none .relative;
+
+  &:focus,
+  &.focus {
+    @apply .border-indigo;
+    box-shadow: 0 0 0 1px config('colors.indigo');
+  }
+
+  &::placeholder {
+    @apply .text-grey-dark .opacity-100;
+  }
+}
+
+.form-select {
+  @apply .pr-6;
+
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAAABGdBTUEAALGPC/xhBQAAAQtJREFUOBG1lEEOgjAQRalbGj2OG9caOACn4ALGtfEuHACiazceR1PWOH/CNA3aMiTaBDpt/7zPdBKy7M/DCL9pGkvxxVp7KsvyJftL5rZt1865M+Ucq6pyyF3hNcI7Cuu+728QYn/JQA5yKaempxuZmQngOwEaYx55nu+1lQh8GIatMGi+01NwBcEmhxBqK4nAPZJ78K0KKFAJmR3oPp8+Iwgob0Oa6+TLoeCvRx+mTUYf/FVBGTPRwDkfLxnaSrRwcH0FWhNOmrkWYbE2XEicqgSa1J0LQ+aPCuQgZiLnwewbGuz5MGoAhcIkCQcjaTBjMgtXGURMVHC1wcQEy0J+Zlj8bKAnY1/UzDe2dbAVqfXn6wAAAABJRU5ErkJggg==');
+  background-size: 0.7rem;
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+
+  &::-ms-expand {
+    @apply .opacity-0;
+  }
+}
+
+.form-error {
+  @apply .text-red .mt-2 .text-sm;
+}
+
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+  @apply .border-red-light;
+
+  &:focus {
+    box-shadow: 0 0 0 1px config('colors.red');
+  }
+}
