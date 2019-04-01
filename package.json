@@ -17,7 +17,7 @@
         "eslint": "^5.14.1",
         "eslint-plugin-vue": "^5.2.2",
         "fuse.js": "^3.4.2",
-        "inertia-vue": "file:../inertia-vue",
+        "inertia-vue": "inertiajs/inertia-vue",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
