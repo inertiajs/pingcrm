@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e605df0d49e56e6f5c11bd44dd6c7eb",
+    "content-hash": "0355694807fea35952ab921c638f6d8b",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1530,6 +1530,46 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "reinink/remember-query-strings",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reinink/remember-query-strings.git",
+                "reference": "91c7723a4545ba96d0474581563b30cd262f56e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reinink/remember-query-strings/zipball/91c7723a4545ba96d0474581563b30cd262f56e2",
+                "reference": "91c7723a4545ba96d0474581563b30cd262f56e2",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Reinink\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "https://reinink.ca"
+                }
+            ],
+            "description": "Laravel middleware that automatically remembers and restores query strings.",
+            "homepage": "https://github.com/reinink/remember-query-strings",
+            "keywords": [
+                "laravel",
+                "middleware",
+                "query-strings"
+            ],
+            "time": "2019-04-02T17:35:40+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
