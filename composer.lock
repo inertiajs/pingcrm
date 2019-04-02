@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa9ce2fd4daacfdcf55ca7c6fc1e73c6",
+    "content-hash": "1e605df0d49e56e6f5c11bd44dd6c7eb",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1530,54 +1530,6 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
-        },
-        {
-            "name": "reinink/advanced-eloquent",
-            "version": "v0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reinink/advanced-eloquent.git",
-                "reference": "2d92b29ba085fd537c198868e8e5c15a0bf205b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reinink/advanced-eloquent/zipball/2d92b29ba085fd537c198868e8e5c15a0bf205b8",
-                "reference": "2d92b29ba085fd537c198868e8e5c15a0bf205b8",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "AdvancedEloquent\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "AdvancedEloquent\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Reinink",
-                    "email": "jonathan@reinink.ca",
-                    "homepage": "https://reinink.ca"
-                }
-            ],
-            "description": "A set of advanced Eloquent macros for Laravel",
-            "homepage": "https://github.com/reinink/advanced-eloquent",
-            "keywords": [
-                "advanced",
-                "eloquent",
-                "laravel",
-                "macro"
-            ],
-            "time": "2018-11-23T20:30:53+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

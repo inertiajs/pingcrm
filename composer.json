@@ -12,7 +12,6 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "openpsa/ranger": "^0.4.0",
-        "reinink/advanced-eloquent": "^0.2.0",
         "tightenco/ziggy": "^0.6.9"
     },
     "require-dev": {
