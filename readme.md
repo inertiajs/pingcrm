@@ -41,15 +41,10 @@ Generate application key:
 php artisan key:generate
 ```
 
-Setup local database by editing `.env`. Use whatever database (MySQL, Postgres, SQLite) you'd like here.
+Create an SQLite database. You can also use another database (MySQL, Postgres), simply update your configuration accordingly.
 
-```
-DB_CONNECTION=
-DB_HOST=
-DB_PORT=
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+```sh
+touch database/database.sqlite
 ```
 
 Run database migrations:
