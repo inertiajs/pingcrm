@@ -34,8 +34,6 @@ class Contact extends Model
                         $query->where('name', 'ilike', '%'.$search.'%');
                     });
             });
-        // })->when($filters['role'] ?? null, function ($query, $role) {
-        //     $query->whereRole($role);
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();
