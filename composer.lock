@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cc6108193764648981d89772c76571e",
+    "content-hash": "fa9ce2fd4daacfdcf55ca7c6fc1e73c6",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -427,12 +427,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "b0ed1f62f17c46057e5a7d7de9ba5703bfa61bff"
+                "reference": "efca95180d2fb5f6969238350f0c15c90ad17c40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/b0ed1f62f17c46057e5a7d7de9ba5703bfa61bff",
-                "reference": "b0ed1f62f17c46057e5a7d7de9ba5703bfa61bff",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/efca95180d2fb5f6969238350f0c15c90ad17c40",
+                "reference": "efca95180d2fb5f6969238350f0c15c90ad17c40",
                 "shasum": ""
             },
             "require-dev": {
@@ -460,7 +460,7 @@
                 "inertia",
                 "laravel"
             ],
-            "time": "2019-04-01T16:36:13+00:00"
+            "time": "2019-04-01T19:01:52+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -552,16 +552,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.8",
+            "version": "v5.8.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3f0a5744a866ae3ae0ca84f47080501714af01ba"
+                "reference": "2455d21938e9072e5a8ecef64ae162a1825d336b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3f0a5744a866ae3ae0ca84f47080501714af01ba",
-                "reference": "3f0a5744a866ae3ae0ca84f47080501714af01ba",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2455d21938e9072e5a8ecef64ae162a1825d336b",
+                "reference": "2455d21938e9072e5a8ecef64ae162a1825d336b",
                 "shasum": ""
             },
             "require": {
@@ -695,7 +695,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-03-26T17:19:10+00:00"
+            "time": "2019-04-02T14:11:17+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -4850,8 +4850,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "~7.2.0",
-        "ext-redis": "*"
+        "php": "~7.2.0"
     },
     "platform-dev": []
 }

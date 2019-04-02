@@ -6,7 +6,6 @@
     "type": "project",
     "require": {
         "php": "~7.2.0",
-        "ext-redis": "*",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.4",
         "inertiajs/inertia-laravel": "dev-master",
