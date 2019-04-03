@@ -13,6 +13,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use SoftDeletes, Authenticatable, Authorizable;
 
+    protected $casts = [
+        'owner' => 'boolean',
+    ];
+
     public function account()
     {
         return $this->belongsTo(Account::class);
