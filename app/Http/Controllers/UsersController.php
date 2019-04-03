@@ -23,7 +23,7 @@ class UsersController extends Controller
                         'id' => $user->id,
                         'name' => $user->name,
                         'email' => $user->email,
-                        'owner' => $user->owner,
+                        'owner' => (bool) $user->owner,
                         'deleted_at' => $user->deleted_at,
                     ];
                 }),
