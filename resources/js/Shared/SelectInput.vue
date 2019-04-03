@@ -18,7 +18,7 @@ export default {
         return `select-input-${this._uid}`
       },
     },
-    value: [String, Number],
+    value: [String, Number, Boolean],
     label: String,
     error: String,
   },
