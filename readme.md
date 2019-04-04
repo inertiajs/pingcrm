@@ -9,7 +9,7 @@ A demo application to illustrate how Inertia.js works.
 Clone the repo locally:
 
 ```sh
-git clone git@github.com:inertiajs/pingcrm.git pingcrm
+git clone https://github.com/inertiajs/pingcrm.git pingcrm
 cd pingcrm
 ```
 
