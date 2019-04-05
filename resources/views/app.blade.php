@@ -9,7 +9,7 @@
 </head>
 <body class="font-sans leading-none text-grey-darkest antialiased">
 
-<div id="app" data-component="{{ $component }}" data-props="{{ json_encode($props, JSON_FORCE_OBJECT) }}"></div>
+<div id="app" data-component="{{ $component }}" data-props="{{ json_encode((object) $props) }}"></div>
 
 </body>
 </html>
