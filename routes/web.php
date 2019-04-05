@@ -60,5 +60,5 @@ Route::get('reports')->name('reports')->uses('ReportsController@index')->middlew
 
 // 500 error
 Route::get('500', function () {
-    echo $fail;
+    abort(500);
 });
