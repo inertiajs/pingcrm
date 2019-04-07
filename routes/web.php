@@ -17,7 +17,7 @@ Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login');
 Route::get('logout')->name('logout')->uses('Auth\LoginController@logout');
 
 // Dashboard
-Route::get('/')->name('dashboard')->uses('DashboardController@index')->middleware('auth');
+Route::get('/')->name('dashboard')->uses('DashboardController')->middleware('auth');
 
 // Accounts
 Route::get('accounts')->name('accounts')->uses('AccountsController@index')->middleware('remember', 'auth');
@@ -56,7 +56,7 @@ Route::delete('contacts/{contact}')->name('contacts.destroy')->uses('ContactsCon
 Route::put('contacts/{contact}/restore')->name('contacts.restore')->uses('ContactsController@restore')->middleware('auth');
 
 // Reports
-Route::get('reports')->name('reports')->uses('ReportsController@index')->middleware('auth');
+Route::get('reports')->name('reports')->uses('ReportsController')->middleware('auth');
 
 // 500 error
 Route::get('500', function () {
