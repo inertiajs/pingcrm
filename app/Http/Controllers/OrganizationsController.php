@@ -12,10 +12,10 @@ class OrganizationsController extends Controller
     public function index()
     {
         return Inertia::render('Organizations/Index', [
-            'filters' => Request::all('search', 'role', 'trashed'),
+            'filters' => Request::all('search', 'trashed'),
             'organizations' => Auth::user()->account->organizations()
                 ->orderBy('name')
-                ->filter(Request::only('search', 'role', 'trashed'))
+                ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->only('id', 'name', 'phone', 'city', 'deleted_at'),
         ]);
