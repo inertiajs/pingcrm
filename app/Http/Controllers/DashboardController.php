@@ -6,7 +6,7 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
         return Inertia::render('Dashboard/Index');
     }
