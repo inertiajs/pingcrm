@@ -12,5 +12,6 @@ $factory->define(App\Organization::class, function (Faker $faker) {
         'region' => $faker->state,
         'country' => 'US',
         'postal_code' => $faker->postcode,
+        'account_id' => factory(\App\Account::class)
     ];
 });
