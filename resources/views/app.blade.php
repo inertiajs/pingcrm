@@ -9,7 +9,7 @@
 </head>
 <body class="font-sans leading-none text-grey-darkest antialiased">
 
-<div id="app" data-component="{{ $component }}" data-props="{{ json_encode((object) $props) }}"></div>
+@inertia
 
 </body>
 </html>
