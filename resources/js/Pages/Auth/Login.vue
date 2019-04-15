@@ -6,16 +6,16 @@
         <div class="px-10 py-12">
           <h1 class="text-center font-bold text-3xl">Welcome Back!</h1>
           <div class="mx-auto mt-6 w-24 border-b-2" />
-          <text-input v-model="form.fields.email" class="mt-10" label="Email" :error="form.errors.first('email')" type="email" autofocus autocapitalize="off" />
-          <text-input v-model="form.fields.password" class="mt-6" label="Password" :error="form.errors.first('password')" type="password" />
+          <text-input v-model="form.email" class="mt-10" label="Email" :error="errors.email ? errors.email[0] : null" type="email" autofocus autocapitalize="off" />
+          <text-input v-model="form.password" class="mt-6" label="Password" type="password" />
           <label class="mt-6 select-none flex items-center" for="remember">
-            <input id="remember" v-model="form.fields.remember" class="mr-1" type="checkbox">
+            <input id="remember" v-model="form.remember" class="mr-1" type="checkbox">
             <span class="text-sm">Remember Me</span>
           </label>
         </div>
         <div class="px-10 py-4 bg-grey-lightest border-t border-grey-lighter flex justify-between items-center">
           <a class="hover:underline" tabindex="-1" href="#reset-password">Forget password?</a>
-          <loading-button :loading="form.sending" class="btn-indigo" type="submit">Login</loading-button>
+          <loading-button :loading="sending" class="btn-indigo" type="submit">Login</loading-button>
         </div>
       </form>
     </div>
@@ -24,7 +24,6 @@
 
 <script>
 import { Inertia } from 'inertia-vue'
-import Form from '@/Utils/Form'
 import LoadingButton from '@/Shared/LoadingButton'
 import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
@@ -36,16 +35,17 @@ export default {
     TextInput,
   },
   props: {
-    intendedUrl: String,
+    errors: Object,
   },
   inject: ['page'],
   data() {
     return {
-      form: new Form({
+      sending: false,
+      form: {
         email: null,
         password: null,
         remember: null,
-      }),
+      },
     }
   },
   mounted() {
@@ -53,10 +53,12 @@ export default {
   },
   methods: {
     submit() {
-      this.form.post({
-        url: this.route('login.attempt').url(),
-        then: () => Inertia.visit(this.intendedUrl),
-      })
+      this.sending = true
+      Inertia.post(this.route('login.attempt').url(), {
+        email: this.form.email,
+        password: this.form.password,
+        remember: this.form.remember,
+      }).then(() => this.sending = false)
     },
   },
 }

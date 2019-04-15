@@ -35,18 +35,6 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return Inertia::render('Auth/Login', [
-            'intendedUrl' => Session::pull('url.intended', URL::route('dashboard')),
-        ]);
-    }
-
-    protected function authenticated(Request $request, $user)
-    {
-        return Response::json(['success' => true]);
-    }
-
-    protected function loggedOut(Request $request)
-    {
-        return Redirect::route('login');
+        return Inertia::render('Auth/Login');
     }
 }

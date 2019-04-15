@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Inertia::share('app.name', Config::get('app.name'));
+        Inertia::share('errors', function () {
+            return Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [];
+        });
         Inertia::share('auth.user', function () {
             if (Auth::user()) {
                 return [
