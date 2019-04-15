@@ -65,23 +65,23 @@ export default {
   methods: {
     submit() {
       this.form.put({
-        url: this.route('users.update', this.user.id).url(),
+        url: this.route('users.update', this.user.id),
         then: () => Inertia.visit(this.route('users')),
       })
     },
     destroy() {
       if (confirm('Are you sure you want to delete this user?')) {
         this.form.delete({
-          url: this.route('users.destroy', this.user.id).url(),
-          then: () => Inertia.replace(this.route('users.edit', this.user.id).url()),
+          url: this.route('users.destroy', this.user.id),
+          then: () => Inertia.replace(this.route('users.edit', this.user.id)),
         })
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this user?')) {
         this.form.put({
-          url: this.route('users.restore', this.user.id).url(),
-          then: () => Inertia.replace(this.route('users.edit', this.user.id).url()),
+          url: this.route('users.restore', this.user.id),
+          then: () => Inertia.replace(this.route('users.edit', this.user.id)),
         })
       }
     },

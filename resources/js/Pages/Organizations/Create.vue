@@ -77,7 +77,7 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      Inertia.post(this.route('organizations.store').url(), this.form).then(() => this.sending = false)
+      Inertia.post(this.route('organizations.store'), this.form).then(() => this.sending = false)
     },
   },
 }

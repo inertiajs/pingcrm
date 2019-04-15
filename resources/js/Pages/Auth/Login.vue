@@ -54,7 +54,7 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      Inertia.post(this.route('login.attempt').url(), {
+      Inertia.post(this.route('login.attempt'), {
         email: this.form.email,
         password: this.form.password,
         remember: this.form.remember,

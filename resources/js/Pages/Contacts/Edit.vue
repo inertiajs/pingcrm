@@ -79,23 +79,23 @@ export default {
   methods: {
     submit() {
       this.form.put({
-        url: this.route('contacts.update', this.contact.id).url(),
+        url: this.route('contacts.update', this.contact.id),
         then: () => Inertia.visit(this.route('contacts')),
       })
     },
     destroy() {
       if (confirm('Are you sure you want to delete this contact?')) {
         this.form.delete({
-          url: this.route('contacts.destroy', this.contact.id).url(),
-          then: () => Inertia.replace(this.route('contacts.edit', this.contact.id).url()),
+          url: this.route('contacts.destroy', this.contact.id),
+          then: () => Inertia.replace(this.route('contacts.edit', this.contact.id)),
         })
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this contact?')) {
         this.form.put({
-          url: this.route('contacts.restore', this.contact.id).url(),
-          then: () => Inertia.replace(this.route('contacts.edit', this.contact.id).url()),
+          url: this.route('contacts.restore', this.contact.id),
+          then: () => Inertia.replace(this.route('contacts.edit', this.contact.id)),
         })
       }
     },

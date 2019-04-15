@@ -71,7 +71,7 @@ export default {
   methods: {
     submit() {
       this.form.post({
-        url: this.route('contacts.store').url(),
+        url: this.route('contacts.store'),
         then: data => Inertia.visit(this.route('contacts.edit', data.id)),
       })
     },
