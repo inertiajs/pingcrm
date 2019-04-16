@@ -7,26 +7,26 @@
     <div class="bg-white rounded shadow overflow-hidden max-w-lg">
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.fields.first_name" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('first_name')" label="First name" />
-          <text-input v-model="form.fields.last_name" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('last_name')" label="Last name" />
-          <select-input v-model="form.fields.organization_id" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('organization_id')" label="Organization">
+          <text-input v-model="form.first_name" :errors="errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
+          <text-input v-model="form.last_name" :errors="errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
+          <select-input v-model="form.organization_id" :errors="errors.organization_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Organization">
             <option :value="null" />
             <option v-for="organization in organizations" :key="organization.id" :value="organization.id">{{ organization.name }}</option>
           </select-input>
-          <text-input v-model="form.fields.email" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('email')" label="Email" />
-          <text-input v-model="form.fields.phone" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('phone')" label="Phone" />
-          <text-input v-model="form.fields.address" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('address')" label="Address" />
-          <text-input v-model="form.fields.city" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('city')" label="City" />
-          <text-input v-model="form.fields.region" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('region')" label="Province/State" />
-          <select-input v-model="form.fields.country" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('country')" label="Country">
+          <text-input v-model="form.email" :errors="errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
+          <text-input v-model="form.phone" :errors="errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
+          <text-input v-model="form.address" :errors="errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.city" :errors="errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
+          <text-input v-model="form.region" :errors="errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
+          <select-input v-model="form.country" :errors="errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
             <option :value="null" />
             <option value="CA">Canada</option>
             <option value="US">United States</option>
           </select-input>
-          <text-input v-model="form.fields.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('postal_code')" label="Postal code" />
+          <text-input v-model="form.postal_code" :errors="errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-grey-lightest border-t border-grey-lighter flex justify-end items-center">
-          <loading-button :loading="form.sending" class="btn-indigo" type="submit">Create Contact</loading-button>
+          <loading-button :loading="sending" class="btn-indigo" type="submit">Create Contact</loading-button>
         </div>
       </form>
     </div>
@@ -35,7 +35,6 @@
 
 <script>
 import { Inertia, InertiaLink } from 'inertia-vue'
-import Form from '@/Utils/Form'
 import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
@@ -50,11 +49,20 @@ export default {
     TextInput,
   },
   props: {
+    contact: {
+      type: Object,
+      default: () => ({}),
+    },
     organizations: Array,
+    errors: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
-      form: new Form({
+      sending: false,
+      form: {
         first_name: null,
         last_name: null,
         organization_id: null,
@@ -65,15 +73,20 @@ export default {
         region: null,
         country: null,
         postal_code: null,
-      }),
+      },
     }
+  },
+  watch: {
+    form: {
+      handler: form => Inertia.cache('contact', form),
+      deep: true,
+    },
   },
   methods: {
     submit() {
-      this.form.post({
-        url: this.route('contacts.store'),
-        then: data => Inertia.visit(this.route('contacts.edit', data.id)),
-      })
+      this.sending = true
+      Inertia.post(this.route('contacts.store'), this.form)
+        .then(() => this.sending = false)
     },
   },
 }

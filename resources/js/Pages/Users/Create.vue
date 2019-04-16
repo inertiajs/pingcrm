@@ -7,17 +7,17 @@
     <div class="bg-white rounded shadow overflow-hidden max-w-lg">
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.fields.first_name" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('first_name')" label="First name" />
-          <text-input v-model="form.fields.last_name" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('last_name')" label="Last name" />
-          <text-input v-model="form.fields.email" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('email')" label="Email" />
-          <text-input v-model="form.fields.password" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('password')" type="password" autocomplete="new-password" label="Password" />
-          <select-input v-model="form.fields.owner" class="pr-6 pb-8 w-full lg:w-1/2" :error="form.errors.first('owner')" label="Owner">
+          <text-input v-model="form.first_name" :errors="errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
+          <text-input v-model="form.last_name" :errors="errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
+          <text-input v-model="form.email" :errors="errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
+          <text-input v-model="form.password" :errors="errors.password" class="pr-6 pb-8 w-full lg:w-1/2" type="password" autocomplete="new-password" label="Password" />
+          <select-input v-model="form.owner" :errors="errors.owner" class="pr-6 pb-8 w-full lg:w-1/2" label="Owner">
             <option :value="true">Yes</option>
             <option :value="false">No</option>
           </select-input>
         </div>
         <div class="px-8 py-4 bg-grey-lightest border-t border-grey-lighter flex justify-end items-center">
-          <loading-button :loading="form.sending" class="btn-indigo" type="submit">Create User</loading-button>
+          <loading-button :loading="sending" class="btn-indigo" type="submit">Create User</loading-button>
         </div>
       </form>
     </div>
@@ -26,7 +26,6 @@
 
 <script>
 import { Inertia, InertiaLink } from 'inertia-vue'
-import Form from '@/Utils/Form'
 import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
@@ -41,25 +40,38 @@ export default {
     TextInput,
   },
   props: {
-    organizations: Array,
+    user: {
+      type: Object,
+      default: () => ({ owner: false }),
+    },
+    errors: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
-      form: new Form({
-        first_name: null,
-        last_name: null,
-        email: null,
-        password: null,
-        owner: null,
-      }),
+      sending: false,
+      form: {
+        first_name: this.user.first_name,
+        last_name: this.user.last_name,
+        email: this.user.email,
+        password: this.user.password,
+        owner: this.user.owner,
+      },
     }
+  },
+  watch: {
+    form: {
+      handler: form => Inertia.cache('user', form),
+      deep: true,
+    },
   },
   methods: {
     submit() {
-      this.form.post({
-        url: this.route('users.store'),
-        then: data => Inertia.visit(this.route('users.edit', data.id)),
-      })
+      this.sending = true
+      Inertia.post(this.route('users.store'), this.form)
+        .then(() => this.sending = false)
     },
   },
 }

@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class UsersController extends Controller
 {
@@ -37,7 +38,7 @@ class UsersController extends Controller
 
     public function store()
     {
-        return Auth::user()->account->users()->create(
+        Auth::user()->account->users()->create(
             Request::validate([
                 'first_name' => ['required', 'max:50'],
                 'last_name' => ['required', 'max:50'],
@@ -45,7 +46,9 @@ class UsersController extends Controller
                 'password' => ['nullable'],
                 'owner' => ['required', 'boolean'],
             ])
-        )->only('id');
+        );
+
+        return Redirect::route('users');
     }
 
     public function edit(User $user)
@@ -77,15 +80,21 @@ class UsersController extends Controller
         if (Request::get('password')) {
             $user->update(['password' => Request::get('password')]);
         }
+
+        return Redirect::route('users.edit', $user);
     }
 
     public function destroy(User $user)
     {
         $user->delete();
+
+        return Redirect::route('users.edit', $user);
     }
 
     public function restore(User $user)
     {
         $user->restore();
+
+        return Redirect::route('users.edit', $user);
     }
 }
