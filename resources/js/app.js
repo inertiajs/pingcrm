@@ -11,8 +11,7 @@ let app = document.getElementById('app')
 new Vue({
   render: h => h(Inertia, {
     props: {
-      component: app.dataset.component,
-      props: JSON.parse(app.dataset.props),
+      initialPage: JSON.parse(app.dataset.page),
       resolveComponent: (component) => {
         return import(`@/Pages/${component}`).then(module => module.default)
       },
