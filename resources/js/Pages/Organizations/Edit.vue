@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       sending: false,
-      form: {
+      form: Inertia.remember({
         name: this.organization.name,
         email: this.organization.email,
         phone: this.organization.phone,
@@ -107,7 +107,7 @@ export default {
         region: this.organization.region,
         country: this.organization.country,
         postal_code: this.organization.postal_code,
-      },
+      }),
     }
   },
   methods: {

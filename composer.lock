@@ -427,12 +427,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "307747e352eefb48a84e7e17b63ea7738606f2a1"
+                "reference": "d22b42840936f377ba77cef563332f7e544b91ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/307747e352eefb48a84e7e17b63ea7738606f2a1",
-                "reference": "307747e352eefb48a84e7e17b63ea7738606f2a1",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/d22b42840936f377ba77cef563332f7e544b91ef",
+                "reference": "d22b42840936f377ba77cef563332f7e544b91ef",
                 "shasum": ""
             },
             "require-dev": {
@@ -467,7 +467,7 @@
                 "inertia",
                 "laravel"
             ],
-            "time": "2019-04-17T18:00:32+00:00"
+            "time": "2019-04-22T14:39:16+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -559,16 +559,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.8.12",
+            "version": "v5.8.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "6dd75b67811a265c57144ab15f25a8061ed4721f"
+                "reference": "837e3823e2274d22b8e281d093391b5d9c23029a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6dd75b67811a265c57144ab15f25a8061ed4721f",
-                "reference": "6dd75b67811a265c57144ab15f25a8061ed4721f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/837e3823e2274d22b8e281d093391b5d9c23029a",
+                "reference": "837e3823e2274d22b8e281d093391b5d9c23029a",
                 "shasum": ""
             },
             "require": {
@@ -702,7 +702,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-04-16T13:47:32+00:00"
+            "time": "2019-04-18T15:28:45+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1580,16 +1580,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.0",
+            "version": "v6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707"
+                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707",
-                "reference": "6fa3232ff9d3f8237c0fae4b7ff05e1baa4cd707",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
+                "reference": "5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a",
                 "shasum": ""
             },
             "require": {
@@ -1638,7 +1638,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2019-03-10T07:52:41+00:00"
+            "time": "2019-04-21T09:21:45+00:00"
         },
         {
             "name": "symfony/console",
@@ -4102,16 +4102,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.8",
+            "version": "7.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c29c0525cf4572c11efe1db49a8b8aee9dfac58a"
+                "reference": "134669cf0eeac3f79bc7f0c793efbc158bffc160"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c29c0525cf4572c11efe1db49a8b8aee9dfac58a",
-                "reference": "c29c0525cf4572c11efe1db49a8b8aee9dfac58a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/134669cf0eeac3f79bc7f0c793efbc158bffc160",
+                "reference": "134669cf0eeac3f79bc7f0c793efbc158bffc160",
                 "shasum": ""
             },
             "require": {
@@ -4182,7 +4182,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-03-26T13:23:54+00:00"
+            "time": "2019-04-19T15:50:46+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

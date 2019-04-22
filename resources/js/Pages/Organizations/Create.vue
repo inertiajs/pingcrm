@@ -44,10 +44,6 @@ export default {
     TextInput,
   },
   props: {
-    organization: {
-      type: Object,
-      default: () => ({}),
-    },
     errors: {
       type: Object,
       default: () => ({}),
@@ -56,23 +52,17 @@ export default {
   data() {
     return {
       sending: false,
-      form: {
-        name: this.organization.name,
-        email: this.organization.email,
-        phone: this.organization.phone,
-        address: this.organization.address,
-        city: this.organization.city,
-        region: this.organization.region,
-        country: this.organization.country,
-        postal_code: this.organization.postal_code,
-      },
+      form: Inertia.remember({
+        name: null,
+        email: null,
+        phone: null,
+        address: null,
+        city: null,
+        region: null,
+        country: null,
+        postal_code: null,
+      }),
     }
-  },
-  watch: {
-    form: {
-      handler: form => Inertia.cache('organization', form),
-      deep: true,
-    },
   },
   methods: {
     submit() {

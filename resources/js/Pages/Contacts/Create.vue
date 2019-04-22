@@ -49,10 +49,6 @@ export default {
     TextInput,
   },
   props: {
-    contact: {
-      type: Object,
-      default: () => ({}),
-    },
     organizations: Array,
     errors: {
       type: Object,
@@ -62,7 +58,7 @@ export default {
   data() {
     return {
       sending: false,
-      form: {
+      form: Inertia.remember({
         first_name: null,
         last_name: null,
         organization_id: null,
@@ -73,14 +69,8 @@ export default {
         region: null,
         country: null,
         postal_code: null,
-      },
+      }),
     }
-  },
-  watch: {
-    form: {
-      handler: form => Inertia.cache('contact', form),
-      deep: true,
-    },
   },
   methods: {
     submit() {

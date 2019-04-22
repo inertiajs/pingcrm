@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       sending: false,
-      form: {
+      form: Inertia.remember({
         first_name: this.contact.first_name,
         last_name: this.contact.last_name,
         organization_id: this.contact.organization_id,
@@ -77,7 +77,7 @@ export default {
         region: this.contact.region,
         country: this.contact.country,
         postal_code: this.contact.postal_code,
-      },
+      }),
     }
   },
   methods: {

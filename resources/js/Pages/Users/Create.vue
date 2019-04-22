@@ -40,10 +40,6 @@ export default {
     TextInput,
   },
   props: {
-    user: {
-      type: Object,
-      default: () => ({ owner: false }),
-    },
     errors: {
       type: Object,
       default: () => ({}),
@@ -52,20 +48,14 @@ export default {
   data() {
     return {
       sending: false,
-      form: {
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        password: this.user.password,
-        owner: this.user.owner,
-      },
+      form: Inertia.remember({
+        first_name: null,
+        last_name: null,
+        email: null,
+        password: null,
+        owner: false,
+      }),
     }
-  },
-  watch: {
-    form: {
-      handler: form => Inertia.cache('user', form),
-      deep: true,
-    },
   },
   methods: {
     submit() {
