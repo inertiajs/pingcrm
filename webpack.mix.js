@@ -15,14 +15,6 @@ const tailwindcss = require('tailwindcss')
  |
  */
 
-// Provide inline source maps.
-if ( ! mix.inProduction()) {
-  mix.webpackConfig({
-    devtool: 'inline-source-map',
-  })
-    .sourceMaps()
-}
-
 mix.js('resources/js/app.js', 'public/js')
   .postCss('resources/css/app.css', 'public/css', [
     cssImport(),
@@ -39,3 +31,4 @@ mix.js('resources/js/app.js', 'public/js')
     },
   })
   .version()
+  .sourceMaps()
