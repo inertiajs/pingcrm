@@ -16,7 +16,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         TestResponse::macro('props', function ($key = null) {
-            $props = json_decode(json_encode($this->original->getData()['props']), JSON_OBJECT_AS_ARRAY);
+            $props = json_decode(json_encode($this->original->getData()['page']['props']), JSON_OBJECT_AS_ARRAY);
 
             if ($key) {
                 return Arr::get($props, $key);
