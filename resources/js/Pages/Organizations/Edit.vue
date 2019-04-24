@@ -70,7 +70,6 @@
 </template>
 
 <script>
-import { Inertia, InertiaLink } from 'inertia-vue'
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
@@ -80,7 +79,6 @@ import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   components: {
-    InertiaLink,
     Icon,
     Layout,
     LoadingButton,
@@ -95,10 +93,11 @@ export default {
       default: () => ({}),
     },
   },
+  remember: ['form'],
   data() {
     return {
       sending: false,
-      form: Inertia.remember({
+      form: {
         name: this.organization.name,
         email: this.organization.email,
         phone: this.organization.phone,
@@ -107,23 +106,23 @@ export default {
         region: this.organization.region,
         country: this.organization.country,
         postal_code: this.organization.postal_code,
-      }),
+      },
     }
   },
   methods: {
     submit() {
       this.sending = true
-      Inertia.put(this.route('organizations.update', this.organization.id), this.form)
+      this.$inertia.put(this.route('organizations.update', this.organization.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this organization?')) {
-        Inertia.delete(this.route('organizations.destroy', this.organization.id))
+        this.$inertia.delete(this.route('organizations.destroy', this.organization.id))
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this organization?')) {
-        Inertia.put(this.route('organizations.restore', this.organization.id))
+        this.$inertia.put(this.route('organizations.restore', this.organization.id))
       }
     },
   },

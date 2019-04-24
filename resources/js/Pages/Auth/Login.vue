@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { Inertia } from 'inertia-vue'
 import LoadingButton from '@/Shared/LoadingButton'
 import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
@@ -54,7 +53,7 @@ export default {
   methods: {
     submit() {
       this.sending = true
-      Inertia.post(this.route('login.attempt'), {
+      this.$inertia.post(this.route('login.attempt'), {
         email: this.form.email,
         password: this.form.password,
         remember: this.form.remember,

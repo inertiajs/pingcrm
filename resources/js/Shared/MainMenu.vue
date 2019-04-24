@@ -28,12 +28,10 @@
 </template>
 
 <script>
-import { InertiaLink } from 'inertia-vue'
 import Icon from '@/Shared/Icon'
 
 export default {
   components: {
-    InertiaLink,
     Icon,
   },
   methods: {

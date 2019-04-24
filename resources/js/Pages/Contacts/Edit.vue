@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { Inertia, InertiaLink } from 'inertia-vue'
 import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
@@ -48,7 +47,6 @@ import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   components: {
-    InertiaLink,
     Layout,
     LoadingButton,
     SelectInput,
@@ -63,10 +61,11 @@ export default {
       default: () => ({}),
     },
   },
+  remember: 'form',
   data() {
     return {
       sending: false,
-      form: Inertia.remember({
+      form: {
         first_name: this.contact.first_name,
         last_name: this.contact.last_name,
         organization_id: this.contact.organization_id,
@@ -77,23 +76,23 @@ export default {
         region: this.contact.region,
         country: this.contact.country,
         postal_code: this.contact.postal_code,
-      }),
+      },
     }
   },
   methods: {
     submit() {
       this.sending = true
-      Inertia.put(this.route('contacts.update', this.contact.id), this.form)
+      this.$inertia.put(this.route('contacts.update', this.contact.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this contact?')) {
-        Inertia.delete(this.route('contacts.destroy', this.contact.id))
+        this.$inertia.delete(this.route('contacts.destroy', this.contact.id))
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this contact?')) {
-        Inertia.put(this.route('contacts.restore', this.contact.id))
+        this.$inertia.put(this.route('contacts.restore', this.contact.id))
       }
     },
   },

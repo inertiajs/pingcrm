@@ -64,7 +64,6 @@
 
 <script>
 import _ from 'lodash'
-import { Inertia, InertiaLink } from 'inertia-vue'
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
 import Pagination from '@/Shared/Pagination'
@@ -72,7 +71,6 @@ import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
   components: {
-    InertiaLink,
     Icon,
     Layout,
     Pagination,
@@ -94,7 +92,7 @@ export default {
     form: {
       handler: _.throttle(function() {
         let query = _.pickBy(this.form)
-        Inertia.replace(this.route('contacts', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.route('contacts', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
     },

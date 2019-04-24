@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { Inertia, InertiaLink } from 'inertia-vue'
 import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
@@ -39,7 +38,6 @@ import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   components: {
-    InertiaLink,
     Layout,
     LoadingButton,
     SelectInput,
@@ -53,32 +51,33 @@ export default {
       default: () => ({}),
     },
   },
+  remember: 'form',
   data() {
     return {
       sending: false,
-      form: Inertia.remember({
+      form: {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
         email: this.user.email,
         password: this.user.password,
         owner: this.user.owner,
-      }),
+      },
     }
   },
   methods: {
     submit() {
       this.sending = true
-      Inertia.put(this.route('users.update', this.user.id), this.form)
+      this.$inertia.put(this.route('users.update', this.user.id), this.form)
         .then(() => this.sending = false)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this user?')) {
-        Inertia.delete(this.route('users.destroy', this.user.id))
+        this.$inertia.delete(this.route('users.destroy', this.user.id))
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this user?')) {
-        Inertia.put(this.route('users.restore', this.user.id))
+        this.$inertia.put(this.route('users.restore', this.user.id))
       }
     },
   },

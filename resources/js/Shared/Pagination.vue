@@ -8,12 +8,7 @@
 </template>
 
 <script>
-import { InertiaLink } from 'inertia-vue'
-
 export default {
-  components: {
-    InertiaLink,
-  },
   props: {
     links: Array,
   },

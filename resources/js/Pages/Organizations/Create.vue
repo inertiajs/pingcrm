@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { Inertia, InertiaLink } from 'inertia-vue'
 import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
@@ -37,7 +36,6 @@ import TextInput from '@/Shared/TextInput'
 
 export default {
   components: {
-    InertiaLink,
     Layout,
     LoadingButton,
     SelectInput,
@@ -49,10 +47,11 @@ export default {
       default: () => ({}),
     },
   },
+  remember: ['form'],
   data() {
     return {
       sending: false,
-      form: Inertia.remember({
+      form: {
         name: null,
         email: null,
         phone: null,
@@ -61,13 +60,13 @@ export default {
         region: null,
         country: null,
         postal_code: null,
-      }),
+      },
     }
   },
   methods: {
     submit() {
       this.sending = true
-      Inertia.post(this.route('organizations.store'), this.form)
+      this.$inertia.post(this.route('organizations.store'), this.form)
         .then(() => this.sending = false)
     },
   },
