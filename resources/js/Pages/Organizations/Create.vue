@@ -47,7 +47,7 @@ export default {
       default: () => ({}),
     },
   },
-  remember: ['form'],
+  remember: 'form',
   data() {
     return {
       sending: false,
