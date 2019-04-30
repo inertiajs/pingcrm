@@ -16,8 +16,6 @@
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: loading 1s infinite linear;
-  animation: loading 1s infinite linear;
 }
 
 @keyframes loading {
