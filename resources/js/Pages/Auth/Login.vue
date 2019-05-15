@@ -36,7 +36,6 @@ export default {
   props: {
     errors: Object,
   },
-  inject: ['page'],
   data() {
     return {
       sending: false,
@@ -48,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    document.title = `Login | ${this.page.props.app.name}`
+    document.title = `Login | ${this.$page.app.name}`
   },
   methods: {
     submit() {

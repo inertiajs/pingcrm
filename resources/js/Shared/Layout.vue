@@ -16,17 +16,17 @@
             </dropdown>
           </div>
           <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-base flex justify-between items-center">
-            <div class="mt-1 mr-4">{{ page.props.auth.user.account.name }}</div>
+            <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
                 <div class="text-grey-darkest group-hover:text-indigo-dark focus:text-indigo-dark mr-1 whitespace-no-wrap">
-                  <span>{{ page.props.auth.user.first_name }}</span>
-                  <span class="hidden md:inline">{{ page.props.auth.user.last_name }}</span>
+                  <span>{{ $page.auth.user.first_name }}</span>
+                  <span class="hidden md:inline">{{ $page.auth.user.last_name }}</span>
                 </div>
                 <icon class="w-5 h-5 group-hover:fill-indigo-dark fill-grey-darkest focus:fill-indigo-dark" name="cheveron-down" />
               </div>
               <div slot="dropdown" class="mt-2 py-2 shadow-lg bg-white rounded text-sm">
-                <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('users.edit', page.props.auth.user.id)">My Profile</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('users')">Manage Users</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('logout')" method="post">Logout</inertia-link>
               </div>
@@ -59,7 +59,6 @@ export default {
     Logo,
     MainMenu,
   },
-  inject: ['page'],
   props: {
     title: String,
   },
@@ -79,7 +78,7 @@ export default {
   },
   methods: {
     updatePageTitle(title) {
-      document.title = title ? `${title} | ${this.page.props.app.name}` : this.page.props.app.name
+      document.title = title ? `${title} | ${this.$page.app.name}` : this.$page.app.name
     },
     hideDropdownMenus() {
       this.showUserMenu = false
