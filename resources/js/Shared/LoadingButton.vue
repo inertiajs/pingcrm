@@ -1,6 +1,6 @@
 <template>
   <button :disabled="loading" class="flex items-center">
-    <div v-if="loading" class="spinner mr-2" />
+    <div v-if="loading" class="btn-spinner mr-2" />
     <slot />
   </button>
 </template>
