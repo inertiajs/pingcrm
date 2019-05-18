@@ -8,7 +8,7 @@
     <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
       This organization has been deleted.
     </trashed-message>
-    <div class="bg-white rounded shadow overflow-hidden max-w-lg">
+    <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :errors="errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
@@ -42,7 +42,7 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo" :href="route('contacts.edit', contact.id)">
               {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-no-shrink w-3 h-3 fill-grey ml-2" />
+              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-grey ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">

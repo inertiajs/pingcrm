@@ -19,7 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
   .postCss('resources/css/app.css', 'public/css', [
     cssImport(),
     cssNesting(),
-    tailwindcss('tailwind.js'),
+    require('tailwindcss')
   ])
   .webpackConfig({
     output: { chunkFilename: 'js/[name].[contenthash].js' },

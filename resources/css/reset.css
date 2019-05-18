@@ -1,6 +1,5 @@
-a {
-  color: inherit;
-  text-decoration: none;
+html {
+  line-height: 1.15;
 }
 
 input, select, textarea, button, div, a {

@@ -2,7 +2,7 @@
   <layout title="Organizations">
     <h1 class="mb-8 font-bold text-3xl">Organizations</h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-sm mr-4" @reset="reset">
+      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-grey-darkest">Trashed:</label>
         <select v-model="form.trashed" class="mt-1 w-full form-select">
           <option :value="null" />
@@ -26,7 +26,7 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo" :href="route('organizations.edit', organization.id)">
               {{ organization.name }}
-              <icon v-if="organization.deleted_at" name="trash" class="flex-no-shrink w-3 h-3 fill-grey ml-2" />
+              <icon v-if="organization.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-grey ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">

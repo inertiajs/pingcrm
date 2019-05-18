@@ -4,18 +4,18 @@
     <div class="flex flex-col">
       <div class="min-h-screen flex flex-col" @click="hideDropdownMenus">
         <div class="md:flex">
-          <div class="bg-indigo-darkest md:flex-no-shrink md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
+          <div class="bg-indigo-darkest md:flex-shrink-0 md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
             <inertia-link class="mt-1" href="/">
               <logo class="fill-white" width="120" height="28" />
             </inertia-link>
             <dropdown class="md:hidden" placement="bottom-end">
               <svg class="fill-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
-              <div slot="dropdown" class="mt-2 px-8 py-4 shadow-lg bg-indigo-darker rounded">
+              <div slot="dropdown" class="mt-2 px-8 py-4 shadow-xl bg-indigo-darker rounded">
                 <main-menu />
               </div>
             </dropdown>
           </div>
-          <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-base flex justify-between items-center">
+          <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
             <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
@@ -25,7 +25,7 @@
                 </div>
                 <icon class="w-5 h-5 group-hover:fill-indigo-dark fill-grey-darkest focus:fill-indigo-dark" name="cheveron-down" />
               </div>
-              <div slot="dropdown" class="mt-2 py-2 shadow-lg bg-white rounded text-sm">
+              <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
                 <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('users')">Manage Users</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-indigo hover:text-white" :href="route('logout')" method="post">Logout</inertia-link>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="flex flex-grow">
-          <div class="bg-indigo-darker flex-no-shrink w-56 p-12 hidden md:block">
+          <div class="bg-indigo-darker flex-shrink-0 w-56 p-12 hidden md:block">
             <main-menu />
           </div>
           <div class="w-full overflow-hidden px-4 py-8 md:p-12">
