@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 bg-indigo-700 min-h-screen flex justify-center items-center">
+  <div class="p-6 bg-indigo-800 min-h-screen flex justify-center items-center">
     <div class="w-full max-w-md">
       <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
       <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="submit">

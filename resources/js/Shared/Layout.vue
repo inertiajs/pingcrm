@@ -4,7 +4,7 @@
     <div class="flex flex-col">
       <div class="min-h-screen flex flex-col" @click="hideDropdownMenus">
         <div class="md:flex">
-          <div class="bg-indigo-800 md:flex-shrink-0 md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
+          <div class="bg-indigo-900 md:flex-shrink-0 md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
             <inertia-link class="mt-1" href="/">
               <logo class="fill-white" width="120" height="28" />
             </inertia-link>
@@ -26,15 +26,15 @@
                 <icon class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-800 focus:fill-indigo-600" name="cheveron-down" />
               </div>
               <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                <inertia-link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
-                <inertia-link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('users')">Manage Users</inertia-link>
-                <inertia-link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('logout')" method="post">Logout</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo-600 hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo-600 hover:text-white" :href="route('users')">Manage Users</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo-600 hover:text-white" :href="route('logout')" method="post">Logout</inertia-link>
               </div>
             </dropdown>
           </div>
         </div>
         <div class="flex flex-grow">
-          <div class="bg-indigo-700 flex-shrink-0 w-56 p-12 hidden md:block">
+          <div class="bg-indigo-800 flex-shrink-0 w-56 p-12 hidden md:block">
             <main-menu />
           </div>
           <div class="w-full overflow-hidden px-4 py-8 md:p-12">
