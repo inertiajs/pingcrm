@@ -1,8 +1,8 @@
 <template>
   <layout :title="`${form.first_name} ${form.last_name}`">
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('users')">Users</inertia-link>
-      <span class="text-indigo-light font-medium">/</span>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('users')">Users</inertia-link>
+      <span class="text-indigo-400 font-medium">/</span>
       {{ form.first_name }} {{ form.last_name }}
     </h1>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
@@ -20,8 +20,8 @@
             <option :value="false">No</option>
           </select-input>
         </div>
-        <div class="px-8 py-4 bg-grey-lightest border-t border-grey-lighter flex items-center">
-          <button v-if="!user.deleted_at" class="text-red hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
+          <button v-if="!user.deleted_at" class="text-red-500 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
           <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update User</loading-button>
         </div>
       </form>

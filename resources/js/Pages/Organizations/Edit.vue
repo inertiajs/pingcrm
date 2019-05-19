@@ -1,8 +1,8 @@
 <template>
   <layout :title="form.name">
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('organizations')">Organizations</inertia-link>
-      <span class="text-indigo-light font-medium">/</span>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('organizations')">Organizations</inertia-link>
+      <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
     <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
@@ -24,8 +24,8 @@
           </select-input>
           <text-input v-model="form.postal_code" :errors="errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
-        <div class="px-8 py-4 bg-grey-lightest border-t border-grey-lighter flex items-center">
-          <button v-if="!organization.deleted_at" class="text-red hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
+          <button v-if="!organization.deleted_at" class="text-red-500 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
           <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
         </div>
       </form>
@@ -38,11 +38,11 @@
           <th class="px-6 pt-6 pb-4">City</th>
           <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
         </tr>
-        <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-grey-lightest focus-within:bg-grey-lightest">
+        <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo" :href="route('contacts.edit', contact.id)">
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
               {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-grey ml-2" />
+              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
@@ -57,7 +57,7 @@
           </td>
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-grey" />
+              <icon name="cheveron-right" class="block w-6 h-6 fill-gray" />
             </inertia-link>
           </td>
         </tr>
