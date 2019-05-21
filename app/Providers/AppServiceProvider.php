@@ -29,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
             return md5_file(public_path('mix-manifest.json'));
         });
         Inertia::share('app.name', Config::get('app.name'));
+        Inertia::share('flash', function () {
+            return [
+                'success' => Session::get('success'),
+            ];
+        });
         Inertia::share('errors', function () {
             return Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [];
         });

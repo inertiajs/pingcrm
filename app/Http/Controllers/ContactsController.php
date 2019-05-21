@@ -64,7 +64,7 @@ class ContactsController extends Controller
             ])
         );
 
-        return Redirect::route('contacts');
+        return Redirect::route('contacts')->with('success', 'Contact created.');
     }
 
     public function edit(Contact $contact)
@@ -111,20 +111,20 @@ class ContactsController extends Controller
             ])
         );
 
-        return Redirect::route('contacts.edit', $contact);
+        return Redirect::route('contacts.edit', $contact)->with('success', 'Contact updated.');
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
 
-        return Redirect::route('contacts.edit', $contact);
+        return Redirect::route('contacts.edit', $contact)->with('success', 'Contact deleted.');
     }
 
     public function restore(Contact $contact)
     {
         $contact->restore();
 
-        return Redirect::route('contacts.edit', $contact);
+        return Redirect::route('contacts.edit', $contact)->with('success', 'Contact restored.');
     }
 }
