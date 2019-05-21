@@ -54,5 +54,5 @@ Route::get('reports')->name('reports')->uses('ReportsController');
 
 // 500 error
 Route::get('500', function () {
-    abort(500);
+    echo $fail;
 });
