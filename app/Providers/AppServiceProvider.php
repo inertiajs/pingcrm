@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Inertia\Inertia;
-use OpenPsa\Ranger\Ranger;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\UrlWindow;
@@ -54,7 +53,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->registerLengthAwarePaginator();
-        $this->registerCarbonMarcos();
     }
 
     protected function registerLengthAwarePaginator()
@@ -126,16 +124,6 @@ class AppServiceProvider extends ServiceProvider
                     ]);
                 }
             };
-        });
-    }
-
-    protected function registerCarbonMarcos()
-    {
-        CarbonImmutable::macro('range', function ($to) {
-            return (new Ranger('en'))->format(
-                $this->toDateString(),
-                $to->toDateString()
-            );
         });
     }
 }
