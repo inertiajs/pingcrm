@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use Debugbar;
 use Inertia\Inertia;
-use OpenPsa\Ranger\Ranger;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\UrlWindow;
@@ -28,28 +26,33 @@ class AppServiceProvider extends ServiceProvider
         Inertia::version(function () {
             return md5_file(public_path('mix-manifest.json'));
         });
-        Inertia::share('app.name', Config::get('app.name'));
-        Inertia::share('errors', function () {
-            return Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [];
-        });
-        Inertia::share('auth.user', function () {
-            if (Auth::user()) {
-                return [
-                    'id' => Auth::user()->id,
-                    'first_name' => Auth::user()->first_name,
-                    'last_name' => Auth::user()->last_name,
-                    'email' => Auth::user()->email,
-                    'role' => Auth::user()->role,
-                    'account' => [
-                        'id' => Auth::user()->account->id,
-                        'name' => Auth::user()->account->name,
-                    ],
-                ];
-            }
+
+        Inertia::share(function () {
+            return [
+                'app' => [
+                    'name' => Config::get('app.name'),
+                ],
+                'auth' => [
+                    'user' => Auth::user() ? [
+                        'id' => Auth::user()->id,
+                        'first_name' => Auth::user()->first_name,
+                        'last_name' => Auth::user()->last_name,
+                        'email' => Auth::user()->email,
+                        'role' => Auth::user()->role,
+                        'account' => [
+                            'id' => Auth::user()->account->id,
+                            'name' => Auth::user()->account->name,
+                        ],
+                    ] : null,
+                ],
+                'flash' => [
+                    'success' => Session::get('success'),
+                ],
+                'errors' => Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [],
+            ];
         });
 
         $this->registerLengthAwarePaginator();
-        $this->registerCarbonMarcos();
     }
 
     protected function registerLengthAwarePaginator()
@@ -121,16 +124,6 @@ class AppServiceProvider extends ServiceProvider
                     ]);
                 }
             };
-        });
-    }
-
-    protected function registerCarbonMarcos()
-    {
-        CarbonImmutable::macro('range', function ($to) {
-            return (new Ranger('en'))->format(
-                $this->toDateString(),
-                $to->toDateString()
-            );
         });
     }
 }

@@ -48,7 +48,7 @@ class UsersController extends Controller
             ])
         );
 
-        return Redirect::route('users');
+        return Redirect::route('users')->with('success', 'User created.');
     }
 
     public function edit(User $user)
@@ -81,20 +81,20 @@ class UsersController extends Controller
             $user->update(['password' => Request::get('password')]);
         }
 
-        return Redirect::route('users.edit', $user);
+        return Redirect::route('users.edit', $user)->with('success', 'User updated.');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
 
-        return Redirect::route('users.edit', $user);
+        return Redirect::route('users.edit', $user)->with('success', 'User deleted.');
     }
 
     public function restore(User $user)
     {
         $user->restore();
 
-        return Redirect::route('users.edit', $user);
+        return Redirect::route('users.edit', $user)->with('success', 'User restored.');
     }
 }

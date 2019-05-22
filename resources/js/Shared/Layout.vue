@@ -38,6 +38,7 @@
             <main-menu />
           </div>
           <div class="w-full overflow-hidden px-4 py-8 md:p-12">
+            <flash-messages />
             <slot />
           </div>
         </div>
@@ -48,6 +49,7 @@
 
 <script>
 import Dropdown from '@/Shared/Dropdown'
+import FlashMessages from '@/Shared/FlashMessages'
 import Icon from '@/Shared/Icon'
 import Logo from '@/Shared/Logo'
 import MainMenu from '@/Shared/MainMenu'
@@ -55,6 +57,7 @@ import MainMenu from '@/Shared/MainMenu'
 export default {
   components: {
     Dropdown,
+    FlashMessages,
     Icon,
     Logo,
     MainMenu,
