@@ -19,15 +19,6 @@ Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
 // Dashboard
 Route::get('/')->name('dashboard')->uses('DashboardController')->middleware('auth');
 
-// Accounts
-Route::get('accounts')->name('accounts')->uses('AccountsController@index')->middleware('remember', 'auth');
-Route::get('accounts/create')->name('accounts.create')->uses('AccountsController@create')->middleware('auth');
-Route::post('accounts')->name('accounts.store')->uses('AccountsController@store')->middleware('auth');
-Route::get('accounts/{account}/edit')->name('accounts.edit')->uses('AccountsController@edit')->middleware('auth');
-Route::put('accounts/{account}')->name('accounts.update')->uses('AccountsController@update')->middleware('auth');
-Route::delete('accounts/{account}')->name('accounts.destroy')->uses('AccountsController@destroy')->middleware('auth');
-Route::put('accounts/{account}/restore')->name('accounts.restore')->uses('AccountsController@restore')->middleware('auth');
-
 // Users
 Route::get('users')->name('users')->uses('UsersController@index')->middleware('remember', 'auth');
 Route::get('users/create')->name('users.create')->uses('UsersController@create')->middleware('auth');
