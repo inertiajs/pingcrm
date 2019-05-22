@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Debugbar;
 use Inertia\Inertia;
 use OpenPsa\Ranger\Ranger;
 use Carbon\CarbonImmutable;
