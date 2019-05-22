@@ -15,7 +15,7 @@
         </div>
         <div class="px-10 py-4 bg-gray-100 border-t border-gray-200 flex justify-between items-center">
           <a class="hover:underline" tabindex="-1" href="#reset-password">Forget password?</a>
-          <loading-button :loading="sending" class="btn-indigo" type="submit">Login</loading-button>
+          <loading-button :loading="sending" class="btn-indigo-500" type="submit">Login</loading-button>
         </div>
       </form>
     </div>

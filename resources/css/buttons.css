@@ -1,5 +1,5 @@
-.btn-indigo {
-  @apply px-6 py-3 rounded bg-indigo-700 text-white text-sm font-bold whitespace-no-wrap;
+.btn-indigo-500 {
+  @apply px-6 py-3 rounded bg-indigo-600 text-white text-sm font-bold whitespace-no-wrap;
 
   &:hover, &:focus { @apply bg-orange-500 }
 }

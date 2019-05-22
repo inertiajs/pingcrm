@@ -21,8 +21,8 @@
           </select-input>
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-          <button v-if="!user.deleted_at" class="text-red-500 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
-          <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update User</loading-button>
+          <button v-if="!user.deleted_at" class="text-red-700 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
+          <loading-button :loading="sending" class="btn-indigo-500 ml-auto" type="submit">Update User</loading-button>
         </div>
       </form>
     </div>

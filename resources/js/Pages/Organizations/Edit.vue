@@ -25,8 +25,8 @@
           <text-input v-model="form.postal_code" :errors="errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-          <button v-if="!organization.deleted_at" class="text-red-500 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
-          <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
+          <button v-if="!organization.deleted_at" class="text-red-700 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
+          <loading-button :loading="sending" class="btn-indigo-500 ml-auto" type="submit">Update Organization</loading-button>
         </div>
       </form>
     </div>
@@ -42,7 +42,7 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
               {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray ml-2" />
+              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
@@ -57,7 +57,7 @@
           </td>
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray" />
+              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
         </tr>

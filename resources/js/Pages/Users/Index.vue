@@ -3,20 +3,20 @@
     <h1 class="mb-8 font-bold text-3xl">Users</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-800">Role:</label>
+        <label class="block text-gray-700">Role:</label>
         <select v-model="form.role" class="mt-1 w-full form-select">
           <option :value="null" />
           <option value="user">User</option>
           <option value="owner">Owner</option>
         </select>
-        <label class="mt-4 block text-gray-800">Trashed:</label>
+        <label class="mt-4 block text-gray-700">Trashed:</label>
         <select v-model="form.trashed" class="mt-1 w-full form-select">
           <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="route('users.create')">
+      <inertia-link class="btn-indigo-500" :href="route('users.create')">
         <span>Create</span>
         <span class="hidden md:inline">User</span>
       </inertia-link>
@@ -32,7 +32,7 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('users.edit', user.id)">
               {{ user.name }}
-              <icon v-if="user.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray ml-2" />
+              <icon v-if="user.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
@@ -47,7 +47,7 @@
           </td>
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray" />
+              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
         </tr>

@@ -10,7 +10,7 @@
             </inertia-link>
             <dropdown class="md:hidden" placement="bottom-end">
               <svg class="fill-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
-              <div slot="dropdown" class="mt-2 px-8 py-4 shadow-xl bg-indigo-700 rounded">
+              <div slot="dropdown" class="mt-2 px-8 py-4 shadow-xl bg-indigo-800 rounded">
                 <main-menu />
               </div>
             </dropdown>
@@ -19,16 +19,16 @@
             <div class="mt-1 mr-4">{{ $page.auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
-                <div class="text-gray-800 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
+                <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
                   <span>{{ $page.auth.user.first_name }}</span>
                   <span class="hidden md:inline">{{ $page.auth.user.last_name }}</span>
                 </div>
-                <icon class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-800 focus:fill-indigo-600" name="cheveron-down" />
+                <icon class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" name="cheveron-down" />
               </div>
               <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                <inertia-link class="block px-6 py-2 hover:bg-indigo-600 hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
-                <inertia-link class="block px-6 py-2 hover:bg-indigo-600 hover:text-white" :href="route('users')">Manage Users</inertia-link>
-                <inertia-link class="block px-6 py-2 hover:bg-indigo-600 hover:text-white" :href="route('logout')" method="post">Logout</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('users')">Manage Users</inertia-link>
+                <inertia-link class="block px-6 py-2 hover:bg-indigo-500 hover:text-white" :href="route('logout')" method="post">Logout</inertia-link>
               </div>
             </dropdown>
           </div>

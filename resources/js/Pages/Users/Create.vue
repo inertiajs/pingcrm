@@ -17,7 +17,7 @@
           </select-input>
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center">
-          <loading-button :loading="sending" class="btn-indigo" type="submit">Create User</loading-button>
+          <loading-button :loading="sending" class="btn-indigo-500" type="submit">Create User</loading-button>
         </div>
       </form>
     </div>
