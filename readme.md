@@ -61,6 +61,12 @@ Run database seeder:
 php artisan db:seed
 ```
 
+Run the dev server:
+
+```sh
+php artisan serve
+```
+
 You're ready to go! Visit Ping CRM in your browser, and login with:
 
 - **Username:** johndoe@example.com
@@ -68,8 +74,16 @@ You're ready to go! Visit Ping CRM in your browser, and login with:
 
 ## Running tests
 
-To run the Ping CRM tests, run:
+If you have `phpunit` installed globally, you can run the Ping CRM test suite with:
 
-```
+```sh
 phpunit
+```
+
+Or to install `phpunit` locally, and then run the test suite:
+
+
+```sh
+composer install --dev
+./vendor/bin/phpunit
 ```
