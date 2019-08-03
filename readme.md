@@ -61,7 +61,7 @@ Run database seeder:
 php artisan db:seed
 ```
 
-Run the dev server:
+Run the dev server (the output will give the address):
 
 ```sh
 php artisan serve
@@ -80,7 +80,7 @@ If you have `phpunit` installed globally, you can run the Ping CRM test suite wi
 phpunit
 ```
 
-Or to install `phpunit` locally, and then run the test suite:
+Or you can install `phpunit` locally and subsequently run the test suite:
 
 
 ```sh
