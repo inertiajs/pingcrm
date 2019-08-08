@@ -45,7 +45,9 @@ class AppServiceProvider extends ServiceProvider
                 'flash' => [
                     'success' => Session::get('success'),
                 ],
-                'errors' => Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [],
+                'errors' => Session::get('errors')
+                    ? Session::get('errors')->getBag('default')->getMessages()
+                    : (object) [],
             ];
         });
 
