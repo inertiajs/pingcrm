@@ -29,9 +29,6 @@ class AppServiceProvider extends ServiceProvider
 
         Inertia::share(function () {
             return [
-                'app' => [
-                    'name' => Config::get('app.name'),
-                ],
                 'auth' => [
                     'user' => Auth::user() ? [
                         'id' => Auth::user()->id,

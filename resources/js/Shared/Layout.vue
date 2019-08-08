@@ -72,17 +72,14 @@ export default {
     }
   },
   watch: {
-    title(title) {
-      this.updatePageTitle(title)
+    title: {
+      immediate: true,
+      handler(title) {
+        document.title = title ? `${title} | Ping CRM` : 'Ping CRM'
+      },
     },
-  },
-  mounted() {
-    this.updatePageTitle(this.title)
   },
   methods: {
-    updatePageTitle(title) {
-      document.title = title ? `${title} | ${this.$page.app.name}` : this.$page.app.name
-    },
     hideDropdownMenus() {
       this.showUserMenu = false
     },

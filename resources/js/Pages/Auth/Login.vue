@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    document.title = `Login | ${this.$page.app.name}`
+    document.title = 'Login | Ping CRM'
   },
   methods: {
     submit() {
