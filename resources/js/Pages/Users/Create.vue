@@ -45,12 +45,12 @@ export default {
     return {
       sending: false,
       form: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
+        first_name: null,
+        last_name: null,
+        email: null,
+        password: null,
         owner: false,
-        photo: '',
+        photo: null,
       },
     }
   },
@@ -59,12 +59,12 @@ export default {
       this.sending = true
 
       var data = new FormData()
-      data.append('first_name', this.form.first_name)
-      data.append('last_name', this.form.last_name)
-      data.append('email', this.form.email)
-      data.append('password', this.form.password)
+      data.append('first_name', this.form.first_name || '')
+      data.append('last_name', this.form.last_name || '')
+      data.append('email', this.form.email || '')
+      data.append('password', this.form.password || '')
       data.append('owner', this.form.owner ? '1' : '0')
-      data.append('photo', this.form.photo)
+      data.append('photo', this.form.photo || '')
 
       this.$inertia.post(this.route('users.store'), data)
         .then(() => this.sending = false)

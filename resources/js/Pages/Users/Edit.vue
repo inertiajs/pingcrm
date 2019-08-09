@@ -63,7 +63,7 @@ export default {
         email: this.user.email,
         password: this.user.password,
         owner: this.user.owner,
-        photo: '',
+        photo: null,
       },
     }
   },
@@ -72,16 +72,22 @@ export default {
       this.sending = true
 
       var data = new FormData()
-      data.append('first_name', this.form.first_name)
-      data.append('last_name', this.form.last_name)
-      data.append('email', this.form.email)
-      data.append('password', this.form.password)
+      data.append('first_name', this.form.first_name || '')
+      data.append('last_name', this.form.last_name || '')
+      data.append('email', this.form.email || '')
+      data.append('password', this.form.password || '')
       data.append('owner', this.form.owner ? '1' : '0')
-      data.append('photo', this.form.photo)
+      data.append('photo', this.form.photo || '')
       data.append('_method', 'put')
 
       this.$inertia.post(this.route('users.update', this.user.id), data)
-        .then(() => this.sending = false)
+        .then(() => {
+          this.sending = false
+          if (Object.keys(this.$page.errors).length === 0) {
+            this.form.photo = null
+            this.form.password = null
+          }
+        })
     },
     destroy() {
       if (confirm('Are you sure you want to delete this user?')) {

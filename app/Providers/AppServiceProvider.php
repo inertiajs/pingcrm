@@ -6,11 +6,9 @@ use Inertia\Inertia;
 use League\Glide\Server;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\UrlWindow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -69,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
                 'source' => Storage::getDriver(),
                 'cache' => Storage::getDriver(),
                 'cache_folder' => '.glide-cache',
-                'base_url' => URL::to('img'),
+                'base_url' => 'img',
             ]);
         });
     }

@@ -2,15 +2,15 @@
   <div>
     <label v-if="label" class="form-label">{{ label }}:</label>
     <div class="form-input p-0" :class="{ error: errors.length }">
-      <input class="hidden" ref="file" type="file" @change="change" :accept="accept">
+      <input ref="file" type="file" :accept="accept" class="hidden" @change="change">
       <div v-if="!value" class="p-2">
-        <button @click="browse" type="button" class="px-4 py-1 bg-grey-dark hover:bg-grey-darker rounded-sm text-xs font-medium text-white">
+        <button type="button" class="px-4 py-1 bg-grey-dark hover:bg-grey-darker rounded-sm text-xs font-medium text-white" @click="browse">
           Browse
         </button>
       </div>
       <div v-else class="flex items-center justify-between p-2">
         <div class="flex-1 pr-1">{{ value.name }} <span class="text-grey-dark text-xs">({{ filesize(value.size) }})</span></div>
-        <button @click="remove" type="button" class="px-4 py-1 bg-grey-dark hover:bg-grey-darker rounded-sm text-xs font-medium text-white">
+        <button type="button" class="px-4 py-1 bg-grey-dark hover:bg-grey-darker rounded-sm text-xs font-medium text-white" @click="remove">
           Remove
         </button>
       </div>
@@ -22,12 +22,6 @@
 <script>
 export default {
   props: {
-    id: {
-      type: String,
-      default() {
-        return `text-input-${this._uid}`
-      },
-    },
     value: File,
     label: String,
     accept: String,
@@ -41,7 +35,7 @@ export default {
       if (!value) {
         this.$refs.file.value = ''
       }
-    }
+    },
   },
   methods: {
     filesize(size) {
@@ -57,6 +51,6 @@ export default {
     remove() {
       this.$emit('input', null)
     },
-  }
+  },
 }
 </script>
