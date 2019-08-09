@@ -6,7 +6,7 @@
         <span class="text-indigo-light font-medium">/</span>
         {{ form.first_name }} {{ form.last_name }}
       </h1>
-      <img class="block w-8 h-8 rounded-full ml-4" :src="user.photo">
+      <img v-if="user.photo" class="block w-8 h-8 rounded-full ml-4" :src="user.photo">
     </div>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
       This user has been deleted.
