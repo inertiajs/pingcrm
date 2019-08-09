@@ -1,10 +1,13 @@
 <template>
   <layout :title="`${form.first_name} ${form.last_name}`">
-    <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('users')">Users</inertia-link>
-      <span class="text-indigo-light font-medium">/</span>
-      {{ form.first_name }} {{ form.last_name }}
-    </h1>
+    <div class="mb-8 flex justify-start max-w-lg">
+      <h1 class="font-bold text-3xl">
+        <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('users')">Users</inertia-link>
+        <span class="text-indigo-light font-medium">/</span>
+        {{ form.first_name }} {{ form.last_name }}
+      </h1>
+      <img class="block w-8 h-8 rounded-full ml-4" :src="user.photo">
+    </div>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
       This user has been deleted.
     </trashed-message>
@@ -19,6 +22,7 @@
             <option :value="true">Yes</option>
             <option :value="false">No</option>
           </select-input>
+          <file-input v-model="form.photo" :errors="$page.errors.photo" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
         </div>
         <div class="px-8 py-4 bg-grey-lightest border-t border-grey-lighter flex items-center">
           <button v-if="!user.deleted_at" class="text-red hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
@@ -34,6 +38,7 @@ import Layout from '@/Shared/Layout'
 import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
+import FileInput from '@/Shared/FileInput'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
@@ -42,6 +47,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
+    FileInput,
     TrashedMessage,
   },
   props: {
@@ -57,13 +63,24 @@ export default {
         email: this.user.email,
         password: this.user.password,
         owner: this.user.owner,
+        photo: '',
       },
     }
   },
   methods: {
     submit() {
       this.sending = true
-      this.$inertia.put(this.route('users.update', this.user.id), this.form)
+
+      var data = new FormData()
+      data.append('first_name', this.form.first_name)
+      data.append('last_name', this.form.last_name)
+      data.append('email', this.form.email)
+      data.append('password', this.form.password)
+      data.append('owner', this.form.owner ? '1' : '0')
+      data.append('photo', this.form.photo)
+      data.append('_method', 'put')
+
+      this.$inertia.post(this.route('users.update', this.user.id), data)
         .then(() => this.sending = false)
     },
     destroy() {

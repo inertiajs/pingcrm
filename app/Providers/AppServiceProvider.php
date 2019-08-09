@@ -3,14 +3,17 @@
 namespace App\Providers;
 
 use Inertia\Inertia;
+use League\Glide\Server;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\UrlWindow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -22,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
     }
 
     public function register()
+    {
+        $this->registerInertia();
+        $this->registerGlide();
+        $this->registerLengthAwarePaginator();
+    }
+
+    public function registerInertia()
     {
         Inertia::version(function () {
             return md5_file(public_path('mix-manifest.json'));
@@ -50,8 +60,18 @@ class AppServiceProvider extends ServiceProvider
                     : (object) [],
             ];
         });
+    }
 
-        $this->registerLengthAwarePaginator();
+    protected function registerGlide()
+    {
+        $this->app->bind(Server::class, function ($app) {
+            return Server::create([
+                'source' => Storage::getDriver(),
+                'cache' => Storage::getDriver(),
+                'cache_folder' => '.glide-cache',
+                'base_url' => URL::to('img'),
+            ]);
+        });
     }
 
     protected function registerLengthAwarePaginator()

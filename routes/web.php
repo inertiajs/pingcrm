@@ -28,6 +28,9 @@ Route::put('users/{user}')->name('users.update')->uses('UsersController@update')
 Route::delete('users/{user}')->name('users.destroy')->uses('UsersController@destroy')->middleware('auth');
 Route::put('users/{user}/restore')->name('users.restore')->uses('UsersController@restore')->middleware('auth');
 
+// Images
+Route::get('/img/{path}', 'ImagesController@show')->where('path', '.*');
+
 // Organizations
 Route::get('organizations')->name('organizations')->uses('OrganizationsController@index')->middleware('remember', 'auth');
 Route::get('organizations/create')->name('organizations.create')->uses('OrganizationsController@create')->middleware('auth');

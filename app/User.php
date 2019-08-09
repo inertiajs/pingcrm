@@ -2,6 +2,8 @@
 
 namespace App;
 
+use League\Glide\Server;
+use Illuminate\Support\Facades\App;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,6 +32,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function photoUrl(array $attributes)
+    {
+        if (!$this->photo_path) {
+            return;
+        }
+
+        return App::make(Server::class)->fromPath($this->photo_path, $attributes)->url();
     }
 
     public function scopeOrderByName($query)
