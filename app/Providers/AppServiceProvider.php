@@ -35,9 +35,9 @@ class AppServiceProvider extends ServiceProvider
             return md5_file(public_path('mix-manifest.json'));
         });
 
-        Inertia::share(function () {
-            return [
-                'auth' => [
+        Inertia::share([
+            'auth' => function () {
+                return [
                     'user' => Auth::user() ? [
                         'id' => Auth::user()->id,
                         'first_name' => Auth::user()->first_name,
@@ -49,15 +49,19 @@ class AppServiceProvider extends ServiceProvider
                             'name' => Auth::user()->account->name,
                         ],
                     ] : null,
-                ],
-                'flash' => [
+                ];
+            },
+            'flash' => function () {
+                return [
                     'success' => Session::get('success'),
-                ],
-                'errors' => Session::get('errors')
+                ];
+            },
+            'errors' => function () {
+                return Session::get('errors')
                     ? Session::get('errors')->getBag('default')->getMessages()
-                    : (object) [],
-            ];
-        });
+                    : (object) [];
+            },
+        ]);
     }
 
     protected function registerGlide()
