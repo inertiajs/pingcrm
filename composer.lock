@@ -507,12 +507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "5b5f9b38d83c6dd20fd18b04c948149408d850ce"
+                "reference": "cb84170a9a3a1eee5afa1842b292446571f78f48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/5b5f9b38d83c6dd20fd18b04c948149408d850ce",
-                "reference": "5b5f9b38d83c6dd20fd18b04c948149408d850ce",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/cb84170a9a3a1eee5afa1842b292446571f78f48",
+                "reference": "cb84170a9a3a1eee5afa1842b292446571f78f48",
                 "shasum": ""
             },
             "require-dev": {
@@ -550,7 +550,7 @@
                 "inertia",
                 "laravel"
             ],
-            "time": "2019-08-10T12:37:10+00:00"
+            "time": "2019-08-10T13:02:20+00:00"
         },
         {
             "name": "intervention/image",
@@ -3794,20 +3794,20 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.9.2",
+            "version": "1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "8d0a041a565fc1e927e75f1d1bea5f34edf6e7d1"
+                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8d0a041a565fc1e927e75f1d1bea5f34edf6e7d1",
-                "reference": "8d0a041a565fc1e927e75f1d1bea5f34edf6e7d1",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/007c053ae6f31bba39dfa19a7726f56e9763bbea",
+                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.1"
             },
             "replace": {
                 "myclabs/deep-copy": "self.version"
@@ -3815,8 +3815,6 @@
             "require-dev": {
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.6",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-phpunit": "^0.9.4",
                 "phpunit/phpunit": "^7.1"
             },
             "type": "library",
@@ -3840,7 +3838,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2019-08-09T12:38:39+00:00"
+            "time": "2019-08-09T12:45:53+00:00"
         },
         {
             "name": "nunomaduro/collision",
