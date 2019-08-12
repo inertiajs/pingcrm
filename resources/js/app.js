@@ -3,7 +3,7 @@ import PortalVue from 'portal-vue'
 import Vue from 'vue'
 
 Vue.config.productionTip = false
-Vue.mixin({ methods: { route: (...args) => window.route(...args).url() } })
+Vue.mixin({ methods: { route: window.route } })
 Vue.use(Inertia)
 Vue.use(PortalVue)
 
