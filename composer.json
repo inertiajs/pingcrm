@@ -8,7 +8,7 @@
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.4",
-        "inertiajs/inertia-laravel": "dev-master",
+        "inertiajs/inertia-laravel": "^0.1",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "league/glide": "2.0.x-dev",
