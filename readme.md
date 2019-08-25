@@ -19,6 +19,12 @@ Install PHP dependencies:
 composer install
 ```
 
+Install Laravel Telescope
+
+```sh
+php artisan telescope:install
+```
+
 Install NPM dependencies:
 
 ```sh
