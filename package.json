@@ -14,7 +14,6 @@
         "@inertiajs/inertia": "^0.1.0",
         "@inertiajs/inertia-vue": "^0.1.0",
         "autosize": "^4.0.2",
-        "axios": "^0.18",
         "cross-env": "^5.1",
         "eslint": "^5.14.1",
         "eslint-plugin-vue": "^5.2.2",
