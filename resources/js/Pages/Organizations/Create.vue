@@ -1,5 +1,5 @@
 <template>
-  <layout title="Create Organization">
+  <div>
     <h1 class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('organizations')">Organizations</inertia-link>
       <span class="text-indigo-light font-medium">/</span> Create
@@ -25,7 +25,7 @@
         </div>
       </form>
     </div>
-  </layout>
+  </div>
 </template>
 
 <script>
@@ -35,8 +35,9 @@ import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
 
 export default {
+  metaInfo: { title: 'Create Organization' },
+  layout: (h, page) => h(Layout, [page]),
   components: {
-    Layout,
     LoadingButton,
     SelectInput,
     TextInput,

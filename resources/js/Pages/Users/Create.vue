@@ -1,5 +1,5 @@
 <template>
-  <layout title="Create User">
+  <div>
     <h1 class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('users')">Users</inertia-link>
       <span class="text-indigo-light font-medium">/</span> Create
@@ -22,7 +22,7 @@
         </div>
       </form>
     </div>
-  </layout>
+  </div>
 </template>
 
 <script>
@@ -33,8 +33,9 @@ import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
 
 export default {
+  metaInfo: { title: 'Create User' },
+  layout: (h, page) => h(Layout, [page]),
   components: {
-    Layout,
     LoadingButton,
     SelectInput,
     TextInput,

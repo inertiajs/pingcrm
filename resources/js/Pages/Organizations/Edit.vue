@@ -1,5 +1,5 @@
 <template>
-  <layout :title="form.name">
+  <div>
     <h1 class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('organizations')">Organizations</inertia-link>
       <span class="text-indigo-light font-medium">/</span>
@@ -66,7 +66,7 @@
         </tr>
       </table>
     </div>
-  </layout>
+  </div>
 </template>
 
 <script>
@@ -78,9 +78,12 @@ import TextInput from '@/Shared/TextInput'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
+  metaInfo() {
+    return { title: this.form.name }
+  },
+  layout: (h, page) => h(Layout, [page]),
   components: {
     Icon,
-    Layout,
     LoadingButton,
     SelectInput,
     TextInput,

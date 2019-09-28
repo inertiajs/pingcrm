@@ -1,5 +1,5 @@
 <template>
-  <layout :title="`${form.first_name} ${form.last_name}`">
+  <div>
     <div class="mb-8 flex justify-start max-w-lg">
       <h1 class="font-bold text-3xl">
         <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('users')">Users</inertia-link>
@@ -30,7 +30,7 @@
         </div>
       </form>
     </div>
-  </layout>
+  </div>
 </template>
 
 <script>
@@ -42,8 +42,13 @@ import FileInput from '@/Shared/FileInput'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
+  metaInfo() {
+    return {
+      title: `${this.form.first_name} ${this.form.last_name}`,
+    }
+  },
+  layout: (h, page) => h(Layout, [page]),
   components: {
-    Layout,
     LoadingButton,
     SelectInput,
     TextInput,

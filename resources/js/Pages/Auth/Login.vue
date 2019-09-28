@@ -28,6 +28,7 @@ import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
 
 export default {
+  metaInfo: { title: 'Login' },
   components: {
     LoadingButton,
     Logo,
@@ -45,9 +46,6 @@ export default {
         remember: null,
       },
     }
-  },
-  mounted() {
-    document.title = 'Login | Ping CRM'
   },
   methods: {
     submit() {
