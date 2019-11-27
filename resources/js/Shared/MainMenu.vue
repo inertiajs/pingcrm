@@ -34,13 +34,16 @@ export default {
   components: {
     Icon,
   },
+  props: {
+    url: String,
+  },
   methods: {
     isUrl(...urls) {
       if (urls[0] === '') {
-        return location.pathname.substr(1) === ''
+        return this.url === ''
       }
 
-      return urls.filter(url => location.pathname.substr(1).startsWith(url)).length
+      return urls.filter(url => this.url.startsWith(url)).length
     },
   },
 }

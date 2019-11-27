@@ -1,15 +1,14 @@
 <template>
-  <layout title="Reports">
+  <div>
     <h1 class="mb-8 font-bold text-3xl">Reports</h1>
-  </layout>
+  </div>
 </template>
 
 <script>
 import Layout from '@/Shared/Layout'
 
 export default {
-  components: {
-    Layout,
-  },
+  metaInfo: { title: 'Reports' },
+  layout: (h, page) => h(Layout, [page]),
 }
 </script>

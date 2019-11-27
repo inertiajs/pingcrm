@@ -3,14 +3,15 @@
 namespace App\Providers;
 
 use Inertia\Inertia;
+use League\Glide\Server;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\UrlWindow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -23,16 +24,20 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->registerInertia();
+        $this->registerGlide();
+        $this->registerLengthAwarePaginator();
+    }
+
+    public function registerInertia()
+    {
         Inertia::version(function () {
             return md5_file(public_path('mix-manifest.json'));
         });
 
-        Inertia::share(function () {
-            return [
-                'app' => [
-                    'name' => Config::get('app.name'),
-                ],
-                'auth' => [
+        Inertia::share([
+            'auth' => function () {
+                return [
                     'user' => Auth::user() ? [
                         'id' => Auth::user()->id,
                         'first_name' => Auth::user()->first_name,
@@ -44,15 +49,31 @@ class AppServiceProvider extends ServiceProvider
                             'name' => Auth::user()->account->name,
                         ],
                     ] : null,
-                ],
-                'flash' => [
+                ];
+            },
+            'flash' => function () {
+                return [
                     'success' => Session::get('success'),
-                ],
-                'errors' => Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [],
-            ];
-        });
+                ];
+            },
+            'errors' => function () {
+                return Session::get('errors')
+                    ? Session::get('errors')->getBag('default')->getMessages()
+                    : (object) [];
+            },
+        ]);
+    }
 
-        $this->registerLengthAwarePaginator();
+    protected function registerGlide()
+    {
+        $this->app->bind(Server::class, function ($app) {
+            return Server::create([
+                'source' => Storage::getDriver(),
+                'cache' => Storage::getDriver(),
+                'cache_folder' => '.glide-cache',
+                'base_url' => 'img',
+            ]);
+        });
     }
 
     protected function registerLengthAwarePaginator()

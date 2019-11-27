@@ -1,5 +1,5 @@
 <template>
-  <layout title="Create Contact">
+  <div>
     <h1 class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('contacts')">Contacts</inertia-link>
       <span class="text-indigo-400 font-medium">/</span> Create
@@ -30,7 +30,7 @@
         </div>
       </form>
     </div>
-  </layout>
+  </div>
 </template>
 
 <script>
@@ -40,8 +40,9 @@ import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
 
 export default {
+  metaInfo: { title: 'Create Contact' },
+  layout: (h, page) => h(Layout, [page]),
   components: {
-    Layout,
     LoadingButton,
     SelectInput,
     TextInput,

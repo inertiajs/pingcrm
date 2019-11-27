@@ -12,8 +12,8 @@
 */
 
 // Auth
-Route::get('login')->name('login')->uses('Auth\LoginController@showLoginForm');
-Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login');
+Route::get('login')->name('login')->uses('Auth\LoginController@showLoginForm')->middleware('guest');
+Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login')->middleware('guest');
 Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
 
 // Dashboard
@@ -27,6 +27,9 @@ Route::get('users/{user}/edit')->name('users.edit')->uses('UsersController@edit'
 Route::put('users/{user}')->name('users.update')->uses('UsersController@update')->middleware('auth');
 Route::delete('users/{user}')->name('users.destroy')->uses('UsersController@destroy')->middleware('auth');
 Route::put('users/{user}/restore')->name('users.restore')->uses('UsersController@restore')->middleware('auth');
+
+// Images
+Route::get('/img/{path}', 'ImagesController@show')->where('path', '.*');
 
 // Organizations
 Route::get('organizations')->name('organizations')->uses('OrganizationsController@index')->middleware('remember', 'auth');

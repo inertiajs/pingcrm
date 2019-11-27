@@ -11,13 +11,14 @@
     },
     "devDependencies": {
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@inertiajs/inertia": "^0.1.0",
+        "@inertiajs/inertia-vue": "^0.1.0",
         "autosize": "^4.0.2",
         "axios": "^0.18",
         "cross-env": "^5.1",
         "eslint": "^5.14.1",
         "eslint-plugin-vue": "^5.2.2",
         "fuse.js": "^3.4.2",
-        "inertia-vue": "inertiajs/inertia-vue",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
@@ -28,5 +29,8 @@
         "tailwindcss": "^1.0.1",
         "vue": "^2.6.6",
         "vue-template-compiler": "^2.6.6"
+    },
+    "dependencies": {
+        "vue-meta": "^2.2.2"
     }
 }

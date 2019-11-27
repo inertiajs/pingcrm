@@ -25,6 +25,7 @@ class UsersController extends Controller
                         'name' => $user->name,
                         'email' => $user->email,
                         'owner' => $user->owner,
+                        'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
                         'deleted_at' => $user->deleted_at,
                     ];
                 }),
@@ -38,15 +39,23 @@ class UsersController extends Controller
 
     public function store()
     {
-        Auth::user()->account->users()->create(
-            Request::validate([
-                'first_name' => ['required', 'max:50'],
-                'last_name' => ['required', 'max:50'],
-                'email' => ['required', 'max:50', 'email', Rule::unique('users')],
-                'password' => ['nullable'],
-                'owner' => ['required', 'boolean'],
-            ])
-        );
+        Request::validate([
+            'first_name' => ['required', 'max:50'],
+            'last_name' => ['required', 'max:50'],
+            'email' => ['required', 'max:50', 'email', Rule::unique('users')],
+            'password' => ['nullable'],
+            'owner' => ['required', 'boolean'],
+            'photo' => ['nullable', 'image'],
+        ]);
+
+        Auth::user()->account->users()->create([
+            'first_name' => Request::get('first_name'),
+            'last_name' => Request::get('last_name'),
+            'email' => Request::get('email'),
+            'password' => Request::get('password'),
+            'owner' => Request::get('owner'),
+            'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+        ]);
 
         return Redirect::route('users')->with('success', 'User created.');
     }
@@ -60,6 +69,7 @@ class UsersController extends Controller
                 'last_name' => $user->last_name,
                 'email' => $user->email,
                 'owner' => $user->owner,
+                'photo' => $user->photoUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
                 'deleted_at' => $user->deleted_at,
             ],
         ]);
@@ -73,9 +83,14 @@ class UsersController extends Controller
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
+            'photo' => ['nullable', 'image'],
         ]);
 
         $user->update(Request::only('first_name', 'last_name', 'email', 'owner'));
+
+        if (Request::file('photo')) {
+            $user->update(['photo_path' => Request::file('photo')->store('users')]);
+        }
 
         if (Request::get('password')) {
             $user->update(['password' => Request::get('password')]);

@@ -1,5 +1,5 @@
 <template>
-  <layout title="Organizations">
+  <div>
     <h1 class="mb-8 font-bold text-3xl">Organizations</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
@@ -51,7 +51,7 @@
       </table>
     </div>
     <pagination :links="organizations.links" />
-  </layout>
+  </div>
 </template>
 
 <script>
@@ -62,9 +62,10 @@ import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
+  metaInfo: { title: 'Organizations' },
+  layout: (h, page) => h(Layout, [page]),
   components: {
     Icon,
-    Layout,
     Pagination,
     SearchFilter,
   },

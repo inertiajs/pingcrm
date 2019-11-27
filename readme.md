@@ -22,7 +22,7 @@ composer install
 Install NPM dependencies:
 
 ```sh
-npm install
+npm ci
 ```
 
 Build assets:
