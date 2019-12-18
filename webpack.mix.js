@@ -27,7 +27,7 @@ mix.js('resources/js/app.js', 'public/js')
         purgecss({
           content: ['./resources/views/**/*.blade.php', './resources/js/**/*.vue'],
           defaultExtractor: content => content.match(/[\w-/:.]+(?<!:)/g) || [],
-          whitelist: ['nprogress'],
+          whitelistPatternsChildren: [/nprogress/],
         }),
       ] : [],
     ],
