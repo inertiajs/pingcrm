@@ -79,8 +79,8 @@ class UsersController extends Controller
 
     public function update(User $user)
     {
-        if (App::environment('demo') && $user->id === 1) {
             return Redirect::route('users.edit', $user)->with('error', 'Updating the demo user is not allowed.');
+        if (App::environment('demo') && $user->isDemoUser()) {
         }
 
         Request::validate([
@@ -107,8 +107,8 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        if (App::environment('demo') && $user->id === 1) {
             return Redirect::route('users.edit', $user)->with('error', 'Deleting the demo user is not allowed.');
+        if (App::environment('demo') && $user->isDemoUser()) {
         }
 
         $user->delete();
