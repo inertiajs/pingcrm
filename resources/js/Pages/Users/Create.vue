@@ -34,7 +34,7 @@ import FileInput from '@/Shared/FileInput'
 
 export default {
   metaInfo: { title: 'Create User' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     LoadingButton,
     SelectInput,

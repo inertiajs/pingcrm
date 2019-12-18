@@ -70,7 +70,7 @@ import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Users' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     Icon,
     SearchFilter,

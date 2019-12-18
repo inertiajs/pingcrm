@@ -73,7 +73,7 @@ import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Contacts' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     Icon,
     Pagination,

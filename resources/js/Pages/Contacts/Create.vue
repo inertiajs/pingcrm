@@ -41,7 +41,7 @@ import TextInput from '@/Shared/TextInput'
 
 export default {
   metaInfo: { title: 'Create Contact' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     LoadingButton,
     SelectInput,
