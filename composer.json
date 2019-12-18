@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": "^7.2",
+        "ext-exif": "*",
+        "ext-gd": "*",
         "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/laravel-dump-server": "^1.0",
         "facade/ignition": "^1.4",
