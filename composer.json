@@ -46,7 +46,6 @@
     "scripts": {
         "compile": [
             "npm run prod",
-            "@php artisan vendor:publish --provider=\"Laravel\\Horizon\\HorizonServiceProvider\"",
             "@php artisan migrate --force"
         ],
         "reseed": [
