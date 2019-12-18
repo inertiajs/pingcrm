@@ -4,10 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          'Cerebri Sans',
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ['Cerebri Sans', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         indigo: {
@@ -21,7 +18,7 @@ module.exports = {
         },
       },
       boxShadow: theme => ({
-        'outline': '0 0 0 2px ' + theme('colors.indigo.500'),
+        outline: '0 0 0 2px ' + theme('colors.indigo.500'),
       }),
       fill: theme => theme('colors'),
     },
