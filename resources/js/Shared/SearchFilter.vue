@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="flex w-full bg-white shadow rounded">
-      <dropdown class="px-4 md:px-6 rounded-l border-r hover:bg-grey-lightest focus:border-white focus:shadow-outline focus:z-10" placement="bottom-start">
+      <dropdown :auto-close="false" class="px-4 md:px-6 rounded-l border-r hover:bg-grey-lightest focus:border-white focus:shadow-outline focus:z-10" placement="bottom-start">
         <div class="flex items-baseline">
           <span class="text-grey-darkest hidden md:inline">Filter</span>
           <svg class="w-2 h-2 fill-grey-darker md:ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 961.243 599.998">
