@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import autosize from 'autosize'
-
 export default {
   inheritAttrs: false,
   props: {
@@ -24,15 +22,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    autosize: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  mounted() {
-    if (this.autosize) {
-      autosize(this.$refs.input)
-    }
   },
   methods: {
     focus() {

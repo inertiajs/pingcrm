@@ -30,8 +30,5 @@ mix.js('resources/js/app.js', 'public/js')
       },
     },
   })
-  .babelConfig({
-    plugins: ['@babel/plugin-syntax-dynamic-import'],
-  })
   .version()
   .sourceMaps()
