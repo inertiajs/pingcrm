@@ -41,8 +41,8 @@ export default {
     return {
       sending: false,
       form: {
-        email: null,
-        password: null,
+        email: 'johndoe@example.com',
+        password: 'secret',
         remember: null,
       },
     }
