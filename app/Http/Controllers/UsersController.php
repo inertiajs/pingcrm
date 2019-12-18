@@ -79,8 +79,8 @@ class UsersController extends Controller
 
     public function update(User $user)
     {
-            return Redirect::route('users.edit', $user)->with('error', 'Updating the demo user is not allowed.');
         if (App::environment('demo') && $user->isDemoUser()) {
+            return Redirect::back()->with('error', 'Updating the demo user is not allowed.');
         }
 
         Request::validate([
@@ -102,24 +102,24 @@ class UsersController extends Controller
             $user->update(['password' => Request::get('password')]);
         }
 
-        return Redirect::route('users.edit', $user)->with('success', 'User updated.');
+        return Redirect::back()->with('success', 'User updated.');
     }
 
     public function destroy(User $user)
     {
-            return Redirect::route('users.edit', $user)->with('error', 'Deleting the demo user is not allowed.');
         if (App::environment('demo') && $user->isDemoUser()) {
+            return Redirect::back()->with('error', 'Deleting the demo user is not allowed.');
         }
 
         $user->delete();
 
-        return Redirect::route('users.edit', $user)->with('success', 'User deleted.');
+        return Redirect::back()->with('success', 'User deleted.');
     }
 
     public function restore(User $user)
     {
         $user->restore();
 
-        return Redirect::route('users.edit', $user)->with('success', 'User restored.');
+        return Redirect::back()->with('success', 'User restored.');
     }
 }
