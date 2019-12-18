@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\User;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 
 class UsersController extends Controller
 {
@@ -77,6 +79,10 @@ class UsersController extends Controller
 
     public function update(User $user)
     {
+        if (App::environment('demo') && $user->id === 1) {
+            return Redirect::route('users.edit', $user)->with('error', 'Updating the demo user is not allowed.');
+        }
+
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -101,6 +107,10 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
+        if (App::environment('demo') && $user->id === 1) {
+            return Redirect::route('users.edit', $user)->with('error', 'Deleting the demo user is not allowed.');
+        }
+
         $user->delete();
 
         return Redirect::route('users.edit', $user)->with('success', 'User deleted.');
