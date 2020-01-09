@@ -74,16 +74,8 @@ You're ready to go! Visit Ping CRM in your browser, and login with:
 
 ## Running tests
 
-If you have `phpunit` installed globally, you can run the Ping CRM test suite with:
+To run the Ping CRM tests, run:
 
-```sh
-phpunit
 ```
-
-Or you can install `phpunit` locally and subsequently run the test suite:
-
-
-```sh
-composer install --dev
-./vendor/bin/phpunit
+phpunit
 ```
