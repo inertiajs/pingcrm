@@ -61,6 +61,12 @@ Run database seeder:
 php artisan db:seed
 ```
 
+Run the dev server (the output will give the address):
+
+```sh
+php artisan serve
+```
+
 You're ready to go! Visit Ping CRM in your browser, and login with:
 
 - **Username:** johndoe@example.com
