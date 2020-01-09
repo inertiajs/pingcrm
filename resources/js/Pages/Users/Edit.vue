@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="mb-8 flex justify-start max-w-lg">
+    <div class="mb-8 flex justify-start max-w-3xl">
       <h1 class="font-bold text-3xl">
-        <inertia-link class="text-indigo-light hover:text-indigo-dark" :href="route('users')">Users</inertia-link>
-        <span class="text-indigo-light font-medium">/</span>
+        <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('users')">Users</inertia-link>
+        <span class="text-indigo-400 font-medium">/</span>
         {{ form.first_name }} {{ form.last_name }}
       </h1>
       <img v-if="user.photo" class="block w-8 h-8 rounded-full ml-4" :src="user.photo">
@@ -11,7 +11,7 @@
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
       This user has been deleted.
     </trashed-message>
-    <div class="bg-white rounded shadow overflow-hidden max-w-lg">
+    <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.first_name" :errors="$page.errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
@@ -24,8 +24,8 @@
           </select-input>
           <file-input v-model="form.photo" :errors="$page.errors.photo" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
         </div>
-        <div class="px-8 py-4 bg-grey-lightest border-t border-grey-lighter flex items-center">
-          <button v-if="!user.deleted_at" class="text-red hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
+        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
+          <button v-if="!user.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
           <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update User</loading-button>
         </div>
       </form>

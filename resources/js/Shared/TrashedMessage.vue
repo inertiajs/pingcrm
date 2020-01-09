@@ -1,12 +1,12 @@
 <template>
-  <div class="p-4 bg-yellow-light rounded border border-yellow-dark flex items-center justify-between">
+  <div class="p-4 bg-yellow-400 rounded flex items-center justify-between max-w-3xl">
     <div class="flex items-center">
-      <icon name="trash" class="flex-no-shrink w-4 h-4 fill-yellow-darker mr-2" />
-      <div class="text-yellow-darker">
+      <icon name="trash" class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2" />
+      <div class="text-sm font-medium text-yellow-800">
         <slot />
       </div>
     </div>
-    <button class="text-yellow-darker hover:underline" tabindex="-1" type="button" @click="$emit('restore')">Restore</button>
+    <button class="text-sm text-yellow-800 hover:underline" tabindex="-1" type="button" @click="$emit('restore')">Restore</button>
   </div>
 </template>
 

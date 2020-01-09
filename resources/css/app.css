@@ -1,8 +1,9 @@
 /* Reset */
-@import "tailwindcss/preflight";
+@import "tailwindcss/base";
 @import "reset";
 
 /* Components */
+@import "tailwindcss/components";
 @import "buttons";
 @import "form";
 @import "nprogress";

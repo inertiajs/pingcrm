@@ -22,7 +22,7 @@ mix.js('resources/js/app.js', 'public/js')
     postCss: [
       cssImport(),
       cssNesting(),
-      tailwindcss('tailwind.js'),
+      tailwindcss('tailwind.config.js'),
       ...mix.inProduction() ? [
         purgecss({
           content: ['./resources/views/**/*.blade.php', './resources/js/**/*.vue'],
@@ -36,7 +36,7 @@ mix.js('resources/js/app.js', 'public/js')
     output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
     resolve: {
       alias: {
-        'vue$': 'vue/dist/vue.runtime.esm.js',
+        vue$: 'vue/dist/vue.runtime.esm.js',
         '@': path.resolve('resources/js'),
       },
     },
