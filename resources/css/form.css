@@ -10,7 +10,7 @@
   &:focus,
   &.focus {
     @apply .border-indigo-500;
-    box-shadow: 0 0 0 1px theme('colors.indigo-500');
+    box-shadow: 0 0 0 1px theme('colors.indigo.500');
   }
 
   &::placeholder {

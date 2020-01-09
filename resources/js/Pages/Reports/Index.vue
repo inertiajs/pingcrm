@@ -9,6 +9,6 @@ import Layout from '@/Shared/Layout'
 
 export default {
   metaInfo: { title: 'Reports' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
 }
 </script>

@@ -6,22 +6,22 @@
     "type": "project",
     "require": {
         "php": "^7.2",
-        "fideloper/proxy": "^4.0",
-        "inertiajs/inertia-laravel": "^0.1",
-        "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0",
-        "league/glide": "2.0.x-dev",
-        "reinink/remember-query-strings": "^0.1.0",
-        "tightenco/ziggy": "^0.8.0"
-    },
-    "require-dev": {
+        "ext-exif": "*",
+        "ext-gd": "*",
         "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/laravel-dump-server": "^1.0",
         "facade/ignition": "^1.4",
+        "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.4",
+        "inertiajs/inertia-laravel": "^0.2",
+        "laravel/framework": "^6.0",
+        "laravel/tinker": "^1.0",
+        "league/glide": "2.0.x-dev",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "reinink/remember-query-strings": "^0.1.0",
+        "tightenco/ziggy": "^0.8.0"
     },
     "autoload": {
         "classmap": [
@@ -46,8 +46,8 @@
     "scripts": {
         "compile": [
             "npm run prod",
-            "@php artisan vendor:publish --provider=\"Laravel\\Horizon\\HorizonServiceProvider\"",
-            "@php artisan migrate --force"
+            "@php artisan migrate:fresh",
+            "@php artisan db:seed"
         ],
         "reseed": [
             "@php artisan migrate:fresh",

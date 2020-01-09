@@ -13,8 +13,7 @@ let app = document.getElementById('app')
 
 new Vue({
   metaInfo: {
-    title: 'Loading…',
-    titleTemplate: '%s | Ping CRM',
+    titleTemplate: (title) => title ? `${title} - Ping CRM` : 'Ping CRM'
   },
   render: h => h(InertiaApp, {
     props: {

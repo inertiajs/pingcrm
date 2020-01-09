@@ -10,7 +10,7 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo-500" :href="route('contacts.create')">
+      <inertia-link class="btn-indigo" :href="route('contacts.create')">
         <span>Create</span>
         <span class="hidden md:inline">Contact</span>
       </inertia-link>
@@ -63,15 +63,17 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
+import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
+import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/Shared/SearchFilter'
+import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Contacts' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     Icon,
     Pagination,
@@ -91,8 +93,8 @@ export default {
   },
   watch: {
     form: {
-      handler: _.throttle(function() {
-        let query = _.pickBy(this.form)
+      handler: throttle(function() {
+        let query = pickBy(this.form)
         this.$inertia.replace(this.route('contacts', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
@@ -100,7 +102,7 @@ export default {
   },
   methods: {
     reset() {
-      this.form = _.mapValues(this.form, () => null)
+      this.form = mapValues(this.form, () => null)
     },
   },
 }

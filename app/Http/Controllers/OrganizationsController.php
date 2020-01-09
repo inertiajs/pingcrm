@@ -79,20 +79,20 @@ class OrganizationsController extends Controller
             ])
         );
 
-        return Redirect::route('organizations.edit', $organization)->with('success', 'Organization updated.');
+        return Redirect::back()->with('success', 'Organization updated.');
     }
 
     public function destroy(Organization $organization)
     {
         $organization->delete();
 
-        return Redirect::route('organizations.edit', $organization)->with('success', 'Organization deleted.');
+        return Redirect::back()->with('success', 'Organization deleted.');
     }
 
     public function restore(Organization $organization)
     {
         $organization->restore();
 
-        return Redirect::route('organizations.edit', $organization)->with('success', 'Organization restored.');
+        return Redirect::back()->with('success', 'Organization restored.');
     }
 }

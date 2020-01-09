@@ -25,8 +25,8 @@
           <text-input v-model="form.postal_code" :errors="$page.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-          <button v-if="!organization.deleted_at" class="text-red-700 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
-          <loading-button :loading="sending" class="btn-indigo-500 ml-auto" type="submit">Update Organization</loading-button>
+          <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
+          <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
         </div>
       </form>
     </div>
@@ -81,7 +81,7 @@ export default {
   metaInfo() {
     return { title: this.form.name }
   },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     Icon,
     LoadingButton,

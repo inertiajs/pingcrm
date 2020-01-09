@@ -26,7 +26,7 @@
           <text-input v-model="form.postal_code" :errors="$page.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center">
-          <loading-button :loading="sending" class="btn-indigo-500" type="submit">Create Contact</loading-button>
+          <loading-button :loading="sending" class="btn-indigo" type="submit">Create Contact</loading-button>
         </div>
       </form>
     </div>
@@ -41,7 +41,7 @@ import TextInput from '@/Shared/TextInput'
 
 export default {
   metaInfo: { title: 'Create Contact' },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     LoadingButton,
     SelectInput,

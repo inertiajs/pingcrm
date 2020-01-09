@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\User;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 
 class UsersController extends Controller
 {
@@ -77,6 +79,10 @@ class UsersController extends Controller
 
     public function update(User $user)
     {
+        if (App::environment('demo') && $user->isDemoUser()) {
+            return Redirect::back()->with('error', 'Updating the demo user is not allowed.');
+        }
+
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -96,20 +102,24 @@ class UsersController extends Controller
             $user->update(['password' => Request::get('password')]);
         }
 
-        return Redirect::route('users.edit', $user)->with('success', 'User updated.');
+        return Redirect::back()->with('success', 'User updated.');
     }
 
     public function destroy(User $user)
     {
+        if (App::environment('demo') && $user->isDemoUser()) {
+            return Redirect::back()->with('error', 'Deleting the demo user is not allowed.');
+        }
+
         $user->delete();
 
-        return Redirect::route('users.edit', $user)->with('success', 'User deleted.');
+        return Redirect::back()->with('success', 'User deleted.');
     }
 
     public function restore(User $user)
     {
         $user->restore();
 
-        return Redirect::route('users.edit', $user)->with('success', 'User restored.');
+        return Redirect::back()->with('success', 'User restored.');
     }
 }

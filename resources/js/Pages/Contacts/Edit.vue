@@ -30,8 +30,8 @@
           <text-input v-model="form.postal_code" :errors="$page.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-          <button v-if="!contact.deleted_at" class="text-red-700 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Contact</button>
-          <loading-button :loading="sending" class="btn-indigo-500 ml-auto" type="submit">Update Contact</loading-button>
+          <button v-if="!contact.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Contact</button>
+          <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update Contact</loading-button>
         </div>
       </form>
     </div>
@@ -51,7 +51,7 @@ export default {
       title: `${this.form.first_name} ${this.form.last_name}`,
     }
   },
-  layout: (h, page) => h(Layout, [page]),
+  layout: Layout,
   components: {
     LoadingButton,
     SelectInput,

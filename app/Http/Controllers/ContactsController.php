@@ -111,20 +111,20 @@ class ContactsController extends Controller
             ])
         );
 
-        return Redirect::route('contacts.edit', $contact)->with('success', 'Contact updated.');
+        return Redirect::back()->with('success', 'Contact updated.');
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
 
-        return Redirect::route('contacts.edit', $contact)->with('success', 'Contact deleted.');
+        return Redirect::back()->with('success', 'Contact deleted.');
     }
 
     public function restore(Contact $contact)
     {
         $contact->restore();
 
-        return Redirect::route('contacts.edit', $contact)->with('success', 'Contact restored.');
+        return Redirect::back()->with('success', 'Contact restored.');
     }
 }
