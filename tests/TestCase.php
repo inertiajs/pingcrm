@@ -16,6 +16,10 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        TestResponse::macro('actual', function () {
+            return json_encode($this->original->getData()['page']['props']);
+        });
+
         TestResponse::macro('props', function ($key = null) {
             $props = json_decode($this->actual(), JSON_OBJECT_AS_ARRAY);
 
@@ -52,7 +56,7 @@ abstract class TestCase extends BaseTestCase
             return $this;
         });
     
-        TestResponse::macro('assertPropsFragment', function ($data) {
+        TestResponse::macro('assertInertiaFragment', function ($data) {
             $actual = $this->actual();
 
             foreach (Arr::sortRecursive($data) as $key => $value) {
@@ -60,7 +64,7 @@ abstract class TestCase extends BaseTestCase
     
                 Assert::assertTrue(
                     Str::contains($actual, $expected),
-                    'Unable to find props fragment: '.PHP_EOL.PHP_EOL.
+                    'Unable to find JSON fragment: '.PHP_EOL.PHP_EOL.
                     '['.json_encode([$key => $value]).']'.PHP_EOL.PHP_EOL.
                     'within'.PHP_EOL.PHP_EOL.
                     "[{$actual}]."
@@ -70,8 +74,28 @@ abstract class TestCase extends BaseTestCase
             return $this;
         });
 
-        TestResponse::macro('actual', function () {
-            return json_encode($this->original->getData()['page']['props']);
+        TestResponse::macro('assertInertiaMissing', function ($data) {
+            $actual = $this->actual();
+
+            foreach (Arr::sortRecursive($data) as $key => $value) {
+                $unexpected = $this->jsonSearchStrings($key, $value);
+
+                Assert::assertFalse(
+                    Str::contains($actual, $unexpected),
+                    'Found unexpected JSON fragment: '.PHP_EOL.PHP_EOL.
+                    '['.json_encode([$key => $value]).']'.PHP_EOL.PHP_EOL.
+                    'within'.PHP_EOL.PHP_EOL.
+                    "[{$actual}]."
+                );
+            }
+
+            return $this;
+        });
+
+        TestResponse::macro('dumpInertia', function () {
+            dump(json_decode($this->actual(), JSON_OBJECT_AS_ARRAY));
+
+            return $this;
         });
     }
 }
