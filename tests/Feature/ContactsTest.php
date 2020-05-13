@@ -40,11 +40,13 @@ class ContactsTest extends TestCase
             ->assertPropCount('contacts.data', 5)
             ->assertPropValue('contacts.data', function ($contacts) {
                 $this->assertEquals(
-                    ['id', 'name', 'phone', 'city', 
-                    'deleted_at', 'organization'],
+                    ['id', 'name', 'phone', 'city', 'deleted_at', 'organization'],
                     array_keys($contacts[0])
                 );
-            });
+            })
+            ->assertPropsFragment($this->user->only('id', 'first_name', 'last_name', 'email'))
+            ->assertPropsFragment($this->user->account->only('id', 'name'))
+            ->assertPropsFragment(Contact::first()->only('id', 'name', 'phone', 'city'));
     }
 
     public function test_can_search_for_contacts()
@@ -63,7 +65,8 @@ class ContactsTest extends TestCase
             ->assertPropCount('contacts.data', 1)
             ->assertPropValue('contacts.data', function ($contacts) {
                 $this->assertEquals('Greg Andersson', $contacts[0]['name']);
-            });
+            })
+            ->assertPropsFragment(Contact::first()->only('id', 'name'));
     }
 
     public function test_cannot_view_deleted_contacts()
