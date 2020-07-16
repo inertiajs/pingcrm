@@ -17,7 +17,7 @@
         "eslint": "^5.16.0",
         "eslint-plugin-vue": "^5.2.3",
         "laravel-mix": "^5.0.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "popper.js": "^1.16.0",
         "portal-vue": "^1.5.1",
         "postcss-import": "^12.0.1",
