@@ -15,4 +15,3 @@ class CheckForMaintenanceMode extends Middleware
         //
     ];
 }
-

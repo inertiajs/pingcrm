@@ -1,9 +1,9 @@
 <?php
 
-use App\User;
 use App\Account;
 use App\Contact;
 use App\Organization;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

@@ -15,4 +15,3 @@ class EncryptCookies extends Middleware
         //
     ];
 }
-

@@ -9,7 +9,6 @@
 .DS_Store
 .env
 .env.backup
-.php_cs.dist
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
