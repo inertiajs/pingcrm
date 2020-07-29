@@ -11,7 +11,7 @@ abstract class Model extends Eloquent
 
     protected $perPage = 10;
 
-    public function resolveRouteBinding($value)
+    public function resolveRouteBinding($value, $field = null)
     {
         return in_array(SoftDeletes::class, class_uses($this))
             ? $this->where($this->getRouteKeyName(), $value)->withTrashed()->first()
