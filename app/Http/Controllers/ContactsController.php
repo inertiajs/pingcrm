@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
-use Inertia\Inertia;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\Rule;
+use Inertia\Inertia;
 
 class ContactsController extends Controller
 {

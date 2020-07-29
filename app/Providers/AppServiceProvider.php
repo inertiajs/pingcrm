@@ -2,26 +2,24 @@
 
 namespace App\Providers;
 
-use Inertia\Inertia;
-use League\Glide\Server;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\UrlWindow;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Inertia\Inertia;
+use League\Glide\Server;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        Date::use(CarbonImmutable::class);
-    }
-
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
     public function register()
     {
         $this->registerInertia();
