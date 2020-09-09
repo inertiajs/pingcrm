@@ -2,19 +2,25 @@
   <div>
     <h1 class="mb-8 font-bold text-3xl">Users</h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
-        </select>
-        <label class="mt-4 block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="with">With Trashed</option>
-          <option value="only">Only Trashed</option>
-        </select>
+      <search-filter class="w-full max-w-md mr-4">
+        <template v-slot:default="slotProps">
+          <label>
+            <span class="block text-gray-700">Role:</span>
+            <select v-model="slotProps.form.role" class="mt-1 w-full form-select">
+              <option :value="null" />
+              <option value="user">User</option>
+              <option value="owner">Owner</option>
+            </select>
+          </label>
+          <label>
+            <span class="mt-4 block text-gray-700">Trashed:</span>
+            <select v-model="slotProps.form.trashed" class="mt-1 w-full form-select">
+              <option :value="null" />
+              <option value="with">With Trashed</option>
+              <option value="only">Only Trashed</option>
+            </select>
+          </label>
+        </template>
       </search-filter>
       <inertia-link class="btn-indigo" :href="route('users.create')">
         <span>Create</span>
@@ -63,10 +69,7 @@
 <script>
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
-import mapValues from 'lodash/mapValues'
-import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/Shared/SearchFilter'
-import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Users' },
@@ -78,29 +81,6 @@ export default {
   props: {
     users: Array,
     filters: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        role: this.filters.role,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      handler: throttle(function() {
-        let query = pickBy(this.form)
-        this.$inertia.replace(this.route('users', Object.keys(query).length ? query : { remember: 'forget' }))
-      }, 150),
-      deep: true,
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
   },
 }
 </script>
