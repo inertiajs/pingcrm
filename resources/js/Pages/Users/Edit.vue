@@ -75,8 +75,6 @@ export default {
   },
   methods: {
     submit() {
-      this.sending = true
-
       var data = new FormData()
       data.append('first_name', this.form.first_name || '')
       data.append('last_name', this.form.last_name || '')
@@ -86,14 +84,18 @@ export default {
       data.append('photo', this.form.photo || '')
       data.append('_method', 'put')
 
-      this.$inertia.post(this.route('users.update', this.user.id), data)
-        .then(() => {
-          this.sending = false
+      this.$inertia.post(this.route('users.update', this.user.id), data, {
+        onStart: () => this.sending = true,
+        onSuccess: () => {
           if (Object.keys(this.$page.errors).length === 0) {
             this.form.photo = null
             this.form.password = null
           }
-        })
+        },
+        onFinish: () => {
+          this.sending = false
+        },
+      })
     },
     destroy() {
       if (confirm('Are you sure you want to delete this user?')) {

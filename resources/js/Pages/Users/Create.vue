@@ -60,9 +60,7 @@ export default {
   },
   methods: {
     submit() {
-      this.sending = true
-
-      var data = new FormData()
+      const data = new FormData()
       data.append('first_name', this.form.first_name || '')
       data.append('last_name', this.form.last_name || '')
       data.append('email', this.form.email || '')
@@ -70,8 +68,10 @@ export default {
       data.append('owner', this.form.owner ? '1' : '0')
       data.append('photo', this.form.photo || '')
 
-      this.$inertia.post(this.route('users.store'), data)
-        .then(() => this.sending = false)
+      this.$inertia.post(this.route('users.store'), data, {
+        onStart: () => this.sending = true,
+        onFinish: () => this.sending = false,
+      })
     },
   },
 }
