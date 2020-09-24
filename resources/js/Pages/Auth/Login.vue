@@ -49,12 +49,16 @@ export default {
   },
   methods: {
     submit() {
-      this.sending = true
-      this.$inertia.post(this.route('login.attempt'), {
+      const data = {
         email: this.form.email,
         password: this.form.password,
         remember: this.form.remember,
-      }).then(() => this.sending = false)
+      }
+
+      this.$inertia.post(this.route('login.attempt'), data, {
+        onStart: () => this.sending = true,
+        onFinish: () => this.sending = false,
+      })
     },
   },
 }
