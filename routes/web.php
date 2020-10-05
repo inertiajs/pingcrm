@@ -147,5 +147,4 @@ Route::get('500', function () {
         Config::set('app.debug', true);
     }
 
-    echo $fail;
 });
