@@ -28,14 +28,17 @@ import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
 
 export default {
-  metaInfo: { title: 'Login' },
+  // metaInfo: { title: 'Login' },
   components: {
     LoadingButton,
     Logo,
     TextInput,
   },
   props: {
-    errors: Object,
+    errors: {
+      type: Object,
+      default: () => ({})
+    },
   },
   data() {
     return {

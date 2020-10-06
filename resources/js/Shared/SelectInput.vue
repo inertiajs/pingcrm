@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div :class="$attrs.class">
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
-    <select :id="id" ref="input" v-model="selected" v-bind="$attrs" class="form-select" :class="{ error: error }">
+    <select :id="id" ref="input" v-model="selected" v-bind="{ ...$attrs, class: null }" class="form-select" :class="{ error: error }">
       <slot />
     </select>
     <div v-if="error" class="form-error">{{ error }}</div>
@@ -14,22 +14,22 @@ export default {
   props: {
     id: {
       type: String,
-      default() {
-        return `select-input-${this._uid}`
+      default(test, ing) {
+        return `select-input-${Math.random() * 1000}`;
       },
     },
-    value: [String, Number, Boolean],
+    modelValue: [String, Number, Boolean],
     label: String,
     error: String,
   },
   data() {
     return {
-      selected: this.value,
+      selected: this.modelValue,
     }
   },
   watch: {
     selected(selected) {
-      this.$emit('input', selected)
+      this.$emit('update:modelValue', selected)
     },
   },
   methods: {
