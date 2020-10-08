@@ -24,7 +24,7 @@
         "postcss-nesting": "^7.0.1",
         "resolve-url-loader": "^2.3.2",
         "tailwindcss": "^1.2.0-canary.5",
-        "vue": "^3.0.0-rc.10",
+        "vue": "^3.0.0",
         "vue-loader": "^16.0.0-beta.8"
     }
 }
