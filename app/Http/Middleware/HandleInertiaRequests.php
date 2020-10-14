@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
-class Inertia extends Middleware
+class HandleInertiaRequests extends Middleware
 {
     /**
      * Determines the current asset version.
