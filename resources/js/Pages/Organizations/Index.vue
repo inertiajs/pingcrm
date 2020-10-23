@@ -2,18 +2,22 @@
   <div>
     <h1 class="mb-8 font-bold text-3xl">Organizations</h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="with">With Trashed</option>
-          <option value="only">Only Trashed</option>
-        </select>
+      <search-filter class="w-full max-w-md mr-4">
+        <template v-slot:default="slotProps">
+          <label>
+            <span class="block text-gray-700">Trashed:</span>
+            <select v-model="slotProps.form.trashed" class="mt-1 w-full form-select">
+              <option :value="null" />
+              <option value="with">With Trashed</option>
+              <option value="only">Only Trashed</option>
+            </select>
+          </label>
+        </template>
+        <inertia-link class="btn-indigo" :href="route('organizations.create')">
+          <span>Create</span>
+          <span class="hidden md:inline">Organization</span>
+        </inertia-link>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="route('organizations.create')">
-        <span>Create</span>
-        <span class="hidden md:inline">Organization</span>
-      </inertia-link>
     </div>
     <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
@@ -57,11 +61,8 @@
 <script>
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
-import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
-import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/Shared/SearchFilter'
-import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Organizations' },
@@ -74,28 +75,6 @@ export default {
   props: {
     organizations: Object,
     filters: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      handler: throttle(function() {
-        let query = pickBy(this.form)
-        this.$inertia.replace(this.route('organizations', Object.keys(query).length ? query : { remember: 'forget' }))
-      }, 150),
-      deep: true,
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
   },
 }
 </script>
