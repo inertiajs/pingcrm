@@ -28,7 +28,7 @@ class OrganizationsController extends Controller
     {
         return Inertia::render('Organizations/Create', [
             'message' => 'Hey there Jonathan, it is '.Carbon::now('America/Toronto')->toTimeString(),
-        ]);
+        ])->inlineable('default');
 
         // return Inertia::render('Organizations/Create', [
         //     'message' => 'Hey there Jonathan, it is '.Carbon::now('America/Toronto')->toTimeString(),
@@ -50,7 +50,8 @@ class OrganizationsController extends Controller
             ])
         );
 
-        return Redirect::route('organizations')->with('success', 'Organization created.');
+        return Redirect::route('organizations.edit', $organization)->with('success', 'Organization created.');
+        // return Redirect::route('organizations')->with('success', 'Organization created.');
     }
 
     public function edit(Organization $organization)
@@ -69,7 +70,7 @@ class OrganizationsController extends Controller
                 'deleted_at' => $organization->deleted_at,
                 'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
-        ]);
+        ])->inlineable('default');
     }
 
     public function update(Organization $organization)

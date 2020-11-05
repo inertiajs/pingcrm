@@ -13,7 +13,7 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="route('organizations.create')" inline>
+      <inertia-link class="btn-indigo" :href="route('organizations.create')" inline="default">
         Create <span class="hidden md:inline">Organization</span>
       </inertia-link>
     </div>
@@ -26,23 +26,23 @@
         </tr>
         <tr v-for="organization in organizations.data" :key="organization.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('organizations.edit', organization.id)">
+            <inertia-link inline="default" class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('organizations.edit', organization.id)">
               {{ organization.name }}
               <icon v-if="organization.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('organizations.edit', organization.id)" tabindex="-1">
+            <inertia-link inline="default" class="px-6 py-4 flex items-center" :href="route('organizations.edit', organization.id)" tabindex="-1">
               {{ organization.city }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('organizations.edit', organization.id)" tabindex="-1">
+            <inertia-link inline="default" class="px-6 py-4 flex items-center" :href="route('organizations.edit', organization.id)" tabindex="-1">
               {{ organization.phone }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('organizations.edit', organization.id)" tabindex="-1">
+            <inertia-link inline="default" class="px-4 flex items-center" :href="route('organizations.edit', organization.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>

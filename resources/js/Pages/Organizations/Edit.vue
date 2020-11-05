@@ -1,5 +1,5 @@
 <template>
-  <component :is="$page.inline ? 'modal' : 'div'">
+  <component :is="$page.inline ? 'slideout' : 'div'">
     <h1 v-if="!$page.inline" class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('organizations')">Organizations</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
@@ -8,21 +8,22 @@
     <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
       This organization has been deleted.
     </trashed-message>
-    <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
+    <h2 class="pt-12 font-bold text-2xl">Edit Organization</h2>
+    <div class="mt-6">
       <form @submit.prevent="submit">
-        <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.name" :error="errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.phone" :error="errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.city" :error="errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
-          <text-input v-model="form.region" :error="errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
-          <select-input v-model="form.country" :error="errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
+        <div>
+          <text-input v-model="form.name" :error="errors.name" class="pb-8" label="Name" />
+          <text-input v-model="form.email" :error="errors.email" class="pb-8" label="Email" />
+          <text-input v-model="form.phone" :error="errors.phone" class="pb-8" label="Phone" />
+          <text-input v-model="form.address" :error="errors.address" class="pb-8" label="Address" />
+          <text-input v-model="form.city" :error="errors.city" class="pb-8" label="City" />
+          <text-input v-model="form.region" :error="errors.region" class="pb-8" label="Province/State" />
+          <select-input v-model="form.country" :error="errors.country" class="pb-8" label="Country">
             <option :value="null" />
             <option value="CA">Canada</option>
             <option value="US">United States</option>
           </select-input>
-          <text-input v-model="form.postal_code" :error="errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
+          <text-input v-model="form.postal_code" :error="errors.postal_code" class="pb-8" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
@@ -30,7 +31,7 @@
         </div>
       </form>
     </div>
-    <h2 class="mt-12 font-bold text-2xl">Contacts</h2>
+    <h2 class="pt-12 font-bold text-2xl">Contacts</h2>
     <div class="mt-6 bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <tr class="text-left font-bold">
@@ -76,7 +77,7 @@ import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
 import TrashedMessage from '@/Shared/TrashedMessage'
-import Modal from '@/Shared/Modal'
+import Slideout from '@/Shared/Slideout'
 
 export default {
   metaInfo() {
@@ -89,13 +90,13 @@ export default {
     SelectInput,
     TextInput,
     TrashedMessage,
-    Modal,
+    Slideout,
   },
   props: {
     errors: Object,
     organization: Object,
   },
-  remember: 'form',
+  // remember: 'form',
   data() {
     return {
       sending: false,

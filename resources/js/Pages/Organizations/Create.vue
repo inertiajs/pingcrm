@@ -69,7 +69,7 @@ export default {
   methods: {
     submit() {
       this.$inertia.post(this.route('organizations.store'), this.form, {
-        inline: 'same',
+        inline: 'default',
         onStart: () => this.sending = true,
         onFinish: () => this.sending = false,
       })
