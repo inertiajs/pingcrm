@@ -16,7 +16,22 @@ const tailwindcss = require('tailwindcss')
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').vue({ version: 3 }).webpackConfig({
+mix.postCss('resources/css/app.css', 'public/css/app.css')
+  .options({
+    postCss: [
+      cssImport(),
+      cssNesting(),
+      tailwindcss('tailwind.config.js'),
+      ...mix.inProduction() ? [
+        purgecss({
+          content: ['./resources/views/**/*.blade.php', './resources/js/**/*.vue'],
+          defaultExtractor: content => content.match(/[\w-/:.]+(?<!:)/g) || [],
+          whitelistPatternsChildren: [/nprogress/],
+        }),
+      ] : [],
+    ],
+  })
+  .js('resources/js/app.js', 'public/js').vue({ version: 3 }).webpackConfig({
     output: { chunkFilename: 'js/[name].js[hash]' },
     resolve: {
       alias: {
@@ -24,21 +39,6 @@ mix.js('resources/js/app.js', 'public/js').vue({ version: 3 }).webpackConfig({
         vue: path.resolve('node_modules', 'vue'),
       },
     },
-}).version()
-
-//   .postCss('resources/css/app.css', 'public/css/app.css')
-//   .options({
-//     postCss: [
-//       cssImport(),
-//       cssNesting(),
-//       tailwindcss('tailwind.config.js'),
-//       ...mix.inProduction() ? [
-//         purgecss({
-//           content: ['./resources/views/**/*.blade.php', './resources/js/**/*.vue'],
-//           defaultExtractor: content => content.match(/[\w-/:.]+(?<!:)/g) || [],
-//           whitelistPatternsChildren: [/nprogress/],
-//         }),
-//       ] : [],
-//     ],
-//   })
-//   .sourceMaps()
+  })
+  .version()
+  .sourceMaps()

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 class="mb-8 font-bold text-3xl">
+  <component :is="$page.inline ? 'modal' : 'div'">
+    <h1 v-if="!$page.inline" class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('organizations')">Organizations</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
@@ -66,7 +66,7 @@
         </tr>
       </table>
     </div>
-  </div>
+  </component>
 </template>
 
 <script>
@@ -76,6 +76,7 @@ import LoadingButton from '@/Shared/LoadingButton'
 import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
 import TrashedMessage from '@/Shared/TrashedMessage'
+import Modal from '@/Shared/Modal'
 
 export default {
   metaInfo() {
@@ -88,6 +89,7 @@ export default {
     SelectInput,
     TextInput,
     TrashedMessage,
+    Modal,
   },
   props: {
     errors: Object,

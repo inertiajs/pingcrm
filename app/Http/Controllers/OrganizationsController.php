@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Inertia\Inertia;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\DashboardController;
 
 class OrganizationsController extends Controller
 {
@@ -24,12 +26,18 @@ class OrganizationsController extends Controller
 
     public function create()
     {
-        return Inertia::render('Organizations/Create');
+        return Inertia::render('Organizations/Create', [
+            'message' => 'Hey there Jonathan, it is '.Carbon::now('America/Toronto')->toTimeString(),
+        ]);
+
+        // return Inertia::render('Organizations/Create', [
+        //     'message' => 'Hey there Jonathan, it is '.Carbon::now('America/Toronto')->toTimeString(),
+        // ])->inlineBase(fn () => $this->index());
     }
 
     public function store()
     {
-        Auth::user()->account->organizations()->create(
+        $organization = Auth::user()->account->organizations()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
                 'email' => ['nullable', 'max:50', 'email'],

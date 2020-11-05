@@ -1,4 +1,7 @@
 <template>
+  <teleport to="head">
+    <title>{{ title('Login') }}</title>
+  </teleport>
   <div class="p-6 bg-indigo-800 min-h-screen flex justify-center items-center">
     <div class="w-full max-w-md">
       <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
@@ -28,7 +31,7 @@ import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
 
 export default {
-  // metaInfo: { title: 'Login' },
+  section: 'public',
   components: {
     LoadingButton,
     Logo,

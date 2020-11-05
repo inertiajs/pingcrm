@@ -1,5 +1,8 @@
 <template>
   <div>
+    <teleport to="head">
+      <title>{{ title('Organizations') }}</title>
+    </teleport>
     <h1 class="mb-8 font-bold text-3xl">Organizations</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
@@ -10,9 +13,8 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="route('organizations.create')">
-        <span>Create</span>
-        <span class="hidden md:inline">Organization</span>
+      <inertia-link class="btn-indigo" :href="route('organizations.create')" inline>
+        Create <span class="hidden md:inline">Organization</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded shadow overflow-x-auto">
@@ -64,7 +66,6 @@ import SearchFilter from '@/Shared/SearchFilter'
 import throttle from 'lodash/throttle'
 
 export default {
-  metaInfo: { title: 'Organizations' },
   layout: Layout,
   components: {
     Icon,

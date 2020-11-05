@@ -12,6 +12,9 @@ createApp({
     resolveComponent: name => import(`@/Pages/${name}`).then(m => m.default),
   })
 })
-.mixin({ methods: { route: window.route } })
+.mixin({ methods: {
+    route: window.route,
+    title: title => `Ping CRM - ${title}`,
+}})
 .use(plugin)
 .mount(el)
