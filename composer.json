@@ -16,7 +16,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.0.1",
-        "inertiajs/inertia-laravel": "^0.2",
+        "inertiajs/inertia-laravel": "^0.3",
         "laravel/framework": "^8.0",
         "laravel/legacy-factories": "^1.0",
         "laravel/tinker": "^2.0",
