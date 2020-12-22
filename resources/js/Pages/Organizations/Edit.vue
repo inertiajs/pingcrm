@@ -9,24 +9,24 @@
       This organization has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="submit">
+      <form @submit.prevent="form.put(route('organizations.update', organization.id))">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.name" :error="errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.phone" :error="errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.city" :error="errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
-          <text-input v-model="form.region" :error="errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
-          <select-input v-model="form.country" :error="errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
+          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
+          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
+          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
+          <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
+          <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
+          <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
             <option :value="null" />
             <option value="CA">Canada</option>
             <option value="US">United States</option>
           </select-input>
-          <text-input v-model="form.postal_code" :error="errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
+          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
-          <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
         </div>
       </form>
     </div>
@@ -90,14 +90,12 @@ export default {
     TrashedMessage,
   },
   props: {
-    errors: Object,
     organization: Object,
   },
   remember: 'form',
   data() {
     return {
-      sending: false,
-      form: {
+      form: this.$inertia.form({
         name: this.organization.name,
         email: this.organization.email,
         phone: this.organization.phone,
@@ -106,16 +104,10 @@ export default {
         region: this.organization.region,
         country: this.organization.country,
         postal_code: this.organization.postal_code,
-      },
+      }),
     }
   },
   methods: {
-    submit() {
-      this.$inertia.put(this.route('organizations.update', this.organization.id), this.form, {
-        onStart: () => this.sending = true,
-        onFinish: () => this.sending = false,
-      })
-    },
     destroy() {
       if (confirm('Are you sure you want to delete this organization?')) {
         this.$inertia.delete(this.route('organizations.destroy', this.organization.id))
