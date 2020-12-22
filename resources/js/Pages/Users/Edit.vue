@@ -12,7 +12,7 @@
       This user has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="form.post(route('users.update', user.id))">
+      <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.first_name" :error="form.errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
           <text-input v-model="form.last_name" :error="form.errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
@@ -66,13 +66,18 @@ export default {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
         email: this.user.email,
-        password: this.user.password,
+        password: null,
         owner: this.user.owner,
         photo: null,
       }),
     }
   },
   methods: {
+    submit() {
+      this.form.post(this.route('users.update', this.user.id), {
+        onSuccess: () => this.form.reset('password', 'photo'),
+      })
+    },
     destroy() {
       if (confirm('Are you sure you want to delete this user?')) {
         this.$inertia.delete(this.route('users.destroy', this.user.id))
