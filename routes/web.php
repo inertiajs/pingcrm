@@ -135,6 +135,10 @@ Route::get('reports', [ReportsController::class, 'index'])
     ->name('reports')
     ->middleware('auth');
 
+Route::get('reports/{report}', [ReportsController::class, 'show'])
+    ->name('reports.show')
+    ->middleware('auth');
+
 // Images
 
 Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');

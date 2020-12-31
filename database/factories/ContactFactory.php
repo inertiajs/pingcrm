@@ -13,5 +13,6 @@ $factory->define(App\Models\Contact::class, function (Faker $faker) {
         'region' => $faker->state,
         'country' => 'US',
         'postal_code' => $faker->postcode,
+        'created_at' => $faker->dateTimeBetween('-2 years', 'now')
     ];
 });
