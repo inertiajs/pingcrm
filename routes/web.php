@@ -135,6 +135,24 @@ Route::get('reports', [ReportsController::class, 'index'])
     ->name('reports')
     ->middleware('auth');
 
+// Requirements
+
+Route::get('requirements', [RequirementController::class, 'index'])
+    ->name('requirements')
+    ->middleware('auth');
+
+// Templates
+
+Route::get('templates', [TemplateController::class, 'index'])
+    ->name('templates')
+    ->middleware('auth');
+
+// Expedientes
+
+Route::get('expedients', [ExpedientController::class, 'index'])
+    ->name('expedients')
+    ->middleware('auth');
+
 // Images
 
 Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');
