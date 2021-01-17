@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpedientsTable extends Migration
+class CreateExpedientRequirementTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateExpedientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('expedients', function (Blueprint $table) {
+        Schema::create('expedient_requirement', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 254);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignId('expedient_id');
+            $table->foreignId('requirement_id');
+            // $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ class CreateExpedientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expedients');
+        Schema::dropIfExists('expedient_requirement');
     }
 }

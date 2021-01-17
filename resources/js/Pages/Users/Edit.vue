@@ -1,44 +1,53 @@
 <template>
-  <div>
-    <div class="mb-8 flex justify-start max-w-3xl">
-      <h1 class="font-bold text-3xl">
-        <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('users')">Users</inertia-link>
-        <span class="text-indigo-400 font-medium">/</span>
-        {{ form.first_name }} {{ form.last_name }}
-      </h1>
-      <img v-if="user.photo" class="block w-8 h-8 rounded-full ml-4" :src="user.photo">
-    </div>
+  <v-card flat>
+    <v-breadcrumbs :items="breadcrumbs" class="overline">
+      <template v-slot:divider>
+        <v-icon>mdi-chevron-right</v-icon>
+      </template>
+    </v-breadcrumbs>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
-      This user has been deleted.
+      Este Usuario a sido Eliminada.
     </trashed-message>
-    <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="submit">
-        <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.first_name" :error="errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
-          <text-input v-model="form.last_name" :error="errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
-          <text-input v-model="form.email" :error="errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.password" :error="errors.password" class="pr-6 pb-8 w-full lg:w-1/2" type="password" autocomplete="new-password" label="Password" />
-          <select-input v-model="form.owner" :error="errors.owner" class="pr-6 pb-8 w-full lg:w-1/2" label="Owner">
-            <option :value="true">Yes</option>
-            <option :value="false">No</option>
-          </select-input>
-          <file-input v-model="form.photo" :error="errors.photo" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
-        </div>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-          <button v-if="!user.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
-          <loading-button :loading="sending" class="btn-indigo ml-auto" type="submit">Update User</loading-button>
-        </div>
-      </form>
-    </div>
-  </div>
+
+    <v-card-text>
+      <v-row>
+        <v-col cols="12">
+          <user-form :form.sync="form" :errors="errors" class="overline">
+            <template #preview>
+              <v-avatar
+                v-if="user.photo"
+                color="grey darken-1 shrink"
+                rounded
+                size="64"
+              >
+                <img :src="user.photo" :alt="user.name">
+              </v-avatar>
+            </template>
+          </user-form>
+        </v-col>
+      </v-row>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn v-if="!user.deleted_at" color="error" @click="destroy">
+        Eliminar
+      </v-btn>
+      <v-spacer />
+
+      <v-btn
+        :loading="sending"
+        :errors="errors"
+        color="primary"
+        @click="submit"
+      >
+        Actualizar
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
 import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
-import SelectInput from '@/Shared/SelectInput'
-import TextInput from '@/Shared/TextInput'
-import FileInput from '@/Shared/FileInput'
+import UserForm from '@/Components/User/Form'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
@@ -49,10 +58,7 @@ export default {
   },
   layout: Layout,
   components: {
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    FileInput,
+    UserForm,
     TrashedMessage,
   },
   props: {
@@ -64,13 +70,24 @@ export default {
     return {
       sending: false,
       form: {
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        password: this.user.password,
-        owner: this.user.owner,
-        photo: null,
+        ...this.user,
+        // first_name: this.user.first_name,
+        // last_name: this.user.last_name,
+        // email: this.user.email,
+        // phone: this.user.phone,
+        // password: this.user.password,
+        // owner: this.user.owner,
+        // photo: null,
       },
+      breadcrumbs: [
+        {
+          text: 'Usuarios',
+          disabled: false,
+          href: this.route('users'),
+          exact: true,
+        },
+        { text: 'Editar', disabled: true },
+      ],
     }
   },
   methods: {
@@ -79,14 +96,15 @@ export default {
       data.append('first_name', this.form.first_name || '')
       data.append('last_name', this.form.last_name || '')
       data.append('email', this.form.email || '')
+      data.append('phone', this.form.phone || '')
       data.append('password', this.form.password || '')
       data.append('owner', this.form.owner ? '1' : '0')
       data.append('photo', this.form.photo || '')
       data.append('_method', 'put')
 
       this.$inertia.post(this.route('users.update', this.user.id), data, {
-        onStart: () => this.sending = true,
-        onFinish: () => this.sending = false,
+        onStart: () => (this.sending = true),
+        onFinish: () => (this.sending = false),
         onSuccess: () => {
           if (Object.keys(this.$page.errors).length === 0) {
             this.form.photo = null

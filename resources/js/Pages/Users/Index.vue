@@ -1,105 +1,179 @@
 <template>
-  <div>
-    <h1 class="mb-8 font-bold text-3xl">Users</h1>
-    <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
-        </select>
-        <label class="mt-4 block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="with">With Trashed</option>
-          <option value="only">Only Trashed</option>
-        </select>
-      </search-filter>
-      <inertia-link class="btn-indigo" :href="route('users.create')">
-        <span>Create</span>
-        <span class="hidden md:inline">User</span>
-      </inertia-link>
-    </div>
-    <div class="bg-white rounded shadow overflow-x-auto">
-      <table class="w-full whitespace-no-wrap">
-        <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">Email</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Role</th>
-        </tr>
-        <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('users.edit', user.id)">
-              <img v-if="user.photo" class="block w-5 h-5 rounded-full mr-2 -my-2" :src="user.photo">
-              {{ user.name }}
-              <icon v-if="user.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-            </inertia-link>
-          </td>
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              {{ user.email }}
-            </inertia-link>
-          </td>
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              {{ user.owner ? 'Owner' : 'User' }}
-            </inertia-link>
-          </td>
-          <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
-          </td>
-        </tr>
-        <tr v-if="users.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No users found.</td>
-        </tr>
-      </table>
-    </div>
-  </div>
+  <v-card flat>
+    <v-breadcrumbs :items="breadcrumbs" class="overline pb-0">
+      <template v-slot:divider>
+        <v-icon>mdi-chevron-right</v-icon>
+      </template>
+    </v-breadcrumbs>
+    <search-filter v-model="form.search" class="overline" @reset="reset">
+      <v-col cols="12" md="3" class="pa-1">
+        <v-select
+          v-model="form.trashed"
+          :items="filtersOption.trashed"
+          label="Filtro Eliminados:"
+          dense
+          hide-details
+          outlined
+          clearable
+        />
+      </v-col>
+      <v-col cols="12" md="3" class="pa-1">
+        <v-select
+          v-model="form.role"
+          :items="filtersOption.role"
+          label="Filtro Roles:"
+          dense
+          hide-details
+          outlined
+          clearable
+        />
+      </v-col>
+      <v-col cols="12" md="3" class="pa-1">
+        <v-text-field
+          v-model="form.search"
+          label="Filtro:"
+          placeholder=""
+          outlined
+          dense
+          append-icon="mdi-magnify"
+          hide-details
+        />
+      </v-col>
+    </search-filter>
+    <v-row class="text-end px-4" no-gutters justify="end" align="center">
+      <v-col cols="12" md="3" class="pa-2">
+        <v-btn @click="create()">Crear Usuario</v-btn>
+      </v-col>
+    </v-row>
+
+    <v-card-text>
+      <data-table-wrapper
+        :items="users.data"
+        :headers="headers"
+        :links="users.links"
+        with-search
+        sort-by="name"
+      >
+        <template #item="{ item }">
+          <tr>
+            <td>
+              <v-avatar
+                class="hidden-sm-and-down ma-1"
+                color="grey darken-1 shrink"
+                size="32"
+              >
+                <img v-if="item.photo" :src="item.photo" :alt="item.name">
+              </v-avatar>
+            </td>
+            <td class="text-no-wrap">
+              {{ item.name }}
+            </td>
+            <td class="text-no-wrap">
+              {{ item.email }}
+            </td>
+            <td class="text-end">
+              {{ item.owner ? 'Admin' : 'Usuario' }}
+            </td>
+            <td class="text-right">
+              <v-icon v-if="item.deleted_at" color="warning">
+                mdi-delete-restore
+              </v-icon>
+
+              <v-btn text icon small @click="edit(item.id)">
+                <v-icon small>mdi-pencil</v-icon>
+              </v-btn>
+            </td>
+          </tr>
+        </template>
+      </data-table-wrapper>
+    </v-card-text>
+    <Pagination
+      v-if="users.links.length > 1"
+      :links="users.links"
+      :page="form.page"
+      route="users"
+      @input="v => (form.page = v)"
+    />
+  </v-card>
 </template>
 
 <script>
-import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
+import DataTableWrapper from '@/Shared/DataTableWrapper'
 import mapValues from 'lodash/mapValues'
 import pickBy from 'lodash/pickBy'
-import SearchFilter from '@/Shared/SearchFilter'
 import throttle from 'lodash/throttle'
+import SearchFilter from '@/Shared/SearchFilter'
+import Pagination from '@/Shared/Pagination'
 
 export default {
-  metaInfo: { title: 'Users' },
+  metaInfo: { title: 'Reports' },
   layout: Layout,
-  components: {
-    Icon,
-    SearchFilter,
-  },
-  props: {
-    users: Array,
-    filters: Object,
-  },
+  components: { DataTableWrapper, SearchFilter, Pagination },
+  props: { users: Object, filters: Object },
   data() {
     return {
+      headers: [
+        { text: '', value: 'photo', sortable: false },
+        { text: 'Nombre', value: 'name' },
+        { text: 'Email', value: 'email' },
+        { text: 'Rol', value: 'role', align: 'end', width: '75' },
+        {
+          text: '',
+          align: 'end',
+          width: '100',
+          value: 'action',
+          sortable: false,
+        },
+      ],
       form: {
         search: this.filters.search,
-        role: this.filters.role,
         trashed: this.filters.trashed,
+        role: this.filters.role,
+        page: this.filters.page | 1,
       },
+      filtersOption: {
+        trashed: [
+          { text: 'Con', value: 'with' },
+          { text: 'Solamente', value: 'only' },
+        ],
+        role: [
+          { text: 'Usuario', value: 'user' },
+          { text: 'Admin', value: 'owner' },
+        ],
+      },
+      breadcrumbs: [{ text: 'Usuarios', disabled: false }],
     }
   },
+
   watch: {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.route('users', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(
+          this.route(
+            'users',
+            Object.keys(query).length ? query : { remember: 'forget' }
+          )
+        )
       }, 150),
       deep: true,
     },
   },
   methods: {
+    search(value) {
+      // eslint-disable-next-line no-console
+      console.log(value, 'input')
+    },
     reset() {
       this.form = mapValues(this.form, () => null)
+      this.form.page = 1
+    },
+    create() {
+      this.$inertia.visit(this.route('users.create'))
+    },
+    edit(_template) {
+      this.$inertia.visit(this.route('users.edit', _template))
     },
   },
 }

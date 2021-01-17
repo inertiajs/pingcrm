@@ -45,6 +45,7 @@ class HandleInertiaRequests extends Middleware
                         'last_name' => $request->user()->last_name,
                         'email' => $request->user()->email,
                         'role' => $request->user()->role,
+                        'photo' => $request->user()->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
                         'admin' => $request->user()->owner,
                         'account' => [
                             'id' => $request->user()->account->id,
@@ -53,6 +54,13 @@ class HandleInertiaRequests extends Middleware
                     ] : null,
                 ];
             },
+            'tabs' => [
+                // ['label' => 'Dashboard', 'route' => 'dashboard'],
+                ['label' => 'Expedientes', 'route' => 'expedients'],
+                ['label' => 'Plantillas', 'route' => 'templates'],
+                ['label' => 'Requisitos', 'route' => 'requirements'],
+                ['label' => 'Usuarios', 'route' => 'users'],
+            ],
             'flash' => function () use ($request) {
                 return [
                     'success' => $request->session()->get('success'),
