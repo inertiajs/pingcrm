@@ -10,4 +10,9 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard/Index');
     }
+
+    public function showSimulator()
+    {
+        return Inertia::render('Simulator/Index');
+    }
 }

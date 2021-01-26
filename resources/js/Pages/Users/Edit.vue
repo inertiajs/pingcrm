@@ -71,13 +71,13 @@ export default {
       sending: false,
       form: {
         ...this.user,
+        photo: null,
         // first_name: this.user.first_name,
         // last_name: this.user.last_name,
         // email: this.user.email,
         // phone: this.user.phone,
         // password: this.user.password,
         // owner: this.user.owner,
-        // photo: null,
       },
       breadcrumbs: [
         {

@@ -1,13 +1,11 @@
 <template>
   <v-card flat>
-    <v-breadcrumbs :items="breadcrumbs" class="overline pb-0">
-      <template v-slot:divider>
-        <v-icon>mdi-chevron-right</v-icon>
-      </template>
-    </v-breadcrumbs>
+    <breadcrumbs :breadcrumbs="breadcrumbs" />
+
     <search-filter v-model="form.search" @reset="reset">
       <v-col cols="12" md="3" class="pa-1">
         <v-select
+          v-if="$page.props.auth.user.admin"
           v-model="form.trashed"
           :items="items"
           label="Filtro Elminados:"
@@ -28,7 +26,13 @@
         />
       </v-col>
     </search-filter>
-    <v-row class="text-end px-4" no-gutters justify="end" align="center">
+    <v-row
+      v-if="$page.props.auth.user.admin"
+      class="text-end px-4"
+      no-gutters
+      justify="end"
+      align="center"
+    >
       <v-col cols="12" md="3" class="pa-2">
         <v-btn @click="create()">Crear Expediente</v-btn>
       </v-col>
@@ -44,41 +48,84 @@
             md="6"
           >
             <v-hover v-slot="{ hover }">
-              <v-card color="grey lighten-2" :elevation="hover ? 12 : 2">
-                <v-toolbar flat>
+              <v-card color="grey lighten-3" :elevation="hover ? 12 : 2" shaped>
+                <v-toolbar>
                   <v-toolbar-title class="grey--text">
                     {{ `#${expedient.id.toString().padStart(5, 0)}` }}
+                    <v-chip v-if="expedient.deleted_at" label color="warning">
+                      Eliminado
+                    </v-chip>
                   </v-toolbar-title>
 
                   <v-spacer />
 
-                  <v-btn icon>
-                    <v-icon>mdi-magnify</v-icon>
+                  <v-btn
+                    v-if="$page.props.auth.user.admin"
+                    icon
+                    @click="adminExpedient(expedient.id)"
+                  >
+                    <v-icon>mdi-eye</v-icon>
                   </v-btn>
 
-                  <v-btn icon>
+                  <v-btn icon @click="show(expedient.id)">
                     <v-icon>mdi-apps</v-icon>
                   </v-btn>
 
-                  <v-btn icon>
-                    <v-icon>mdi-dots-vertical</v-icon>
-                  </v-btn>
+                  <v-menu
+                    v-if="$page.props.auth.user.admin"
+                    offset-y
+                    bottom
+                    left
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn icon v-bind="attrs" v-on="on">
+                        <v-icon>mdi-dots-vertical</v-icon>
+                      </v-btn>
+                    </template>
+
+                    <v-list dense>
+                      <v-list-item
+                        v-if="!expedient.deleted_at"
+                        dense
+                        class="error"
+                        @click="destroy(expedient.id)"
+                      >
+                        <span class="overline white--text">Eliminar</span>
+                      </v-list-item>
+                      <v-list-item
+                        v-if="expedient.deleted_at"
+                        dense
+                        class="orange"
+                        @click="restore(expedient.id)"
+                      >
+                        <span class="overline white--text">Restore</span>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
                 </v-toolbar>
 
                 <v-divider />
 
-                <v-card-title class="text-h6 text--primary">
-                  {{ expedient.name }}
+                <v-card-title class="text-h6 text--primary text-uppercase">
+                  <span class="orange--text font-weight-black">
+                    {{ expedient.name }}
+                  </span>
                 </v-card-title>
-                <v-card-text>
-                  <div>Word of the Day</div>
-                  <p class="display-1 text--primary">
-                    el·ee·mos·y·nar·y
+                <v-card-text class="indigo--text font-weight-medium">
+                  <div class="overline">
+                    Fecha Creacion:
+                    {{
+                      Intl.DateTimeFormat('es-MX', {
+                        dateStyle: 'long',
+                      }).format(new Date(expedient.created_at))
+                    }}
+                  </div>
+                  <p class="display-1 text--primary mb-0 font-weight-black">
+                    {{ expedient.owner_user.name }}
                   </p>
-                  <p>adjective</p>
-                  <div class="text--primary">
-                    relating to or dependent on charity; charitable.<br>
-                    "an eleemosynary educational institution."
+                  <p>{{ expedient.owner_user.email }}</p>
+                  <div class="font-italic">
+                    {{ expedient.template }}
                   </div>
                 </v-card-text>
               </v-card>
@@ -109,31 +156,18 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-// import DataTableWrapper from '@/Shared/DataTableWrapper'
-import mapValues from 'lodash/mapValues'
-import pickBy from 'lodash/pickBy'
-import throttle from 'lodash/throttle'
+import { mapValues, pickBy, throttle } from 'lodash'
 import SearchFilter from '@/Shared/SearchFilter'
 import Pagination from '@/Shared/Pagination'
+import Breadcrumbs from '@/Shared/Breadcrumbs'
 
 export default {
   metaInfo: { title: 'Expedientes' },
   layout: Layout,
-  components: { SearchFilter, Pagination },
+  components: { SearchFilter, Pagination, Breadcrumbs },
   props: { expedients: Object, filters: Object },
   data() {
     return {
-      headers: [
-        { text: 'ID', width: '75', value: 'id' },
-        { text: 'Nombre', value: 'name' },
-        {
-          text: '',
-          align: 'end',
-          width: '250',
-          value: 'action',
-          sortable: false,
-        },
-      ],
       form: {
         search: this.filters.search,
         trashed: this.filters.trashed,
@@ -141,7 +175,6 @@ export default {
       },
       items: [
         { text: '(Vacio)', value: '' },
-        { divider: true },
         { text: 'Con', value: 'with' },
         { text: 'Solamente', value: 'only' },
       ],
@@ -175,8 +208,21 @@ export default {
     create() {
       this.$inertia.visit(this.route('expedients.create'))
     },
-    edit(_expedient) {
-      this.$inertia.visit(this.route('expedients.edit', _expedient))
+    adminExpedient(_expedient_id) {
+      this.$inertia.visit(this.route('expedients.documents', _expedient_id))
+    },
+    show(_expedient_id) {
+      this.$inertia.visit(this.route('expedients.show', _expedient_id))
+    },
+    destroy(_expedient_id) {
+      if (confirm('Seguro en Eliminar este Expediente?')) {
+        this.$inertia.delete(this.route('expedients.destroy', _expedient_id))
+      }
+    },
+    restore(_expedient_id) {
+      if (confirm('Seguro en Restaurar este Expediente?')) {
+        this.$inertia.put(this.route('expedients.restore', _expedient_id))
+      }
     },
   },
 }

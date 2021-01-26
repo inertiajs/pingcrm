@@ -1,22 +1,21 @@
 <template>
   <v-app>
-    <v-content class="background">
-      <v-container class="fill-height" fluid>
-        <!-- <flash-messages /> -->
-        <slot />
-      </v-container>
+    <v-main class="grey lighten-3">
+      <flash-messages />
+      <slot />
       <!-- <Footer /> -->
-    </v-content>
+    </v-main>
+    <portal-target name="modal" multiple />
   </v-app>
 </template>
 
 <script>
-// import Footer from '~/components/layout/Footer'
+import FlashMessages from '@/Shared/FlashMessages.vue'
 
 export default {
   name: 'BasicLayout',
   components: {
-    // Footer,
+    FlashMessages,
   },
 }
 </script>

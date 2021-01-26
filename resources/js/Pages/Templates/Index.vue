@@ -50,6 +50,9 @@
             <td class="text-no-wrap">
               {{ item.name }}
             </td>
+            <td class="text-no-wrap text-center">
+              {{ item.requirements_count }}
+            </td>
             <td class="text-right">
               <v-chip v-if="item.deleted_at" color="warning" outlined x-small>
                 Eliminado
@@ -83,7 +86,7 @@ import SearchFilter from '@/Shared/SearchFilter'
 import Pagination from '@/Shared/Pagination'
 
 export default {
-  metaInfo: { title: 'Reports' },
+  metaInfo: { title: 'Plantillas' },
   layout: Layout,
   components: { DataTableWrapper, SearchFilter, Pagination },
   props: { templates: Object, filters: Object },
@@ -92,6 +95,12 @@ export default {
       headers: [
         { text: 'ID', width: '75', value: 'id' },
         { text: 'Nombre', value: 'name' },
+        {
+          text: 'Requisitos',
+          value: 'requirements_count',
+          align: 'center',
+          width: '200',
+        },
         {
           text: '',
           align: 'end',

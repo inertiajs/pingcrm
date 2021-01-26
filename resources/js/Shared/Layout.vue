@@ -1,48 +1,49 @@
 <template>
   <v-app id="inspire">
     <v-app-bar app color="white" flat>
-      <v-avatar
-        :color="
-          $vuetify.breakpoint.smAndDown ? 'grey darken-1 shrink' : 'transparent'
-        "
-        size="32"
-      />
-      <v-tabs
-        v-if="$page.props.tabs"
-        v-model="active"
-        centered
-        color="grey darken-1"
-      >
-        <v-tab
-          v-for="tab in $page.props.tabs"
-          :key="tab.label"
-          @click="click(tab)"
-        >
-          {{ tab.label }}
-        </v-tab>
-      </v-tabs>
       <v-menu offset-y open-on-hover>
         <template v-slot:activator="{ on, attrs }">
-          <v-avatar
-            class="hidden-sm-and-down"
-            color="grey darken-1 shrink"
-            size="36"
-            v-bind="attrs"
-            v-on="on"
-          >
-            <img
-              v-if="$page.props.auth.user.photo"
-              :src="$page.props.auth.user.photo"
-              :alt="$page.props.auth.user.name"
+          <div class="d-flex d-flex-row align-center" v-bind="attrs" v-on="on">
+            <v-avatar
+              class="hidden-sm-and-down"
+              color="grey darken-1 shrink"
+              size="36"
             >
-          </v-avatar>
+              <img
+                v-if="$page.props.auth.user.photo"
+                :src="$page.props.auth.user.photo"
+                :alt="$page.props.auth.user.first_name"
+              >
+            </v-avatar>
+            <v-chip label outlined class="overline ml-2">
+              {{ $page.props.auth.user.first_name }}
+            </v-chip>
+          </div>
         </template>
         <v-list>
-          <v-list-item v-for="(item, index) in items" :key="index">
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item>
+            <v-list-item-title>
+              <!-- {{ item.title }} -->
+              <inertia-link
+                class="overline"
+                :href="route('logout')"
+                method="post"
+                as="button"
+              >
+                Cerrar Sesion
+              </inertia-link>
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <v-tabs v-model="active" centered color="grey darken-1">
+        <template v-for="tab in $page.props.tabs">
+          <v-tab v-if="tab.show" :key="tab.label" @click="click(tab)">
+            {{ tab.label }}
+          </v-tab>
+        </template>
+      </v-tabs>
     </v-app-bar>
 
     <v-main class="grey lighten-3">
@@ -51,6 +52,7 @@
           <v-col cols="12" sm="10">
             <v-sheet rounded="lg">
               <!-- <h4>{{ url() }} {{ active }}</h4> -->
+              <flash-messages />
               <slot />
             </v-sheet>
           </v-col>
@@ -63,12 +65,16 @@
 </template>
 
 <script>
+import FlashMessages from '@/Shared/FlashMessages'
+
 export default {
+  components: { FlashMessages },
+
   data: () => ({
     showUserMenu: false,
     accounts: null,
     active: null,
-    items: [{ title: 'Account' }, { title: 'Logout' }],
+    items: [{ title: 'Logout', route: 'logout' }],
   }),
   mounted() {
     for (const key in this.$page.props.tabs) {

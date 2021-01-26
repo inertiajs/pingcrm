@@ -5,12 +5,8 @@
         <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
-    <trashed-message
-      v-if="expedient.deleted_at"
-      class="mb-6"
-      @restore="restore"
-    >
-      Este Requisito a sido Eliminado.
+    <trashed-message v-if="template.deleted_at" class="mb-6" @restore="restore">
+      Esta Plantilla a sido Eliminada.
     </trashed-message>
 
     <form @submit.prevent="submit">
@@ -26,18 +22,18 @@
             />
           </v-col>
           <v-col cols="12" md="6" class="pa-1">
-            <v-textarea
+            <!-- <v-textarea
               v-model="form.description"
               :error-messages="errors.description"
               class="title text-uppercase"
               label="Descripcion"
               outlined
-            />
+            /> -->
           </v-col>
         </v-row>
       </v-card-text>
       <v-card-actions>
-        <v-btn v-if="!expedient.deleted_at" color="error" @click="destroy">
+        <v-btn v-if="!template.deleted_at" color="error" @click="destroy">
           Eliminar
         </v-btn>
         <v-spacer />
@@ -61,21 +57,20 @@ export default {
   },
   props: {
     errors: Object,
-    expedient: Object,
+    template: Object,
   },
   remember: 'form',
   data() {
     return {
       sending: false,
       form: {
-        name: this.expedient.name,
-        description: this.expedient.description,
+        name: this.template.name,
       },
       breadcrumbs: [
         {
-          text: 'Expedientes',
+          text: 'Plantillas',
           disabled: false,
-          href: this.route('expedients'),
+          href: this.route('templates'),
           exact: true,
         },
         { text: 'Editar', disabled: true },
@@ -85,7 +80,7 @@ export default {
   methods: {
     submit() {
       this.$inertia.put(
-        this.route('expedients.update', this.expedient.id),
+        this.route('templates.update', this.template.id),
         this.form,
         {
           onStart: () => (this.sending = true),
@@ -94,15 +89,13 @@ export default {
       )
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this expedient?')) {
-        this.$inertia.delete(
-          this.route('expedients.destroy', this.expedient.id)
-        )
+      if (confirm('Are you sure you want to delete this template?')) {
+        this.$inertia.delete(this.route('templates.destroy', this.template.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this expedient?')) {
-        this.$inertia.put(this.route('expedients.restore', this.expedient.id))
+      if (confirm('Are you sure you want to restore this template?')) {
+        this.$inertia.put(this.route('templates.restore', this.template.id))
       }
     },
   },

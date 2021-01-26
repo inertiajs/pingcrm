@@ -10,6 +10,16 @@ class Requirement extends Model
 
     use SoftDeletes;
 
+
+    public function expedients()
+    {
+        return $this->belongsToMany(Expedient::class, 'documents',  'requirement_id', 'expedient_id',)
+            ->as('document')
+            ->using(Document::class)
+            ->withPivot('id', 'status_id', 'commentary', 'until_valid')
+            ->withTimestamps();
+    }
+
     public function scopeOrderByName($query)
     {
         $query->orderBy('name');

@@ -47,6 +47,7 @@ class HandleInertiaRequests extends Middleware
                         'role' => $request->user()->role,
                         'photo' => $request->user()->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
                         'admin' => $request->user()->owner,
+                        // 'permissions' => $request->user()->permissions,
                         'account' => [
                             'id' => $request->user()->account->id,
                             'name' => $request->user()->account->name,
@@ -56,10 +57,10 @@ class HandleInertiaRequests extends Middleware
             },
             'tabs' => [
                 // ['label' => 'Dashboard', 'route' => 'dashboard'],
-                ['label' => 'Expedientes', 'route' => 'expedients'],
-                ['label' => 'Plantillas', 'route' => 'templates'],
-                ['label' => 'Requisitos', 'route' => 'requirements'],
-                ['label' => 'Usuarios', 'route' => 'users'],
+                ['label' => 'Expedientes', 'route' => 'expedients', 'show' => true],
+                ['label' => 'Plantillas', 'route' => 'templates', 'show' =>  $request->user()->owner ?? false],
+                ['label' => 'Requisitos', 'route' => 'requirements', 'show' =>  $request->user()->owner ?? false],
+                ['label' => 'Usuarios', 'route' => 'users', 'show' =>  $request->user()->owner ?? false],
             ],
             'flash' => function () use ($request) {
                 return [

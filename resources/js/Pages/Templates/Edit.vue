@@ -5,14 +5,11 @@
         <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
-    <trashed-message v-if="template.deleted_at" class="mb-6" @restore="restore">
-      Esta Plantilla a sido Eliminada.
-    </trashed-message>
 
     <form @submit.prevent="submit">
       <v-card-text>
-        <v-row no-gutters>
-          <v-col cols="12" md="6" class="pa-1">
+        <v-row>
+          <v-col cols="12">
             <v-text-field
               v-model="form.name"
               :error-messages="errors.name"
@@ -21,51 +18,120 @@
               outlined
             />
           </v-col>
-          <v-col cols="12" md="6" class="pa-1">
-            <!-- <v-textarea
+          <!-- <v-col cols="12" lg="6">
+            <v-textarea
               v-model="form.description"
               :error-messages="errors.description"
-              class="title text-uppercase"
+              class="pr-6 pb-8 title text-uppercase"
               label="Descripcion"
               outlined
-            /> -->
+            />
+          </v-col> -->
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-toolbar color="blue lighten-2 text-uppercase" dark dense>
+              <v-toolbar-title>CheckList Requisitos</v-toolbar-title>
+              <v-spacer />
+              <!-- <v-text-field
+                rounded
+                append-icon="mdi-magnify"
+                dense
+                single-line
+                outlined
+                solo-inverted
+                hide-details
+              /> -->
+              <v-btn icon @click.native="showAddRequirementDialog">
+                <v-icon large color="success darken-2">
+                  mdi-plus-box-multiple-outline
+                </v-icon>
+              </v-btn>
+            </v-toolbar>
+            <v-list dense class=" title text-uppercase">
+              <template v-for="(item, index) in items">
+                <v-list-item :key="item.title" class="green lighten-5">
+                  <template v-slot:default>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.name" />
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                      <v-btn icon @click="deleteItemConfirm(index)">
+                        <v-icon color="red darken-1">
+                          mdi-trash-can
+                        </v-icon>
+                      </v-btn>
+                    </v-list-item-action>
+                  </template>
+                </v-list-item>
+
+                <v-divider v-if="index < items.length - 1" :key="index" />
+              </template>
+            </v-list>
           </v-col>
         </v-row>
       </v-card-text>
       <v-card-actions>
-        <v-btn v-if="!template.deleted_at" color="error" @click="destroy">
-          Eliminar
-        </v-btn>
-        <v-spacer />
-        <v-btn type="submit" :loading="sending" color="primary">Guardar</v-btn>
+        <v-btn type="submit" block :loading="sending">Guardar</v-btn>
       </v-card-actions>
     </form>
+
+    <dialog-modal :show="addRequirementDialog" @close="closeModal">
+      <template #title>
+        Requisitos
+      </template>
+
+      <template #content>
+        <v-row justify="center" align="center" class="ma-auto">
+          <v-autocomplete
+            v-model="values"
+            :items="requirements"
+            item-text="name"
+            item-value="id"
+            clearable
+            filled
+            rounded
+            solo
+            hide-details
+            return-object
+          />
+        </v-row>
+      </template>
+
+      <template #footer>
+        <v-btn block @click="save(values)">Agregar</v-btn>
+      </template>
+    </dialog-modal>
   </v-card>
 </template>
 
 <script>
 import Layout from '@/Shared/Layout'
-import TrashedMessage from '@/Shared/TrashedMessage'
+import DialogModal from '@/Shared/DialogModal'
 
 export default {
   metaInfo() {
     return { title: this.form.name }
   },
   layout: Layout,
-  components: {
-    TrashedMessage,
-  },
+  components: { DialogModal },
   props: {
     errors: Object,
     template: Object,
+    requirements: Array,
+    items: Array,
   },
   remember: 'form',
   data() {
     return {
       sending: false,
-      form: {
+      addRequirementDialog: false,
+      form: this.$inertia.form({
         name: this.template.name,
-      },
+        requirements: this.items,
+      }),
+      values: [],
       breadcrumbs: [
         {
           text: 'Plantillas',
@@ -79,9 +145,13 @@ export default {
   },
   methods: {
     submit() {
+      const payload = {
+        ...this.form,
+        requirements: this.items.map(d => d.id),
+      }
       this.$inertia.put(
         this.route('templates.update', this.template.id),
-        this.form,
+        payload,
         {
           onStart: () => (this.sending = true),
           onFinish: () => (this.sending = false),
@@ -96,6 +166,27 @@ export default {
     restore() {
       if (confirm('Are you sure you want to restore this template?')) {
         this.$inertia.put(this.route('templates.restore', this.template.id))
+      }
+    },
+    showAddRequirementDialog() {
+      this.addRequirementDialog = true
+    },
+    closeModal() {
+      this.addRequirementDialog = false
+      this.values = []
+    },
+    save(item) {
+      if (item.id && !this.items.some(e => e.id === item.id)) {
+        this.items.push(item)
+        return this.closeModal()
+      }
+      return !item.id
+        ? alert('Seleccione algun Requisito')
+        : alert('Elemento Duplicado')
+    },
+    deleteItemConfirm(index) {
+      if (confirm('Se Eliminara de la lista')) {
+        this.items.splice(index, 1)
       }
     },
   },

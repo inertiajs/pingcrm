@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Requirement;
 use App\Models\Template;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -22,6 +23,7 @@ class TemplateController extends Controller
                             'id' => $template->id,
                             'name' => $template->name,
                             'deleted_at' => $template->deleted_at,
+                            'requirements_count' => $template->requirements()->count()
                         ];
                     }),
             ]);
@@ -29,15 +31,24 @@ class TemplateController extends Controller
 
     public function create()
     {
-        return Inertia::render('Templates/Create');
+        return Inertia::render('Templates/Create', [
+            'requirements' => Requirement::all('id', 'name')
+        ]);
     }
 
     public function store()
     {
-        Template::create(
-            Request::validate([
-                'name' => ['required', 'max:100'],
-            ])
+        Request::validate([
+            'name' => ['required', 'max:100'],
+            'requirements' => ['required', 'array']
+        ]);
+
+        $template = Template::create(
+            Request::only('name')
+        );
+
+        $template->requirements()->syncWithoutDetaching(
+            Request::input('requirements')
         );
 
         return Redirect::route('templates')->with('success', 'Template created.');
@@ -51,15 +62,25 @@ class TemplateController extends Controller
                 'name' => $template->name,
                 'deleted_at' => $template->deleted_at,
             ],
+            'requirements' => Requirement::all('id', 'name'),
+            'items' => $template->requirements()->orderByName()->get()->map->only('id', 'name'),
         ]);
     }
 
     public function update(Template $template)
     {
+
+        Request::validate([
+            'name' => ['required', 'max:100'],
+            'requirements' => ['required', 'array']
+        ]);
+
         $template->update(
-            Request::validate([
-                'name' => ['required', 'max:100'],
-            ])
+            Request::only('name')
+        );
+
+        $template->requirements()->sync(
+            Request::input('requirements')
         );
 
         return Redirect::back()->with('success', 'Template updated.');

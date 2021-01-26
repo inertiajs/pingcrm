@@ -1,52 +1,61 @@
 <template>
-  <v-row align="center" justify="center" class="ma-0">
-    <v-col cols="12" sm="8" md="4" lg="4" xl="3">
-      <v-card outlined>
-        <v-card-title> Login </v-card-title>
-
-        <v-container>
-          <form @submit.prevent="submit">
-            <v-card-text>
-              <v-text-field
-                v-model="form.email"
-                :error="errors.email"
-                class="mt-10"
-                label="Email"
-                type="email"
-                autofocus
-                autocapitalize="off"
-              />
-              <v-text-field
-                v-model="form.password"
-                class="mt-6"
-                label="Password"
-                type="password"
-              />
-            </v-card-text>
-            <v-card-actions>
-              <v-checkbox
-                id="remember"
-                v-model="form.remember"
-                label="Recuerdame"
-                class="mr-1"
-                type="checkbox"
-              />
-              <v-spacer />
-              <v-btn
-                dark
-                depressed
-                :loading="loading"
-                color="primary"
-                type="submit"
-              >
-                Login
-              </v-btn>
-            </v-card-actions>
-          </form>
-        </v-container>
-      </v-card>
-    </v-col>
-  </v-row>
+  <v-container fluid fill-height class="loginOverlay">
+    <v-layout flex align-center justify-center>
+      <v-flex xs12 sm4 elevation-6>
+        <v-toolbar class="red darken-2 overline text-center">
+          <v-toolbar-title class="white--text text-center">
+            <h4>Terrentro Expediente</h4>
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-card>
+          <v-card-text class="pt-4">
+            <div>
+              <v-form ref="form" @submit.prevent="submit">
+                <v-text-field
+                  v-model="form.email"
+                  label="Correo Electronico"
+                  :error-messages="errors.email"
+                  required
+                  outlined
+                />
+                <v-text-field
+                  v-model="form.password"
+                  :error-messages="errors.password"
+                  label="Contraseña"
+                  min="8"
+                  :append-icon="e1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="e1 ? 'password' : 'text'"
+                  :rules="passwordRules"
+                  counter
+                  required
+                  outlined
+                  @click:append="() => (e1 = !e1)"
+                />
+                <v-checkbox
+                  id="remember"
+                  v-model="form.remember"
+                  label="Recuerdame"
+                  type="checkbox"
+                />
+                <v-layout justify-space-between>
+                  <v-btn
+                    dark
+                    depressed
+                    block
+                    :loading="sending"
+                    color="primary"
+                    type="submit"
+                  >
+                    Login
+                  </v-btn>
+                </v-layout>
+              </v-form>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -59,11 +68,12 @@ export default {
   layout: (h, page) => h(Layout, [page]),
   data() {
     return {
+      e1: true,
       sending: false,
       tab: null,
       form: {
-        email: 'johndoe@example.com',
-        password: 'secret',
+        email: null,
+        password: null,
         remember: null,
       },
     }
@@ -83,3 +93,20 @@ export default {
   },
 }
 </script>
+<style>
+#login {
+  background-image: url('https://images.unsplash.com/photo-1497733942558-e74c87ef89db?dpr=1&auto=compress,format&fit=crop&w=1650&h=&q=80&cs=tinysrgb&crop=');
+  background-size: cover;
+  overflow: hidden;
+}
+
+.loginOverlay {
+  background: rgba(33, 150, 243, 0.3);
+}
+
+.photoCredit {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+</style>

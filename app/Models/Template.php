@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Template extends Model
 {
     use SoftDeletes;
+
+
+
+    public function requirements()
+    {
+        return $this->belongsToMany(Requirement::class, 'requirement_template', 'template_id', 'requirement_id');
+    }
 
     public function scopeOrderByName($query)
     {

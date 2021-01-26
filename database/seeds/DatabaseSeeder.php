@@ -2,9 +2,9 @@
 
 use App\Models\Account;
 use App\Models\Contact;
-use App\Models\Expedient;
 use App\Models\Organization;
 use App\Models\Requirement;
+use App\Models\Status;
 use App\Models\Template;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -14,12 +14,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $account = Account::create(['name' => 'Acme Corporation']);
+        Status::createMany(
+            ['text' => 'Por Cargar', 'key' => Status::STATUS_KEY_PENDING],
+            ['text' => 'En Revision', 'key' => Status::STATUS_KEY_REVIEW],
+            ['text' => 'Validos', 'key' => Status::STATUS_KEY_VALID],
+            ['text' => 'Invalidos', 'key' => Status::STATUS_KEY_INVALID],
+            ['text' => 'Excluidos', 'key' => Status::STATUS_KEY_EXCLUDED],
+        );
+
 
         factory(User::class)->create([
             'account_id' => $account->id,
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'johndoe@example.com',
+            'first_name' => 'Admin',
+            'last_name' => 'Terrentro',
+            'email' => 'admin@terrentro.com',
             'owner' => true,
         ]);
 
@@ -36,6 +44,6 @@ class DatabaseSeeder extends Seeder
 
         factory(Requirement::class, 50)->create();
         factory(Template::class, 5)->create();
-        factory(Expedient::class, 100)->create();
+        // factory(Expedient::class, 100)->create();
     }
 }

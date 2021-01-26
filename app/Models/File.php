@@ -2,10 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class File extends Model
 {
-    use HasFactory;
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class, 'id');
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->pathURL();
+    }
+
+    public function pathURL()
+    {
+        if ($this->file_path) {
+            return URL::to($this->file_path);
+        }
+    }
+
+    protected $appends = [
+        'path',
+    ];
 }

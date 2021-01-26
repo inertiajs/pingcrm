@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpedientRequirementTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateExpedientRequirementTable extends Migration
      */
     public function up()
     {
-        Schema::create('expedient_requirement', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('expedient_id');
-            $table->foreignId('requirement_id');
-            // $table->timestamps();
+            $table->foreignId('document_id')->constrained('documents', 'id')->cascadeOnDelete();
+            $table->string('file_name');
+            $table->string('file_path');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateExpedientRequirementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expedient_requirement');
+        Schema::dropIfExists('files');
     }
 }

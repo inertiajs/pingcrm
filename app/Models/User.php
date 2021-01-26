@@ -20,14 +20,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'owner' => 'boolean',
     ];
 
+    protected $hidden = ['password'];
+
     public function account()
     {
         return $this->belongsTo(Account::class);
     }
 
+    public function expedients_follower()
+    {
+        return $this->belongsToMany(Expedient::class, 'expedient_user', 'user_id', 'expedient_id');
+    }
+
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getPhotoAttribute()
+    {
+        return $this->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']);
     }
 
     public function setPasswordAttribute($password)
@@ -42,10 +54,33 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
     }
 
+    // protected $appends = [
+    //     'permissions',
+    // ];
+
+    // public function getPermissionsAttribute()
+    // {
+    //     return [
+    //         'expedients' => [
+    //             'view' => $this->can('user-admin'),
+    //         ],
+    //         'templates' => [
+    //             'view' => $this->can('user-admin'),
+    //         ],
+    //         'requirements' => [
+    //             'view' => $this->can('user-admin'),
+    //         ],
+    //         'users' => [
+    //             'view' => $this->can('user-admin'),
+    //         ],
+    //     ];
+    // }
+
     public function isDemoUser()
     {
         return $this->email === 'johndoe@example.com';
     }
+
 
     public function scopeOrderByName($query)
     {
