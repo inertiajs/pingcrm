@@ -1,10 +1,6 @@
 <template>
   <v-card flat>
-    <v-breadcrumbs :items="breadcrumbs" class="overline">
-      <template v-slot:divider>
-        <v-icon>mdi-chevron-right</v-icon>
-      </template>
-    </v-breadcrumbs>
+    <breadcrumbs :items="breadcrumbs" />
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
       Este Usuario a sido Eliminada.
     </trashed-message>
@@ -12,28 +8,13 @@
     <v-card-text>
       <v-row>
         <v-col cols="12">
-          <user-form :form.sync="form" :errors="errors" class="overline">
-            <template #preview>
-              <v-avatar
-                v-if="user.photo"
-                color="grey darken-1 shrink"
-                rounded
-                size="64"
-              >
-                <img :src="user.photo" :alt="user.name">
-              </v-avatar>
-            </template>
-          </user-form>
+          <user-form :form.sync="form" :errors="errors" class="overline" />
         </v-col>
       </v-row>
     </v-card-text>
     <v-card-actions>
-      <v-btn v-if="!user.deleted_at" color="error" @click="destroy">
-        Eliminar
-      </v-btn>
-      <v-spacer />
-
       <v-btn
+        block
         :loading="sending"
         :errors="errors"
         color="primary"
@@ -49,6 +30,7 @@
 import Layout from '@/Shared/Layout'
 import UserForm from '@/Components/User/Form'
 import TrashedMessage from '@/Shared/TrashedMessage'
+import Breadcrumbs from '@/Shared/Breadcrumbs'
 
 export default {
   metaInfo() {
@@ -60,6 +42,7 @@ export default {
   components: {
     UserForm,
     TrashedMessage,
+    Breadcrumbs,
   },
   props: {
     errors: Object,
@@ -87,6 +70,10 @@ export default {
           exact: true,
         },
         { text: 'Editar', disabled: true },
+        {
+          text: `${this.user.first_name} ${this.user.last_name}`,
+          disabled: true,
+        },
       ],
     }
   },
@@ -112,11 +99,6 @@ export default {
           }
         },
       })
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this user?')) {
-        this.$inertia.delete(this.route('users.destroy', this.user.id))
-      }
     },
     restore() {
       if (confirm('Are you sure you want to restore this user?')) {

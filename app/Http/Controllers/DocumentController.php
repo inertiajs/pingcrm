@@ -8,6 +8,7 @@ use App\Models\File;
 use App\Models\Status;
 use Exception;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -145,8 +146,9 @@ class DocumentController extends Controller
                     $document->files()->create(
                         [
                             'document_id' => $document->id,
+                            'user_id' => Auth::user()->id,
                             'file_name' => $file->getClientOriginalName(),
-                            'file_path' => $file ? $file->store('files') : null
+                            'file_path' => $file ? $file->store('files/expedients/' . $document->expedient_id . "/" . $document->id) : null
                         ]
                     );
                 }
@@ -156,7 +158,7 @@ class DocumentController extends Controller
             }
         } catch (Exception $e) {
             DB::rollback();
-            // return $e;
+            return $e;
             return Redirect::back()->with('error', 'ERROR Servidor para el Documento.');
         }
         DB::commit();
@@ -188,14 +190,18 @@ class DocumentController extends Controller
         $zip = new \ZipArchive();
         $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
-        $path = Storage::path('files');
-        foreach ($document->files as $name => $file) {
-            $filePath = $file->file_path;
-            $relativePath = 'app/' . $filePath;
-            $file_name = $path . "\\" . substr($filePath, strlen('file/') + 1);
-            $zip->addFile($file_name, $relativePath);
+        $path = Storage::path('files/expedients/' . $document->expedient_id . "/" . $document->id);
+        $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
+        foreach ($files as $name => $file) {
+            // We're skipping all subfolders
+            if (!$file->isDir()) {
+                $filePath = $file->getRealPath();
+                // extracting filename with substr/strlen
+                // return dd($file->getFileName());
+                $relativePath =  $document->expedient->name . "/" . $document->requirement->name . '/' . $file->getFileName();
+                $zip->addFile($filePath, $relativePath);
+            }
         }
-
         $zip->close();
         return response()->download($zip_file);
     }

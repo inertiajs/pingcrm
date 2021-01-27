@@ -14,14 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $account = Account::create(['name' => 'Acme Corporation']);
-        Status::createMany(
-            ['text' => 'Por Cargar', 'key' => Status::STATUS_KEY_PENDING],
-            ['text' => 'En Revision', 'key' => Status::STATUS_KEY_REVIEW],
-            ['text' => 'Validos', 'key' => Status::STATUS_KEY_VALID],
-            ['text' => 'Invalidos', 'key' => Status::STATUS_KEY_INVALID],
-            ['text' => 'Excluidos', 'key' => Status::STATUS_KEY_EXCLUDED],
-        );
-
+        Status::create(['text' => 'Por Cargar', 'key' => Status::STATUS_KEY_PENDING]);
+        Status::create(['text' => 'En Revision', 'key' => Status::STATUS_KEY_REVIEW]);
+        Status::create(['text' => 'Validos', 'key' => Status::STATUS_KEY_VALID]);
+        Status::create(['text' => 'Invalidos', 'key' => Status::STATUS_KEY_INVALID]);
+        Status::create(['text' => 'Excluidos', 'key' => Status::STATUS_KEY_EXCLUDED]);
 
         factory(User::class)->create([
             'account_id' => $account->id,

@@ -1,5 +1,5 @@
 <template>
-  <v-breadcrumbs :items="breadcrumbs" class="overline">
+  <v-breadcrumbs :items="items" class="overline">
     <template v-slot:divider>
       <v-icon>mdi-chevron-right</v-icon>
     </template>
@@ -9,7 +9,7 @@
 <script>
 export default {
   props: {
-    breadcrumbs: {
+    items: {
       type: Array,
       required: true,
     },

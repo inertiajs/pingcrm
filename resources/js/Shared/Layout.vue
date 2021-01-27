@@ -37,7 +37,7 @@
         </v-list>
       </v-menu>
 
-      <v-tabs v-model="active" centered color="grey darken-1">
+      <v-tabs v-model="active" centered color="red darken-4">
         <template v-for="tab in $page.props.tabs">
           <v-tab v-if="tab.show" :key="tab.label" @click="click(tab)">
             {{ tab.label }}

@@ -25,21 +25,6 @@ class Document extends Model
 
     protected $with = ['files'];
 
-    // protected $appends = [
-    //     'id'
-    // ];
-
-
-    // public function getIdAttribute()
-    // {
-    //     $result =  DB::table('documents')->select('id')
-    //         ->where('expedient_id', $this->expedient_id)
-    //         ->where('requirement_id', $this->requirement_id)
-    //         ->first();
-
-    //     return $result->id;
-    // }
-
     public function files()
     {
         return $this->hasMany(File::class, 'document_id', 'id');
@@ -53,5 +38,10 @@ class Document extends Model
     public function requirement()
     {
         return $this->belongsTo(Requirement::class, 'requirement_id');
+    }
+
+    public function expedient()
+    {
+        return $this->belongsTo(Expedient::class, 'expedient_id');
     }
 }

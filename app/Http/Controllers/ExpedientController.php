@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class ExpedientController extends Controller
@@ -24,7 +23,7 @@ class ExpedientController extends Controller
                 'filters' => Request::all('search', 'trashed', 'page'),
                 'expedients' => Expedient::orderByName()
                     ->filter(Request::only('search', 'trashed'))
-                    ->ownerUser()
+                    ->ownerOrFollowerUser(Auth::user())
                     ->paginate(10)
                     ->transform(function ($expedient) {
                         return [
@@ -33,7 +32,7 @@ class ExpedientController extends Controller
                             'deleted_at' => $expedient->deleted_at,
                             'template' => $expedient->template->name,
                             'owner_user' => $expedient->owner_user->only('id', 'name', 'email'),
-                            'follower_users' => $expedient->follower_users->only('id', 'name', 'email'),
+                            'follower_users_count' => $expedient->follower_users()->count(),
                             'requirements_count' => $expedient->requirements()->count(),
                             'created_at' => $expedient->created_at,
                         ];

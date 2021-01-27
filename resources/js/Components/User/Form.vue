@@ -59,7 +59,6 @@
           label="Photo"
           outlined
         />
-        <slot name="preview" />
       </v-col>
     </v-row>
   </v-form>

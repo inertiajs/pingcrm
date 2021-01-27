@@ -43,7 +43,7 @@
           </v-list>
         </v-card>
       </v-col>
-      <v-col v-if="Document" cols="12" md="8">
+      <v-col cols="12" md="8">
         <v-card>
           <v-toolbar color="light-blue" dark dense>
             <v-toolbar-title>
@@ -138,13 +138,16 @@
                       >
                         <v-icon>mdi-file-upload</v-icon>
                       </v-btn>
-                      <!-- <v-btn
-                        icon
-                        target="_blank"
-                        :href="`/documents/${Document.id}/downloadFilesZip`"
-                      >
-                        <v-icon>mdi-cloud-download-outline</v-icon>
-                      </v-btn> -->
+                      <template v-if="Document.files">
+                        <v-btn
+                          v-if="Document.files.length > 0"
+                          icon
+                          target="_blank"
+                          :href="`/documents/${Document.id}/downloadFilesZip`"
+                        >
+                          <v-icon>mdi-cloud-download-outline</v-icon>
+                        </v-btn>
+                      </template>
                     </v-toolbar>
                     <v-list dense>
                       <v-list-item
@@ -215,7 +218,14 @@
       </template>
 
       <template #footer>
-        <v-btn block @click.prevent="uploadFileDocument">
+        <v-btn
+          v-show="filesToUpload.length > 0"
+          block
+          :loading="sending"
+          :disabled="sending"
+          color="success"
+          @click.prevent="uploadFileDocument"
+        >
           Cargar Archivo(s)
         </v-btn>
       </template>

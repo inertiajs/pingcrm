@@ -49,8 +49,8 @@
           >
             <v-hover v-slot="{ hover }">
               <v-card color="grey lighten-3" :elevation="hover ? 12 : 2" shaped>
-                <v-toolbar>
-                  <v-toolbar-title class="grey--text">
+                <v-toolbar dense color="indigo darken-4" dark>
+                  <v-toolbar-title>
                     {{ `#${expedient.id.toString().padStart(5, 0)}` }}
                     <v-chip v-if="expedient.deleted_at" label color="warning">
                       Eliminado
@@ -64,7 +64,7 @@
                     icon
                     @click="adminExpedient(expedient.id)"
                   >
-                    <v-icon>mdi-eye</v-icon>
+                    <v-icon>mdi-folder-open</v-icon>
                   </v-btn>
 
                   <v-btn icon @click="show(expedient.id)">
@@ -85,12 +85,11 @@
 
                     <v-list dense>
                       <v-list-item
-                        v-if="!expedient.deleted_at"
                         dense
-                        class="error"
-                        @click="destroy(expedient.id)"
+                        class="accent"
+                        @click="edit(expedient.id)"
                       >
-                        <span class="overline white--text">Eliminar</span>
+                        <span class="overline white--text">Modificar</span>
                       </v-list-item>
                       <v-list-item
                         v-if="expedient.deleted_at"
@@ -100,33 +99,52 @@
                       >
                         <span class="overline white--text">Restore</span>
                       </v-list-item>
+                      <v-list-item
+                        v-else
+                        dense
+                        class="error"
+                        @click="destroy(expedient.id)"
+                      >
+                        <span class="overline white--text">Eliminar</span>
+                      </v-list-item>
                     </v-list>
                   </v-menu>
                 </v-toolbar>
-
                 <v-divider />
 
-                <v-card-title class="text-h6 text--primary text-uppercase">
-                  <span class="orange--text font-weight-black">
-                    {{ expedient.name }}
-                  </span>
+                <v-card-title class="text-uppercase" style="color:#d61523">
+                  {{ expedient.name }}
                 </v-card-title>
-                <v-card-text class="indigo--text font-weight-medium">
+
+                <v-card-text>
+                  <v-row align="center" class="mx-0">
+                    <div class="grey--text">
+                      Seguidores ({{ expedient.follower_users_count }})
+                    </div>
+                  </v-row>
+                  <div class="my-2 subtitle-1">
+                    {{ expedient.template }}
+                  </div>
+                  <v-divider />
+
                   <div class="overline">
-                    Fecha Creacion:
-                    {{
-                      Intl.DateTimeFormat('es-MX', {
-                        dateStyle: 'long',
-                      }).format(new Date(expedient.created_at))
-                    }}
+                    fecha creacion:
+                    <span
+                      class="indigo--text text--darken-4 font-weight-medium"
+                    >
+                      {{
+                        Intl.DateTimeFormat('es-MX', {
+                          dateStyle: 'long',
+                        }).format(new Date(expedient.created_at))
+                      }}
+                    </span>
                   </div>
                   <p class="display-1 text--primary mb-0 font-weight-black">
                     {{ expedient.owner_user.name }}
                   </p>
-                  <p>{{ expedient.owner_user.email }}</p>
-                  <div class="font-italic">
-                    {{ expedient.template }}
-                  </div>
+                  <p class="indigo--text font-weight-medium">
+                    {{ expedient.owner_user.email }}
+                  </p>
                 </v-card-text>
               </v-card>
             </v-hover>

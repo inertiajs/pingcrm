@@ -4,7 +4,7 @@ require('vuetifyjs-mix-extension')
 
 mix
   .js('resources/js/app.js', 'public/js')
-  .vue()
+  .vue({ version: 2 })
   .vuetify()
   .sass('resources/sass/app.sass', 'public/css')
   .webpackConfig(require('./webpack.config'))

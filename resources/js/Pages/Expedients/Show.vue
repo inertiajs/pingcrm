@@ -107,7 +107,13 @@
       </template>
 
       <template #footer>
-        <v-btn block @click.prevent="submit">
+        <v-btn
+          v-show="form.files.length > 0"
+          block
+          :loading="sending"
+          :disabled="sending"
+          @click.prevent="submit"
+        >
           Enviar Documento(s) Revision
         </v-btn>
       </template>
@@ -164,7 +170,6 @@ export default {
       each(this.form.files, (file, i) => {
         data.append(`archivos[${i}]`, file)
       })
-      data.append('status_key', 'review')
       data.append('_method', 'put')
       this.$inertia.post(
         this.route('documents.uploadFiles', this.form.document.id),

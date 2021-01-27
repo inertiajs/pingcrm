@@ -12,6 +12,11 @@ class File extends Model
         return $this->belongsTo(Document::class, 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
+
     public function getPathAttribute()
     {
         return $this->pathURL();

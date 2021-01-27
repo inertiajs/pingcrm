@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 class Expedient extends Model
 {
@@ -51,7 +50,11 @@ class Expedient extends Model
             $query->where(function ($query) use ($search) {
                 $query->orWhere('name', 'like', '%' . $search . '%')
                     ->orWhere('id', 'like', '%' . $search . '%');
-            });
+            })
+                ->orWhereHas('owner_user', function ($query) use ($search) {
+                    $query->where('first_name', 'like', '%' . $search . '%')
+                        ->orWhere('last_name', 'like', '%' . $search . '%');
+                });
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();
@@ -61,19 +64,19 @@ class Expedient extends Model
         });
     }
 
-    public function scopeOwnerUser($query)
+    public function scopeOwnerOrFollowerUser($query, User $user)
     {
-        if (Auth::user()->owner) {
+        if ($user->owner) {
             return $query;
         } else {
             $query->when(
-                Auth::user()->id ?? null,
+                $user->id ?? null,
                 function ($query, $user_id) {
-                    $query->orwhere('owner_user_id', $user_id)
-                        ->orWhere('user_id', $user_id)
-                        ->orWhereHas('follower_users', function ($query) use ($user_id) {
-                            return $query->whereIn('user_id', [$user_id]);
-                        });
+                    $query->where(function ($query) use ($user_id) {
+                        $query->where('owner_user_id', $user_id)->orWhere('user_id', $user_id);
+                    })->orWhereHas('follower_users', function ($query) use ($user_id) {
+                        return $query->whereIn('user_id', [$user_id]);
+                    });
                 }
             );
         }
