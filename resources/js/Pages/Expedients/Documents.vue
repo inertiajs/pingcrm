@@ -66,7 +66,10 @@
                     :items="statuses"
                     item-text="text"
                     item-value="key"
-                    :hint="`valido hasta: ${Document.until_valid}`"
+                    :hint="
+                      `valido hasta: ${Document.until_valid || 'Indefinido'}`
+                    "
+                    persistent-hint
                     :error-messages="errors.status_key"
                   />
                   <v-menu
@@ -98,7 +101,11 @@
                   </v-menu>
                 </v-col>
                 <v-col cols="12" md="3" class="text-left">
-                  <v-btn v-if="Document.id" color="success" @click="submit()">
+                  <v-btn
+                    v-if="Document.id"
+                    color="success"
+                    @click="submit(Document.status_key)"
+                  >
                     Guardar
                   </v-btn>
                 </v-col>
@@ -204,6 +211,7 @@
         <div class="d-flex flex-column align-content-space-between">
           <v-file-input
             v-model="filesToUpload"
+            accept="image/*, application/pdf"
             placeholder="seleccionar archivos."
             chips
             counter
@@ -223,7 +231,8 @@
           block
           :loading="sending"
           :disabled="sending"
-          color="success"
+          class="white--text"
+          color="indigo darken-5"
           @click.prevent="uploadFileDocument"
         >
           Cargar Archivo(s)
@@ -330,10 +339,15 @@ export default {
         },
       })
     },
-    submit() {
+    submit(status) {
+      let payload = {
+        ...this.Document,
+        until_valid: status !== 'valid' ? null : this.Document.until_valid,
+        commentary: status !== 'invalid' ? null : this.Document.commentary,
+      }
       this.$inertia.put(
         this.route('documents.update', this.Document.id),
-        this.Document,
+        payload,
         {
           onStart: () => (this.sending = true),
           onFinish: () => (this.sending = false),

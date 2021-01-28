@@ -23,28 +23,16 @@
             :class="{
               'on-hover': hover,
               'darken-1': true,
-              orange: hover,
-              grey: document.status === 'pending',
-              error: document.status === 'invalid',
-              success: document.status === 'valid',
-              accent: document.status === 'review',
             }"
+            :color="statusDocument(document.status).color"
             @click="showDocumentDialog(document)"
           >
             <v-card-title class="overline white--text">
               <v-row class="fill-height flex-column" justify="space-between">
                 <div class="align-self-center mt-2">
-                  <v-btn
-                    v-for="(icon, index) in icons"
-                    :key="index"
-                    :class="{ 'show-btns': hover }"
-                    :color="transparent"
-                    icon
-                  >
-                    <v-icon class="show-btns" :color="transparent">
-                      {{ icon }}
-                    </v-icon>
-                  </v-btn>
+                  <v-icon class="show-btns" :color="transparent" large>
+                    {{ statusDocument(document.status).icon }}
+                  </v-icon>
                 </div>
 
                 <div>
@@ -92,14 +80,16 @@
           <div>
             <v-file-input
               v-model="form.files"
+              accept="image/*,application/pdf"
               placeholder="seleccionar archivos."
               chips
               counter
               multiple
               show-size
-              truncate-length="15"
               outlined
+              filled
               clearable
+              truncate-length="15"
               :error-messages="errors.archivos"
             />
           </div>
@@ -109,9 +99,12 @@
       <template #footer>
         <v-btn
           v-show="form.files.length > 0"
-          block
           :loading="sending"
           :disabled="sending"
+          autofocus
+          block
+          class="white--text"
+          color="indigo darken-5"
           @click.prevent="submit"
         >
           Enviar Documento(s) Revision
@@ -148,17 +141,27 @@ export default {
     transparent: 'rgba(255, 255, 255, 0)',
   }),
   methods: {
-    getClasses(status) {
-      let classes = ''
-      classes = status === 'pending' ? { black: true } : ''
-      classes = status === 'review' ? { blue: true } : ''
-      classes = status == 'valid' ? { orange: true } : ''
-      classes = status === 'invalid' ? { error: true } : ''
-      return classes
+    statusDocument(status) {
+      switch (status) {
+      case 'review':
+        return { color: 'blue', icon: 'mdi-pencil' }
+      case 'pending':
+        return { color: 'grey', icon: 'mdi-timer-sand' }
+      case 'valid':
+        return { color: 'green', icon: 'mdi-check-all' }
+      case 'invalid':
+        return { color: 'error', icon: 'mdi-alert-circle-outline' }
+      case 'excluded':
+        return { color: 'black', icon: 'mdi-debug-step-over' }
+      default:
+        return {}
+      }
     },
     showDocumentDialog(_document) {
-      this.form.document = _document
-      this.addDocumentsDialog = true
+      if (_document.status !== 'review' && _document.status !== 'valid') {
+        this.form.document = _document
+        this.addDocumentsDialog = true
+      }
     },
     closeModal() {
       this.form.document = {}
@@ -178,7 +181,11 @@ export default {
           onStart: () => (this.sending = true),
           onFinish: () => (this.sending = false),
           onSuccess: () => {
-            this.closeModal()
+            if (confirm('¿Desea Agregar mas archivos?')) {
+              this.form.files = []
+            } else {
+              this.closeModal()
+            }
           },
         }
       )
