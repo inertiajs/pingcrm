@@ -89,7 +89,8 @@
               outlined
               filled
               clearable
-              truncate-length="15"
+              truncate-length="5"
+              :loading="sending"
               :error-messages="errors.archivos"
             />
           </div>
@@ -158,7 +159,7 @@ export default {
       }
     },
     showDocumentDialog(_document) {
-      if (_document.status !== 'review' && _document.status !== 'valid') {
+      if (_document.status !== 'valid') {
         this.form.document = _document
         this.addDocumentsDialog = true
       }

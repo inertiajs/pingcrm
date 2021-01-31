@@ -1,10 +1,10 @@
 <template>
   <v-card flat>
-    <breadcrumbs :breadcrumbs="breadcrumbs" />
+    <breadcrumbs :items="breadcrumbs" />
 
     <v-row class="mx-3">
       <v-col cols="12" md="4">
-        <v-card max-width="300">
+        <v-card>
           <v-list subheader dense>
             <v-subheader inset class="overline">Requisitos</v-subheader>
             <v-list-group
@@ -40,6 +40,14 @@
                 </v-list-item-content>
               </v-list-item>
             </v-list-group>
+            <v-subheader class="overline">
+              <v-btn block color="indigo darken-5" text>
+                Agregar requisito
+                <v-icon right>
+                  mdi-plus
+                </v-icon>
+              </v-btn>
+            </v-subheader>
           </v-list>
         </v-card>
       </v-col>
@@ -278,7 +286,6 @@ export default {
           href: this.route('expedients'),
           exact: true,
         },
-
         { text: 'Administrar', disabled: true },
         { text: this.expedient.name, disabled: true },
       ],

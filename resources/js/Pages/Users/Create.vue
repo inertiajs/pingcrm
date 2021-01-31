@@ -5,20 +5,18 @@
         <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
-
     <v-card-text>
-      <v-row>
-        <v-col cols="12">
-          <user-form :form.sync="form" :errors="errors" />
-        </v-col>
-      </v-row>
+      <v-container class="grey lighten-5 elevation-2" fluid>
+        <user-form :form.sync="form" :errors="errors" />
+      </v-container>
     </v-card-text>
     <v-card-actions>
       <v-btn
-        block
         :loading="sending"
         :errors="errors"
-        color="primary"
+        color="indigo darken-5"
+        dark
+        block
         @click="submit"
       >
         Guardar
