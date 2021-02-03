@@ -41,7 +41,12 @@
               </v-list-item>
             </v-list-group>
             <v-subheader class="overline">
-              <v-btn block color="indigo darken-5" text>
+              <v-btn
+                block
+                color="indigo darken-5"
+                text
+                @click="openDialogAddRequirement"
+              >
                 Agregar requisito
                 <v-icon right>
                   mdi-plus
@@ -247,6 +252,43 @@
         </v-btn>
       </template>
     </dialog-modal>
+
+    <dialog-modal :show="dialogs.addRequirement" @close="closeModal">
+      <template #title>
+        Requisitos
+      </template>
+
+      <template #content>
+        <v-row justify="center" align="center" class="ma-auto">
+          <v-autocomplete
+            v-model="requirement"
+            :items="requirements"
+            item-text="name"
+            item-value="id"
+            clearable
+            filled
+            rounded
+            outlined
+            :error-messages="errors.requirement"
+            return-object
+          />
+        </v-row>
+      </template>
+
+      <template #footer>
+        <v-btn
+          v-show="requirement"
+          block
+          :loading="sending"
+          :disabled="sending"
+          class="white--text"
+          color="indigo darken-5"
+          @click="saveRequirement(requirement)"
+        >
+          Agregar
+        </v-btn>
+      </template>
+    </dialog-modal>
   </v-card>
 </template>
 
@@ -268,15 +310,18 @@ export default {
     },
     folders: Array,
     statuses: Array,
+    requirements: Array,
   },
   remember: 'Document',
   data() {
     return {
       dialogs: {
         uploadFiles: false,
+        addRequirement: false,
       },
       menu_picker_date: false,
       Document: {},
+      requirement: {},
       sending: false,
       filesToUpload: [],
       breadcrumbs: [
@@ -312,9 +357,14 @@ export default {
     openDialogUploadFiles() {
       this.dialogs.uploadFiles = true
     },
+    openDialogAddRequirement() {
+      this.dialogs.addRequirement = true
+    },
     closeModal() {
       this.dialogs.uploadFiles = false
+      this.dialogs.addRequirement = false
       this.filesToUpload = []
+      this.requirement = {}
     },
     uploadFileDocument() {
       const data = new FormData()
@@ -332,6 +382,22 @@ export default {
           onSuccess: () => {
             this.closeModal()
             this.Document = {}
+          },
+        }
+      )
+    },
+    saveRequirement(_requirement) {
+      let payload = {
+        requirement: _requirement.id,
+      }
+      this.$inertia.put(
+        this.route('expedients.addRequirement', this.expedient.id),
+        payload,
+        {
+          onStart: () => (this.sending = true),
+          onFinish: () => (this.sending = false),
+          onSuccess: () => {
+            this.closeModal()
           },
         }
       )

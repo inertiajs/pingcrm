@@ -77,7 +77,7 @@ export default {
         ...this.form,
         requirements: this.form.requirements.flatMap(item => [item.id]),
         users_followers: this.form.users_followers.flatMap(item => [item.id]),
-        template: this.form.template.id,
+        template: this.form.template ? this.form.template.id : null,
       }
       this.$inertia.post(this.route('expedients.store'), payload, {
         onStart: () => (this.sending = true),

@@ -11,7 +11,7 @@
     </v-app-bar>
     <v-row align="center">
       <v-col
-        v-for="document in expedient.documents"
+        v-for="document in documents"
         :key="document.id"
         cols="12"
         md="4"
@@ -141,6 +141,11 @@ export default {
     icons: ['mdi-clock'],
     transparent: 'rgba(255, 255, 255, 0)',
   }),
+  computed: {
+    documents() {
+      return this.expedient.documents.filter(doc => doc.status !== 'excluded')
+    },
+  },
   methods: {
     statusDocument(status) {
       switch (status) {

@@ -173,9 +173,11 @@ Route::prefix('expedients')->name('expedients')->middleware('auth')->group(funct
     Route::get('/create', [ExpedientController::class, 'create'])->name('.create');
     Route::post('/', [ExpedientController::class, 'store'])->name('.store');
     Route::get('/{expedient}/documents', [ExpedientController::class, 'documents'])->name('.documents');
+    Route::get('/{expedient}/edit', [ExpedientController::class, 'edit'])->name('.edit');
     Route::put('/{expedient}', [ExpedientController::class, 'update'])->name('.update');
     Route::delete('/{expedient}', [ExpedientController::class, 'destroy'])->name('.destroy');
     Route::put('/{expedient}/restore', [ExpedientController::class, 'restore'])->name('.restore');
+    Route::put('/{expedient}/addRequirement', [ExpedientController::class, 'addRequirement'])->name('.addRequirement');
 });
 
 // Documents

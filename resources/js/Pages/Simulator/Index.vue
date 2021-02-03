@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-app-bar app color="#151635" dark>
-      <v-app-bar-nav-icon />
+      <v-app-bar-nav-icon href="https://terrentro.com/" />
 
       <v-toolbar-title
         class="text-subtitle-1 text-md-h5 text-uppercase"
@@ -12,8 +12,8 @@
 
       <v-spacer />
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+      <v-btn icon @click="print">
+        <v-icon>mdi-printer</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -22,11 +22,6 @@
         <v-row>
           <v-col cols="12" sm="10" offset-sm="1">
             <v-sheet min-height="70vh" rounded="lg">
-              <!-- <v-img
-                max-height="100"
-                src="../assets/logo.jpeg"
-                class="white--text"
-              /> -->
               <v-container>
                 <v-row
                   class="d-flex flex-wrap justify-space-between pa-3 ma-2 grey lighten-5"
@@ -36,15 +31,6 @@
                     label="Valor Con IVA:"
                     type="number"
                     class="mx-2 flex-grow-1 flex-shrink-1"
-                    prefix="$"
-                    outlined
-                    dense
-                  />
-                  <v-text-field
-                    v-model="apertura"
-                    label="Apertura de Contrato:"
-                    type="number"
-                    class="mx-2"
                     prefix="$"
                     outlined
                     dense
@@ -73,19 +59,28 @@
                     class="mx-2 flex-grow-1 flex-shrink-1"
                     prefix="$"
                     outlined
+                    disabled
                     dense
                   />
-                  <v-select
-                    v-model="rents"
-                    label="Rentas Anticipadas:"
-                    class="mx-2 flex-grow-1 flex-shrink-1"
-                    :items="anticipated"
-                    item-text="mes"
-                    prefix="#"
-                    outlined
-                    dense
-                    return-object
-                  />
+
+                  <v-col
+                    cols="6"
+                    md="2"
+                    class="mx-2 flex-grow-1 flex-shrink-0 pa-0"
+                  >
+                    <v-select
+                      v-model="rents"
+                      label="Rentas Anticipadas:"
+                      class="mx-2 flex-grow-0 flex-shrink-0"
+                      :items="anticipated"
+                      item-text="mes"
+                      prefix="#"
+                      outlined
+                      reverse
+                      dense
+                      return-object
+                    />
+                  </v-col>
                 </v-row>
                 <v-simple-table dense>
                   <thead>
@@ -109,9 +104,15 @@
                         :key="`opps-${index}`"
                         class="text-center font-weight-bold"
                       >
-                        <template v-if="i == 0"> ${{ apertura }} </template>
-                        <template v-if="i == 1"> ${{ firmas }} </template>
-                        <template v-if="i == 2"> ${{ seguro }} </template>
+                        <template v-if="i == 0">
+                          ${{ aperturaContrato }}
+                        </template>
+                        <template v-if="i == 1">
+                          ${{ parseInt(firmas).toFixed(2) }}
+                        </template>
+                        <template v-if="i == 2">
+                          ${{ parseInt(seguro).toFixed(2) }}
+                        </template>
                         <template
                           v-if="!!row.cb && typeof row.cb === 'function'"
                         >
@@ -123,11 +124,6 @@
                               })
                             )
                           }}
-                          <!-- tax: item.tax,
-                                tax2: item.tax2,
-                                percent_unid: item.percent,
-                                percent: rents.percent,
-                                annual: item.annual, -->
                         </template>
                       </td>
                     </tr>
@@ -160,14 +156,6 @@
                               })
                             )
                           }}
-                          <!-- tax: item.tax,
-                                tax2: item.tax2,
-                                tax3: item.tax3,
-                                percent: rents.percent,
-                                percent_unid: item.percent,
-                                meses: item.mes - rents.mes,
-                                mensualidad: item.mes,
-                                annual: item.annual, -->
                         </template>
                       </td>
                     </tr>
@@ -334,6 +322,9 @@ export default {
         },
       ]
     },
+    aperturaContrato() {
+      return this.amount * 0.02
+    },
   },
   methods: {
     utilidad_mensual(params) {
@@ -369,14 +360,17 @@ export default {
       return this._subtotal(params) + this.rentas_en_deposito(params)
     },
     _subtotal(params) {
-      let annual = this.seguro * params.annual
-      return this.apertura + this.firmas + annual
+      let annual = parseInt(this.seguro) * params.annual
+      return this.aperturaContrato + parseInt(this.firmas) + annual
     },
     rentas_en_deposito(params) {
       return this.pago_mensual_sin_iva(params) * this.rents.mes
     },
     pago_mensual_sin_iva({ tax, tax2, percent }) {
       return this.amount * tax * (1 - percent / 100) * tax2
+    },
+    print() {
+      window.print()
     },
   },
 }

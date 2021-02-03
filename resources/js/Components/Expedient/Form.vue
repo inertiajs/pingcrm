@@ -14,6 +14,9 @@
         <v-autocomplete
           v-model="form.owner_user"
           :items="users"
+          label="Cliente a quien Pertenece el Expediente:"
+          placeholder="Email Cliente..."
+          :error-messages="errors.owner_user"
           item-text="email"
           item-value="id"
           clearable
@@ -21,7 +24,7 @@
           filled
           outlined
           dense
-          label="Cliente a quien Pertenece el Expediente:"
+          :disabled="isEdit"
         >
           <!-- <template v-slot:prepend>
         <v-tooltip top>
@@ -40,8 +43,10 @@
         <v-autocomplete
           v-model="form.template"
           :items="templates"
+          label="Plantilla:"
           placeholder="Seleccione una Plantilla"
           prepend-inner-icon="mdi-clipboard-list-outline"
+          :error-messages="errors.template"
           item-text="name"
           item-value="id"
           return-object
@@ -50,7 +55,7 @@
           rounded
           filled
           dense
-          label="Plantilla:"
+          :disabled="isEdit"
         >
           <template v-slot:append-outer>
             <v-tooltip top>
@@ -66,7 +71,7 @@
           </template>
         </v-autocomplete>
 
-        <v-switch v-model="form.active" label="ACTIVO" />
+        <v-switch v-model="form.active" label="ACTIVO" class="mr-auto" />
         <div class="text-center text-h3 text-center">
           <div>{{ form.requirements.length }}</div>
           <div class="overline">requisitos por revisar.</div>
@@ -76,10 +81,11 @@
         <v-expansion-panels>
           <v-expansion-panel class="py-0">
             <v-expansion-panel-header
-              class="indigo white--text overline"
+              class="indigo white--text overline py-0"
               disable-icon-rotate
             >
-              <span>Lista Seguidores ({{ form.users_followers.length }}) </span>
+              <span>Lista Seguidores ({{ form.users_followers.length || 0 }})
+              </span>
               <v-spacer />
               <template v-slot:actions>
                 <v-btn icon @click.native="showAddFollowerDialog">
@@ -200,6 +206,11 @@ export default {
     errors: Object,
     users: { type: Array, required: true },
     templates: { type: Array, required: true },
+    isEdit: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   data: () => ({
     addRequirementDialog: false,

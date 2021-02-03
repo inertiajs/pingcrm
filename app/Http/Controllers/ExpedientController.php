@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expedient;
+use App\Models\Requirement;
 use App\Models\Status;
 use App\Models\Template;
 use App\Models\User;
@@ -22,7 +23,7 @@ class ExpedientController extends Controller
             Inertia::render('Expedients/Index', [
                 'filters' => Request::all('search', 'trashed', 'page'),
                 'expedients' => Expedient::orderByName()
-                    ->filter(Request::only('search', 'trashed'))
+                    ->filter(Request::only('search', 'trashed', 'folio'))
                     ->ownerOrFollowerUser(Auth::user())
                     ->paginate(10)
                     ->transform(function ($expedient) {
@@ -30,7 +31,7 @@ class ExpedientController extends Controller
                             'id' => $expedient->id,
                             'name' => $expedient->name,
                             'deleted_at' => $expedient->deleted_at,
-                            'template' => $expedient->template->name,
+                            'template' => $expedient->template()->withTrashed()->get('name')->pluck('name')->join(''),
                             'owner_user' => $expedient->owner_user->only('id', 'name', 'email'),
                             'follower_users_count' => $expedient->follower_users()->count(),
                             'requirements_count' => $expedient->requirements()->count(),
@@ -52,7 +53,7 @@ class ExpedientController extends Controller
             'expedient' => [
                 'id' => $expedient->id,
                 'name' => $expedient->name,
-                'documents' => $expedient->requirements->map(function ($R) {
+                'documents' => $expedient->requirements()->withTrashed()->get()->map(function ($R) {
                     return [
                         'id' => $R->document->id,
                         'title' => $R->name,
@@ -70,24 +71,8 @@ class ExpedientController extends Controller
     public function create()
     {
         return Inertia::render('Expedients/Create', [
-            'templates' => Template::all()
-                ->transform(function ($template) {
-                    return [
-                        'id' => $template->id,
-                        'name' => $template->name,
-                        'requirements' => $template->requirements
-                    ];
-                }),
-            'users' => User::all()
-                ->transform(function ($user) {
-                    return [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'phone' => $user->phone,
-                        'photo' => $user->photo,
-                    ];
-                }),
+            'templates' => Template::orderByName()->get()->map->only('id', 'name', 'requirements'),
+            'users' => User::orderByName()->get()->map->only('id', 'name', 'email')
         ]);
     }
 
@@ -95,8 +80,8 @@ class ExpedientController extends Controller
     {
         Request::validate([
             'name' => ['required', 'max:100', Rule::unique('expedients')],
-            'requirements' => ['required', 'array'],
-            'users_followers' => ['required', 'array'],
+            'requirements' => ['array'],
+            'users_followers' => ['array'],
             'owner_user' => ['required'],
             'template' => ['required'],
             'active' => ['required'],
@@ -158,24 +143,45 @@ class ExpedientController extends Controller
                                 'until_valid' => $D->until_valid,
                                 'commentary' => $D->commentary,
                                 'status_key' => $D->status->key,
-                                'title' => $D->requirement->name,
-                                'description' => $D->requirement->description,
+                                'title' => $D->requirement()->withTrashed()->get('name')->pluck('name')->join(''),
+                                'description' => $D->requirement()->withTrashed()->get('description')->pluck('description')->join(''),
                             ];
                         }),
                     'documents_count' => $S->documents->where('expedient_id', $expedient->id)->count()
                 ];
-            })
+            }),
+            'requirements' => Requirement::whereNotIn('id', $expedient->requirements->pluck('id'))->get(['id', 'name'])
+        ]);
+    }
+
+    public function edit(Expedient $expedient)
+    {
+        return Inertia::render('Expedients/Edit', [
+            'expedient' => [
+                'id' => $expedient->id,
+                'name' => $expedient->name,
+                'active' => $expedient->active,
+                'deleted_at' => $expedient->deleted_at,
+                'template' => $expedient->template->only('id', 'name'),
+                'requirements' => $expedient->requirements,
+                'owner_user' => $expedient->owner_user->only('id', 'name', 'email'),
+                'users_followers' => $expedient->follower_users()->orderByName()->get()->map->only('id', 'name', 'email'),
+            ],
+            'templates' => Template::orderByName()->get()->map->only('id', 'name', 'requirements'),
+            'users' => User::orderByName()->get()->map->only('id', 'name', 'email')
         ]);
     }
 
     public function update(Expedient $expedient)
     {
-        $expedient->update(
-            Request::validate([
-                'name' => ['required', 'max:100', Rule::unique('expedients')],
-                'users_followers' => ['required', 'array'],
-                'active' => ['required'],
-            ])
+        Request::validate([
+            'name' => ['required', 'max:100', Rule::unique('expedients')->ignore($expedient->id)],
+            'users_followers' => ['array'],
+            'active' => ['required'],
+        ]);
+        $expedient->update(Request::only('name', 'active'));
+        $expedient->follower_users()->sync(
+            Request::input('users_followers')
         );
 
         return Redirect::back()->with('success', 'Expedient updated.');
@@ -193,5 +199,20 @@ class ExpedientController extends Controller
         $expedient->restore();
 
         return Redirect::back()->with('success', 'Expedient restored.');
+    }
+
+    public function addRequirement(Expedient $expedient)
+    {
+
+        Request::validate([
+            'requirement' => ['required'],
+        ]);
+        $status = Status::where('key', Status::STATUS_KEY_PENDING)->first();
+        $expedient->requirements()->attach(
+            Request::get('requirement'),
+            ['status_id' => $status->id]
+        );
+
+        return Redirect::back()->with('success', 'Requisito Agregado');
     }
 }

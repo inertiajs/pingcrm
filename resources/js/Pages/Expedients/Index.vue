@@ -1,6 +1,6 @@
 <template>
   <v-card flat>
-    <breadcrumbs :breadcrumbs="breadcrumbs" />
+    <breadcrumbs :items="breadcrumbs" />
 
     <search-filter v-model="form.search" @reset="reset">
       <v-col cols="12" md="3" class="pa-1">
@@ -16,9 +16,20 @@
       </v-col>
       <v-col cols="12" md="3" class="pa-1">
         <v-text-field
+          v-model="form.folio"
+          label="Filtro por Folio:"
+          placeholder="ingrese Folio Expediente"
+          outlined
+          dense
+          append-icon="mdi-magnify"
+          hide-details
+        />
+      </v-col>
+      <v-col cols="12" md="3" class="pa-1">
+        <v-text-field
           v-model="form.search"
           label="Filtro:"
-          placeholder=""
+          placeholder="Cliente, Email, Titulo"
           outlined
           dense
           append-icon="mdi-magnify"
@@ -85,6 +96,7 @@
 
                     <v-list dense>
                       <v-list-item
+                        v-if="$page.props.auth.user.admin"
                         dense
                         class="accent"
                         @click="edit(expedient.id)"
@@ -189,6 +201,7 @@ export default {
       form: {
         search: this.filters.search,
         trashed: this.filters.trashed,
+        folio: this.filters.folio,
         page: this.filters.page | 1,
       },
       items: [
@@ -231,6 +244,9 @@ export default {
     },
     show(_expedient_id) {
       this.$inertia.visit(this.route('expedients.show', _expedient_id))
+    },
+    edit(_expedient_id) {
+      this.$inertia.visit(this.route('expedients.edit', _expedient_id))
     },
     destroy(_expedient_id) {
       if (confirm('Seguro en Eliminar este Expediente?')) {
