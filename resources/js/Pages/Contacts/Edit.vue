@@ -8,7 +8,7 @@
     <trashed-message v-if="contact.deleted_at" class="mb-6" @restore="restore">
       This contact has been deleted.
     </trashed-message>
-    <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
+    <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.first_name" :error="form.errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
@@ -29,7 +29,7 @@
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!contact.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Contact</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Contact</loading-button>
         </div>

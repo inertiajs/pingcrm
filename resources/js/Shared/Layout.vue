@@ -19,7 +19,7 @@
             <div class="mt-1 mr-4">{{ $page.props.auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end">
               <div class="flex items-center cursor-pointer select-none group">
-                <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
+                <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-nowrap">
                   <span>{{ $page.props.auth.user.first_name }}</span>
                   <span class="hidden md:inline">{{ $page.props.auth.user.last_name }}</span>
                 </div>

@@ -8,7 +8,7 @@
     <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
       This organization has been deleted.
     </trashed-message>
-    <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
+    <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
@@ -24,7 +24,7 @@
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
         </div>
@@ -32,7 +32,7 @@
     </div>
     <h2 class="mt-12 font-bold text-2xl">Contacts</h2>
     <div class="mt-6 bg-white rounded shadow overflow-x-auto">
-      <table class="w-full whitespace-no-wrap">
+      <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Name</th>
           <th class="px-6 pt-6 pb-4">City</th>

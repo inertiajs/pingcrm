@@ -1,7 +1,5 @@
 .btn-indigo {
-  @apply px-6 py-3 rounded bg-indigo-600 text-white text-sm font-bold whitespace-no-wrap;
-
-  &:hover, &:focus { @apply bg-orange-500 }
+  @apply px-6 py-3 rounded bg-indigo-600 text-white text-sm leading-4 font-bold whitespace-nowrap hover:bg-orange-400 focus:bg-orange-400;
 }
 
 .btn-spinner,
@@ -15,15 +13,19 @@
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: .2em solid white;
-  border-right: .2em solid white;
-  border-bottom: .2em solid white;
-  border-left: .2em solid transparent;
+  border-top: 0.2em solid white;
+  border-right: 0.2em solid white;
+  border-bottom: 0.2em solid white;
+  border-left: 0.2em solid transparent;
   transform: translateZ(0);
   animation: spinning 1s infinite linear;
 }
 
 @keyframes spinning {
-  0% { transform: rotate(0deg) }
-  100% { transform: rotate(360deg) }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -15,8 +15,8 @@
         <span class="hidden md:inline">Contact</span>
       </inertia-link>
     </div>
-    <div class="bg-white rounded shadow overflow-x-auto">
-      <table class="w-full whitespace-no-wrap">
+    <div class="bg-white rounded-md shadow overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Name</th>
           <th class="px-6 pt-6 pb-4">Organization</th>
