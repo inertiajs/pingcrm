@@ -15,8 +15,8 @@
         <span class="hidden md:inline">Organization</span>
       </inertia-link>
     </div>
-    <div class="bg-white rounded shadow overflow-x-auto">
-      <table class="w-full whitespace-no-wrap">
+    <div class="bg-white rounded-md shadow overflow-x-auto">
+      <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Name</th>
           <th class="px-6 pt-6 pb-4">City</th>
@@ -50,27 +50,27 @@
         </tr>
       </table>
     </div>
-    <pagination :links="organizations.links" />
+    <pagination class="mt-6" :links="organizations.links" />
   </div>
 </template>
 
 <script>
 import Icon from '@/Shared/Icon'
+import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
+import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
-import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/Shared/SearchFilter'
-import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Organizations' },
-  layout: Layout,
   components: {
     Icon,
     Pagination,
     SearchFilter,
   },
+  layout: Layout,
   props: {
     organizations: Object,
     filters: Object,

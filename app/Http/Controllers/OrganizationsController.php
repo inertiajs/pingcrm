@@ -18,7 +18,15 @@ class OrganizationsController extends Controller
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
-                ->only('id', 'name', 'phone', 'city', 'deleted_at'),
+                ->through(function ($organization) {
+                    return [
+                        'id' => $organization->id,
+                        'name' => $organization->name,
+                        'phone' => $organization->phone,
+                        'city' => $organization->city,
+                        'deleted_at' => $organization->deleted_at,
+                    ];
+                }),
         ]);
     }
 
