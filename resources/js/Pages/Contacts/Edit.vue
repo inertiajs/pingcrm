@@ -59,7 +59,6 @@ export default {
   },
   layout: Layout,
   props: {
-    errors: Object,
     contact: Object,
     organizations: Array,
   },
