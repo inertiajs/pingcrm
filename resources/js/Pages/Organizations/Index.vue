@@ -56,21 +56,21 @@
 
 <script>
 import Icon from '@/Shared/Icon'
+import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
+import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
-import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/Shared/SearchFilter'
-import throttle from 'lodash/throttle'
 
 export default {
   metaInfo: { title: 'Organizations' },
-  layout: Layout,
   components: {
     Icon,
     Pagination,
     SearchFilter,
   },
+  layout: Layout,
   props: {
     organizations: Object,
     filters: Object,

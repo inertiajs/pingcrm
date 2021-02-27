@@ -6,7 +6,7 @@
         <span class="text-indigo-400 font-medium">/</span>
         {{ form.first_name }} {{ form.last_name }}
       </h1>
-      <img v-if="user.photo" class="block w-8 h-8 rounded-full ml-4" :src="user.photo">
+      <img v-if="user.photo" class="block w-8 h-8 rounded-full ml-4" :src="user.photo" />
     </div>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
       This user has been deleted.
@@ -35,10 +35,10 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
-import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
@@ -47,14 +47,14 @@ export default {
       title: `${this.form.first_name} ${this.form.last_name}`,
     }
   },
-  layout: Layout,
   components: {
+    FileInput,
     LoadingButton,
     SelectInput,
     TextInput,
-    FileInput,
     TrashedMessage,
   },
+  layout: Layout,
   props: {
     user: Object,
   },

@@ -40,9 +40,9 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
-import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
@@ -51,13 +51,13 @@ export default {
       title: `${this.form.first_name} ${this.form.last_name}`,
     }
   },
-  layout: Layout,
   components: {
     LoadingButton,
     SelectInput,
     TextInput,
     TrashedMessage,
   },
+  layout: Layout,
   props: {
     errors: Object,
     contact: Object,

@@ -35,18 +35,18 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
-import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
   metaInfo: { title: 'Create Contact' },
-  layout: Layout,
   components: {
     LoadingButton,
     SelectInput,
     TextInput,
   },
+  layout: Layout,
   props: {
     organizations: Array,
   },

@@ -46,11 +46,11 @@
 </template>
 
 <script>
-import Dropdown from '@/Shared/Dropdown'
-import FlashMessages from '@/Shared/FlashMessages'
 import Icon from '@/Shared/Icon'
 import Logo from '@/Shared/Logo'
+import Dropdown from '@/Shared/Dropdown'
 import MainMenu from '@/Shared/MainMenu'
+import FlashMessages from '@/Shared/FlashMessages'
 
 export default {
   components: {

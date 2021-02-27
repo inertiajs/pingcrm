@@ -72,16 +72,15 @@
 <script>
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
-import SelectInput from '@/Shared/SelectInput'
 import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   metaInfo() {
     return { title: this.form.name }
   },
-  layout: Layout,
   components: {
     Icon,
     LoadingButton,
@@ -89,6 +88,7 @@ export default {
     TextInput,
     TrashedMessage,
   },
+  layout: Layout,
   props: {
     organization: Object,
   },

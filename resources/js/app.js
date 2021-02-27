@@ -16,12 +16,13 @@ const el = document.getElementById('app')
 
 new Vue({
   metaInfo: {
-    titleTemplate: (title) => title ? `${title} - Ping CRM` : 'Ping CRM'
+    titleTemplate: title => (title ? `${title} - Ping CRM` : 'Ping CRM'),
   },
-  render: h => h(App, {
-    props: {
-      initialPage: JSON.parse(el.dataset.page),
-      resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
-    },
-  }),
+  render: h =>
+    h(App, {
+      props: {
+        initialPage: JSON.parse(el.dataset.page),
+        resolveComponent: name => import(`@/Pages/${name}`).then(module => module.default),
+      },
+    }),
 }).$mount(el)

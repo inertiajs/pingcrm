@@ -27,20 +27,20 @@
 
 <script>
 import Layout from '@/Shared/Layout'
-import LoadingButton from '@/Shared/LoadingButton'
-import SelectInput from '@/Shared/SelectInput'
-import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
+import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
   metaInfo: { title: 'Create User' },
-  layout: Layout,
   components: {
+    FileInput,
     LoadingButton,
     SelectInput,
     TextInput,
-    FileInput,
   },
+  layout: Layout,
   remember: 'form',
   data() {
     return {

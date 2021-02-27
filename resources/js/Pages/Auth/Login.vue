@@ -9,7 +9,7 @@
           <text-input v-model="form.email" :error="form.errors.email" class="mt-10" label="Email" type="email" autofocus autocapitalize="off" />
           <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Password" type="password" />
           <label class="mt-6 select-none flex items-center" for="remember">
-            <input id="remember" v-model="form.remember" class="mr-1" type="checkbox">
+            <input id="remember" v-model="form.remember" class="mr-1" type="checkbox" />
             <span class="text-sm">Remember Me</span>
           </label>
         </div>
@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import LoadingButton from '@/Shared/LoadingButton'
 import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
+import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
   metaInfo: { title: 'Login' },
