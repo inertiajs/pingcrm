@@ -9,7 +9,7 @@
       This contact has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="form.put(route('contacts.update', contact.id))">
+      <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.first_name" :error="form.errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
           <text-input v-model="form.last_name" :error="form.errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
@@ -81,6 +81,9 @@ export default {
     }
   },
   methods: {
+    update() {
+      this.form.put(this.route('contacts.update', this.contact.id))
+    },
     destroy() {
       if (confirm('Are you sure you want to delete this contact?')) {
         this.$inertia.delete(this.route('contacts.destroy', this.contact.id))

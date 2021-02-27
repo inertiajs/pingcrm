@@ -9,7 +9,7 @@
       This organization has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="form.put(route('organizations.update', organization.id))">
+      <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
@@ -108,6 +108,9 @@ export default {
     }
   },
   methods: {
+    update() {
+      this.form.put(this.route('organizations.update', this.organization.id))
+    },
     destroy() {
       if (confirm('Are you sure you want to delete this organization?')) {
         this.$inertia.delete(this.route('organizations.destroy', this.organization.id))

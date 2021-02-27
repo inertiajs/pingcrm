@@ -2,7 +2,7 @@
   <div class="p-6 bg-indigo-800 min-h-screen flex justify-center items-center">
     <div class="w-full max-w-md">
       <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
-      <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="submit">
+      <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
           <h1 class="text-center font-bold text-3xl">Welcome Back!</h1>
           <div class="mx-auto mt-6 w-24 border-b-2" />
@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    submit() {
+    login() {
       this.form
         .transform(data => ({
           ...data,

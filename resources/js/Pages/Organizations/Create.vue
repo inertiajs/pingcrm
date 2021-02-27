@@ -5,7 +5,7 @@
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="form.post(route('organizations.store'))">
+      <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
@@ -56,6 +56,11 @@ export default {
         postal_code: null,
       }),
     }
+  },
+  methods: {
+    store() {
+      this.form.post(this.route('organizations.store'))
+    },
   },
 }
 </script>

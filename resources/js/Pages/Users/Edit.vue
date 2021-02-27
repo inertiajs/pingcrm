@@ -12,7 +12,7 @@
       This user has been deleted.
     </trashed-message>
     <div class="bg-white rounded shadow overflow-hidden max-w-3xl">
-      <form @submit.prevent="submit">
+      <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.first_name" :error="form.errors.first_name" class="pr-6 pb-8 w-full lg:w-1/2" label="First name" />
           <text-input v-model="form.last_name" :error="form.errors.last_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Last name" />
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    submit() {
+    update() {
       this.form.post(this.route('users.update', this.user.id), {
         onSuccess: () => this.form.reset('password', 'photo'),
       })
