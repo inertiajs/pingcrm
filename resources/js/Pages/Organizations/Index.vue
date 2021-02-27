@@ -50,7 +50,7 @@
         </tr>
       </table>
     </div>
-    <pagination :links="organizations.links" />
+    <pagination class="mt-6" :links="organizations.links" />
   </div>
 </template>
 
