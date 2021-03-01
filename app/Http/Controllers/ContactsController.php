@@ -20,6 +20,7 @@ class ContactsController extends Controller
                 ->orderByName()
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
+                ->withQueryString()
                 ->through(function ($contact) {
                     return [
                         'id' => $contact->id,

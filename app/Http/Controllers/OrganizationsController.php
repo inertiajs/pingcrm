@@ -18,6 +18,7 @@ class OrganizationsController extends Controller
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
+                ->withQueryString()
                 ->through(function ($organization) {
                     return [
                         'id' => $organization->id,
