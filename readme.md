@@ -77,5 +77,5 @@ You're ready to go! Visit Ping CRM in your browser, and login with:
 To run the Ping CRM tests, run:
 
 ```
-phpunit
+phpunit --testsuite=Feature
 ```
