@@ -13,8 +13,8 @@ createApp({
   })
 })
 .mixin({ methods: {
-    route: window.route,
-    title: title => `Ping CRM - ${title}`,
+  route: window.route,
+  title: title => `Ping CRM - ${title}`,
 }})
 .use(plugin)
 .mount(el)
