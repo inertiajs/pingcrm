@@ -31,7 +31,7 @@ mix.postCss('resources/css/app.css', 'public/css/app.css')
       ] : [],
     ],
   })
-  .js('resources/js/app.js', 'public/js').vue({ version: 3 }).webpackConfig({
+  .js('resources/js/app.js', 'public/js').vue().webpackConfig({
     output: { chunkFilename: 'js/[name].js[hash]' },
     resolve: {
       alias: {
