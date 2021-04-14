@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use Illuminate\Support\Arr;
-use PHPUnit\Framework\Assert;
-use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Arr;
+use Illuminate\Testing\TestResponse;
+use PHPUnit\Framework\Assert;
 
 abstract class TestCase extends BaseTestCase
 {

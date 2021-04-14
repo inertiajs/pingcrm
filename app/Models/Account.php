@@ -1,8 +1,6 @@
 <?php
 
-namespace App;
-
-use Illuminate\Database\Eloquent\SoftDeletes;
+namespace App\Models;
 
 class Account extends Model
 {

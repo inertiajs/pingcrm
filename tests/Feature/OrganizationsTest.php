@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Account;
-use Tests\TestCase;
-use App\Organization;
+use App\Models\Account;
+use App\Models\User;
+use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class OrganizationsTest extends TestCase
 {

@@ -8,7 +8,7 @@
 /vendor
 .DS_Store
 .env
-.php_cs.dist
+.env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

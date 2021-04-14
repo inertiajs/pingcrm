@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Organization;
+use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
+use Inertia\Inertia;
 
 class OrganizationsController extends Controller
 {
@@ -18,7 +18,16 @@ class OrganizationsController extends Controller
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
-                ->only('id', 'name', 'phone', 'city', 'deleted_at'),
+                ->withQueryString()
+                ->through(function ($organization) {
+                    return [
+                        'id' => $organization->id,
+                        'name' => $organization->name,
+                        'phone' => $organization->phone,
+                        'city' => $organization->city,
+                        'deleted_at' => $organization->deleted_at,
+                    ];
+                }),
         ]);
     }
 
