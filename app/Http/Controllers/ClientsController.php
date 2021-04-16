@@ -24,7 +24,8 @@ class ClientsController extends Controller
                         'id' => $client->id,
                         'name' => $client->name,
                         'phone' => $client->phone,
-                        'city' => $client->city,
+                        'priority' => $client->priority,
+                        'status' => $client->status,
                         'deleted_at' => $client->deleted_at,
                     ];
                 }),
@@ -41,13 +42,9 @@ class ClientsController extends Controller
         Auth::user()->account->clients()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'phone' => ['nullable', 'max:20'],
+                'status' => ['nullable', 'max:4'],
+                'priority' => ['nullable', 'max:4'],
             ])
         );
 
@@ -60,15 +57,11 @@ class ClientsController extends Controller
             'client' => [
                 'id' => $client->id,
                 'name' => $client->name,
-                'email' => $client->email,
                 'phone' => $client->phone,
-                'address' => $client->address,
-                'city' => $client->city,
-                'region' => $client->region,
-                'country' => $client->country,
-                'postal_code' => $client->postal_code,
+                'status' => $client->status,
+                'priority' => $client->priority,
                 'deleted_at' => $client->deleted_at,
-                'contacts' => $client->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                //'contacts' => $client->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
         ]);
     }
@@ -78,13 +71,9 @@ class ClientsController extends Controller
         $client->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'phone' => ['nullable', 'max:20'],
+                'status' => ['nullable', 'max:4'],
+                'priority' => ['nullable', 'max:4'],
             ])
         );
 
