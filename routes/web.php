@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+<<<<<<< Updated upstream
+=======
+use App\Http\Controllers\AddressesController;
+use App\Http\Controllers\ClientsController;
+>>>>>>> Stashed changes
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
@@ -130,6 +135,70 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+<<<<<<< Updated upstream
+=======
+// Clients
+
+Route::get('clients', [ClientsController::class, 'index'])
+    ->name('clients')
+    ->middleware('remember', 'auth');
+
+Route::get('clients/create', [ClientsController::class, 'create'])
+    ->name('clients.create')
+    ->middleware('auth');
+
+Route::post('clients', [ClientsController::class, 'store'])
+    ->name('clients.store')
+    ->middleware('auth');
+
+Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
+    ->name('clients.edit')
+    ->middleware('auth');
+
+Route::put('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
+    ->middleware('auth');
+
+Route::delete('clients/{client}', [ClientsController::class, 'destroy'])
+    ->name('clients.destroy')
+    ->middleware('auth');
+
+Route::put('clients/{client}/restore', [ClientsController::class, 'restore'])
+    ->name('clients.restore')
+    ->middleware('auth');
+
+    // Addresses
+
+Route::get('addresses', [AddressesController::class, 'index'])
+    ->name('addresses')
+    ->middleware('remember', 'auth');
+
+Route::get('addresses/create', [AddressesController::class, 'create'])
+    ->name('addresses.create')
+    ->middleware('auth');
+
+Route::post('addresses', [AddressesController::class, 'store'])
+    ->name('addresses.store')
+    ->middleware('auth');
+
+Route::get('addresses/{address}/edit', [AddressesController::class, 'edit'])
+    ->name('addresses.edit')
+    ->middleware('auth');
+
+Route::put('addresses/{address}', [AddressesController::class, 'update'])
+    ->name('addresses.update')
+    ->middleware('auth');
+
+Route::delete('addresses/{address}', [AddressesController::class, 'destroy'])
+    ->name('addresses.destroy')
+    ->middleware('auth');
+
+Route::put('addresses/{address}/restore', [AddressesController::class, 'restore'])
+    ->name('addresses.restore')
+    ->middleware('auth');
+
+
+>>>>>>> Stashed changes
 // Contacts
 
 Route::get('contacts', [ContactsController::class, 'index'])

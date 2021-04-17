@@ -19,6 +19,19 @@ class Account extends Model
         return $this->hasMany(Task::class);
     }
 
+<<<<<<< Updated upstream
+=======
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+>>>>>>> Stashed changes
     public function contacts()
     {
         return $this->hasMany(Contact::class);
