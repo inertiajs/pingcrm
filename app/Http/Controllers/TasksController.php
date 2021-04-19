@@ -42,7 +42,7 @@ class TasksController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300', 'description'],
+                'description' => ['nullable', 'max:300'],
                 'user_id' => ['nullable', 'max:50'],
                 'task_id' => ['nullable', 'max:150'],
                 'team_id' => ['nullable', 'max:50'],
@@ -74,7 +74,7 @@ class TasksController extends Controller
                 'creator' => $task->creator,
                 'due_date' => $task->due_date,
                 'completed_date' => $task->completed_date,
-                'contacts' => $task->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                'contacts' => $task->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
             ],
         ]);
     }
@@ -83,13 +83,18 @@ class TasksController extends Controller
     {
         $task->update(
             Request::validate([
+                'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:50', 'email'],
-                'priority' => ['nullable', 'max:50'],
-                'status' => ['nullable', 'max:150'],
-                'creator' => ['nullable', 'max:50'],
-                'due_date' => ['nullable', 'max:50'],
-                'completed_date' => ['nullable', 'max:2'],
+                'description' => ['nullable', 'max:300'],
+                'user_id' => ['nullable', 'max:50'],
+                'task_id' => ['nullable', 'max:150'],
+                'team_id' => ['nullable', 'max:50'],
+                'project_id' => ['nullable', 'max:50'],
+                'priority' => ['nullable', 'max:2'],
+                'status' => ['nullable', 'max:25'],
+                'creator' => ['nullable', 'max:25'],
+                'due_date' => ['nullable', 'max:25'],
+                'completed_date' => ['nullable', 'max:25'],
              
             ])
         );

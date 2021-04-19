@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Education;
+use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
-class EducationsController extends Controller
+class TasksController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Educations/Index', [
+        return Inertia::render('Tasks/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'Educations' => Auth::user()->account->Educations()
+            'tasks' => Auth::user()->account->tasks()
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
-                ->through(function ($Education) {
+                ->through(function ($task) {
                     return [
-                        'id' => $Education->id,
-                        'name' => $Education->name,
-                        'phone' => $Education->phone,
-                        'city' => $Education->city,
-                        'deleted_at' => $Education->deleted_at,
+                        'id' => $task->id,
+                        'title' => $task->title,
+                        'description' => $task->description,
+                        'user_id' => $task->user_id,
+                        'task_id' => $task->task_id,
                     ];
                 }),
         ]);
@@ -33,75 +33,81 @@ class EducationsController extends Controller
 
     public function create()
     {
-        return Inertia::render('Educations/Create');
+        return Inertia::render('Tasks/Create');
     }
 
     public function store()
     {
-        Auth::user()->account->Educations()->create(
+        Auth::user()->account->tasks()->create(
             Request::validate([
-                'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'id' => ['nullable', 'max:50'],
+                'title' => ['required', 'max:100'],
+                'description' => ['nullable', 'max:300']
+                'user_id' => ['nullable', 'max:50'],
+                'task_id' => ['nullable', 'max:150'],
+                'team_id' => ['nullable', 'max:50'],
+                'project_id' => ['nullable', 'max:50'],
+                'priority' => ['nullable', 'max:2'],
+                'status' => ['nullable', 'max:25'],
+                'creator' => ['nullable', 'max:25'],
+                'due_date' => ['nullable', 'max:25'],
+                'completed_date' => ['nullable', 'max:25'],
             ])
         );
 
-        return Redirect::route('Educations')->with('success', 'Educations created.');
+        return Redirect::route('tasks')->with('success', 'Tasks created.');
     }
 
-    public function edit(Education $Education)
+    public function edit(Task $task)
     {
-        return Inertia::render('Educations/Edit', [
-            'Education' => [
-                'id' => $Education->id,
-                'name' => $Education->name,
-                'email' => $Education->email,
-                'phone' => $Education->phone,
-                'address' => $Education->address,
-                'city' => $Education->city,
-                'region' => $Education->region,
-                'country' => $Education->country,
-                'postal_code' => $Education->postal_code,
-                'deleted_at' => $Education->deleted_at,
-                'contacts' => $Education->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+        return Inertia::render('Tasks/Edit', [
+            'task' => [
+                'id' => $task->id,
+                'title' => $task->title,
+                'description' => $task->description,
+                'user_id' => $task->user_id,
+                'task_id' => $task->task_id,
+                'team_id' => $task->team_id,
+                'project_id' => $task->project_id,
+                'priority' => $task->priority,
+                'status' => $task->status,
+                'creator' => $task->creator,
+                'due_date' => $task->due_date,
+                'completed_date' => $task->completed_date,
+                'contacts' => $task->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
         ]);
     }
 
-    public function update(Education $Education)
+    public function update(Task $task)
     {
-        $Education->update(
+        $task->update(
             Request::validate([
-                'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'title' => ['required', 'max:100'],
+                'description' => ['nullable', 'max:50', 'email'],
+                'priority' => ['nullable', 'max:50'],
+                'status' => ['nullable', 'max:150'],
+                'creator' => ['nullable', 'max:50'],
+                'due_date' => ['nullable', 'max:50'],
+                'completed_date' => ['nullable', 'max:2'],
+             
             ])
         );
 
-        return Redirect::back()->with('success', 'Education updated.');
+        return Redirect::back()->with('success', 'Task updated.');
     }
 
-    public function destroy(Education $Education)
+    public function destroy(Task $task)
     {
-        $Education->delete();
+        $task->delete();
 
-        return Redirect::back()->with('success', 'Education deleted.');
+        return Redirect::back()->with('success', 'Task deleted.');
     }
 
-    public function restore(Education $Education)
+    public function restore(Task $task)
     {
-        $Education->restore();
+        $task->restore();
 
-        return Redirect::back()->with('success', 'Education restored.');
+        return Redirect::back()->with('success', 'Task restored.');
     }
 }
