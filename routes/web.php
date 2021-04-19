@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
+use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +99,66 @@ Route::delete('organizations/{organization}', [OrganizationsController::class, '
 
 Route::put('organizations/{organization}/restore', [OrganizationsController::class, 'restore'])
     ->name('organizations.restore')
+    ->middleware('auth');
+
+// Tasks
+
+Route::get('tasks', [TasksController::class, 'index'])
+    ->name('tasks')
+    ->middleware('remember', 'auth');
+
+Route::get('tasks/create', [TasksController::class, 'create'])
+    ->name('tasks.create')
+    ->middleware('auth');
+
+Route::post('tasks', [TasksController::class, 'store'])
+    ->name('tasks.store')
+    ->middleware('auth');
+
+Route::get('tasks/{task}/edit', [TasksController::class, 'edit'])
+    ->name('tasks.edit')
+    ->middleware('auth');
+
+Route::put('tasks/{task}', [TasksController::class, 'update'])
+    ->name('tasks.update')
+    ->middleware('auth');
+
+Route::delete('tasks/{task}', [TasksController::class, 'destroy'])
+    ->name('tasks.destroy')
+    ->middleware('auth');
+
+Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
+    ->name('tasks.restore')
+    ->middleware('auth');
+
+// Clients
+
+Route::get('clients', [ClientsController::class, 'index'])
+    ->name('clients')
+    ->middleware('remember', 'auth');
+
+Route::get('clients/create', [ClientsController::class, 'create'])
+    ->name('clients.create')
+    ->middleware('auth');
+
+Route::post('clients', [ClientsController::class, 'store'])
+    ->name('clients.store')
+    ->middleware('auth');
+
+Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
+    ->name('clients.edit')
+    ->middleware('auth');
+
+Route::put('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
+    ->middleware('auth');
+
+Route::delete('clients/{client}', [ClientsController::class, 'destroy'])
+    ->name('clients.destroy')
+    ->middleware('auth');
+
+Route::put('clients/{client}/restore', [ClientsController::class, 'restore'])
+    ->name('clients.restore')
     ->middleware('auth');
 
 // Contacts

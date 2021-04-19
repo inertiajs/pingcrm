@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Account;
+use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Organization;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +25,12 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 5)->create(['account_id' => $account->id]);
 
         $organizations = factory(Organization::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $tasks = factory(Task::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $clients = factory(Client::class, 100)
             ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)
