@@ -1,11 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-<<<<<<< Updated upstream
-=======
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\ClientsController;
->>>>>>> Stashed changes
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
@@ -135,8 +132,6 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
-<<<<<<< Updated upstream
-=======
 // Clients
 
 Route::get('clients', [ClientsController::class, 'index'])
@@ -198,7 +193,6 @@ Route::put('addresses/{address}/restore', [AddressesController::class, 'restore'
     ->middleware('auth');
 
 
->>>>>>> Stashed changes
 // Contacts
 
 Route::get('contacts', [ContactsController::class, 'index'])
