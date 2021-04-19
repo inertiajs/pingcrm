@@ -1,11 +1,8 @@
 <?php
 
 use App\Models\Account;
-<<<<<<< Updated upstream
-=======
-use App\Models\Client;
 use App\Models\Address;
->>>>>>> Stashed changes
+use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\Task;
@@ -34,16 +31,13 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
-<<<<<<< Updated upstream
-=======
-        $clients = factory(Client::class, 100)
-            ->create(['account_id' => $account->id]);
 
             $addresses = factory(Address::class, 100)
             ->create(['account_id' => $account->id]);
 
+        $clients = factory(Client::class, 100)
+            ->create(['account_id' => $account->id]);
 
->>>>>>> Stashed changes
         factory(Contact::class, 100)
             ->create(['account_id' => $account->id])
             ->each(function ($contact) use ($organizations) {
