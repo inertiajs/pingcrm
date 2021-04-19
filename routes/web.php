@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -129,6 +130,40 @@ Route::delete('tasks/{task}', [TasksController::class, 'destroy'])
 Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
+
+    
+// Education
+
+Route::get('educations', [EducationsController::class, 'index'])
+->name('educations')
+->middleware('remember', 'auth');
+
+Route::get('educations/create', [EducationsController::class, 'create'])
+->name('educations.create')
+->middleware('auth');
+
+Route::post('educations', [EducationsController::class, 'store'])
+->name('educations.store')
+->middleware('auth');
+
+Route::get('educations/{education}/edit', [EducationsController::class, 'edit'])
+->name('educations.edit')
+->middleware('auth');
+
+Route::put('educations/{education}', [EducationsController::class, 'update'])
+->name('educations.update')
+->middleware('auth');
+
+Route::delete('educations/{education}', [EducationsController::class, 'destroy'])
+->name('educations.destroy')
+->middleware('auth');
+
+Route::put('educations/{education}/restore', [EducationsController::class, 'restore'])
+->name('educations.restore')
+->middleware('auth');
+
+
+
 
 // Contacts
 

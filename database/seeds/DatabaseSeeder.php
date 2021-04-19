@@ -4,6 +4,7 @@ use App\Models\Account;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\Task;
+use App\Models\Education;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,9 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $tasks = factory(Task::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $education = factory(Education::class, 100)
             ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)

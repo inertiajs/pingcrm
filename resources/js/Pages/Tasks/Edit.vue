@@ -11,18 +11,19 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
-          <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
-          <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
-            <option :value="null" />
-            <option value="CA">Canada</option>
-            <option value="US">United States</option>
-          </select-input>
-          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
+          <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
+          <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
+          <text-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority" />
+          <text-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status" />
+          <text-input v-model="form.deu_date" :error="form.errors.deu_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Deu_date" />
+          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed_date" />
+          <text-input v-model="form.user_id" :error="form.errors.User_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
+          <text-input v-model="form.task_id" :error="form.errors.task_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Task_id" />
+          <text-input v-model="form.project_id" :error="form.errors.project_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Project_id" />
+          <text-input v-model="form.team_id" :error="form.errors.team_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Team_id" />
+          
+        
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
@@ -34,27 +35,91 @@
     <div class="mt-6 bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">City</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
+          <th class="px-6 pt-6 pb-4">Id</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
+          <th class="px-6 pt-6 pb-4">Description</th>
+          <th class="px-6 pt-6 pb-4">Priority</th>
+          <th class="px-6 pt-6 pb-4">Status</th>
+          <th class="px-6 pt-6 pb-4">Deu_date</th>
+          <th class="px-6 pt-6 pb-4">Completed_date</th>
+          <th class="px-6 pt-6 pb-4">User_id</th>
+          <th class="px-6 pt-6 pb-4">Task_id</th>
+          <th class="px-6 pt-6 pb-4">Project_id</th>
+          <th class="px-6 pt-6 pb-4">Team_id</th>
+          
         </tr>
         <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
-              {{ contact.name }}
+              {{ contact.id }}
               <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
+
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.city }}
+              {{ contact.title }}
             </inertia-link>
           </td>
+    
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.phone }}
+              {{ contact.description }}
             </inertia-link>
           </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.priority }}
+            </inertia-link>
+          </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.status }}
+            </inertia-link>
+          </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.deu_date }}
+            </inertia-link>
+          </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.completed_date }}
+            </inertia-link>
+          </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.user_id }}
+            </inertia-link>
+          </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.task_id }}
+            </inertia-link>
+          </td>
+
+           <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.project_id }}
+            </inertia-link>
+          </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+              {{ contact.team_id }}
+            </inertia-link>
+          </td>
+
+
+
+
+
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
@@ -96,14 +161,17 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        name: this.organization.name,
-        email: this.organization.email,
-        phone: this.organization.phone,
-        address: this.organization.address,
-        city: this.organization.city,
-        region: this.organization.region,
-        country: this.organization.country,
-        postal_code: this.organization.postal_code,
+        id: this.organization.id,
+        title: this.organization.title,
+        description: this.organization.description,
+        priority: this.organization.priority,
+        status: this.organization.status,
+        deu_date: this.organization.deu_date,
+        completed_date: this.organization.completed_date,
+        user_id: this.organization.user_id,
+        task_id: this.organization.task,
+        project_id: this.organization.project_id,
+        team_id: this.organization.team_id,
       }),
     }
   },

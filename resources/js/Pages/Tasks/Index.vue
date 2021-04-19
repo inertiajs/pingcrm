@@ -18,33 +18,95 @@
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">City</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
+          <th class="px-6 pt-6 pb-4">Id</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
+          <th class="px-6 pt-6 pb-4">Description</th>
+          <th class="px-6 pt-6 pb-4">Priority</th>
+          <th class="px-6 pt-6 pb-4">Status</th>
+          <th class="px-6 pt-6 pb-4">Due_date</th>
+          <th class="px-6 pt-6 pb-4">Completed_date</th>
+          <th class="px-6 pt-6 pb-4">User_id</th>
+          <th class="px-6 pt-6 pb-4">Task_id</th>
+          <th class="px-6 pt-6 pb-4">Project_id</th>
+          <th class="px-6 pt-6 pb-4">Team_id</th>
         </tr>
         <tr v-for="task in tasks.data" :key="task.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('tasks.edit', task.id)">
-              {{ task.name }}
-              <icon v-if="task.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+            <icon v-if="task.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              {{ task.id }}
             </inertia-link>
           </td>
+
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
-              {{ task.city }}
+              {{ task.title }}
             </inertia-link>
           </td>
+
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
-              {{ task.phone }}
+              {{ task.description }}
             </inertia-link>
           </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.priority }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.status }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.deu_date }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.completed_date }}
+            </inertia-link>
+          </td>
+
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.user_id }}
+            </inertia-link>
+          </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.task_id }}
+            </inertia-link>
+          </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.project_id }}
+            </inertia-link>
+          </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
+              {{ task.team_id }}
+            </inertia-link>
+          </td>
+
+
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
         </tr>
+
         <tr v-if="tasks.data.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No tasks found.</td>
         </tr>
