@@ -11,7 +11,6 @@ $factory->define(App\Models\Address::class, function (Faker $faker) {
         'city' => $faker->city,
         'region' => $faker->state,
         'country' => 'India',
-        
         'postal_code' => $faker->postcode,
     ];
 });
