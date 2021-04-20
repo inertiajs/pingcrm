@@ -19,9 +19,11 @@
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Name</th>
+          <th class="px-6 pt-6 pb-4">Phone</th>
+          <th class="px-6 pt-6 pb-4">Address Line1</th>
+          <th class="px-6 pt-6 pb-4">Address Line2</th>
           <th class="px-6 pt-6 pb-4">City</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
-        </tr>
+          
         <tr v-for="address in addresses.data" :key="address.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('addresses.edit', address.id)">
@@ -37,6 +39,16 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
               {{ address.phone }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
+              {{ address.address_line1 }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
+              {{ address.address_line2 }}
             </inertia-link>
           </td>
           <td class="border-t w-px">

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -24,6 +23,8 @@ class AddressesController extends Controller
                         'id' => $address->id,
                         'name' => $address->name,
                         'phone' => $address->phone,
+                    'address_line1' =>$address -> address_line1,
+                    'address_line2' =>$address -> address_line2,
                     
                         'deleted_at' => $address->deleted_at,
                     ];
@@ -57,7 +58,9 @@ class AddressesController extends Controller
                 'id' => $address->id,
                 'name' => $address->name,
                 'phone' => $address->phone,
-            
+                'address_line1' =>$address -> address_line1,
+                'address_line2' =>$address -> address_line2,
+                
                 'deleted_at' => $address->deleted_at,
                 //'contacts' => $address->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],

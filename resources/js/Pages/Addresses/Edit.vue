@@ -5,28 +5,28 @@
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
-    <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore">
-      This organization has been deleted.
+    <trashed-message v-if="address.deleted_at" class="mb-6" @restore="restore">
+      This address has been deleted.
     </trashed-message>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
+           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
+          <text-input v-model="form.address_line1" :error="form.errors.address_line1" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.address_line2" :error="form.errors.address_line2" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+         <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
           <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
           <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
             <option :value="null" />
-            <option value="CA">Canada</option>
+            <option value="CA">India</option>
             <option value="US">United States</option>
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
+          <button v-if="!address.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Address</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Address</loading-button>
         </div>
       </form>
     </div>
@@ -38,7 +38,7 @@
           <th class="px-6 pt-6 pb-4">City</th>
           <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
         </tr>
-        <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="contact in address.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
               {{ contact.name }}
@@ -61,8 +61,8 @@
             </inertia-link>
           </td>
         </tr>
-        <tr v-if="organization.contacts.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No contacts found.</td>
+        <tr v-if="address.contacts.length === 0">
+          <td class="border-t px-6 py-4" colspan="4">No address found.</td>
         </tr>
       </table>
     </div>
@@ -90,35 +90,35 @@ export default {
   },
   layout: Layout,
   props: {
-    organization: Object,
+    address: Object,
   },
   remember: 'form',
   data() {
     return {
       form: this.$inertia.form({
-        name: this.organization.name,
-        email: this.organization.email,
-        phone: this.organization.phone,
-        address: this.organization.address,
-        city: this.organization.city,
-        region: this.organization.region,
-        country: this.organization.country,
-        postal_code: this.organization.postal_code,
+        name: this.address.name,
+         phone: this.address.phone,
+        address_line1: this.address.address_line1,
+        address_line2: this.address.address_line2,
+        city: this.address.city,
+        region: this.address.region,
+        country: this.address.country,
+        postal_code: this.address.postal_code,
       }),
     }
   },
   methods: {
     update() {
-      this.form.put(this.route('organizations.update', this.organization.id))
+      this.form.put(this.route('address.update', this.address.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this organization?')) {
-        this.$inertia.delete(this.route('organizations.destroy', this.organization.id))
+      if (confirm('Are you sure you want to delete this address?')) {
+        this.$inertia.delete(this.route('address.destroy', this.address.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this organization?')) {
-        this.$inertia.put(this.route('organizations.restore', this.organization.id))
+      if (confirm('Are you sure you want to restore this address?')) {
+        this.$inertia.put(this.route('address.restore', this.address.id))
       }
     },
   },

@@ -8,14 +8,15 @@
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.address_line1" :error="form.errors.address_line1" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.address_line2" :error="form.errors.address_line2" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+         
           <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
           <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
           <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
             <option :value="null" />
-            <option value="CA">Canada</option>
+            <option value="CA">India</option>
             <option value="US">United States</option>
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
@@ -47,9 +48,9 @@ export default {
     return {
       form: this.$inertia.form({
         name: null,
-        email: null,
         phone: null,
-        address: null,
+        address_line1: null,
+        address_line2: null,
         city: null,
         region: null,
         country: null,

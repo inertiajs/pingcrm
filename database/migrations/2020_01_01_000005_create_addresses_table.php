@@ -17,9 +17,10 @@ class CreateAddressesTable extends Migration
             $table->increments('id');
             $table->integer('account_id')->index();
             $table->string('name', 100);
-            $table->string('email', 50)->nullable();
             $table->string('phone', 50)->nullable();
-            $table->string('address', 150)->nullable();
+            $table->string('address_line1', 150);
+            $table->string('address_line2', 150);
+
             $table->string('city', 50)->nullable();
             $table->string('region', 50)->nullable();
             $table->string('country', 2)->nullable();
@@ -36,6 +37,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('addresses');
     }
 }
