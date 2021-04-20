@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Account;
+use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\Task;
@@ -31,10 +32,14 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
+
         $restaurants = factory(Restaurant::class, 100)
             ->create(['account_id' => $account->id]);
-       
+
         $education = factory(Education::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $clients = factory(Client::class, 100)
             ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)
