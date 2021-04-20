@@ -29,7 +29,7 @@
         </div>
       </form>
     </div>
-    <h2 class="mt-12 font-bold text-2xl">Contacts</h2>
+    <h2 class="mt-12 font-bold text-2xl">tasks</h2>
     <div class="mt-6 bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
@@ -46,82 +46,81 @@
           <th class="px-6 pt-6 pb-4">Team_id</th>
           
         </tr>
-        <tr v-for="contact in task.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="task in task.tasks" :key="task.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
-              {{ contact.id }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('tasks.edit',)">
+              
+              <icon v-if="task.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
 
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.title }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+           
             </inertia-link>
           </td>
     
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.description }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+              
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.priority }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+              
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.status }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+             
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.deu_date }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+              
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.completed_date }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+              
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.user_id }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+              
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.task_id }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+        
             </inertia-link>
           </td>
 
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.project_id }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
+              
             </inertia-link>
           </td>
           
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.team_id }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
             </inertia-link>
           </td>
 
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <inertia-link class="px-4 flex items-center" :href="route('tasks.edit',)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
         </tr>
-        <tr v-if="task.contacts.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No contacts found.</td>
+        <tr v-if="task.tasks.length === 0">
+          <td class="border-t px-6 py-4" colspan="4">No tasks found.</td>
         </tr>
       </table>
     </div>
@@ -180,7 +179,7 @@ export default {
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this organization?')) {
+      if (confirm('Are you sure you want to restore this task?')) {
         this.$inertia.put(this.route('tasks.restore', this.task.id))
       }
     },
