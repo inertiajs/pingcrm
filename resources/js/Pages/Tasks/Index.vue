@@ -20,7 +20,6 @@
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Id</th>
           <th class="px-6 pt-6 pb-4">Title</th>
-          <th class="px-6 pt-6 pb-4">Description</th>
           <th class="px-6 pt-6 pb-4">Priority</th>
           <th class="px-6 pt-6 pb-4">Status</th>
           <th class="px-6 pt-6 pb-4">Due_date</th>
@@ -44,11 +43,7 @@
             </inertia-link>
           </td>
 
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
-              {{ task.description }}
-            </inertia-link>
-          </td>
+
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">

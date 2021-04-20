@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Task extends Model
+class Restaurant extends Model
 {
     use SoftDeletes;
 

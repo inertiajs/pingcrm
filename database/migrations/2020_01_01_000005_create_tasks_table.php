@@ -17,6 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
+            $table->foreignId('account_id')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('task_id')->nullable();
             $table->foreignId('team_id')->nullable();

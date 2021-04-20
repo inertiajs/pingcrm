@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('tasks')">tasks</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('tasks')">Tasks</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
@@ -22,8 +22,6 @@
           <text-input v-model="form.task_id" :error="form.errors.task_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Task_id" />
           <text-input v-model="form.project_id" :error="form.errors.project_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Project_id" />
           <text-input v-model="form.team_id" :error="form.errors.team_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Team_id" />
-          
-        
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!task.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete task</button>
@@ -116,10 +114,6 @@
             </inertia-link>
           </td>
 
-
-
-
-
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
@@ -133,6 +127,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import Icon from '@/Shared/Icon'
@@ -185,7 +180,7 @@ export default {
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this task?')) {
+      if (confirm('Are you sure you want to restore this organization?')) {
         this.$inertia.put(this.route('tasks.restore', this.task.id))
       }
     },
