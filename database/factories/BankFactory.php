@@ -6,7 +6,7 @@ $factory->define(App\Models\Bank::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
         'phone' => $faker->tollFreePhoneNumber,
-        'account_number' => $faker -> accountnumber,
-        'ifsc_code' => $faker -> ifsccode,
+        'account_number' => $faker->bankAccountNumber,
+        'ifsc_code' => $faker ->randomNumber(7),
         ];
 });

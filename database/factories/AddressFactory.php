@@ -10,7 +10,8 @@ $factory->define(App\Models\Address::class, function (Faker $faker) {
         'address_line2' => $faker->streetAddress,
         'city' => $faker->city,
         'region' => $faker->state,
-        'country' => 'India','US',
+        'country' => 'India',
+        
         'postal_code' => $faker->postcode,
     ];
 });
