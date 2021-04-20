@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('addresses')">Addresses</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('banks')">Bank Details</inertia-link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
@@ -10,6 +10,8 @@
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
+          <text-input v-model="form.account_number" :error="form.errors.account_number" class="pr-6 pb-8 w-full lg:w-1/2" label="Account_number" />
+          <text-input v-model="form.ifsc_code" :error="form.errors.ifsc_code" class="pr-6 pb-8 w-full lg:w-1/2" label="IFSC Code" />
           <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
           <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
           <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
@@ -21,7 +23,7 @@
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Address</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Bank</loading-button>
         </div>
       </form>
     </div>
@@ -35,7 +37,7 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create Address' },
+  metaInfo: { title: 'Create Bank' },
   components: {
     LoadingButton,
     SelectInput,
@@ -49,6 +51,8 @@ export default {
         name: null,
         email: null,
         phone: null,
+        account_number:null,
+        ifsc_code:null,
         address: null,
         city: null,
         region: null,
@@ -59,7 +63,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post(this.route('addresses.store'))
+      this.form.post(this.route('banks.store'))
     },
   },
 }

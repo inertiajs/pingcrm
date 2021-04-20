@@ -24,8 +24,7 @@ class AddressesController extends Controller
                         'id' => $address->id,
                         'name' => $address->name,
                         'phone' => $address->phone,
-                        'priority' => $address->priority,
-                        'status' => $address->status,
+                    
                         'deleted_at' => $address->deleted_at,
                     ];
                 }),
@@ -43,8 +42,8 @@ class AddressesController extends Controller
             Request::validate([
                 'name' => ['required', 'max:100'],
                 'phone' => ['nullable', 'max:20'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
+                'address line 1' => ['max:200'],
+                'address line 2' => ['max:200'],
             ])
         );
 
@@ -58,8 +57,7 @@ class AddressesController extends Controller
                 'id' => $address->id,
                 'name' => $address->name,
                 'phone' => $address->phone,
-                'status' => $address->status,
-                'priority' => $address->priority,
+            
                 'deleted_at' => $address->deleted_at,
                 //'contacts' => $address->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
@@ -72,25 +70,25 @@ class AddressesController extends Controller
             Request::validate([
                 'name' => ['required', 'max:100'],
                 'phone' => ['nullable', 'max:20'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
+                'address line 1' => ['max:200'],
+                'address line 2' => ['max:200'],
             ])
         );
 
-        return Redirect::back()->with('success', 'Client updated.');
+        return Redirect::back()->with('success', 'Address updated.');
     }
 
     public function destroy(Address $address)
     {
         $address->delete();
 
-        return Redirect::back()->with('success', 'Client deleted.');
+        return Redirect::back()->with('success', 'Address deleted.');
     }
 
     public function restore(Address $address)
     {
         $address->restore();
 
-        return Redirect::back()->with('success', 'Client restored.');
+        return Redirect::back()->with('success', 'Address restored.');
     }
 }
