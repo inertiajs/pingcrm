@@ -21,12 +21,12 @@ class BanksController extends Controller
                 ->withQueryString()
                 ->through(function ($bank) {
                     return [
-                        'id' => $bank->id,
-                        'name' => $bank->name,
-                        'phone' => $bank->phone,
-                        'account_number' => $bank-> account_number,
+                        'id' => $bank -> id,
+                        'name' => $bank -> name,
+                        'phone' => $bank -> phone,
+                        'account_number' => $bank -> account_number,
                         'ifsc_code' => $bank -> ifsc_code,
-                        'deleted_at' => $bank->deleted_at,
+                        'deleted_at' => $bank -> deleted_at,
                     ];
                 }),
         ]);
@@ -42,15 +42,10 @@ class BanksController extends Controller
         Auth::user()->account->banks()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
-                'account_number' => ['max:100'],
+                'account_number' => ['nullable','max:100'],
                 'ifsc_code' => ['nullable','max:100'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                
             ])
         );
 
@@ -61,20 +56,13 @@ class BanksController extends Controller
     {
         return Inertia::render('Banks/Edit', [
             'bank' => [
-                'id' => $bank->id,
-                'name' => $bank->name,
-                'email' => $bank->email,
-                'phone' => $bank->phone,
-                'account_number' => $bank-> account_number,
+                'id' => $bank -> id,
+                'name' => $bank -> name,
+                'phone' => $bank -> phone,
+                'account_number' => $bank -> account_number,
                 'ifsc_code' => $bank -> ifsc_code,
-                'address' => $bank->address,
-                'city' => $bank->city,
-                'region' => $bank->region,
-                'country' => $bank->country,
-                'postal_code' => $bank->postal_code,
-                'deleted_at' => $bank->deleted_at,
-               // 'contacts' => $bank->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
-            ],
+                'deleted_at' => $bank -> deleted_at,
+                ],
         ]);
     }
 
@@ -83,16 +71,11 @@ class BanksController extends Controller
         $bank->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
-                'account_number' => ['max:100'],
+                'account_number' => ['nullable','max:100'],
                 'ifsc_code' => ['nullable','max:100'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
             ])
+        
         );
 
         return Redirect::back()->with('success', 'Bank updated.');

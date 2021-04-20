@@ -20,10 +20,9 @@ class CreateAddressesTable extends Migration
             $table->string('phone', 50)->nullable();
             $table->string('address_line1', 150);
             $table->string('address_line2', 150);
-
             $table->string('city', 50)->nullable();
             $table->string('region', 50)->nullable();
-            $table->string('country', 2)->nullable();
+            $table->string('country', 50)->nullable();
             $table->string('postal_code', 25)->nullable();
             $table->timestamps();
             $table->softDeletes();

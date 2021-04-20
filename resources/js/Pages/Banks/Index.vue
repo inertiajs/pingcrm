@@ -19,8 +19,10 @@
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">City</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
+          <th class="px-6 pt-6 pb-4">Phone</th>
+          <th class="px-6 pt-6 pb-4">Account number</th>
+          <th class="px-6 pt-6 pb-4">Ifsc Code</th>
+          <th class="px-6 pt-6 pb-4" colspan="2">City</th>
         </tr>
         <tr v-for="bank in banks.data" :key="bank.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -31,12 +33,22 @@
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('banks.edit', bank.id)" tabindex="-1">
-              {{ bank.city }}
+              {{ bank.phone }}
             </inertia-link>
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('banks.edit', bank.id)" tabindex="-1">
-              {{ bank.phone }}
+              {{ bank.account_number }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('banks.edit', bank.id)" tabindex="-1">
+              {{ bank.ifsc_code }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('banks.edit', bank.id)" tabindex="-1">
+              {{ bank.city }}
             </inertia-link>
           </td>
           <td class="border-t w-px">

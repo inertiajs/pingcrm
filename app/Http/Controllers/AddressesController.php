@@ -20,13 +20,16 @@ class AddressesController extends Controller
                 ->withQueryString()
                 ->through(function ($address) {
                     return [
-                        'id' => $address->id,
-                        'name' => $address->name,
-                        'phone' => $address->phone,
-                    'address_line1' =>$address -> address_line1,
-                    'address_line2' =>$address -> address_line2,
-                    
-                        'deleted_at' => $address->deleted_at,
+                        'id' => $address -> id,
+                        'name' => $address -> name,
+                        'phone' => $address -> phone,
+                        'address_line1' =>$address -> address_line1,
+                        'address_line2' =>$address -> address_line2,
+                        'city' => $address -> city,
+                        'region' => $address -> region,
+                        'country' => $address -> country,
+                        'postal_code' => $address -> postal_code,
+                        'deleted_at' => $address -> deleted_at,
                     ];
                 }),
         ]);
@@ -43,27 +46,33 @@ class AddressesController extends Controller
             Request::validate([
                 'name' => ['required', 'max:100'],
                 'phone' => ['nullable', 'max:20'],
-                'address line 1' => ['max:200'],
-                'address line 2' => ['max:200'],
+                'address_line1' => ['max:200'],
+                'address_line2' => ['max:200'],
+                'city' => ['nullable', 'max:50'],
+                'region' => ['nullable', 'max:50'],
+                'country' => ['nullable', 'max:50'],
+                'postal_code' => ['nullable', 'max:25'],
             ])
         );
 
-        return Redirect::route('clients')->with('success', 'Clients created.');
+        return Redirect::route('addresses')->with('success', 'Addresses created.');
     }
 
     public function edit(Address $address)
     {
         return Inertia::render('Addresses/Edit', [
             'address' => [
-                'id' => $address->id,
-                'name' => $address->name,
-                'phone' => $address->phone,
-                'address_line1' =>$address -> address_line1,
-                'address_line2' =>$address -> address_line2,
-                
-                'deleted_at' => $address->deleted_at,
-                //'contacts' => $address->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
-            ],
+                'id' => $address -> id,
+                'name' => $address -> name,
+                'phone' => $address -> phone,
+                'address_line1' => $address -> address_line1,
+                'address_line2' => $address -> address_line2,
+                'city' => $address -> city,
+                'region' => $address -> region,
+                'country' => $address -> country,
+                'postal_code' => $address -> postal_code,   
+                'deleted_at' => $address -> deleted_at,
+                ],
         ]);
     }
 
@@ -73,8 +82,13 @@ class AddressesController extends Controller
             Request::validate([
                 'name' => ['required', 'max:100'],
                 'phone' => ['nullable', 'max:20'],
-                'address line 1' => ['max:200'],
-                'address line 2' => ['max:200'],
+                'address_line1' => ['max:200'],
+                'address_line2' => ['max:200'],
+                'city' => ['nullable', 'max:50'],
+                'region' => ['nullable', 'max:50'],
+                'country' => ['nullable', 'max:50'],
+                'postal_code' => ['nullable', 'max:25'],
+
             ])
         );
 
