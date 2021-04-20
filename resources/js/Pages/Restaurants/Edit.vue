@@ -1,33 +1,26 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('tasks')">tasks</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('restaurants')">restaurants</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
-    <trashed-message v-if="task.deleted_at" class="mb-6" @restore="restore">
-      This task has been deleted.
+    <trashed-message v-if="restaurant.deleted_at" class="mb-6" @restore="restore">
+      This restaurant has been deleted.
     </trashed-message>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
+         <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
-          <text-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority" />
-          <text-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status" />
-          <text-input v-model="form.deu_date" :error="form.errors.deu_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Deu_date" />
-          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed_date" />
-          <text-input v-model="form.user_id" :error="form.errors.User_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
-          <text-input v-model="form.task_id" :error="form.errors.task_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Task_id" />
-          <text-input v-model="form.project_id" :error="form.errors.project_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Project_id" />
-          <text-input v-model="form.team_id" :error="form.errors.team_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Team_id" />
-          
+          <text-input v-model="form.User_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
+         
         
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!task.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete task</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update task</loading-button>
+          <button v-if="!restaurant.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete restaurant</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update restaurant</loading-button>
         </div>
       </form>
     </div>
@@ -38,17 +31,10 @@
           <th class="px-6 pt-6 pb-4">Id</th>
           <th class="px-6 pt-6 pb-4">Title</th>
           <th class="px-6 pt-6 pb-4">Description</th>
-          <th class="px-6 pt-6 pb-4">Priority</th>
-          <th class="px-6 pt-6 pb-4">Status</th>
-          <th class="px-6 pt-6 pb-4">Deu_date</th>
-          <th class="px-6 pt-6 pb-4">Completed_date</th>
           <th class="px-6 pt-6 pb-4">User_id</th>
-          <th class="px-6 pt-6 pb-4">Task_id</th>
-          <th class="px-6 pt-6 pb-4">Project_id</th>
-          <th class="px-6 pt-6 pb-4">Team_id</th>
-          
+        
         </tr>
-        <tr v-for="contact in task.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="contact in restaurant.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
               {{ contact.id }}
@@ -70,49 +56,7 @@
 
            <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.priority }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.status }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.deu_date }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.completed_date }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
               {{ contact.user_id }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.task_id }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.project_id }}
-            </inertia-link>
-          </td>
-          
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.team_id }}
             </inertia-link>
           </td>
 
@@ -126,7 +70,7 @@
             </inertia-link>
           </td>
         </tr>
-        <tr v-if="task.contacts.length === 0">
+        <tr v-if="restaurant.contacts.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No contacts found.</td>
         </tr>
       </table>
@@ -155,38 +99,31 @@ export default {
   },
   layout: Layout,
   props: {
-    task: Object,
+    restaurant: Object,
   },
   remember: 'form',
   data() {
     return {
       form: this.$inertia.form({
-        id: this.task.id,
-        title: this.task.title,
-        description: this.task.description,
-        priority: this.task.priority,
-        status: this.task.status,
-        deu_date: this.task.deu_date,
-        completed_date: this.task.completed_date,
-        user_id: this.task.user_id,
-        task_id: this.task.task,
-        project_id: this.task.project_id,
-        team_id: this.task.team_id,
+        id: this.restaurant.id,
+        title: this.restaurant.title,
+        description: this.restaurant.description,
+        user_id: this.restaurant.user_id,
       }),
     }
   },
   methods: {
     update() {
-      this.form.put(this.route('tasks.update', this.task.id))
+      this.form.put(this.route('restaurants.update', this.restaurant.id))
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this task?')) {
-        this.$inertia.delete(this.route('tasks.destroy', this.task.id))
+      if (confirm('Are you sure you want to delete this restaurant?')) {
+        this.$inertia.delete(this.route('restaurants.destroy', this.restaurant.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this task?')) {
-        this.$inertia.put(this.route('tasks.restore', this.task.id))
+      if (confirm('Are you sure you want to restore this restaurant?')) {
+        this.$inertia.put(this.route('restaurants.restore', this.restaurant.id))
       }
     },
   },
