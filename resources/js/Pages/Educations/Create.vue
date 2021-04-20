@@ -7,18 +7,16 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+        
+         
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
-          <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
-          <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
-            <option :value="null" />
-            <option value="CA">Canada</option>
-            <option value="US">United States</option>
-          </select-input>
-          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
+          <text-input v-model="form.mobile" :error="form.errors.mobile" class="pr-6 pb-8 w-full lg:w-1/2" label="Mobile" />
+          <text-input v-model="form.school" :error="form.errors.school" class="pr-6 pb-8 w-full lg:w-1/2" label="School" />
+          <text-input v-model="form.college" :error="form.errors.college" class="pr-6 pb-8 w-full lg:w-1/2" label="College" />
+          <text-input v-model="form.percentage" :error="form.errors.percentage" class="pr-6 pb-8 w-full lg:w-1/2" label="Percentage" />
+      
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Education</loading-button>
@@ -35,7 +33,7 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create Task' },
+  metaInfo: { title: 'Create education' },
   components: {
     LoadingButton,
     SelectInput,
@@ -46,14 +44,15 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
+       
+        title: null,
         name: null,
         email: null,
-        phone: null,
-        address: null,
-        city: null,
-        region: null,
-        country: null,
-        postal_code: null,
+        mobile: null,
+        school: null,
+        college: null,
+        percentage: null,
+        
       }),
     }
   },

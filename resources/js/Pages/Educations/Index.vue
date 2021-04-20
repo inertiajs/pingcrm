@@ -12,39 +12,80 @@
       </search-filter>
       <inertia-link class="btn-indigo" :href="route('educations.create')">
         <span>Create</span>
-        <span class="hidden md:inline">Task</span>
+        <span class="hidden md:inline">Education</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
+          <th class="px-6 pt-6 pb-4">Id</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
           <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">City</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Phone</th>
+          <th class="px-6 pt-6 pb-4">Email</th>
+          <th class="px-6 pt-6 pb-4">Mobile</th>
+          <th class="px-6 pt-6 pb-4">School</th>
+          <th class="px-6 pt-6 pb-4">College</th>
+          <th class="px-6 pt-6 pb-4">Percentage</th>
+         
         </tr>
-        <tr v-for="task in educations.data" :key="task.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="education in educations.data" :key="education.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('educations.edit', task.id)">
-              {{ task.name }}
-              <icon v-if="task.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('educations.edit', education.id)">
+            <icon v-if="education.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              {{ education.id }}
             </inertia-link>
           </td>
+
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', task.id)" tabindex="-1">
-              {{ task.city }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.title }}
             </inertia-link>
           </td>
+
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', task.id)" tabindex="-1">
-              {{ task.phone }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.name }}
             </inertia-link>
           </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.email }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.mobile }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.school }}
+            </inertia-link>
+          </td>
+
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.college }}
+            </inertia-link>
+          </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
+              {{ education.percentage }}
+            </inertia-link>
+          </td>
+
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('educations.edit', task.id)" tabindex="-1">
+            <inertia-link class="px-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
         </tr>
+
         <tr v-if="educations.data.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No educations found.</td>
         </tr>

@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
         // $restaurants = factory(Restaurant::class, 100)
         //     ->create(['account_id' => $account->id]);
 
-        // $education = factory(Education::class, 100)
-        //     ->create(['account_id' => $account->id]);
+         $education = factory(Education::class, 100)
+               ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)
             ->create(['account_id' => $account->id]);

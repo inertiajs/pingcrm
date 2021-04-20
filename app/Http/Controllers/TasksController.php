@@ -74,7 +74,7 @@ class TasksController extends Controller
                 'creator' => $task->creator,
                 'due_date' => $task->due_date,
                 'completed_date' => $task->completed_date,
-                'contacts' => $task->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
+                //'contacts' => $task->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
             ],
         ]);
     }

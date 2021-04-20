@@ -23,9 +23,12 @@ class EducationsController extends Controller
                     return [
                         'id' => $education->id,
                         'title' => $education->title,
-                        'description' => $education->description,
-                        'user_id' => $education->user_id,
-                        'education_id' => $education->education_id,
+                        'name'=>$education->name,
+                        'email'=>$education->email,
+                        'mobile'=>$education->mobile,
+                        'school'=>$education->school,
+                        'college'=>$education->college,
+                        'percentage'=>$education->percentage,
                     ];
                 }),
         ]);
@@ -38,20 +41,18 @@ class EducationsController extends Controller
 
     public function store()
     {
-        Auth::user()->account->Educations()->create(
+        Auth::user()->account->educations()->create(
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'education_id' => ['nullable', 'max:150'],
-                'team_id' => ['nullable', 'max:50'],
-                'project_id' => ['nullable', 'max:50'],
-                'priority' => ['nullable', 'max:2'],
-                'status' => ['nullable', 'max:25'],
-                'creator' => ['nullable', 'max:25'],
-                'due_date' => ['nullable', 'max:25'],
-                'completed_date' => ['nullable', 'max:25'],
+                'name' => ['nullable', 'max:50'],
+                'email' => ['nullable', 'max:50',email],
+                'mobile' => ['nullable', 'max:50'],
+                'school' => ['nullable', 'max:50'],
+                'college' => ['nullable', 'max:50'],
+                'percentage' => ['nullable', 'max:50'],
+               
+                
             ])
         );
 
@@ -64,17 +65,13 @@ class EducationsController extends Controller
             'education' => [
                 'id' => $education->id,
                 'title' => $education->title,
-                'description' => $education->description,
-                'user_id' => $education->user_id,
-                'education_id' => $education->education_id,
-                'team_id' => $education->team_id,
-                'project_id' => $education->project_id,
-                'priority' => $education->priority,
-                'status' => $education->status,
-                'creator' => $education->creator,
-                'due_date' => $education->due_date,
-                'completed_date' => $education->completed_date,
-                'contacts' => $education->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                'name'=>$education->name,
+                'email'=>$education->email,
+                'mobile'=>$education->mobile,
+                'school'=>$education->school,
+                'college'=>$education->college,
+                'percentage'=>$education->percentage,
+               // 'contacts' => $education->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
         ]);
     }
@@ -83,14 +80,15 @@ class EducationsController extends Controller
     {
         $education->update(
             Request::validate([
+                'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:50', 'email'],
-                'priority' => ['nullable', 'max:50'],
-                'status' => ['nullable', 'max:150'],
-                'creator' => ['nullable', 'max:50'],
-                'due_date' => ['nullable', 'max:50'],
-                'completed_date' => ['nullable', 'max:2'],
-             
+                'name' => ['nullable', 'max:50'],
+                'email' => ['nullable', 'max:50',email],
+                'mobile' => ['nullable', 'max:50'],
+                'school' => ['nullable', 'max:50'],
+                'college' => ['nullable', 'max:50'],
+                'percentage' => ['nullable', 'max:50'],
+               
             ])
         );
 
