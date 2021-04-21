@@ -19,7 +19,7 @@ class CreateAddressesTable extends Migration
             $table->string('name', 100);
             $table->string('phone', 50)->nullable();
             $table->string('address_line1', 150);
-            $table->string('address_line2', 150);
+            $table->string('address_line2', 150)->nullable();
             $table->string('city', 50)->nullable();
             $table->string('region', 50)->nullable();
             $table->string('country', 50)->nullable();
