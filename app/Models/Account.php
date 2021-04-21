@@ -34,6 +34,10 @@ class Account extends Model
     {
         return $this->hasMany(Address::class);
     }
+    public function experiences()
+    {
+        return $this->hasMany(Address::class);
+    }
 
     public function banks()
     {

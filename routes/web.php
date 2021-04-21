@@ -6,6 +6,7 @@ use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
@@ -154,6 +155,36 @@ Route::delete('tasks/{task}', [TasksController::class, 'destroy'])
 Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
+
+    // Experiences
+
+Route::get('experiences', [ExperiencesController::class, 'index'])
+->name('experiences')
+->middleware('remember', 'auth');
+
+Route::get('experiences/create', [ExperiencesController::class, 'create'])
+->name('experiences.create')
+->middleware('auth');
+
+Route::post('experiences', [ExperiencesController::class, 'store'])
+->name('experiences.store')
+->middleware('auth');
+
+Route::get('experiences/{experience}/edit', [ExperiencesController::class, 'edit'])
+->name('experiences.edit')
+->middleware('auth');
+
+Route::put('experiences/{experience}', [ExperiencesController::class, 'update'])
+->name('experiences.update')
+->middleware('auth');
+
+Route::delete('experiences/{experience}', [ExperiencesController::class, 'destroy'])
+->name('experiences.destroy')
+->middleware('auth');
+
+Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
+->name('experiences.restore')
+->middleware('auth');
 
     
 // Education
