@@ -19,17 +19,23 @@
         <div :class="isUrl('banks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Bank Details</div>
       </inertia-link>
     </div>
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('experiences')">
+        <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('experiences') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('experiences') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Experiences</div>
+      </inertia-link>
+    </div>
     
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('tasks')">
-        <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('tasks') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <icon name="dashboard" class="w-4 h-4 mr-2" :class="isUrl('tasks') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('tasks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Tasks</div>
       </inertia-link>
     </div>
 
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('educations')">
-        <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('educations') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('educations') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('educations') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Educations</div>
       </inertia-link>
     </div>

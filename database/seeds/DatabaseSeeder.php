@@ -5,6 +5,7 @@ use App\Models\Address;
 use App\Models\Bank;
 use App\Models\Client;
 use App\Models\Contact;
+use App\Models\Experience;
 use App\Models\Organization;
 use App\Models\Task;
 use App\Models\Restaurant;
@@ -34,7 +35,8 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
-
+            $experience = factory(Experience::class, 100)
+            ->create(['account_id' => $account->id]);
 
         // $restaurants = factory(Restaurant::class, 100)
         //     ->create(['account_id' => $account->id]);
