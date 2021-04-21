@@ -19,6 +19,11 @@ class Account extends Model
         return $this->hasMany(Education::class);
     }
 
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class);
+    }
+
 
     public function tasks()
     {

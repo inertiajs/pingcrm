@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('restaurants')">restaurants</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('restaurants')">Restaurants</inertia-link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
@@ -11,69 +11,22 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-         <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
+          <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
-          <text-input v-model="form.User_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
-         
-        
-        </div>
+          <text-input v-model="form.custmer_name" :error="form.errors.custmer_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
+          <text-input v-model="form.custmer_order" :error="form.errors.custmer_order" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_order" />
+          <text-input v-model="form.custmer_address" :error="form.errors.custmer_address" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_address" />
+          <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Bill_no" />
+          <text-input v-model="form.feedback" :error="form.errors.feedback" class="pr-6 pb-8 w-full lg:w-1/2" label="Feedback" />
+       </div>
+       
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!restaurant.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete restaurant</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update restaurant</loading-button>
+          <button v-if="!restaurant.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete task</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Restaurant</loading-button>
         </div>
       </form>
-    </div>
-    <h2 class="mt-12 font-bold text-2xl">Contacts</h2>
-    <div class="mt-6 bg-white rounded shadow overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
-        <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Id</th>
-          <th class="px-6 pt-6 pb-4">Title</th>
-          <th class="px-6 pt-6 pb-4">Description</th>
-          <th class="px-6 pt-6 pb-4">User_id</th>
-        
-        </tr>
-        <tr v-for="contact in restaurant.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
-              {{ contact.id }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-            </inertia-link>
-          </td>
-
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.title }}
-            </inertia-link>
-          </td>
-    
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.description }}
-            </inertia-link>
-          </td>
-
-           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              {{ contact.user_id }}
-            </inertia-link>
-          </td>
-
-
-
-
-
-          <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
-          </td>
-        </tr>
-        <tr v-if="restaurant.contacts.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No contacts found.</td>
-        </tr>
-      </table>
     </div>
   </div>
 </template>
@@ -108,7 +61,12 @@ export default {
         id: this.restaurant.id,
         title: this.restaurant.title,
         description: this.restaurant.description,
-        user_id: this.restaurant.user_id,
+        custmer_name: this.restaurant.custmer_name,
+        phone: this.restaurant.phone,
+        custmer_order: this.restaurant.custmer_order,
+        custmer_address: this.restaurant.custmer_address,
+        bill_no: this.restaurant.bill_no,
+        feedback: this.restaurant.feedback,
       }),
     }
   },

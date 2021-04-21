@@ -2,11 +2,15 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Task::class, function (Faker $faker) {
+$factory->define(App\Models\Restaurant::class, function (Faker $faker) {
     return [
-        'id' => $faker->company,
-        'title' => $faker->companyTitle,
-        'desciption' => $faker->description,
-        'user_id' => $faker->user_id,
+        'title' => $faker->title,
+        'description' => $faker->text,
+        'custmer_name' => $faker->company,
+        'phone' => $faker->tollFreePhoneNumber,
+        'custmer_address' => null,
+        'custmer_order' =>null,
+        'bill_no' => null,
+        'feedback'=>null,
     ];
 });

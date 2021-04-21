@@ -20,10 +20,14 @@
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Id</th>
           <th class="px-6 pt-6 pb-4">Title</th>
-          <th class="px-6 pt-6 pb-4">Description</th>
-          <th class="px-6 pt-6 pb-4">User_id</th>
+          <th class="px-6 pt-6 pb-4">Custmer_name</th>
+          <th class="px-6 pt-6 pb-4">Phone</th>
+          <th class="px-6 pt-6 pb-4">Custmer_order</th>
+          <th class="px-6 pt-6 pb-4">Custmer_address</th>
+          <th class="px-6 pt-6 pb-4">Bill_no</th>
+          <th class="px-6 pt-6 pb-4">Feedback</th>
         </tr>
-        <tr v-for="restaurant in restaurant.data" :key="restaurant.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="restaurant in restaurants.data" :key="restaurant.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('restaurants.edit', restaurant.id)">
               {{ restaurant.id }}
@@ -39,16 +43,39 @@
     
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
-              {{ restaurant.description }}
+              {{ restaurant.custmer_name }}
             </inertia-link>
           </td>
 
-           <td class="border-t">
+          <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
-              {{ restaurant.user_id }}
+              {{ restaurant.phone }}
             </inertia-link>
           </td>
 
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.custmer_order }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.Custmer_address }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.bill_no }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.feedback }}
+            </inertia-link>
+          </td>
 
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">

@@ -1,12 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
@@ -220,7 +218,7 @@ Route::put('restaurants/{restaurant}/restore', [RestaurantsController::class, 'r
 
 
 
-    // Addresses
+// Addresses
 
 Route::get('addresses', [AddressesController::class, 'index'])
     ->name('addresses')
@@ -251,7 +249,7 @@ Route::put('addresses/{address}/restore', [AddressesController::class, 'restore'
     ->middleware('auth');
 
 
-    // banks
+// banks
 
 Route::get('banks', [BanksController::class, 'index'])
 ->name('banks')
