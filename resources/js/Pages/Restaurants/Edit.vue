@@ -13,21 +13,21 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
-          <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
           <text-input v-model="form.custmer_name" :error="form.errors.custmer_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
           <text-input v-model="form.custmer_order" :error="form.errors.custmer_order" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_order" />
-          <text-input v-model="form.custmer_address" :error="form.errors.custmer_address" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_address" />
+          <text-input v-model="form.Custmer_address" :error="form.errors.Custmer_address" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_address" />
           <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Bill_no" />
           <text-input v-model="form.feedback" :error="form.errors.feedback" class="pr-6 pb-8 w-full lg:w-1/2" label="Feedback" />
-       </div>
-       
+      
+        </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!restaurant.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete task</button>
+          <button v-if="!education.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete restaurant</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Restaurant</loading-button>
         </div>
       </form>
     </div>
+
   </div>
 </template>
 
