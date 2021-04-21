@@ -13,7 +13,7 @@ class CreateEducationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('educations', function (Blueprint $table) {
+        Schema::create('education', function (Blueprint $table) {
             $table->id();
             $table->integer('account_id')->index();
             $table->string('title');
@@ -23,6 +23,8 @@ class CreateEducationsTable extends Migration
             $table->string('school', 150)->nullable();
             $table->string('college', 50)->nullable();
             $table->string('percentage', 50)->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

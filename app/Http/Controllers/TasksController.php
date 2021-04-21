@@ -15,7 +15,7 @@ class TasksController extends Controller
         return Inertia::render('Tasks/Index', [
             'filters' => Request::all('search', 'trashed'),
             'tasks' => Auth::user()->account->tasks()
-                ->orderBy('name')
+                ->orderBy('title')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
@@ -95,7 +95,7 @@ class TasksController extends Controller
                 'creator' => ['nullable', 'max:25'],
                 'due_date' => ['nullable', 'max:25'],
                 'completed_date' => ['nullable', 'max:25'],
-             
+
             ])
         );
 
