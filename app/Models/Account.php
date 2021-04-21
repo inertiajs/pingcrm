@@ -24,6 +24,16 @@ class Account extends Model
         return $this->hasMany(Client::class);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function banks()
+    {
+        return $this->hasMany(Bank::class);
+    }
+
     public function contacts()
     {
         return $this->hasMany(Contact::class);
