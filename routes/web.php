@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
@@ -160,6 +162,68 @@ Route::delete('clients/{client}', [ClientsController::class, 'destroy'])
 Route::put('clients/{client}/restore', [ClientsController::class, 'restore'])
     ->name('clients.restore')
     ->middleware('auth');
+
+    // Addresses
+
+Route::get('addresses', [AddressesController::class, 'index'])
+    ->name('addresses')
+    ->middleware('remember', 'auth');
+
+Route::get('addresses/create', [AddressesController::class, 'create'])
+    ->name('addresses.create')
+    ->middleware('auth');
+
+Route::post('addresses', [AddressesController::class, 'store'])
+    ->name('addresses.store')
+    ->middleware('auth');
+
+Route::get('addresses/{address}/edit', [AddressesController::class, 'edit'])
+    ->name('addresses.edit')
+    ->middleware('auth');
+
+Route::put('addresses/{address}', [AddressesController::class, 'update'])
+    ->name('addresses.update')
+    ->middleware('auth');
+
+Route::delete('addresses/{address}', [AddressesController::class, 'destroy'])
+    ->name('addresses.destroy')
+    ->middleware('auth');
+
+Route::put('addresses/{address}/restore', [AddressesController::class, 'restore'])
+    ->name('addresses.restore')
+    ->middleware('auth');
+
+
+    // banks
+
+Route::get('banks', [BanksController::class, 'index'])
+->name('banks')
+->middleware('remember', 'auth');
+
+Route::get('banks/create', [BanksController::class, 'create'])
+->name('banks.create')
+->middleware('auth');
+
+Route::post('banks', [BanksController::class, 'store'])
+->name('banks.store')
+->middleware('auth');
+
+Route::get('banks/{bank}/edit', [BanksController::class, 'edit'])
+->name('banks.edit')
+->middleware('auth');
+
+Route::put('banks/{bank}', [BanksController::class, 'update'])
+->name('banks.update')
+->middleware('auth');
+
+Route::delete('banks/{bank}', [BanksController::class, 'destroy'])
+->name('banks.destroy')
+->middleware('auth');
+
+Route::put('banks/{bank}/restore', [BanksController::class, 'restore'])
+->name('banks.restore')
+->middleware('auth');
+
 
 // Contacts
 
