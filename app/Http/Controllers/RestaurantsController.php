@@ -24,8 +24,8 @@ class RestaurantsController extends Controller
                         'id' => $restaurant->id,
                         'title' => $restaurant->title,
                         'description' => $restaurant->description,
-                        'user_id' => $restaurant->user_id,
-                        'restaurant_id' => $restaurant->restaurant_id,
+                        'custmer_name' => $restaurant->custmer_name,
+                        
                     ];
                 }),
         ]);
@@ -42,9 +42,12 @@ class RestaurantsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'restaurant_id' => ['nullable', 'max:150'],
+                'custmer_name' => ['nullable', 'max:50'],
+                'phone' => ['nullable', 'max:50'],
+                'bill_no' => ['nullable', 'max:50'],
+                'items' => ['nullable', 'max:50'],
+                'feedback' => ['nullable', 'max:50'],
+                'coustmer_address' => ['nullable', 'max:100'],
                 
                
                
@@ -63,7 +66,7 @@ class RestaurantsController extends Controller
                 'description' => $restaurant->description,
                 'user_id' => $restaurant->user_id,
                 'restaurant_id' => $restaurant->restaurant_id,
-                s()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
+
             ],
         ]);
     }
