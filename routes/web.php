@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
@@ -36,6 +35,25 @@ Route::post('login', [LoginController::class, 'login'])
 
 Route::post('logout', [LoginController::class, 'logout'])
     ->name('logout');
+
+// Clients
+
+Route::get('clients', [ClientsController::class, 'index'])
+    ->name('clients')
+    ->middleware('remember', 'auth');
+
+Route::get('clients/create', [ClientsController::class, 'create'])
+    ->name('clients.create')
+    ->middleware('auth');
+
+Route::post('clients', [ClientsController::class, 'store'])
+    ->name('clients.store')
+    ->middleware('auth');
+
+Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
+    ->name('clients.edit')
+    ->middleware('auth');
+
 
 // Dashboard
 
