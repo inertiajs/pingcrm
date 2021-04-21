@@ -14,16 +14,19 @@ class CreateTasksTable extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('account_id')->index();
-            $table->string('name', 100);
-            $table->string('email', 50)->nullable();
-            $table->string('phone', 50)->nullable();
-            $table->string('address', 150)->nullable();
-            $table->string('city', 50)->nullable();
-            $table->string('region', 50)->nullable();
-            $table->string('country', 2)->nullable();
-            $table->string('postal_code', 25)->nullable();
+            $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->foreignId('account_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('task_id')->nullable();
+            $table->foreignId('team_id')->nullable();
+            $table->foreignId('project_id');
+            $table->unsignedInteger('priority')->nullable();
+            $table->unsignedInteger('status')->default(100);
+            $table->foreignId('creator')->nullable();
+            $table->timestamp('due_date')->nullable();
+            $table->timestamp('completed_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

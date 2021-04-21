@@ -14,6 +14,12 @@ class Account extends Model
         return $this->hasMany(Organization::class);
     }
 
+    public function educations()
+    {
+        return $this->hasMany(Education::class);
+    }
+
+
     public function tasks()
     {
         return $this->hasMany(Task::class);
