@@ -13,6 +13,10 @@ class Account extends Model
     {
         return $this->hasMany(Organization::class);
     }
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
     public function profiles()
     {
         return $this->hasMany(Profile::class);

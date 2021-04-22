@@ -38,6 +38,12 @@
         <div :class="isUrl('tasks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Tasks</div>
       </inertia-link>
     </div>
+<div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('budgets')">
+        <icon name="dashboard" class="w-4 h-4 mr-2" :class="isUrl('budgets') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('budgets') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Budgets</div>
+      </inertia-link>
+    </div>
 
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('educations')">
