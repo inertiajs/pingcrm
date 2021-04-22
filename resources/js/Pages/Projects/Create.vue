@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('clients')">Clients</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('projects')">Projects</inertia-link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
@@ -23,7 +23,7 @@
           </select-input>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Client</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Project</loading-button>
         </div>
       </form>
     </div>
@@ -37,7 +37,7 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create Client' },
+  metaInfo: { title: 'Create Project' },
   components: {
     LoadingButton,
     SelectInput,
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post(this.route('clients.store'))
+      this.form.post(this.route('projects.store'))
     },
   },
 }

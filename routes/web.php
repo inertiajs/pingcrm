@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
@@ -57,6 +58,26 @@ Route::post('clients', [ClientsController::class, 'store'])
 Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     ->name('clients.edit')
     ->middleware('auth');
+
+
+
+// Projects
+
+    Route::get('projects', [ProjectsController::class, 'index'])
+        ->name('projects')
+        ->middleware('remember', 'auth');
+
+    Route::get('projects/create', [ProjectsController::class, 'create'])
+        ->name('projects.create')
+        ->middleware('auth');
+
+    Route::post('projects', [ProjectsController::class, 'store'])
+        ->name('projects.store')
+        ->middleware('auth');
+
+    Route::get('projects/{project}/edit', [ProjectsController::class, 'edit'])
+        ->name('projects.edit')
+        ->middleware('auth');
 
 
 // Dashboard
@@ -155,7 +176,7 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
-    
+
 // Education
 
 Route::get('educations', [EducationsController::class, 'index'])

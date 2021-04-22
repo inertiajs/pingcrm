@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Projects;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -58,7 +58,7 @@ class ProjectsController extends Controller
                 'id' => $project->id,
                 'name' => $project->name,
                 'phone' => $project->phone,
-                'status' => $client->status,
+                'status' => $clieprojectnt->status,
                 'priority' => $project->priority,
                 'deleted_at' => $project->deleted_at,
                 //'contacts' => $client->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
