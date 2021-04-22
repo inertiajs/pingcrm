@@ -10,6 +10,7 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
@@ -277,6 +278,35 @@ Route::put('documents/{document}/restore', [DocumentsController::class, 'restore
 ->name('documents.restore')
 ->middleware('auth');
 
+// Budget
+
+Route::get('budgets', [BudgetsController::class, 'index'])
+->name('budgets')
+->middleware('remember', 'auth');
+
+Route::get('budgets/create', [BudgetsController::class, 'create'])
+->name('budgets.create')
+->middleware('auth');
+
+Route::post('budgets', [BudgetsController::class, 'store'])
+->name('budgets.store')
+->middleware('auth');
+
+Route::get('budgets/{budget}/edit', [BudgetsController::class, 'edit'])
+->name('budgets.edit')
+->middleware('auth');
+
+Route::put('budgets/{budget}', [BudgetsController::class, 'update'])
+->name('budgets.update')
+->middleware('auth');
+
+Route::delete('budgets/{budget}', [BudgetsController::class, 'destroy'])
+->name('budgets.destroy')
+->middleware('auth');
+
+Route::put('budgets/{budget}/restore', [BudgetsController::class, 'restore'])
+->name('budgets.restore')
+->middleware('auth');
 
 
 

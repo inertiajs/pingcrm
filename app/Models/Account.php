@@ -24,6 +24,11 @@ class Account extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
+
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class);
