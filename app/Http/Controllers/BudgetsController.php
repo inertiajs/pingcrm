@@ -15,7 +15,7 @@ class BudgetsController extends Controller
         return Inertia::render('Budgets/Index', [
             'filters' => Request::all('search', 'trashed'),
             'budgets' => Auth::user()->account->budgets()
-                ->orderBy('name')
+                ->orderBy('project_name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
@@ -27,7 +27,7 @@ class BudgetsController extends Controller
                         'cost' => $budget -> cost,
                         'profit' => $budget -> profit,
                         'loss' => $budget -> loss,
-                        'deleted_at' => $budget -> deleted_at,
+                        'deleted_at' => $budget ->deleted_at,
                     ];
                 }),
         ]);
@@ -58,8 +58,8 @@ class BudgetsController extends Controller
     {
         return Inertia::render('Budgets/Edit', [
             'budget' => [
-                'id' => $budget -> id,
-                'project_name' => $budget -> project_name,
+                        'id' => $budget -> id,
+                        'project_name' => $budget -> project_name,
                         'resources' => $budget -> resources,
                         'cost' => $budget -> cost,
                         'profit' => $budget -> profit,
