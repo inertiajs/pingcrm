@@ -4,6 +4,7 @@ use App\Models\Account;
 use App\Models\Address;
 use App\Models\Bank;
 use App\Models\Client;
+use App\Models\Profile;
 use App\Models\Contact;
 use App\Models\Experience;
 use App\Models\Organization;
@@ -51,6 +52,9 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)
+            ->create(['account_id' => $account->id]);
+
+            $profiles = factory(Profile::class, 100)
             ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)

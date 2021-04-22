@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
+use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
@@ -309,6 +310,36 @@ Route::delete('banks/{bank}', [BanksController::class, 'destroy'])
 
 Route::put('banks/{bank}/restore', [BanksController::class, 'restore'])
 ->name('banks.restore')
+->middleware('auth');
+
+// profiles
+
+Route::get('profiles', [ProfilesController::class, 'index'])
+->name('profiles')
+->middleware('remember', 'auth');
+
+Route::get('profiles/create', [ProfilesController::class, 'create'])
+->name('profiles.create')
+->middleware('auth');
+
+Route::post('profiles', [ProfilesController::class, 'store'])
+->name('profiles.store')
+->middleware('auth');
+
+Route::get('profiles/{profile}/edit', [ProfilesController::class, 'edit'])
+->name('profiles.edit')
+->middleware('auth');
+
+Route::put('profiles/{profile}', [ProfilesController::class, 'update'])
+->name('profiles.update')
+->middleware('auth');
+
+Route::delete('profiles/{profile}', [ProfilesController::class, 'destroy'])
+->name('profiles.destroy')
+->middleware('auth');
+
+Route::put('profiles/{profile}/restore', [ProfilesController::class, 'restore'])
+->name('profiles.restore')
 ->middleware('auth');
 
 
