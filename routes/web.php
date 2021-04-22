@@ -4,8 +4,11 @@ use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
+use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
@@ -155,6 +158,36 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+    // Experiences
+
+Route::get('experiences', [ExperiencesController::class, 'index'])
+->name('experiences')
+->middleware('remember', 'auth');
+
+Route::get('experiences/create', [ExperiencesController::class, 'create'])
+->name('experiences.create')
+->middleware('auth');
+
+Route::post('experiences', [ExperiencesController::class, 'store'])
+->name('experiences.store')
+->middleware('auth');
+
+Route::get('experiences/{experience}/edit', [ExperiencesController::class, 'edit'])
+->name('experiences.edit')
+->middleware('auth');
+
+Route::put('experiences/{experience}', [ExperiencesController::class, 'update'])
+->name('experiences.update')
+->middleware('auth');
+
+Route::delete('experiences/{experience}', [ExperiencesController::class, 'destroy'])
+->name('experiences.destroy')
+->middleware('auth');
+
+Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
+->name('experiences.restore')
+->middleware('auth');
+
     
 // Education
 
@@ -280,6 +313,65 @@ Route::put('banks/{bank}/restore', [BanksController::class, 'restore'])
 ->name('banks.restore')
 ->middleware('auth');
 
+// profiles
+
+Route::get('profiles', [ProfilesController::class, 'index'])
+->name('profiles')
+->middleware('remember', 'auth');
+
+Route::get('profiles/create', [ProfilesController::class, 'create'])
+->name('profiles.create')
+->middleware('auth');
+
+Route::post('profiles', [ProfilesController::class, 'store'])
+->name('profiles.store')
+->middleware('auth');
+
+Route::get('profiles/{profile}/edit', [ProfilesController::class, 'edit'])
+->name('profiles.edit')
+->middleware('auth');
+
+Route::put('profiles/{profile}', [ProfilesController::class, 'update'])
+->name('profiles.update')
+->middleware('auth');
+
+Route::delete('profiles/{profile}', [ProfilesController::class, 'destroy'])
+->name('profiles.destroy')
+->middleware('auth');
+
+Route::put('profiles/{profile}/restore', [ProfilesController::class, 'restore'])
+->name('profiles.restore')
+->middleware('auth');
+
+// budgets
+
+Route::get('budgets', [BudgetsController::class, 'index'])
+->name('budgets')
+->middleware('remember', 'auth');
+
+Route::get('budgets/create', [BudgetsController::class, 'create'])
+->name('budgets.create')
+->middleware('auth');
+
+Route::post('budgets', [BudgetsController::class, 'store'])
+->name('budgets.store')
+->middleware('auth');
+
+Route::get('budgets/{budget}/edit', [BudgetsController::class, 'edit'])
+->name('budgets.edit')
+->middleware('auth');
+
+Route::put('budgets/{budget}', [BudgetsController::class, 'update'])
+->name('budgets.update')
+->middleware('auth');
+
+Route::delete('budgets/{budget}', [BudgetsController::class, 'destroy'])
+->name('budgets.destroy')
+->middleware('auth');
+
+Route::put('budgets/{budget}/restore', [BudgetsController::class, 'restore'])
+->name('budgets.restore')
+->middleware('auth');
 
 // Contacts
 

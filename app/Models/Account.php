@@ -13,6 +13,14 @@ class Account extends Model
     {
         return $this->hasMany(Organization::class);
     }
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
 
     public function educations()
     {
@@ -31,6 +39,10 @@ class Account extends Model
     }
 
     public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+    public function experiences()
     {
         return $this->hasMany(Address::class);
     }
