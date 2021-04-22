@@ -19,7 +19,7 @@
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">Organization</th>
+          <th class="px-6 pt-6 pb-4">Company</th>
           <th class="px-6 pt-6 pb-4"> Start date</th>
           <th class="px-6 pt-6 pb-4">End Date</th>
           <th class="px-6 pt-6 pb-4">Total Experience</th>
@@ -33,7 +33,7 @@
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('experiences.edit', experience.id)" tabindex="-1">
-              {{ experience.organization }}
+              {{ experience.company }}
             </inertia-link>
           </td>
           <td class="border-t">
