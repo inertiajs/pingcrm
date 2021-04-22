@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ReportsController;
@@ -214,6 +215,37 @@ Route::delete('restaurants/{restaurant}', [RestaurantsController::class, 'destro
 Route::put('restaurants/{restaurant}/restore', [RestaurantsController::class, 'restore'])
 ->name('restaurants.restore')
 ->middleware('auth');
+
+// Document
+
+Route::get('documents', [DocumentsController::class, 'index'])
+->name('documents')
+->middleware('remember', 'auth');
+
+Route::get('documents/create', [DocumentsController::class, 'create'])
+->name('documents.create')
+->middleware('auth');
+
+Route::post('documents', [DocumentsController::class, 'store'])
+->name('documents.store')
+->middleware('auth');
+
+Route::get('documents/{document}/edit', [DocumentsController::class, 'edit'])
+->name('documents.edit')
+->middleware('auth');
+
+Route::put('documents/{document}', [DocumentsController::class, 'update'])
+->name('documents.update')
+->middleware('auth');
+
+Route::delete('documents/{document}', [DocumentsController::class, 'destroy'])
+->name('documents.destroy')
+->middleware('auth');
+
+Route::put('documents/{document}/restore', [DocumentsController::class, 'restore'])
+->name('documents.restore')
+->middleware('auth');
+
 
 
 

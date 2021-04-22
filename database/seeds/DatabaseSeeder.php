@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\Task;
 use App\Models\Restaurant;
+use App\Models\Document;
 use App\Models\Education;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -34,13 +35,15 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
-
-
         $restaurants = factory(Restaurant::class, 100)
              ->create(['account_id' => $account->id]);
 
         $education = factory(Education::class, 100)
             ->create(['account_id' => $account->id]);
+
+        $documents = factory(Document::class, 100)
+            ->create(['account_id' => $account->id]);
+
 
         $addresses = factory(Address::class, 100)
             ->create(['account_id' => $account->id]);

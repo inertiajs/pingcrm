@@ -30,6 +30,11 @@ class Account extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
     public function clients()
     {
         return $this->hasMany(Client::class);
