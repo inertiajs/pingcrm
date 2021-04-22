@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
@@ -154,6 +155,36 @@ Route::delete('tasks/{task}', [TasksController::class, 'destroy'])
 Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
+
+// Comments
+
+Route::get('comments', [CommentsController::class, 'index'])
+->name('comments')
+->middleware('remember', 'auth');
+
+Route::get('comments/create', [CommentsController::class, 'create'])
+->name('comments.create')
+->middleware('auth');
+
+Route::post('comments', [CommentsController::class, 'store'])
+->name('comments.store')
+->middleware('auth');
+
+Route::get('comments/{comment}/edit', [CommentsController::class, 'edit'])
+->name('comments.edit')
+->middleware('auth');
+
+Route::put('comments/{comment}', [CommentsController::class, 'update'])
+->name('comments.update')
+->middleware('auth');
+
+Route::delete('comments/{comment}', [CommentsController::class, 'destroy'])
+->name('comments.destroy')
+->middleware('auth');
+
+Route::put('comments/{comment}/restore', [CommentsController::class, 'restore'])
+->name('comments.restore')
+->middleware('auth');
 
     
 // Education
