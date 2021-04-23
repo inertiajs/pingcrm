@@ -23,9 +23,11 @@ class DocumentsController extends Controller
                     return [
                         'id' => $document->id,
                         'title' => $document->title,
-                        'description' => $document->description,
-                        'user_id' => $document->user_id,
-                        'document_id' => $document->document_id,
+                        'customer_name' => $document->customer_name,
+                        'document_label' => $document->document_label,
+                        'document_type' => $document->document_type,
+                        'digit' => $document->digit,
+                        'length' => $document->length,
                     ];
                 }),
         ]);
@@ -42,16 +44,12 @@ class DocumentsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'document_id' => ['nullable', 'max:150'],
-                'team_id' => ['nullable', 'max:50'],
-                'project_id' => ['nullable', 'max:50'],
-                'priority' => ['nullable', 'max:2'],
-                'status' => ['nullable', 'max:25'],
-                'creator' => ['nullable', 'max:25'],
-                'due_date' => ['nullable', 'max:25'],
-                'completed_date' => ['nullable', 'max:25'],
+                'customer_name' => ['nullable', 'max:300'],
+                'document_label' => ['nullable', 'max:50'],
+                'document_type' => ['nullable', 'max:50'],
+                'digit' => ['nullable', 'max:50'],
+                'length' => ['nullable', 'max:2'],
+                
             ])
         );
 
@@ -64,16 +62,11 @@ class DocumentsController extends Controller
             'document' => [
                 'id' => $document->id,
                 'title' => $document->title,
-                'description' => $document->description,
-                'user_id' => $document->user_id,
-                'document_id' => $document->document_id,
-                'team_id' => $document->team_id,
-                'project_id' => $document->project_id,
-                'priority' => $document->priority,
-                'status' => $document->status,
-                'creator' => $document->creator,
-                'due_date' => $document->due_date,
-                'completed_date' => $document->completed_date,
+                'customer_name' => $document->customer_name,
+                'document_label' => $document->document_label,
+                'document_type' => $document->document_type,
+                'digit' => $document->digit,
+                'length' => $document->length,
                 //'contacts' => $document->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
             ],
         ]);
@@ -85,16 +78,11 @@ class DocumentsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'document_id' => ['nullable', 'max:150'],
-                'team_id' => ['nullable', 'max:50'],
-                'project_id' => ['nullable', 'max:50'],
-                'priority' => ['nullable', 'max:2'],
-                'status' => ['nullable', 'max:25'],
-                'creator' => ['nullable', 'max:25'],
-                'due_date' => ['nullable', 'max:25'],
-                'completed_date' => ['nullable', 'max:25'],
+                'customer_name' => ['nullable', 'max:300'],
+                'document_label' => ['nullable', 'max:50'],
+                'document_type' => ['nullable', 'max:50'],
+                'digit' => ['nullable', 'max:50'],
+                'length' => ['nullable', 'max:2'],
 
             ])
         );

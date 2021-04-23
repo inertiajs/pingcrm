@@ -11,14 +11,13 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+        
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
-          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.mobile" :error="form.errors.mobile" class="pr-6 pb-8 w-full lg:w-1/2" label="Mobile" />
-          <text-input v-model="form.school" :error="form.errors.school" class="pr-6 pb-8 w-full lg:w-1/2" label="School" />
-          <text-input v-model="form.college" :error="form.errors.college" class="pr-6 pb-8 w-full lg:w-1/2" label="College" />
-          <text-input v-model="form.percentage" :error="form.errors.percentage" class="pr-6 pb-8 w-full lg:w-1/2" label="Percentage" />
-      
+          <text-input v-model="form.customer_name" :error="form.errors.customer_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Customer_Name" />
+          <text-input v-model="form.document_type" :error="form.errors.document_type" class="pr-6 pb-8 w-full lg:w-1/2" label="Document_type" />
+          <text-input v-model="form.digit" :error="form.errors.digit" class="pr-6 pb-8 w-full lg:w-1/2" label="Digit" />
+          <text-input v-model="form.document_label" :error="form.errors.document_label" class="pr-6 pb-8 w-full lg:w-1/2" label="Document_label" />
+          <text-input v-model="form.length" :error="form.errors.length" class="pr-6 pb-8 w-full lg:w-1/2" label="Length" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!document.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete document</button>
@@ -57,17 +56,12 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        id: this.document.id,
-        title: this.document.title,
-        description: this.document.description,
-        priority: this.document.priority,
-        status: this.document.status,
-        deu_date: this.document.deu_date,
-        completed_date: this.document.completed_date,
-        user_id: this.document.user_id,
-        document_id: this.document.document_id,
-        project_id: this.document.project_id,
-        team_id: this.document.team_id,
+         title: this.document.title,
+        customer_name: this.document.customer_name,
+        document_type: this.document.document_type,
+        length: this.document.length,
+        digit: this.document.digit,
+        document_label: this.document.document_label,
       }),
     }
   },
