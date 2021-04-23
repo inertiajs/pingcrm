@@ -44,40 +44,36 @@
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.name }}
+              {{ document.customer_name }}
             </inertia-link>
           </td>
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.email }}
+              {{ document.document_type }}
             </inertia-link>
           </td>
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.mobile }}
+              {{ document.document_label }}
             </inertia-link>
           </td>
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.school }}
+              {{ document.digit }}
             </inertia-link>
           </td>
 
           
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.college }}
+              {{ document.document_label }}
             </inertia-link>
           </td>
           
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.percentage }}
-            </inertia-link>
-          </td>
+         
 
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
