@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\Task;
+use App\Models\Followup;
 use App\Models\Comment;
 use App\Models\Budget;
 use App\Models\Restaurant;
@@ -41,6 +42,9 @@ class DatabaseSeeder extends Seeder
              ->create(['account_id' => $account->id]);
 
         $education = factory(Education::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $followup = factory(Followup::class, 100)
             ->create(['account_id' => $account->id]);
         
         $budgets = factory(Budget::class, 100)

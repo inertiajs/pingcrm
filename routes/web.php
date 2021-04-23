@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\FollowupsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\DocumentsController;
@@ -156,6 +157,36 @@ Route::delete('tasks/{task}', [TasksController::class, 'destroy'])
 Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
+
+// Followups
+
+Route::get('followups', [FollowupsController::class, 'index'])
+->name('followups')
+->middleware('remember', 'auth');
+
+Route::get('followups/create', [FollowupsController::class, 'create'])
+->name('followups.create')
+->middleware('auth');
+
+Route::post('followups', [FollowupsController::class, 'store'])
+->name('followups.store')
+->middleware('auth');
+
+Route::get('followups/{followup}/edit', [FollowupsController::class, 'edit'])
+->name('followups.edit')
+->middleware('auth');
+
+Route::put('followups/{followup}', [FollowupsController::class, 'update'])
+->name('followups.update')
+->middleware('auth');
+
+Route::delete('followups/{followup}', [FollowupsController::class, 'destroy'])
+->name('followups.destroy')
+->middleware('auth');
+
+Route::put('followups/{followup}/restore', [FollowupsController::class, 'restore'])
+->name('followups.restore')
+->middleware('auth');
 
 // Comments
 
