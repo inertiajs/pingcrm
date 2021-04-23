@@ -76,7 +76,7 @@ class CommentsController extends Controller
                 'id' => ['nullable', 'max:50'],
                 'description' => ['nullable', 'max:300'],
                 'user_id' => ['nullable', 'max:50'],
-                'team_id' => ['nullable', 'max:50'],
+                'task_id' => ['nullable', 'max:50'],
                 'assigned_user_id' => ['nullable', 'max:50'],
                 'type' => ['nullable', 'max:50'],
 
