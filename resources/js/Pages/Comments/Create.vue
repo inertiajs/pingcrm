@@ -10,12 +10,13 @@
         
          
 
+          <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
           <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
           <text-input v-model="form.User_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
-          <text-input v-model="form.comment_id" :error="form.errors.comment_id" class="pr-6 pb-8 w-full lg:w-1/2" label="comment_id" />
-          <text-input v-model="form.project_id" :error="form.errors.project_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Project_id" />
-          <text-input v-model="form.team_id" :error="form.errors.team_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Team_id" />
-      
+          <text-input v-model="form.task_id" :error="form.errors.task_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Task_id" />
+          <text-input v-model="form.assigned_user_id" :error="form.errors.assigned_user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Assigned_user_id" />
+          <text-input v-model="form.type" :error="form.errors.type" class="pr-6 pb-8 w-full lg:w-1/2" label="Type" />
+        
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Comment</loading-button>
