@@ -46,6 +46,9 @@ class DatabaseSeeder extends Seeder
             $experience = factory(Experience::class, 100)
             ->create(['account_id' => $account->id]);
 
+            $restaurants = factory(Restaurants::class, 100)
+            ->create(['account_id' => $account->id]);
+
 
         
         $education = factory(Education::class, 100)
