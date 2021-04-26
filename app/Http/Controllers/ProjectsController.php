@@ -58,7 +58,7 @@ class ProjectsController extends Controller
                 'id' => $project->id,
                 'name' => $project->name,
                 'phone' => $project->phone,
-                'status' => $clieprojectnt->status,
+                'status' => $project->status,
                 'priority' => $project->priority,
                 'deleted_at' => $project->deleted_at,
                 //'contacts' => $client->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
