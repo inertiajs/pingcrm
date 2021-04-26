@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             $experience = factory(Experience::class, 100)
             ->create(['account_id' => $account->id]);
 
-            $restaurants = factory(Restaurants::class, 100)
+            $restaurants = factory(Restaurant::class, 100)
             ->create(['account_id' => $account->id]);
 
 
@@ -72,8 +72,8 @@ class DatabaseSeeder extends Seeder
         $clients = factory(Client::class, 100)
             ->create(['account_id' => $account->id]);
 
-            $profiles = factory(Profile::class, 100)
-            ->create(['account_id' => $account->id]);
+        $profiles = factory(Profile::class, 100)
+        ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)
             ->create(['account_id' => $account->id])
