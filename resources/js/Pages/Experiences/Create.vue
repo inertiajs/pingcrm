@@ -8,7 +8,7 @@
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.organization" :error="form.errors.organization" class="pr-6 pb-8 w-full lg:w-1/2" label="Organization" />
+          <text-input v-model="form.company" :error="form.errors.company" class="pr-6 pb-8 w-full lg:w-1/2" label="Company" />
           <text-input v-model="form.start_date" :error="form.errors.start_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Start Date" />
           <text-input v-model="form.end_date" :error="form.errors.end_date" class="pr-6 pb-8 w-full lg:w-1/2" label="End Date" />
           <text-input v-model="form.total_experience" :error="form.errors.total_experience" class="pr-6 pb-8 w-full lg:w-1/2" label="Total Experience" />
@@ -40,7 +40,7 @@ export default {
     return {
       form: this.$inertia.form({
         name: null,
-        organization:null,
+        company:null,
         start_date:null,
         end_date:null,
         total_experience:null,
