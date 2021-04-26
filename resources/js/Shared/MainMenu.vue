@@ -52,12 +52,26 @@
       </inertia-link>
     </div>
 
-    <!-- <div class="mb-4">
+    <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('restaurants')">
         <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('restaurants') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('restaurants') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Restaurants</div>
       </inertia-link>
-    </div> -->
+    </div>
+
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('documents')">
+        <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('documents') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('documents') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Documents</div>
+      </inertia-link>
+    </div>
+
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('comments')">
+        <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('comments') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('comments') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Comments</div>
+      </inertia-link>
+    </div>
 
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('clients')">

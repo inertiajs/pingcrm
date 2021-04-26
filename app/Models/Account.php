@@ -26,11 +26,26 @@ class Account extends Model
     {
         return $this->hasMany(Education::class);
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class);
+    }
 
 
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 
     public function clients()

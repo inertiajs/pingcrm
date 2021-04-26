@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ProfilesController;
@@ -13,6 +12,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ReportsController;
@@ -158,6 +159,7 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+
     // Experiences
 
 Route::get('experiences', [ExperiencesController::class, 'index'])
@@ -186,6 +188,35 @@ Route::delete('experiences/{experience}', [ExperiencesController::class, 'destro
 
 Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
 ->name('experiences.restore')
+
+// Comments
+
+Route::get('comments', [CommentsController::class, 'index'])
+->name('comments')
+->middleware('remember', 'auth');
+
+Route::get('comments/create', [CommentsController::class, 'create'])
+->name('comments.create')
+->middleware('auth');
+
+Route::post('comments', [CommentsController::class, 'store'])
+->name('comments.store')
+->middleware('auth');
+
+Route::get('comments/{comment}/edit', [CommentsController::class, 'edit'])
+->name('comments.edit')
+->middleware('auth');
+
+Route::put('comments/{comment}', [CommentsController::class, 'update'])
+->name('comments.update')
+->middleware('auth');
+
+Route::delete('comments/{comment}', [CommentsController::class, 'destroy'])
+->name('comments.destroy')
+->middleware('auth');
+
+Route::put('comments/{comment}/restore', [CommentsController::class, 'restore'])
+->name('comments.restore')
 ->middleware('auth');
 
     
@@ -249,10 +280,41 @@ Route::put('restaurants/{restaurant}/restore', [RestaurantsController::class, 'r
 ->name('restaurants.restore')
 ->middleware('auth');
 
+// Document
+
+Route::get('documents', [DocumentsController::class, 'index'])
+->name('documents')
+->middleware('remember', 'auth');
+
+Route::get('documents/create', [DocumentsController::class, 'create'])
+->name('documents.create')
+->middleware('auth');
+
+Route::post('documents', [DocumentsController::class, 'store'])
+->name('documents.store')
+->middleware('auth');
+
+Route::get('documents/{document}/edit', [DocumentsController::class, 'edit'])
+->name('documents.edit')
+->middleware('auth');
+
+Route::put('documents/{document}', [DocumentsController::class, 'update'])
+->name('documents.update')
+->middleware('auth');
+
+Route::delete('documents/{document}', [DocumentsController::class, 'destroy'])
+->name('documents.destroy')
+->middleware('auth');
+
+Route::put('documents/{document}/restore', [DocumentsController::class, 'restore'])
+->name('documents.restore')
+->middleware('auth');
 
 
 
-    // Addresses
+
+
+// Addresses
 
 Route::get('addresses', [AddressesController::class, 'index'])
     ->name('addresses')
@@ -283,7 +345,7 @@ Route::put('addresses/{address}/restore', [AddressesController::class, 'restore'
     ->middleware('auth');
 
 
-    // banks
+// banks
 
 Route::get('banks', [BanksController::class, 'index'])
 ->name('banks')
