@@ -15,7 +15,7 @@ class CommentsController extends Controller
         return Inertia::render('Comments/Index', [
             'filters' => Request::all('search', 'trashed'),
             'comments' => Auth::user()->account->comments()
-                ->orderBy('title')
+                ->orderBy('id')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
