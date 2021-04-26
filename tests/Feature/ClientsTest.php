@@ -90,4 +90,21 @@ class ClientsTest extends TestCase
             ->assertPropValue('filters.trashed', 'with')
             ->assertPropCount('clients.data', 5);
     }
+
+    public function test_can_view_single_client()
+    {
+        $client =  $this->user->account->clients()->saveMany(
+            factory(Client::class, 5)->make()
+        )->first();
+
+        //$client = $client->fresh();
+
+        $this->actingAs($this->user)
+            ->get('/clients/' . $client->id . "/edit")
+            ->assertStatus(200)
+            ->assertPropValue('client.name', $client->name)
+            ->assertPropValue('client.phone', $client->phone)
+            ->assertPropValue('client.priority', $client->priority)
+            ->assertPropValue('client.status', $client->status);
+    }
 }
