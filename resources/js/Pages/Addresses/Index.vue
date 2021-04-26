@@ -33,11 +33,6 @@
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
-              {{ address.city }}
-            </inertia-link>
-          </td>
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
               {{ address.phone }}
             </inertia-link>
           </td>
@@ -49,6 +44,11 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
               {{ address.address_line2 }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('addresses.edit', address.id)" tabindex="-1">
+              {{ address.city }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
