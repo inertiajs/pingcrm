@@ -44,10 +44,10 @@ class DatabaseSeeder extends Seeder
         ->create(['account_id' => $account->id]);
 
             $experience = factory(Experience::class, 100)
+            ->create(['account_id' => $account->id]);
 
-        $restaurants = factory(Restaurant::class, 100)
-             ->create(['account_id' => $account->id]);
 
+        
         $education = factory(Education::class, 100)
             ->create(['account_id' => $account->id]);
 

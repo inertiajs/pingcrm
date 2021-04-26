@@ -187,7 +187,7 @@ Route::delete('experiences/{experience}', [ExperiencesController::class, 'destro
 ->middleware('auth');
 
 Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
-->name('experiences.restore')
+->name('experiences.restore');
 
 // Comments
 
