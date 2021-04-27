@@ -4,11 +4,13 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Document::class, function (Faker $faker) {
     return [
-        'title' => $faker->title,
-        'customer_name' => $faker->company,
-        'label' => 1,
-        'document_type' => null,
-        'digit' => 1,
-        'length' => null,
+
+                'title' => $faker->title,
+                'customer_name' => $faker->company,
+                'label' => 1,
+                'document_type' => null,
+                'digit' => 1,
+                'length' => null,
     ];
+    
 });
