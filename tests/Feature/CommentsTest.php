@@ -53,7 +53,7 @@ class CommentsTest extends TestCase
         $this->user->account->comments()->saveMany(
             factory(Comment::class, 5)->make()
         )->first()->update([
-            'title' => 'Greg Andersson'
+            'user_id' => 'Greg Andersson'
         ]);
 
         $this->actingAs($this->user)
@@ -62,7 +62,7 @@ class CommentsTest extends TestCase
             ->assertPropValue('filters.search', 'Greg')
             ->assertPropCount('comments.data', 1)
             ->assertPropValue('comments.data', function ($comments) {
-                $this->assertEquals('Greg Andersson', $comments[0]['title']);
+                $this->assertEquals('Greg Andersson', $comments[0]['user_id']);
             });
     }
 
@@ -102,12 +102,10 @@ class CommentsTest extends TestCase
         $this->actingAs($this->user)
             ->get('/comments/' . $comment->id . "/edit")
             ->assertStatus(200)
-            ->assertPropValue('comment.name',   $comment->id);
-            ->assertPropValue('comment.phone',  $comment->title);
-            ->assertPropValue('comment.status', $comment->description);
-            ->assertPropValue('comment.status', $comment->user_id);
-            ->assertPropValue('comment.status', $comment->task_id);
-            ->assertPropValue('comment.status', $comment->assigned_user_id);
-            ->assertPropValue('comment.status', $comment->type);
+            ->assertPropValue('comment.user_id', $comment->user_id)
+            ->assertPropValue('comment.task_id', $comment->task_id)
+            ->assertPropValue('comment.assigned_user_id', $comment->assigned_user_id)
+            ->assertPropValue('comment.type', $comment->type);
             
+    }
 }
