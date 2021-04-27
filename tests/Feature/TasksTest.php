@@ -93,8 +93,8 @@ class TasksTest extends TestCase
     
     public function test_can_view_single_client()
     {
-        $task =  $this->user->account->clients()->saveMany(
-            factory(Client::class, 5)->make()
+        $task =  $this->user->account->tasks()->saveMany(
+            factory(Task::class, 5)->make()
         )->first();
 
         //$task = $task->fresh();
@@ -102,16 +102,14 @@ class TasksTest extends TestCase
         $this->actingAs($this->user)
             ->get('/tasks/' . $task->id . "/edit")
             ->assertStatus(200)
-            ->assertPropValue('task.name', $task->id)
-            ->assertPropValue('task.phone', $task->title)
-            ->assertPropValue('task.status', $task->description);
-            ->assertPropValue('task.status', $task->user_id);
-            ->assertPropValue('task.status', $task->task_id);
-            ->assertPropValue('task.status', $task->team_id);
-            ->assertPropValue('task.status', $task->project_id);
-            ->assertPropValue('task.priority',$task->priority);
-            ->assertPropValue('task.status', $task->status);
-            ->assertPropValue('task.status', $task->creator);
-            ->assertPropValue('task.status', $task->deu_date);
-            ->assertPropValue('task.status', $task->completed_date);
+            ->assertPropValue('task.user_id', $task->user_id)
+            ->assertPropValue('task.task_id', $task->task_id)
+            ->assertPropValue('task.team_id', $task->team_id)
+            ->assertPropValue('task.project_id', $task->project_id)
+            ->assertPropValue('task.priority',$task->priority)
+            ->assertPropValue('task.status', $task->status)
+            ->assertPropValue('task.creator', $task->creator)
+            ->assertPropValue('task.deu_date', $task->deu_date)
+            ->assertPropValue('task.completed_date', $task->completed_date);
+    }
 }

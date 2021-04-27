@@ -26,6 +26,13 @@ class TasksController extends Controller
                         'description' => $task->description,
                         'user_id' => $task->user_id,
                         'task_id' => $task->task_id,
+                        'team_id' => $task->team_id,
+                        'project_id' => $task->project_id,
+                        'priority' => $task->priority,
+                        'status' => $task->status,
+                        'creator' => $task->creator,
+                        'due_date' => $task->due_date,
+                        'completed_date' => $task->completed_date,
                     ];
                 }),
         ]);
