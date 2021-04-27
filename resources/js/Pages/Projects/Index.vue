@@ -18,21 +18,24 @@
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">Phone</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
+          <th class="px-6 pt-6 pb-4">Description</th>
           <th class="px-6 pt-6 pb-4">Priority</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Status</th>
+          <th class="px-6 pt-6 pb-4">Status</th>
+          <th class="px-6 pt-6 pb-4">Creater</th>
+          <th class="px-6 pt-6 pb-4">Due Date</th>
+          <th class="px-6 pt-6 pb-4">Completed Date</th>
         </tr>
         <tr v-for="project in projects.data" :key="project.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('projects.edit', project.id)">
-              {{ project.name }}
+              {{ project.title }}
               <icon v-if="project.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
-              {{ project.phone }}
+              {{ project.description }}
             </inertia-link>
           </td>
           <td class="border-t">
@@ -45,6 +48,21 @@
               {{ project.status }}
             </inertia-link>
           </td>
+          <td class="border-t">
+           <inertia-link class="px-6 py-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
+             {{ project.creater }}
+           </inertia-link>
+         </td>
+         <td class="border-t">
+          <inertia-link class="px-6 py-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
+            {{ project.due_date }}
+          </inertia-link>
+        </td>
+        <td class="border-t">
+         <inertia-link class="px-6 py-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
+           {{ project.completed_date }}
+         </inertia-link>
+       </td>
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />

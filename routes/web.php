@@ -68,7 +68,7 @@ Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
         ->middleware('remember', 'auth');
 
     Route::get('projects/create', [ProjectsController::class, 'create'])
-        ->name('projects.create')
+        ->name('Projects.create')
         ->middleware('auth');
 
     Route::post('projects', [ProjectsController::class, 'store'])
