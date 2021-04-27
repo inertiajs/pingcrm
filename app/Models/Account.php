@@ -26,7 +26,7 @@ class Account extends Model
     {
         return $this->hasMany(Education::class);
     }
-    
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -57,9 +57,10 @@ class Account extends Model
     {
         return $this->hasMany(Address::class);
     }
+
     public function experiences()
     {
-        return $this->hasMany(Address::class);
+        return $this->hasMany(Experience::class);
     }
 
     public function banks()

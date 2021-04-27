@@ -40,8 +40,8 @@ class ExperiencesTest extends TestCase
             ->assertPropValue('experiences.data', function ($experiences) {
                 $this->assertEquals(
                     [
-                        'id', 'name', 'company', 'start-date',
-                        'end_date','total_experience', 'deleted_at',
+                        'id', 'name', 'company', 'start_date',
+                        'end_date', 'total_experience', 'deleted_at',
                     ],
                     array_keys($experiences[0])
                 );
