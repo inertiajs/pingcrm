@@ -41,7 +41,7 @@ class FollowupsTest extends TestCase
                 $this->assertEquals(
                     [
                         'id', 'title', 'description', 'customer_name',
-                        'team_id','email', 'priority', 'status', 'phone','aggrement', 'maximum_time','meeting_schedule', 
+                        'team_id','email', 'priority', 'status', 'phone','agreement', 'maximum_time','meeting_schedule', 
                     ],
                     array_keys($followups[0])
                 );
@@ -102,17 +102,14 @@ class FollowupsTest extends TestCase
         $this->actingAs($this->user)
             ->get('/followups/' . $followup->id . "/edit")
             ->assertStatus(200)
-            ->assertPropValue('followup.name',   $followup->id);
-            ->assertPropValue('followup.phone',  $followup->title);
-            ->assertPropValue('followup.status', $followup->description);
-            ->assertPropValue('followup.status', $followup->customer_name);
-            ->assertPropValue('followup.status', $followup->team_id);
-            ->assertPropValue('followup.status', $followup->email);
-            ->assertPropValue('followup.priority',$followup->priority);
-            ->assertPropValue('followup.status', $followup->status);
-            ->assertPropValue('followup.status', $followup->phone);
-            ->assertPropValue('followup.status', $followup->aggrement);
-            ->assertPropValue('followup.status', $followup->maximum_time);
-            ->assertPropValue('followup.status', $followup->meeting_schedule);
-            
+            ->assertPropValue('followup.customer_name', $followup->customer_name)
+            ->assertPropValue('followup.team_id', $followup->team_id)
+            ->assertPropValue('followup.email', $followup->email)
+            ->assertPropValue('followup.priority',$followup->priority)
+            ->assertPropValue('followup.status', $followup->status)
+            ->assertPropValue('followup.phone', $followup->phone)
+            ->assertPropValue('followup.agreement', $followup->agreement)
+            ->assertPropValue('followup.maximum_time', $followup->maximum_time)
+            ->assertPropValue('followup.meeting_schedule', $followup->meeting_schedule);           
+    }
 }
