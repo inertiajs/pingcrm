@@ -13,6 +13,10 @@ class Account extends Model
     {
         return $this->hasMany(Organization::class);
     }
+    public function budgets()
+    {
+        return $this->hasMany(Budget::class);
+    }
     public function profiles()
     {
         return $this->hasMany(Profile::class);
@@ -22,11 +26,26 @@ class Account extends Model
     {
         return $this->hasMany(Education::class);
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class);
+    }
 
 
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 
     public function clients()
