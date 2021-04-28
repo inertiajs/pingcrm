@@ -11,8 +11,15 @@
           <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
-          <text-input v-model="form.User_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
-          <
+          <text-input v-model="form.custmer_name" :error="form.errors.custmer_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+          <text-input v-model="form.custmer_address" :error="form.errors.custmer_address" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+          <text-input v-model="form.custmer_order" :error="form.errors.custmer_order" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+          <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+          <text-input v-model="form.feedback" :error="form.errors.feedback" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
+        
+        
+        
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Restaurant</loading-button>
@@ -40,10 +47,15 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        id: null,
+    
         title: null,
         description: null,
-        user_id: null,
+        custmer_name: null,
+        phone: null,
+        custmer_address:  null,
+        custmer_order: null,
+        bill_no: null,
+        feedback: null,
       
       }),
     }
