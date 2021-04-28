@@ -40,7 +40,7 @@ class RestaurantsTest extends TestCase
             ->assertPropValue('restaurants.data', function ($restaurants) {
                 $this->assertEquals(
                     [
-                        'id', 'title', 'custmer_name',
+                        'id', 'title','description', 'custmer_name',
                         'phone', 'custmer_address', 'custmer_order', 'bill_no','feedback', 
                     ],
                     array_keys($restaurants[0])
@@ -91,9 +91,9 @@ class RestaurantsTest extends TestCase
             ->assertPropCount('restaurants.data', 5);
     }
     
-    public function test_can_view_single_client()
+    public function test_can_view_single_restaurant()
     {
-        $restaurant =  $this->user->account->clients()->saveMany(
+        $restaurant =  $this->user->account->restaurants()->saveMany(
             factory(Restaurant::class, 5)->make()
         )->first();
 
