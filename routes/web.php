@@ -159,65 +159,65 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
-
-    // Experiences
-
-Route::get('experiences', [ExperiencesController::class, 'index'])
-->name('experiences')
-->middleware('remember', 'auth');
-
-Route::get('experiences/create', [ExperiencesController::class, 'create'])
-->name('experiences.create')
-->middleware('auth');
-
-Route::post('experiences', [ExperiencesController::class, 'store'])
-->name('experiences.store')
-->middleware('auth');
-
-Route::get('experiences/{experience}/edit', [ExperiencesController::class, 'edit'])
-->name('experiences.edit')
-->middleware('auth');
-
-Route::put('experiences/{experience}', [ExperiencesController::class, 'update'])
-->name('experiences.update')
-->middleware('auth');
-
-Route::delete('experiences/{experience}', [ExperiencesController::class, 'destroy'])
-->name('experiences.destroy')
-->middleware('auth');
-
-Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
-->name('experiences.restore');
-
 // Comments
 
 Route::get('comments', [CommentsController::class, 'index'])
-->name('comments')
-->middleware('remember', 'auth');
+    ->name('comments')
+    ->middleware('remember', 'auth');
 
 Route::get('comments/create', [CommentsController::class, 'create'])
-->name('comments.create')
-->middleware('auth');
+    ->name('comments.create')
+    ->middleware('auth');
 
 Route::post('comments', [CommentsController::class, 'store'])
-->name('comments.store')
-->middleware('auth');
+    ->name('comments.store')
+    ->middleware('auth');
 
 Route::get('comments/{comment}/edit', [CommentsController::class, 'edit'])
-->name('comments.edit')
-->middleware('auth');
+    ->name('comments.edit')
+    ->middleware('auth');
 
 Route::put('comments/{comment}', [CommentsController::class, 'update'])
-->name('comments.update')
-->middleware('auth');
+    ->name('comments.update')
+    ->middleware('auth');
 
 Route::delete('comments/{comment}', [CommentsController::class, 'destroy'])
-->name('comments.destroy')
-->middleware('auth');
+    ->name('comments.destroy')
+    ->middleware('auth');
 
 Route::put('comments/{comment}/restore', [CommentsController::class, 'restore'])
-->name('comments.restore')
-->middleware('auth');
+    ->name('comments.restore')
+    ->middleware('auth');
+   
+// Experiences
+
+Route::get('experiences', [ExperiencesController::class, 'index'])
+    ->name('experiences')
+    ->middleware('remember', 'auth');
+
+Route::get('experiences/create', [ExperiencesController::class, 'create'])
+    ->name('experiences.create')
+    ->middleware('auth');
+
+Route::post('experiences', [ExperiencesController::class, 'store'])
+    ->name('experiences.store')
+    ->middleware('auth');
+
+Route::get('experiences/{experience}/edit', [ExperiencesController::class, 'edit'])
+    ->name('experiences.edit')
+    ->middleware('auth');
+
+Route::put('experiences/{experience}', [ExperiencesController::class, 'update'])
+    ->name('experiences.update')
+    ->middleware('auth');
+
+Route::delete('experiences/{experience}', [ExperiencesController::class, 'destroy'])
+    ->name('experiences.destroy')   
+    ->middleware('auth');
+
+Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
+    ->name('experiences.restore')   
+    ->middleware('auth');
 
     
 // Education
