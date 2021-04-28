@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
@@ -404,6 +405,35 @@ Route::put('profiles/{profile}/restore', [ProfilesController::class, 'restore'])
 ->name('profiles.restore')
 ->middleware('auth');
 
+// budgets
+
+Route::get('budgets', [BudgetsController::class, 'index'])
+->name('budgets')
+->middleware('remember', 'auth');
+
+Route::get('budgets/create', [BudgetsController::class, 'create'])
+->name('budgets.create')
+->middleware('auth');
+
+Route::post('budgets', [BudgetsController::class, 'store'])
+->name('budgets.store')
+->middleware('auth');
+
+Route::get('budgets/{budget}/edit', [BudgetsController::class, 'edit'])
+->name('budgets.edit')
+->middleware('auth');
+
+Route::put('budgets/{budget}', [BudgetsController::class, 'update'])
+->name('budgets.update')
+->middleware('auth');
+
+Route::delete('budgets/{budget}', [BudgetsController::class, 'destroy'])
+->name('budgets.destroy')
+->middleware('auth');
+
+Route::put('budgets/{budget}/restore', [BudgetsController::class, 'restore'])
+->name('budgets.restore')
+->middleware('auth');
 
 // Contacts
 

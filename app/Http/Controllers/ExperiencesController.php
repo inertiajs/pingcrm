@@ -23,7 +23,7 @@ class ExperiencesController extends Controller
                     return [
                         'id' => $experience -> id,
                         'name' => $experience -> name,
-                        'organization' => $experience -> organization,
+                        'company' => $experience -> company,
                         'start_date' => $experience -> start_date,
                         'end_date' => $experience -> end_date,
                         'total_experience'=> $experience->total_experience,
@@ -43,7 +43,7 @@ class ExperiencesController extends Controller
         Auth::user()->account->experiences()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'organization' => ['nullable', 'max:50'],
+                'company' => ['nullable', 'max:50'],
                 'start_date' => ['nullable','max:100'],
                 'end_date' => ['nullable','max:100'],
                 'total_experience'=>['nullable','max:100'],
@@ -60,7 +60,7 @@ class ExperiencesController extends Controller
             'experience' => [
                 'id' => $experience -> id,
                 'name' => $experience -> name,
-                'organization' => $experience -> organization,
+                'company' => $experience -> company,
                         'start_date' => $experience -> start_date,
                         'end_date' => $experience -> end_date,
                         'total_experience'=> $experience->total_experience,
@@ -74,7 +74,7 @@ class ExperiencesController extends Controller
         $experience->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'organization' => ['nullable', 'max:50'],
+                'company' => ['nullable', 'max:50'],
                 'start_date' => ['nullable','max:100'],
                 'end_date' => ['nullable','max:100'],
                 'total_experience'=>['nullable','max:100'],

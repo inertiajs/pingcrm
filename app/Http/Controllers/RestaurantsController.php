@@ -15,7 +15,7 @@ class RestaurantsController extends Controller
         return Inertia::render('Restaurants/Index', [
             'filters' => Request::all('search', 'trashed'),
             'restaurants' => Auth::user()->account->restaurants()
-                ->orderBy('name')
+                ->orderBy('id')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
