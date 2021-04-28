@@ -36,10 +36,7 @@ class Account extends Model
         return $this->hasMany(Followup::class);
     }
 
-    public function budgets()
-    {
-        return $this->hasMany(Budget::class);
-    }
+    
 
     public function restaurants()
     {

@@ -59,15 +59,10 @@ export default {
       form: this.$inertia.form({
         id: this.budget.id,
         title: this.budget.title,
-        description: this.budget.description,
-        priority: this.budget.priority,
-        status: this.budget.status,
-        deu_date: this.budget.deu_date,
-        completed_date: this.budget.completed_date,
         user_id: this.budget.user_id,
-        task_id: this.budget.task_id,
-        project_id: this.budget.project_id,
-        team_id: this.budget.team_id,
+        annually_salary: this.budget.annually_salary,
+        monthly_salary: this.budget.monthly_salary,
+        data_type: this.budget.data_type,
       }),
     }
   },
