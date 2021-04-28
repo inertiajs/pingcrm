@@ -10,12 +10,12 @@
         
          
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
-          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.mobile" :error="form.errors.mobile" class="pr-6 pb-8 w-full lg:w-1/2" label="Mobile" />
-          <text-input v-model="form.school" :error="form.errors.school" class="pr-6 pb-8 w-full lg:w-1/2" label="School" />
-          <text-input v-model="form.college" :error="form.errors.college" class="pr-6 pb-8 w-full lg:w-1/2" label="College" />
-          <text-input v-model="form.percentage" :error="form.errors.percentage" class="pr-6 pb-8 w-full lg:w-1/2" label="Percentage" />
+          <text-input v-model="form.customer_name" :error="form.errors.customer_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Customer_Name" />
+          <text-input v-model="form.document_type" :error="form.errors.document_type" class="pr-6 pb-8 w-full lg:w-1/2" label="Document_type" />
+          <text-input v-model="form.digit" :error="form.errors.digit" class="pr-6 pb-8 w-full lg:w-1/2" label="Digit" />
+          <text-input v-model="form.document_label" :error="form.errors.document_label" class="pr-6 pb-8 w-full lg:w-1/2" label="Document_label" />
+          <text-input v-model="form.length" :error="form.errors.length" class="pr-6 pb-8 w-full lg:w-1/2" label="Length" />
+         
       
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
@@ -46,12 +46,12 @@ export default {
       form: this.$inertia.form({
        
         title: null,
-        name: null,
-        email: null,
-        mobile: null,
-        school: null,
-        college: null,
-        percentage: null,
+        customer_name: null,
+        document_type: null,
+        length: null,
+        digit: null,
+        document_label: null,
+       
         
       }),
     }
