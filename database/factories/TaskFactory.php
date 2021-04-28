@@ -6,7 +6,7 @@ $factory->define(App\Models\Task::class, function (Faker $faker) {
     return [
         'title' => $faker->title,
         'description' => $faker->text,
-        'priority' => 100,
+        'priority' => 10,
         'status' => 100,
         'user_id' => 1,
         'task_id' => null,
