@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\FollowupsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
@@ -159,6 +160,36 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+// Followups
+
+Route::get('followups', [FollowupsController::class, 'index'])
+->name('followups')
+->middleware('remember', 'auth');
+
+Route::get('followups/create', [FollowupsController::class, 'create'])
+->name('followups.create')
+->middleware('auth');
+
+Route::post('followups', [FollowupsController::class, 'store'])
+->name('followups.store')
+->middleware('auth');
+
+Route::get('followups/{followup}/edit', [FollowupsController::class, 'edit'])
+->name('followups.edit')
+->middleware('auth');
+
+Route::put('followups/{followup}', [FollowupsController::class, 'update'])
+->name('followups.update')
+->middleware('auth');
+
+Route::delete('followups/{followup}', [FollowupsController::class, 'destroy'])
+->name('followups.destroy')
+->middleware('auth');
+
+Route::put('followups/{followup}/restore', [FollowupsController::class, 'restore'])
+->name('followups.restore')
+->middleware('auth');
+
 // Comments
 
 Route::get('comments', [CommentsController::class, 'index'])
@@ -186,9 +217,9 @@ Route::delete('comments/{comment}', [CommentsController::class, 'destroy'])
     ->middleware('auth');
 
 Route::put('comments/{comment}/restore', [CommentsController::class, 'restore'])
-    ->name('comments.restore')
-    ->middleware('auth');
-   
+->name('comments.restore')
+->middleware('auth');
+    
 // Experiences
 
 Route::get('experiences', [ExperiencesController::class, 'index'])
@@ -216,8 +247,8 @@ Route::delete('experiences/{experience}', [ExperiencesController::class, 'destro
     ->middleware('auth');
 
 Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
-    ->name('experiences.restore')   
-    ->middleware('auth');
+->name('experiences.restore')
+->middleware('auth');
 
     
 // Education
@@ -310,6 +341,35 @@ Route::put('documents/{document}/restore', [DocumentsController::class, 'restore
 ->name('documents.restore')
 ->middleware('auth');
 
+// Budget
+
+Route::get('budgets', [BudgetsController::class, 'index'])
+->name('budgets')
+->middleware('remember', 'auth');
+
+Route::get('budgets/create', [BudgetsController::class, 'create'])
+->name('budgets.create')
+->middleware('auth');
+
+Route::post('budgets', [BudgetsController::class, 'store'])
+->name('budgets.store')
+->middleware('auth');
+
+Route::get('budgets/{budget}/edit', [BudgetsController::class, 'edit'])
+->name('budgets.edit')
+->middleware('auth');
+
+Route::put('budgets/{budget}', [BudgetsController::class, 'update'])
+->name('budgets.update')
+->middleware('auth');
+
+Route::delete('budgets/{budget}', [BudgetsController::class, 'destroy'])
+->name('budgets.destroy')
+->middleware('auth');
+
+Route::put('budgets/{budget}/restore', [BudgetsController::class, 'restore'])
+->name('budgets.restore')
+->middleware('auth');
 
 
 
