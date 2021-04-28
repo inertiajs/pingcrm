@@ -7,7 +7,7 @@ $factory->define(App\Models\Document::class, function (Faker $faker) {
 
                 'title' => $faker->title,
                 'customer_name' => $faker->company,
-                'label' => 1,
+                'document_label' => 1,
                 'document_type' => null,
                 'digit' => 1,
                 'length' => null,

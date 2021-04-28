@@ -89,25 +89,23 @@ class DocumentsTest extends TestCase
             ->assertPropCount('documents.data', 5);
     }
 
-public function test_can_view_single_client()
+public function test_can_view_single_document()
 {
-    $task =  $this->user->account->clients()->saveMany(
-        factory(Client::class, 5)->make()
+    $document =  $this->user->account->documents()->saveMany(
+        factory(Document::class, 5)->make()
     )->first();
 
-    //$task = $task->fresh();
+    //$document = $document->fresh();
 
     $this->actingAs($this->user)
-        ->get('/tasks/' . $task->id . "/edit")
+        ->get('/documents/' . $document->id . "/edit")
         ->assertStatus(200)
-        ->assertPropValue('task.name', $task->id)
-        ->assertPropValue('task.phone', $task->title)
-       
-        ->assertPropValue('task.status', $task->customer_name);
-        ->assertPropValue('task.status', $task->document_label);
-        ->assertPropValue('task.status', $task->document_type);
-        ->assertPropValue('task.status', $task->digit);
-        ->assertPropValue('task.priority',$task->length);
+        ->assertPropValue('document.title', $document->title)
+        ->assertPropValue('document.customer_name', $document->customer_name)
+        ->assertPropValue('document.document_label', $document->document_label)
+        ->assertPropValue('document.document_type', $document->document_type)
+        ->assertPropValue('document.digit', $document->digit)
+        ->assertPropValue('document.length',$document->length);
 }
 
 }
