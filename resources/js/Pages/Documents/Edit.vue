@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-         title: this.document.title,
+        title: this.document.title,
         customer_name: this.document.customer_name,
         document_type: this.document.document_type,
         length: this.document.length,

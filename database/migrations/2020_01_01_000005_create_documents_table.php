@@ -19,10 +19,9 @@ class CreateDocumentsTable extends Migration
             $table->text('customer_name')->nullable();
             $table->foreignId('account_id')->nullable();
             $table->string('document_type')->nullable();
-            $table->string('digit')->nullable();
             $table->string('document_label', 50)->nullable();
+            $table->string('digit')->nullable();
             $table->string('length', 50)->nullable();
-           
             $table->timestamps();
             $table->softDeletes();
         });
