@@ -45,11 +45,11 @@ class DocumentsController extends Controller
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
                 'customer_name' => ['nullable', 'max:300'],
-                'document_label' => ['nullable', 'max:50'],
                 'document_type' => ['nullable', 'max:50'],
+                'document_label' => ['nullable', 'max:150'],
                 'digit' => ['nullable', 'max:50'],
-                'length' => ['nullable', 'max:2'],
-                
+                'length' => ['nullable', 'max:50'],
+               
             ])
         );
 
@@ -61,12 +61,12 @@ class DocumentsController extends Controller
         return Inertia::render('Documents/Edit', [
             'document' => [
                 'id' => $document->id,
-                'title' => $document->title,
-                'customer_name' => $document->customer_name,
-                'document_label' => $document->document_label,
-                'document_type' => $document->document_type,
-                'digit' => $document->digit,
-                'length' => $document->length,
+                        'title' => $document->title,
+                        'customer_name' => $document->customer_name,
+                        'document_label' => $document->document_label,
+                        'document_type' => $document->document_type,
+                        'digit' => $document->digit,
+                        'length' => $document->length,
                 //'contacts' => $document->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
             ],
         ]);
@@ -79,11 +79,10 @@ class DocumentsController extends Controller
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
                 'customer_name' => ['nullable', 'max:300'],
-                'document_label' => ['nullable', 'max:50'],
                 'document_type' => ['nullable', 'max:50'],
+                'document_label' => ['nullable', 'max:150'],
                 'digit' => ['nullable', 'max:50'],
-                'length' => ['nullable', 'max:2'],
-
+                'length' => ['nullable', 'max:50'],
             ])
         );
 

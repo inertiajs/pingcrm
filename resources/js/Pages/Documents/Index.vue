@@ -66,13 +66,14 @@
             </inertia-link>
           </td>
 
-          
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.document_label }}
+              {{ document.length }}
             </inertia-link>
           </td>
           
+
+      
          
 
           <td class="border-t w-px">
