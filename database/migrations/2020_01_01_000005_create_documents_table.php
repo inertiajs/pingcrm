@@ -16,17 +16,13 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->text('customer_name')->nullable();
             $table->foreignId('account_id')->nullable();
-            $table->foreignId('user_id')->nullable();
-            $table->foreignId('task_id')->nullable();
-            $table->foreignId('team_id')->nullable();
-            $table->foreignId('project_id');
-            $table->unsignedInteger('priority')->nullable();
-            $table->unsignedInteger('status')->default(100);
-            $table->foreignId('creator')->nullable();
-            $table->timestamp('due_date')->nullable();
-            $table->timestamp('completed_date')->nullable();
+            $table->string('document_type')->nullable();
+            $table->string('digit')->nullable();
+            $table->string('document_label', 50)->nullable();
+            $table->string('length', 50)->nullable();
+           
             $table->timestamps();
             $table->softDeletes();
         });

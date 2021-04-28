@@ -20,12 +20,12 @@
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Id</th>
           <th class="px-6 pt-6 pb-4">Title</th>
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">Email</th>
-          <th class="px-6 pt-6 pb-4">Mobile</th>
-          <th class="px-6 pt-6 pb-4">School</th>
-          <th class="px-6 pt-6 pb-4">College</th>
-          <th class="px-6 pt-6 pb-4">Percentage</th>
+          <th class="px-6 pt-6 pb-4">Customer_Name</th>
+          <th class="px-6 pt-6 pb-4">Document_type</th>
+          <th class="px-6 pt-6 pb-4">Document_label</th>
+          <th class="px-6 pt-6 pb-4">Digit</th>
+          <th class="px-6 pt-6 pb-4">Length</th>
+         
          
         </tr>
         <tr v-for="document in documents.data" :key="document.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
@@ -44,40 +44,36 @@
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.name }}
+              {{ document.customer_name }}
             </inertia-link>
           </td>
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.email }}
+              {{ document.document_type }}
             </inertia-link>
           </td>
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.mobile }}
+              {{ document.document_label }}
             </inertia-link>
           </td>
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.school }}
+              {{ document.digit }}
             </inertia-link>
           </td>
 
           
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.college }}
+              {{ document.document_label }}
             </inertia-link>
           </td>
           
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
-              {{ document.percentage }}
-            </inertia-link>
-          </td>
+         
 
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('documents.edit', document.id)" tabindex="-1">
