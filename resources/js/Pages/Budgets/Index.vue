@@ -70,7 +70,6 @@
             </inertia-link>
           </td>
         </tr>
-
         <tr v-if="budgets.data.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No budgets found.</td>
         </tr>

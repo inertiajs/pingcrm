@@ -17,7 +17,7 @@ class CreateExperiencesTable extends Migration
             $table->increments('id');
             $table->integer('account_id')->index();
             $table->string('name', 100);
-            $table->string('organization', 100)->nullable();
+            $table->string('company', 100)->nullable();
             $table->string('start_date', 100)->nullable();
             $table->string('end_date', 100)->nullable();
             $table->string('total_experience', 100)->nullable();

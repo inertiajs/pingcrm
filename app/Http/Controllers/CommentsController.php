@@ -15,7 +15,7 @@ class CommentsController extends Controller
         return Inertia::render('Comments/Index', [
             'filters' => Request::all('search', 'trashed'),
             'comments' => Auth::user()->account->comments()
-                ->orderBy('title')
+                ->orderBy('id')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
@@ -76,7 +76,7 @@ class CommentsController extends Controller
                 'id' => ['nullable', 'max:50'],
                 'description' => ['nullable', 'max:300'],
                 'user_id' => ['nullable', 'max:50'],
-                'team_id' => ['nullable', 'max:50'],
+                'task_id' => ['nullable', 'max:50'],
                 'assigned_user_id' => ['nullable', 'max:50'],
                 'type' => ['nullable', 'max:50'],
 

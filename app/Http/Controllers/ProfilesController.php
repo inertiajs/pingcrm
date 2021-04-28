@@ -27,6 +27,8 @@ class ProfilesController extends Controller
                         'city' => $profile -> city,
                         'job' => $profile -> job,
                         'nationality' => $profile -> nationality,
+                        'deleted_at' => $profile->deleted_at,
+                   
                     ];
                 }),
         ]);
