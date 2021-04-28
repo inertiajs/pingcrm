@@ -46,9 +46,6 @@ class DatabaseSeeder extends Seeder
         $education = factory(Education::class, 100)
             ->create(['account_id' => $account->id]);
 
-        $experiences = factory(Experience::class, 100)
-            ->create(['account_id' => $account->id]);
-
         $followups = factory(Followup::class, 100)
             ->create(['account_id' => $account->id]);
         
