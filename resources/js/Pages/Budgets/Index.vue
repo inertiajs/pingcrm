@@ -18,39 +18,52 @@
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Project Name</th>
-          <th class="px-6 pt-6 pb-4">Resources</th>
-          <th class="px-6 pt-6 pb-4">Cost </th>
-          <th class="px-6 pt-6 pb-4">Profit</th>
-          <th class="px-6 pt-6 pb-4">Loss</th>
+          <th class="px-6 pt-6 pb-4">Id</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
+          <th class="px-6 pt-6 pb-4">User_id</th>
+          <th class="px-6 pt-6 pb-4">Annually_salary</th>
+          <th class="px-6 pt-6 pb-4">Monthly_salary</th>
+          <th class="px-6 pt-6 pb-4">Data_type</th>
         </tr>
         <tr v-for="budget in budgets.data" :key="budget.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('budgets.edit', budget.id)">
-              {{ budget.project_name }}
-              <icon v-if="budget.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+            <icon v-if="budget.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+              {{ budget.id }}
             </inertia-link>
           </td>
+
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('budgets.edit', budget.id)" tabindex="-1">
-              {{ budget.resources }}
+              {{ budget.title }}
             </inertia-link>
           </td>
+          
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('budgets.edit', budget.id)" tabindex="-1">
-              {{ budget.cost }}
+              {{ budget.user_id }}
             </inertia-link>
           </td>
+          
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('budgets.edit', budget.id)" tabindex="-1">
-              {{ budget.profit }}
+              {{ budget.annually_salary }}
             </inertia-link>
           </td>
+          
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('budgets.edit', budget.id)" tabindex="-1">
-              {{ budget.loss }}
+              {{ budget.monthly_salary }}
             </inertia-link>
           </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('budgets.edit', budget.id)" tabindex="-1">
+              {{ budget.data_type }}
+            </inertia-link>
+          </td>
+
+
           <td class="border-t w-px">
             <inertia-link class="px-4 flex items-center" :href="route('budgets.edit', budget.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
