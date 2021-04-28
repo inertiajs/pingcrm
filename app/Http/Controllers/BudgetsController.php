@@ -15,19 +15,19 @@ class BudgetsController extends Controller
         return Inertia::render('Budgets/Index', [
             'filters' => Request::all('search', 'trashed'),
             'budgets' => Auth::user()->account->budgets()
-                ->orderBy('project_name')
+                ->orderBy('title')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
                 ->through(function ($budget) {
                     return [
-                        'id' => $budget -> id,
-                        'project_name' => $budget -> project_name,
-                        'resources' => $budget -> resources,
-                        'cost' => $budget -> cost,
-                        'profit' => $budget -> profit,
-                        'loss' => $budget -> loss,
-                        'deleted_at' => $budget ->deleted_at,
+                        'id' => $budget->id,
+                        'title' => $budget->title,
+                        'description' => $budget->description,
+                        'user_id' => $budget->user_id,
+                        'annually_income' => $budget->annually_income,
+                        'monthly_salary' => $budget->monthly_salary,
+                        'data_type' => $budget->data_type,
                     ];
                 }),
         ]);
@@ -42,31 +42,33 @@ class BudgetsController extends Controller
     {
         Auth::user()->account->budgets()->create(
             Request::validate([
-                'project_name' => ['required', 'max:100'],
-                'resources' => ['nullable', 'max:50'],
-                'cost' => ['nullable','max:100'],
-                'profit' => ['nullable','max:100'],
-                'loss' => ['nullable','max:100'],
+                'id' => ['nullable', 'max:50'],
+                'title' => ['required', 'max:100'],
+                'description' => ['nullable', 'max:300'],
+                'user_id' => ['nullable', 'max:50'],
+                'annually_salary' => ['nullable', 'max:50'],
+                'monthly_salary' => ['nullable', 'max:50'],
+                'data_type' => ['nullable', 'max:50'],
                 
             ])
         );
 
-        return Redirect::route('budgets')->with('success', 'Budgets created.');
+        return Redirect::route('budgets')->with('success', 'Budget created.');
     }
 
     public function edit(Budget $budget)
     {
         return Inertia::render('Budgets/Edit', [
             'budget' => [
-                        'id' => $budget -> id,
-                        'project_name' => $budget -> project_name,
-                        'resources' => $budget -> resources,
-                        'cost' => $budget -> cost,
-                        'profit' => $budget -> profit,
-                        'loss' => $budget -> loss,
-                        'deleted_at' => $budget -> deleted_at,
-               
-                     ],
+                        'id' => $budget->id,
+                        'title' => $budget->title,
+                        'description' => $budget->description,
+                        'user_id' => $budget->user_id,
+                        'annually_income' => $budget->annually_income,
+                        'monthly_salary' => $budget->monthly_salary,
+                        'data_type' => $budget->data_type,
+                //'contacts' => $budget->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
+            ],
         ]);
     }
 
@@ -74,13 +76,15 @@ class BudgetsController extends Controller
     {
         $budget->update(
             Request::validate([
-                'project_name' => ['required', 'max:100'],
-                'resources' => ['nullable', 'max:50'],
-                'cost' => ['nullable','max:100'],
-                'profit' => ['nullable','max:100'],
-                'loss' => ['nullable','max:100'],
-                   ])
-        
+                'id' => ['nullable', 'max:50'],
+                'title' => ['required', 'max:100'],
+                'description' => ['nullable', 'max:300'],
+                'user_id' => ['nullable', 'max:50'],
+                'annually_salary' => ['nullable', 'max:50'],
+                'monthly_salary' => ['nullable', 'max:50'],
+                'data_type' => ['nullable', 'max:50'],
+
+            ])
         );
 
         return Redirect::back()->with('success', 'Budget updated.');

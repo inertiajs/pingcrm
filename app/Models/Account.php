@@ -31,6 +31,12 @@ class Account extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function followups()
+    {
+        return $this->hasMany(Followup::class);
+    }
+
+    
 
     public function restaurants()
     {
