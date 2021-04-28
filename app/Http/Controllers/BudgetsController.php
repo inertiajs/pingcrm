@@ -25,7 +25,7 @@ class BudgetsController extends Controller
                         'title' => $budget->title,
                         'description' => $budget->description,
                         'user_id' => $budget->user_id,
-                        'annually_income' => $budget->annually_income,
+                        'annually_salary' => $budget->annually_salary,
                         'monthly_salary' => $budget->monthly_salary,
                         'data_type' => $budget->data_type,
                     ];
@@ -64,7 +64,7 @@ class BudgetsController extends Controller
                         'title' => $budget->title,
                         'description' => $budget->description,
                         'user_id' => $budget->user_id,
-                        'annually_income' => $budget->annually_income,
+                        'annually_salary' => $budget->annually_salary,
                         'monthly_salary' => $budget->monthly_salary,
                         'data_type' => $budget->data_type,
                 //'contacts' => $budget->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
