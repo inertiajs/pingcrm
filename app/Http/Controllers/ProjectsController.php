@@ -22,11 +22,11 @@ class ProjectsController extends Controller
                 ->through(function ($project) {
                     return [
                         'id' => $project->id,
-                        'title' => $project->title,
-                        'description' => $project->description,
+                        'title' => $project->company,
+                        'description' => $project->company,
                         'priority' => $project->priority,
                         'status' => $project->status,
-                        'creater' => $project->creater,
+                        'creator' => $project->creator,
                         // 'deleted_at' => $project->deleted_at,
                     ];
                 }),
@@ -43,12 +43,13 @@ class ProjectsController extends Controller
         Auth::user()->account->projects()->create(
             Request::validate([
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:20'],
-                'priority' => ['nullable', 'max:4'],
+                'description' => ['nullable', 'max:100'],
                 'status' => ['nullable', 'max:4'],
-                'creater' => ['nullable', 'max:5'],
+                'priority' => ['nullable', 'max:4'],
+                // 'status' => ['nullable', 'max:4'],
+                'creater' => ['nullable', 'max:50'],
                 'due_date' => ['nullable', 'max:30'],
-                'completed_date' => ['nullable', 'max:30'],
+                // 'completed_date' => ['nullable', 'max:30'],
             ])
         );
 
@@ -60,14 +61,13 @@ class ProjectsController extends Controller
         return Inertia::render('Projects/Edit', [
             'project' => [
                 'id' => $project->id,
-                'title' => $project->title,
-                'description' => $project->description,
-                // 'status' => $project->status,
-                'priority' => $project->priority,
-                'status' => $project->status,
-                'creater' => $project->creater,
-                'due_date' => $project->due_date,
-                'completed_date' => $project->completed_date,
+                'title' => ['required', 'max:100'],
+                'description' => ['nullable', 'max:100'],
+                'status' => ['nullable', 'max:4'],
+                'priority' => ['nullable', 'max:4'],
+                // 'status' => ['nullable', 'max:4'],
+                'creater' => ['nullable', 'max:50'],
+                'due_date' => ['nullable', 'max:30'],
                 // 'deleted_at' => $project->deleted_at,
                 //'contacts' => $client->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
@@ -78,13 +78,13 @@ class ProjectsController extends Controller
     {
         $project->update(
             Request::validate([
-                'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:20'],
-                'priority' => ['nullable', 'max:4'],
-                'status' => ['nullable', 'max:4'],
-                // 'priority' => ['nullable', 'max:4'],
-                'due_date' => ['nullable', 'max:4'],
-                'completed_date' => ['nullable', 'max:4'],
+              'title' => ['required', 'max:100'],
+              'description' => ['nullable', 'max:100'],
+              'status' => ['nullable', 'max:4'],
+              'priority' => ['nullable', 'max:4'],
+              // 'status' => ['nullable', 'max:4'],
+              'creater' => ['nullable', 'max:50'],
+              'due_date' => ['nullable', 'max:30'],
             ])
         );
 

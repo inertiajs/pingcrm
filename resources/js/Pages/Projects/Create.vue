@@ -7,8 +7,8 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
+          <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
             <option value="100">Pending</option>
@@ -21,6 +21,8 @@
             <option value="300">High</option>
             <option value="400">Urgent</option>
           </select-input>
+          <text-input v-model="form.creator" :error="form.errors.creator" class="pr-6 pb-8 w-full lg:w-1/2" label="Creator" />
+          <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Project</loading-button>
@@ -48,10 +50,12 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        name: null,
-        phone: null,
+        title: null,
+        description: null,
         status: null,
         priority: null,
+        creator: null,
+        due_date: null,
       }),
     }
   },
