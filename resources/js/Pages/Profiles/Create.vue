@@ -1,25 +1,26 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('educations')">Educations</inertia-link>
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('profiles')">Profile Details</inertia-link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-        
-         
-          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.school" :error="form.errors.school" class="pr-6 pb-8 w-full lg:w-1/2" label="School" />
-          <text-input v-model="form.college" :error="form.errors.college" class="pr-6 pb-8 w-full lg:w-1/2" label="College" />
-          <text-input v-model="form.percentage" :error="form.errors.percentage" class="pr-6 pb-8 w-full lg:w-1/2" label="Percentage" />
-      
-        </div>
+          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
+          <text-input v-model="form.job" :error="form.errors.job" class="pr-6 pb-8 w-full lg:w-1/2" label="Job" />
+          <select-input v-model="form.nationality" :error="form.errors.nationality" class="pr-6 pb-8 w-full lg:w-1/2" label="Nationality">
+            <option :value="null" />
+            <option value="CA">Hindu</option>
+            <option value="US">Muslim</option>
+            <option value="US">Sikh</option>
+            <option value="US">Christian</option>
+          </select-input>
+           </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Education</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Profile</loading-button>
         </div>
       </form>
     </div>
@@ -33,7 +34,7 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create education' },
+  metaInfo: { title: 'Create Profile' },
   components: {
     LoadingButton,
     SelectInput,
@@ -44,21 +45,17 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-       
-        title: null,
         name: null,
-        email: null,
         phone: null,
-        school: null,
-        college: null,
-        percentage: null,
-        
-      }),
+       city:null,
+        job:null,
+        nationality: null,
+         }),
     }
   },
   methods: {
     store() {
-      this.form.post(this.route('educations.store'))
+      this.form.post(this.route('profiles.store'))
     },
   },
 }
