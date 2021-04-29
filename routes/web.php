@@ -73,8 +73,12 @@ Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
         ->middleware('remember', 'auth');
 
     Route::get('projects/create', [ProjectsController::class, 'create'])
-        ->name('Projects.create')
-        ->middleware('auth');
+            ->name('projects.create')
+            ->middleware('auth');
+
+    // Route::get('projects/create', [ProjectsController::class, 'create'])
+    //     ->name('Projects.create')
+    //     ->middleware('auth');
 
     Route::post('projects', [ProjectsController::class, 'store'])
         ->name('projects.store')
@@ -83,6 +87,18 @@ Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     Route::get('projects/{project}/edit', [ProjectsController::class, 'edit'])
         ->name('projects.edit')
         ->middleware('auth');
+
+    Route::delete('projects/{project}', [ProjectsController::class, 'destroy'])
+            ->name('projects.destroy')
+            ->middleware('auth');
+
+    Route::put('projects/{project}', [ProjectsController::class, 'update'])
+                ->name('projects.update')
+                ->middleware('auth');
+
+    Route::put('projects/{project}/restore', [ProjectsController::class, 'restore'])
+                ->name('projects.restore')
+                ->middleware('auth');
 
 
 // Dashboard
