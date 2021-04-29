@@ -20,8 +20,8 @@
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Title</th>
           <th class="px-6 pt-6 pb-4">Description</th>
-          <th class="px-6 pt-6 pb-4">Priority</th>
           <th class="px-6 pt-6 pb-4">Status</th>
+          <th class="px-6 pt-6 pb-4">Priority</th>
           <th class="px-6 pt-6 pb-4">Creator</th>
           <th class="px-6 pt-6 pb-4">Due Date</th>
           <th class="px-6 pt-6 pb-4">Completed Date</th>
@@ -40,12 +40,12 @@
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
-              {{ project.priority }}
+              {{ project.status }}
             </inertia-link>
           </td>
            <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('projects.edit', project.id)" tabindex="-1">
-              {{ project.status }}
+              {{ project.priority }}
             </inertia-link>
           </td>
           <td class="border-t">

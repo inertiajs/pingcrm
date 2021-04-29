@@ -15,19 +15,21 @@ class ProjectsController extends Controller
         return Inertia::render('Projects/Index', [
             'filters' => Request::all('search', 'trashed'),
             'projects' => Auth::user()->account->projects()
-                ->orderBy('name')
+                ->orderBy('title')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
                 ->through(function ($project) {
                     return [
                         'id' => $project->id,
-                        'title' => $project->company,
-                        'description' => $project->company,
-                        'priority' => $project->priority,
+                        'title' => $project->title,
+                        'description' => $project->description,
                         'status' => $project->status,
+                        'priority' => $project->priority,
                         'creator' => $project->creator,
-                        // 'deleted_at' => $project->deleted_at,
+                        'due_date' =>$project->due_date,
+                        'completed_date' => $project->completed_date,
+                        'deleted_at' => $project->deleted_at,
                     ];
                 }),
         ]);
@@ -46,10 +48,9 @@ class ProjectsController extends Controller
                 'description' => ['nullable', 'max:100'],
                 'status' => ['nullable', 'max:4'],
                 'priority' => ['nullable', 'max:4'],
-                // 'status' => ['nullable', 'max:4'],
-                'creater' => ['nullable', 'max:50'],
+                'creator' => ['nullable', 'max:50'],
                 'due_date' => ['nullable', 'max:30'],
-                // 'completed_date' => ['nullable', 'max:30'],
+                'completed_date' => ['nullable', 'max:30'],
             ])
         );
 
@@ -61,15 +62,14 @@ class ProjectsController extends Controller
         return Inertia::render('Projects/Edit', [
             'project' => [
                 'id' => $project->id,
-                'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:100'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
-                // 'status' => ['nullable', 'max:4'],
-                'creater' => ['nullable', 'max:50'],
-                'due_date' => ['nullable', 'max:30'],
-                // 'deleted_at' => $project->deleted_at,
-                //'contacts' => $client->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                        'title' => $project->title,
+                        'description' => $project->description,
+                        'status' => $project->status,
+                        'priority' => $project->priority,
+                        'creator' => $project->creator,
+                        'due_date' =>$project->due_date,
+                        'completed_date' => $project->completed_date,
+                        'deleted_at' => $project->deleted_at,
             ],
         ]);
     }
@@ -83,8 +83,9 @@ class ProjectsController extends Controller
               'status' => ['nullable', 'max:4'],
               'priority' => ['nullable', 'max:4'],
               // 'status' => ['nullable', 'max:4'],
-              'creater' => ['nullable', 'max:50'],
+              'creator' => ['nullable', 'max:50'],
               'due_date' => ['nullable', 'max:30'],
+              'completed_date' => ['nullable', 'max:30'],
             ])
         );
 

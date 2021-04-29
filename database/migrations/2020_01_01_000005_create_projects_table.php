@@ -14,12 +14,12 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-          $table->id();
-          $table->string('title', 100);
+          $table->increments('id');
+          $table->integer('account_id')->index();
+          $table->string('title');
           $table->text('description', 100)->nullable();
-          $table->foreignId('account_id')->nullable();
-          $table->unsignedInteger('priority')->nullable();
           $table->unsignedInteger('status')->default(100);
+          $table->unsignedInteger('priority')->nullable();
           $table->foreignId('creator')->nullable();
           $table->timestamp('due_date')->nullable();
           $table->timestamp('completed_date')->nullable();

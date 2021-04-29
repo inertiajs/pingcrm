@@ -23,6 +23,7 @@
           </select-input>
           <text-input v-model="form.creator" :error="form.errors.creator" class="pr-6 pb-8 w-full lg:w-1/2" label="Creator" />
           <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
+          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Project</loading-button>
@@ -56,6 +57,7 @@ export default {
         priority: null,
         creator: null,
         due_date: null,
+        completed_date: null,
       }),
     }
   },

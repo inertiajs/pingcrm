@@ -11,8 +11,8 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.title" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
-          <text-input v-model="form.phone" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
+          <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
             <option value="100">Pending</option>
@@ -27,8 +27,7 @@
           </select-input>
           <text-input v-model="form.creator" :error="form.errors.creator" class="pr-6 pb-8 w-full lg:w-1/2" label="Creator" />
           <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
-          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Creator" />
-
+          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!project.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Project</button>
@@ -73,6 +72,7 @@ export default {
         priority: this.project.priority,
         creator: this.project.creator,
         due_date: this.project.due_date,
+        completed_date: this.project.completed_date,
 
       }),
     }
