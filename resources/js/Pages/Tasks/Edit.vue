@@ -27,7 +27,7 @@
             <option value="200">Complete</option>
           </select-input>
           
-          <text-input v-model="form.due_date" :error="form.errors.deu_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due_date" />
+          <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due_date" />
           <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed_date" />
           <text-input v-model="form.User_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
           <text-input v-model="form.task_id" :error="form.errors.task_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Task_id" />
