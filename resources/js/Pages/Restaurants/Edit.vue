@@ -74,6 +74,7 @@ export default {
         custmer_address: this.restaurant.custmer_address,
         bill_no: this.restaurant.bill_no,
         feedback: this.restaurant.feedback,
+        payment_method: this.restaurant.payment_method,
       }),
     }
   },
