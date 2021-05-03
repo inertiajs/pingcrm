@@ -49,7 +49,7 @@ class CommentsController extends Controller
                 'task_id' => ['nullable', 'max:50'],
                 'assigned_user_id' => ['nullable', 'max:50'],
                 'type' => ['nullable', 'max:50'],
-                'priority' => ['nullable', 'max:25'],
+                'priority' => ['nullable', 'max:2'],
                 'status' => ['nullable', 'max:25'],
             ])
         );
@@ -85,7 +85,7 @@ class CommentsController extends Controller
                 'task_id' => ['nullable', 'max:50'],
                 'assigned_user_id' => ['nullable', 'max:50'],
                 'type' => ['nullable', 'max:50'],
-                'priority' => ['nullable', 'max:25'],
+                'priority' => ['nullable', 'max:2'],
                 'status' => ['nullable', 'max:25'],
 
             ])

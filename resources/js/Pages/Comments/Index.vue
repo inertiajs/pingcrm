@@ -59,6 +59,18 @@
               {{ comment.type }}
             </inertia-link>
           </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('comments.edit', comment.id)" tabindex="-1">
+              {{ comment.priority }}
+            </inertia-link>
+          </td>
+          
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('comments.edit', comment.id)" tabindex="-1">
+              {{ comment.status }}
+            </inertia-link>
+          </td>
 
 
           <td class="border-t w-px">
