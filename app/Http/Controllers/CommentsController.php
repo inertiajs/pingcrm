@@ -26,7 +26,9 @@ class CommentsController extends Controller
                         'user_id' => $comment->user_id,
                         'task_id'=>$comment->task_id,
                         'assigned_user_id' => $comment->assigned_user_id,
-                        'type'=>$comment->type
+                        'type'=>$comment->type,
+                        'priority'=> $comment->priority,
+                        'status'=> $comment->status,
                     ];
                 }),
         ]);
@@ -47,6 +49,8 @@ class CommentsController extends Controller
                 'task_id' => ['nullable', 'max:50'],
                 'assigned_user_id' => ['nullable', 'max:50'],
                 'type' => ['nullable', 'max:50'],
+                'priority' => ['nullable', 'max:25'],
+                'status' => ['nullable', 'max:25'],
             ])
         );
 
@@ -62,7 +66,9 @@ class CommentsController extends Controller
                 'user_id' => $comment->user_id,
                 'task_id'=>$comment->task_id,
                 'assigned_user_id' => $comment->assigned_user_id,
-                'type'=>$comment->type
+                'type'=>$comment->type,
+                'priority'=> $comment->priority,
+                'status'=> $comment->status,
                 
                 //'contacts' => $comment->contacts()->orderByName()->get()->map->only('id', 'title', 'city', 'phone'),
             ],
@@ -79,6 +85,8 @@ class CommentsController extends Controller
                 'task_id' => ['nullable', 'max:50'],
                 'assigned_user_id' => ['nullable', 'max:50'],
                 'type' => ['nullable', 'max:50'],
+                'priority' => ['nullable', 'max:25'],
+                'status' => ['nullable', 'max:25'],
 
             ])
         );

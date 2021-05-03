@@ -21,6 +21,8 @@ class CreateCommentsTable extends Migration
             $table->foreignId('assigned_user_id')->nullable();
             $table->text('description')->nullable();
             $table->string('type')->nullable();
+            $table->unsignedInteger('priority')->nullable();
+            $table->unsignedInteger('status')->default(100);
             $table->timestamps();
             $table->softDeletes();
         });
