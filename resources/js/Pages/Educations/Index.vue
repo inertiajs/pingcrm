@@ -22,7 +22,7 @@
           <th class="px-6 pt-6 pb-4">Title</th>
           <th class="px-6 pt-6 pb-4">Name</th>
           <th class="px-6 pt-6 pb-4">Email</th>
-          <th class="px-6 pt-6 pb-4">Mobile</th>
+          <th class="px-6 pt-6 pb-4">Phone</th>
           <th class="px-6 pt-6 pb-4">School</th>
           <th class="px-6 pt-6 pb-4">College</th>
           <th class="px-6 pt-6 pb-4">Percentage</th>

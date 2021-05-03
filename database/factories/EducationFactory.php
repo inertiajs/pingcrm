@@ -7,7 +7,7 @@ $factory->define(App\Models\Education::class, function (Faker $faker) {
         'title' => $faker->title,
         'name' => $faker->name,
         'email' => $faker->email,
-        'mobile' => null,
+        'phone' => $faker->tollFreePhoneNumber,
         'school' => null,
         'college' => null,
         'percentage' => null,
