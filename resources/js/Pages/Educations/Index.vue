@@ -56,7 +56,7 @@
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('educations.edit', education.id)" tabindex="-1">
-              {{ education.mobile }}
+              {{ education.phone }}
             </inertia-link>
           </td>
 
