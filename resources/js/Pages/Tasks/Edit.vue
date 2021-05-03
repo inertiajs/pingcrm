@@ -16,10 +16,10 @@
          
           <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority">
             <option :value="null" />
-            <option value="100">Low</option>
-            <option value="200">Normal</option>
-            <option value="300">High</option>
-            <option value="400">Urgent</option>
+            <option value="10">Low</option>
+            <option value="20">Normal</option>
+            <option value="30">High</option>
+            <option value="40">Urgent</option>
           </select-input>
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
