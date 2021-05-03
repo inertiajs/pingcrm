@@ -12,5 +12,6 @@ $factory->define(App\Models\Restaurant::class, function (Faker $faker) {
         'custmer_order' =>null,
         'bill_no' => null,
         'feedback'=>null,
+        'payment_method'=>null,
     ];
 });

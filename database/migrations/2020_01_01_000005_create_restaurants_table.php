@@ -24,6 +24,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('custmer_address', 150)->nullable();
             $table->string('bill_no', 50)->nullable();
             $table->string('feedback', 50)->nullable();
+            $table->string('payment_method', 50)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

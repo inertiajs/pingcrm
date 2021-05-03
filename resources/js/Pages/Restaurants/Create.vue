@@ -17,7 +17,14 @@
           <text-input v-model="form.custmer_order" :error="form.errors.custmer_order" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
           <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
           <text-input v-model="form.feedback" :error="form.errors.feedback" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_name" />
-        
+          <select-input v-model="form.payment_method" :error="form.errors.payment_method" class="pr-6 pb-8 w-full lg:w-1/2" label="Payment_method">
+            <option :value="null" />
+            <option value="10">Gpay</option>
+            <option value="20">Paytm</option>
+            <option value="30">Cash</option>
+            <option value="40">Bank_Transfer</option>
+          </select-input>
+
         
         
         </div>
@@ -56,6 +63,7 @@ export default {
         custmer_order: null,
         bill_no: null,
         feedback: null,
+        payment_method: null,
       
       }),
     }

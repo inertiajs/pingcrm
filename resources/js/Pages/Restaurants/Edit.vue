@@ -19,7 +19,14 @@
           <text-input v-model="form.Custmer_address" :error="form.errors.Custmer_address" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_address" />
           <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Bill_no" />
           <text-input v-model="form.feedback" :error="form.errors.feedback" class="pr-6 pb-8 w-full lg:w-1/2" label="Feedback" />
-      
+          <select-input v-model="form.payment_method" :error="form.errors.payment_method" class="pr-6 pb-8 w-full lg:w-1/2" label="Payment_method">
+            <option :value="null" />
+            <option value="10">Gpay</option>
+            <option value="20">Paytm</option>
+            <option value="30">Cash</option>
+            <option value="40">Bank_Transfer</option>
+          </select-input>
+          
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!education.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete restaurant</button>

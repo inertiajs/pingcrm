@@ -26,6 +26,7 @@
           <th class="px-6 pt-6 pb-4">Custmer_address</th>
           <th class="px-6 pt-6 pb-4">Bill_no</th>
           <th class="px-6 pt-6 pb-4">Feedback</th>
+          <th class="px-6 pt-6 pb-4">Payment_Method</th>
         </tr>
         <tr v-for="restaurant in restaurants.data" :key="restaurant.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -74,6 +75,12 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
               {{ restaurant.feedback }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.payment_method }}
             </inertia-link>
           </td>
 
