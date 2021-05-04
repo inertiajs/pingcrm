@@ -20,6 +20,8 @@ class CreateBanksTable extends Migration
             $table->string('phone', 50)->nullable();
             $table->string('account_number', 100)->nullable();
             $table->string('ifsc_code', 100)->nullable();
+            $table->string('bank_name', 100)->nullable();
+            $table->string('email', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

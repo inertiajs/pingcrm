@@ -15,16 +15,9 @@
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
           <text-input v-model="form.account_number" :error="form.errors.account_number" class="pr-6 pb-8 w-full lg:w-1/2" label="Account_number" />
           <text-input v-model="form.ifsc_code" :error="form.errors.ifsc_code" class="pr-6 pb-8 w-full lg:w-1/2" label="IFSC Code" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
-          <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
-          <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
-            <option :value="null" />
-            <option value="CA">India</option>
-            <option value="US">United States</option>
-          </select-input>
-          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
-        </div>
+           <text-input v-model="form.bank_name" :error="form.errors.bank_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Bank Name" />
+          <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
+           </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!bank.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Bank</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Bank</loading-button>
@@ -66,12 +59,9 @@ export default {
         phone: this.bank.phone,
         account_number: this.bank.account_number,
         ifsc_code: this.bank.ifsc_code,
-        address: this.bank.address,
-        city: this.bank.city,
-        region: this.bank.region,
-        country: this.bank.country,
-        postal_code: this.bank.postal_code,
-      }),
+        bank_name: this.bank.bank_name,
+        email: this.bank.email,
+            }),
     }
   },
   methods: {
