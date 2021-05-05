@@ -9,6 +9,7 @@ use App\Models\Budget;
 use App\Models\Contact;
 use App\Models\Experience;
 use App\Models\Organization;
+use App\Models\Project;
 use App\Models\Task;
 use App\Models\Followup;
 use App\Models\Comment;
@@ -40,6 +41,14 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
+
+        $clients = factory(Client::class, 100)
+            ->create(['account_id' => $account->id]);
+
+
+        $projects = factory(Project::class, 100)
+            ->create(['account_id' => $account->id]);
+
         $restaurants = factory(Restaurant::class, 100)
              ->create(['account_id' => $account->id]);
 
@@ -48,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
         $followups = factory(Followup::class, 100)
             ->create(['account_id' => $account->id]);
-        
+
         $budgets = factory(Budget::class, 100)
             ->create(['account_id' => $account->id]);
 
@@ -65,6 +74,9 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $projects = factory(Project::class, 100)
             ->create(['account_id' => $account->id]);
 
         $profiles = factory(Profile::class, 100)
