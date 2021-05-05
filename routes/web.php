@@ -11,6 +11,7 @@ use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
+use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\FollowupsController;
 use App\Http\Controllers\CommentsController;
@@ -62,6 +63,42 @@ Route::post('clients', [ClientsController::class, 'store'])
 Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     ->name('clients.edit')
     ->middleware('auth');
+
+
+
+// Projects
+
+    Route::get('projects', [ProjectsController::class, 'index'])
+        ->name('projects')
+        ->middleware('remember', 'auth');
+
+    Route::get('projects/create', [ProjectsController::class, 'create'])
+            ->name('projects.create')
+            ->middleware('auth');
+
+    // Route::get('projects/create', [ProjectsController::class, 'create'])
+    //     ->name('Projects.create')
+    //     ->middleware('auth');
+
+    Route::post('projects', [ProjectsController::class, 'store'])
+        ->name('projects.store')
+        ->middleware('auth');
+
+    Route::get('projects/{project}/edit', [ProjectsController::class, 'edit'])
+        ->name('projects.edit')
+        ->middleware('auth');
+
+    Route::delete('projects/{project}', [ProjectsController::class, 'destroy'])
+            ->name('projects.destroy')
+            ->middleware('auth');
+
+    Route::put('projects/{project}', [ProjectsController::class, 'update'])
+                ->name('projects.update')
+                ->middleware('auth');
+
+    Route::put('projects/{project}/restore', [ProjectsController::class, 'restore'])
+                ->name('projects.restore')
+                ->middleware('auth');
 
 
 // Dashboard
@@ -160,6 +197,7 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+
 // Followups
 
 Route::get('followups', [FollowupsController::class, 'index'])
@@ -219,7 +257,7 @@ Route::delete('comments/{comment}', [CommentsController::class, 'destroy'])
 Route::put('comments/{comment}/restore', [CommentsController::class, 'restore'])
 ->name('comments.restore')
 ->middleware('auth');
-    
+
 // Experiences
 
 Route::get('experiences', [ExperiencesController::class, 'index'])
@@ -243,14 +281,14 @@ Route::put('experiences/{experience}', [ExperiencesController::class, 'update'])
     ->middleware('auth');
 
 Route::delete('experiences/{experience}', [ExperiencesController::class, 'destroy'])
-    ->name('experiences.destroy')   
+    ->name('experiences.destroy')
     ->middleware('auth');
 
 Route::put('experiences/{experience}/restore', [ExperiencesController::class, 'restore'])
 ->name('experiences.restore')
 ->middleware('auth');
 
-    
+
 // Education
 
 Route::get('educations', [EducationsController::class, 'index'])
