@@ -10,6 +10,7 @@ $factory->define(App\Models\Restaurant::class, function (Faker $faker) {
         'phone' => $faker->tollFreePhoneNumber,
         'custmer_address' => null,
         'custmer_order' =>null,
+        'restaurant_name' => null,
         'bill_no' => null,
         'feedback'=>null,
         'payment_method'=>null,

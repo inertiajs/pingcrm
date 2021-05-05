@@ -28,9 +28,9 @@ class RestaurantsController extends Controller
                         'phone' => $restaurant->phone,
                         'custmer_address' => $restaurant->custmer_address,
                         'custmer_order' => $restaurant->custmer_order,
+                        'restaurant_name' => $restaurant->restaurant_name,
                         'bill_no' => $restaurant->bill_no,
                         'feedback' => $restaurant->feedback,
-                        'payment_method' => $restaurant->payment_method,
         
 
                     ];
@@ -54,9 +54,10 @@ class RestaurantsController extends Controller
                 'phone' => ['nullable', 'max:50'],
                 'custmer_address' => ['nullable', 'max:100'],
                 'custmer_order' => ['nullable', 'max:100'],
+                'restaurant_name' => ['nullable', 'max:100'],
+               
                 'bill_no' => ['nullable', 'max:50'],
                 'feedback' => ['nullable', 'max:50'],
-                'payment_method' => ['nullable', 'max:50'],
 
                
                
@@ -77,9 +78,10 @@ class RestaurantsController extends Controller
                         'phone' => $restaurant->phone,
                         'custmer_address' => $restaurant->custmer_address,
                         'custmer_order' => $restaurant->custmer_order,
+                        'restaurant_name' => $restaurant->restaurant_name,
+                       
                         'bill_no' => $restaurant->bill_no,
                         'feedback' => $restaurant->feedback,
-                        'payment_method' => $restaurant->payment_method,
             ],
         ]);
     }
@@ -95,9 +97,10 @@ class RestaurantsController extends Controller
                 'phone' => ['nullable', 'max:50'],
                 'custmer_address' => ['nullable', 'max:100'],
                 'custmer_order' => ['nullable', 'max:100'],
+                'restaurant_name' => ['nullable', 'max:100'],
+               
                 'bill_no' => ['nullable', 'max:50'],
                 'feedback' => ['nullable', 'max:50'],
-                'payment_method' => ['nullable', 'max:50'],
                
             ])
         );
