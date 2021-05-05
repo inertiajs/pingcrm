@@ -25,12 +25,7 @@
         <div :class="isUrl('banks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Bank Details</div>
       </inertia-link>
     </div>
-    <div class="mb-4">
-      <inertia-link class="flex items-center group py-3" :href="route('experiences')">
-        <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('experiences') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
-        <div :class="isUrl('experiences') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Experiences</div>
-      </inertia-link>
-    </div>
+    
 
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('tasks')">
