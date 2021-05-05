@@ -26,6 +26,7 @@ class ContactsController extends Controller
                         'id' => $contact->id,
                         'name' => $contact->name,
                         'phone' => $contact->phone,
+                        'email' => $contact->email,
                         'city' => $contact->city,
                         'deleted_at' => $contact->deleted_at,
                         'organization' => $contact->organization ? $contact->organization->only('name') : null,
