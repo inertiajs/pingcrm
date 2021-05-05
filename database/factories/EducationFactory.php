@@ -10,6 +10,7 @@ $factory->define(App\Models\Education::class, function (Faker $faker) {
         'phone' => $faker->tollFreePhoneNumber,
         'school' => null,
         'college' => null,
+        'higher_education'=>null,
         'percentage' => null,
 
     ];

@@ -22,6 +22,7 @@ class CreateEducationsTable extends Migration
             $table->string('phone', 50)->nullable();
             $table->string('school', 150)->nullable();
             $table->string('college', 50)->nullable();
+            $table->string('higher_education', 50)->nullable();
             $table->string('percentage', 50)->nullable();
             $table->timestamps();
             $table->softDeletes();
