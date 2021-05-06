@@ -41,7 +41,7 @@ class ProjectsTest extends TestCase
                 $this->assertEquals(
                     [
                         'id', 'title', 'description', 'status', 'priority',
-                        'creator', 'due_date', 'completed_date',
+                        'creator', 'due_date', 'completed_date', 'deleted_at'
                     ],
                     array_keys($projects[0])
                 );
@@ -64,7 +64,6 @@ class ProjectsTest extends TestCase
             ->assertPropValue('filters.search', 'Greg')
             ->assertPropCount('projects.data', 1)
             ->assertPropValue('projects.data', function ($projects) {
-                $projects = $projects->fresh();
                 $this->assertEquals('Greg Andersson', $projects[0]['title']);
             });
     }
