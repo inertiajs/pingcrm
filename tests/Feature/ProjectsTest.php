@@ -56,12 +56,15 @@ class ProjectsTest extends TestCase
             'title' => 'Greg Andersson',
         ]);
 
+
+
         $this->actingAs($this->user)
             ->get('/projects?search=Greg')
             ->assertStatus(200)
             ->assertPropValue('filters.search', 'Greg')
             ->assertPropCount('projects.data', 1)
             ->assertPropValue('projects.data', function ($projects) {
+                $projects = $projects->fresh();
                 $this->assertEquals('Greg Andersson', $projects[0]['title']);
             });
     }
@@ -102,7 +105,7 @@ class ProjectsTest extends TestCase
         $this->actingAs($this->user)
             ->get('/projects/' . $project->id . "/edit")
             ->assertStatus(200)
-            ->assertPropValue('project.name', $project->title)
+            ->assertPropValue('project.title', $project->title)
             ->assertPropValue('project.description', $project->description)
             ->assertPropValue('project.status', $project->status)
             ->assertPropValue('project.priority', $project->priority)
