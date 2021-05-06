@@ -49,7 +49,7 @@ class ContactsTest extends TestCase
     public function test_can_search_for_contacts()
     {
         $this->user->account->contacts()->saveMany(
-            factory(contact::class, 5)->make()
+            factory(Contact::class, 5)->make()
         )->first()->update([
             'first_name' => 'Greg',
             'last_name' => 'Andersson'
@@ -68,7 +68,7 @@ class ContactsTest extends TestCase
     public function test_cannot_view_deleted_contacts()
     {
         $this->user->account->contacts()->saveMany(
-            factory(contact::class, 5)->make()
+            factory(Contact::class, 5)->make()
         )->first()->delete();
 
         $this->actingAs($this->user)
@@ -80,7 +80,7 @@ class ContactsTest extends TestCase
     public function test_can_filter_to_view_deleted_contacts()
     {
         $this->user->account->contacts()->saveMany(
-            factory(contact::class, 5)->make()
+            factory(Contact::class, 5)->make()
         )->first()->delete();
 
         $this->actingAs($this->user)

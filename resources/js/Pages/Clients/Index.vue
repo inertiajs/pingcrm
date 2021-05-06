@@ -10,6 +10,8 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
+       <inertia-link class="btn-indigo" href="/projects">Projects</inertia-link>
+    
       <inertia-link class="btn-indigo" :href="route('clients.create')">
         <span>Create</span>
         <span class="hidden md:inline">Client</span>
