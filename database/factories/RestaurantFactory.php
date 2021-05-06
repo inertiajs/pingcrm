@@ -8,9 +8,11 @@ $factory->define(App\Models\Restaurant::class, function (Faker $faker) {
         'description' => $faker->text,
         'custmer_name' => $faker->company,
         'phone' => $faker->tollFreePhoneNumber,
-        'custmer_address' => null,
         'custmer_order' =>null,
+        'custmer_address' => null,
+        'restaurant_name' => null,
         'bill_no' => null,
         'feedback'=>null,
+        'payment_method'=>null,
     ];
 });

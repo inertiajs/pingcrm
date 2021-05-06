@@ -11,12 +11,21 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+         
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.mobile" :error="form.errors.mobile" class="pr-6 pb-8 w-full lg:w-1/2" label="Mobile" />
+          <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
           <text-input v-model="form.school" :error="form.errors.school" class="pr-6 pb-8 w-full lg:w-1/2" label="School" />
           <text-input v-model="form.college" :error="form.errors.college" class="pr-6 pb-8 w-full lg:w-1/2" label="College" />
+          <select-input v-model="form.higher_education" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Higher_education">
+            <option :value="null" />
+            <option value="100">Diploma</option>
+            <option value="200">Graduation</option>
+            <option value="300">Matrix</option>
+            <option value="400">Post_Graduation</option>
+          </select-input>
+          
           <text-input v-model="form.percentage" :error="form.errors.percentage" class="pr-6 pb-8 w-full lg:w-1/2" label="Percentage" />
       
         </div>
@@ -59,15 +68,13 @@ export default {
       form: this.$inertia.form({
         id: this.education.id,
         title: this.education.title,
-        description: this.education.description,
-        priority: this.education.priority,
-        status: this.education.status,
-        deu_date: this.education.deu_date,
-        completed_date: this.education.completed_date,
-        user_id: this.education.user_id,
-        education_id: this.education.education_id,
-        project_id: this.education.project_id,
-        team_id: this.education.team_id,
+        name:this.education.name,
+        email:this.education.email,
+        phone:this.education.phone,
+        school:this.education.school,
+        college:this.education.college,
+        higher_education:this.education.higher_education,
+        percentage:this.education.percentage,
       }),
     }
   },

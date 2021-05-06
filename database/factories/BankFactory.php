@@ -8,5 +8,7 @@ $factory->define(App\Models\Bank::class, function (Faker $faker) {
         'phone' => $faker->tollFreePhoneNumber,
         'account_number' => $faker->bankAccountNumber,
         'ifsc_code' => $faker ->randomNumber(7),
+        'bank_name' => $faker->company,
+        'email' => $faker->unique()->safeEmail,
         ];
 });
