@@ -13,8 +13,20 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
-          <text-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority" />
-          <text-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status" />
+      <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority">
+            <option :value="null" />
+            <option value="10">Low</option>
+            <option value="20">Normal</option>
+            <option value="30">High</option>
+            <option value="40">Urgent</option>
+          </select-input>
+
+          <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
+            <option :value="null" />
+            <option value="100">Pending</option>
+            <option value="200">Complete</option>
+          </select-input>
+          
           <text-input v-model="form.agreement" :error="form.errors.agreement" class="pr-6 pb-8 w-full lg:w-1/2" label="Agreement" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
           <text-input v-model="form.customer_name" :error="form.errors.customer_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Customer_name" />
