@@ -25,10 +25,12 @@ class EducationsController extends Controller
                         'title' => $education->title,
                         'name'=>$education->name,
                         'email'=>$education->email,
-                        'mobile'=>$education->mobile,
+                        'phone' => $education->phone,
                         'school'=>$education->school,
                         'college'=>$education->college,
+                        'higher_education'=>$education->higher_education,
                         'percentage'=>$education->percentage,
+
                     ];
                 }),
         ]);
@@ -46,11 +48,13 @@ class EducationsController extends Controller
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
                 'name' => ['nullable', 'max:50'],
-                'email' => ['nullable', 'max:50',email],
-                'mobile' => ['nullable', 'max:50'],
+                'email' => ['nullable', 'max:50','email'],
+                'phone' => ['nullable', 'max:50'],
                 'school' => ['nullable', 'max:50'],
                 'college' => ['nullable', 'max:50'],
+                'higher_education'=> ['nullable', 'max:50'],
                 'percentage' => ['nullable', 'max:50'],
+                
                
                 
             ])
@@ -67,9 +71,10 @@ class EducationsController extends Controller
                 'title' => $education->title,
                 'name'=>$education->name,
                 'email'=>$education->email,
-                'mobile'=>$education->mobile,
+                'phone'=> $education->phone,
                 'school'=>$education->school,
                 'college'=>$education->college,
+                'higher_education'=>$education->higher_education,
                 'percentage'=>$education->percentage,
                // 'contacts' => $education->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
@@ -83,10 +88,11 @@ class EducationsController extends Controller
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
                 'name' => ['nullable', 'max:50'],
-                'email' => ['nullable', 'max:50',email],
-                'mobile' => ['nullable', 'max:50'],
+                'email' => ['nullable', 'max:50','email'],
+                'phone' => ['nullable', 'max:50'],
                 'school' => ['nullable', 'max:50'],
                 'college' => ['nullable', 'max:50'],
+                'higher_education'=> ['nullable', 'max:50'],
                 'percentage' => ['nullable', 'max:50'],
                
             ])
