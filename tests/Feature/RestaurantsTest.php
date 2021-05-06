@@ -41,7 +41,7 @@ class RestaurantsTest extends TestCase
                 $this->assertEquals(
                     [
                         'id', 'title','description', 'custmer_name',
-                        'phone', 'custmer_order','custmer_address', 'bill_no','feedback','payment_method' 
+                        'phone', 'custmer_order','custmer_address','restaurant_name', 'bill_no','feedback','payment_method'
                     ],
                     array_keys($restaurants[0])
                 );
@@ -90,7 +90,7 @@ class RestaurantsTest extends TestCase
             ->assertPropValue('filters.trashed', 'with')
             ->assertPropCount('restaurants.data', 5);
     }
-    
+
     public function test_can_view_single_restaurant()
     {
         $restaurant =  $this->user->account->restaurants()->saveMany(
@@ -111,6 +111,6 @@ class RestaurantsTest extends TestCase
             ->assertPropValue('restaurant.payment_method', $restaurant->payment_method);
 
 
-                      
+
     }
 }
