@@ -17,6 +17,7 @@
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
+        
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Id</th>
           <th class="px-6 pt-6 pb-4">Title</th>
@@ -29,6 +30,7 @@
           <th class="px-6 pt-6 pb-4">Project_id</th>
           <th class="px-6 pt-6 pb-4">Team_id</th>
         </tr>
+
         <tr v-for="task in tasks.data" :key="task.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('tasks.edit', task.id)">
@@ -42,8 +44,6 @@
               {{ task.title }}
             </inertia-link>
           </td>
-
-
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
@@ -59,7 +59,7 @@
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('tasks.edit', task.id)" tabindex="-1">
-              {{ task.deu_date }}
+              {{ task.due_date }}
             </inertia-link>
           </td>
 
