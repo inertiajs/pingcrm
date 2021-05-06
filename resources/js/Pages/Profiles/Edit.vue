@@ -17,10 +17,10 @@
           <text-input v-model="form.job" :error="form.errors.job" class="pr-6 pb-8 w-full lg:w-1/2" label="Job" />
           <select-input v-model="form.nationality" :error="form.errors.nationality" class="pr-6 pb-8 w-full lg:w-1/2" label="Nationality">
             <option :value="null" />
-            <option value="CA">Hindu</option>
-            <option value="US">Muslim</option>
-            <option value="US">Sikh</option>
-            <option value="US">Christian</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Muslim">Muslim</option>
+            <option value="Sikh">Sikh</option>
+            <option value="Christian">Christian</option>
           </select-input>
             </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">

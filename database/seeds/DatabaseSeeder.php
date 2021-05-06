@@ -38,6 +38,9 @@ class DatabaseSeeder extends Seeder
         $organizations = factory(Organization::class, 100)
             ->create(['account_id' => $account->id]);
 
+        $experiences = factory(Experience::class, 100)
+        ->create(['account_id' => $account->id]);
+
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
