@@ -39,8 +39,9 @@ class ContactsTest extends TestCase
             ->assertPropCount('contacts.data', 5)
             ->assertPropValue('contacts.data', function ($contacts) {
                 $this->assertEquals(
-                    ['id', 'name', 'phone', 'city',
-                    'deleted_at', 'organization'],
+                    ['id', 'name', 'phone','email', 'city',
+                     'organization', 'deleted_at',
+                    ],
                     array_keys($contacts[0])
                 );
             });

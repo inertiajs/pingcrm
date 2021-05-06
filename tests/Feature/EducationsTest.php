@@ -41,7 +41,7 @@ class EducationsTest extends TestCase
                 $this->assertEquals(
                     [
                         'id', 'title', 'name',
-                        'email', 'mobile', 'school', 'college','percentage', 
+                        'email', 'phone', 'school', 'college','higher_education','percentage',
                     ],
                     array_keys($educations[0])
                 );
@@ -104,10 +104,11 @@ class EducationsTest extends TestCase
             ->assertStatus(200)
             ->assertPropValue('education.name', $education->name)
             ->assertPropValue('education.email', $education->email)
-            ->assertPropValue('education.mobile', $education->mobile)
+            ->assertPropValue('education.phone', $education->phone)
             ->assertPropValue('education.school', $education->school)
             ->assertPropValue('education.college', $education->college)
+            ->assertPropValue('education.higher_education', $education->higher_education)
             ->assertPropValue('education.percentage', $education->percentage);
-                      
+            
     }
 }

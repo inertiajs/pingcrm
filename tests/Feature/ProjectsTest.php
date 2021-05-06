@@ -30,17 +30,19 @@ class ProjectsTest extends TestCase
     public function test_can_view_projects()
     {
         $this->user->account->projects()->saveMany(
-            factory(Project::class, 9)->make()
+            factory(Project::class, 5)->make()
         );
 
         $this->actingAs($this->user)
             ->get('/projects')
             ->assertStatus(200)
-            ->assertPropCount('projects.data', 9)
+            ->assertPropCount('projects.data', 5)
             ->assertPropValue('projects.data', function ($projects) {
                 $this->assertEquals(
-                    ['id', 'title', 'description', 'status','priority','creater','due_date','completed_date'
-                    'deleted_at'],
+                    [
+                        'id', 'title', 'description', 'status', 'priority',
+                        'creator', 'due_date', 'completed_date', 'deleted_at'
+                    ],
                     array_keys($projects[0])
                 );
             });
@@ -51,14 +53,15 @@ class ProjectsTest extends TestCase
         $this->user->account->projects()->saveMany(
             factory(Project::class, 5)->make()
         )->first()->update([
-            'title' => 'Project',
-            // 'last_name' => 'Andersson'
+            'title' => 'Greg Andersson',
         ]);
 
+
+
         $this->actingAs($this->user)
-            ->get('/projects?search=Project')
+            ->get('/projects?search=Greg')
             ->assertStatus(200)
-            ->assertPropValue('filters.search', 'Project')
+            ->assertPropValue('filters.search', 'Greg')
             ->assertPropCount('projects.data', 1)
             ->assertPropValue('projects.data', function ($projects) {
                 $this->assertEquals('Greg Andersson', $projects[0]['title']);
@@ -88,5 +91,25 @@ class ProjectsTest extends TestCase
             ->assertStatus(200)
             ->assertPropValue('filters.trashed', 'with')
             ->assertPropCount('projects.data', 5);
+    }
+
+    public function test_can_view_single_project()
+    {
+        $project =  $this->user->account->projects()->saveMany(
+            factory(Project::class, 5)->make()
+        )->first();
+
+        $project = $project->fresh();
+
+        $this->actingAs($this->user)
+            ->get('/projects/' . $project->id . "/edit")
+            ->assertStatus(200)
+            ->assertPropValue('project.title', $project->title)
+            ->assertPropValue('project.description', $project->description)
+            ->assertPropValue('project.status', $project->status)
+            ->assertPropValue('project.priority', $project->priority)
+            ->assertPropValue('project.creator', $project->creator)
+            ->assertPropValue('project.due_date', $project->due_date)
+            ->assertPropValue('project.completed_date', $project->completed_date);
     }
 }

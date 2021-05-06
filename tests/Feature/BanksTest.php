@@ -41,7 +41,7 @@ class BanksTest extends TestCase
                 $this->assertEquals(
                     [
                         'id', 'name', 'phone', 'account_number',
-                        'ifsc_code', 'deleted_at',
+                        'ifsc_code', 'bank_name','email','deleted_at',
                     ],
                     array_keys($banks[0])
                 );
@@ -105,6 +105,9 @@ class BanksTest extends TestCase
             ->assertPropValue('bank.name', $bank->name)
             ->assertPropValue('bank.phone', $bank->phone)
             ->assertPropValue('bank.account_number', $bank->account_number)
-            ->assertPropValue('bank.ifsc_code', $bank->ifsc_code);
+            ->assertPropValue('bank.ifsc_code', $bank->ifsc_code)
+            ->assertPropValue('bank.bank_name', $bank->bank_name)
+            ->assertPropValue('bank.email', $bank->email);
+   
     }
 }
