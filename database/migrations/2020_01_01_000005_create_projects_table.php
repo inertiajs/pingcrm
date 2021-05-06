@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
           $table->increments('id');
           $table->integer('account_id')->index();
           $table->string('title');
-          $table->text('description', 100)->nullable();
+          $table->text('description')->nullable();
           $table->unsignedInteger('status')->default(100);
           $table->unsignedInteger('priority')->nullable();
           $table->foreignId('creator')->nullable();

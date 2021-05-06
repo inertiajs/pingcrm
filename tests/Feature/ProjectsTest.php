@@ -53,7 +53,7 @@ class ProjectsTest extends TestCase
         $this->user->account->projects()->saveMany(
             factory(Project::class, 5)->make()
         )->first()->update([
-            'name' => 'Greg Andersson',
+            'title' => 'Greg Andersson',
         ]);
 
         $this->actingAs($this->user)
@@ -62,7 +62,7 @@ class ProjectsTest extends TestCase
             ->assertPropValue('filters.search', 'Greg')
             ->assertPropCount('projects.data', 1)
             ->assertPropValue('projects.data', function ($projects) {
-                $this->assertEquals('Greg Andersson', $projects[0]['name']);
+                $this->assertEquals('Greg Andersson', $projects[0]['title']);
             });
     }
 
@@ -97,7 +97,7 @@ class ProjectsTest extends TestCase
             factory(Project::class, 5)->make()
         )->first();
 
-        //$client = $client->fresh();
+        $project = $project->fresh();
 
         $this->actingAs($this->user)
             ->get('/projects/' . $project->id . "/edit")
