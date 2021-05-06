@@ -17,9 +17,10 @@
           <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
           <text-input v-model="form.custmer_order" :error="form.errors.custmer_order" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_order" />
           <text-input v-model="form.Custmer_address" :error="form.errors.Custmer_address" class="pr-6 pb-8 w-full lg:w-1/2" label="Custmer_address" />
-<text-input v-model="form.restaurant_name" :error="form.errors.restaurant_name" class="pr-6 pb-8 w-full lg:w-1/2" label="restaurant_name" />
-         <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Bill_no" />
+          <text-input v-model="form.restaurant_name" :error="form.errors.restaurant_name" class="pr-6 pb-8 w-full lg:w-1/2" label="restaurant_name" />
+          <text-input v-model="form.bill_no" :error="form.errors.bill_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Bill_no" />
           <text-input v-model="form.feedback" :error="form.errors.feedback" class="pr-6 pb-8 w-full lg:w-1/2" label="Feedback" />
+          
           <select-input v-model="form.payment_method" :error="form.errors.payment_method" class="pr-6 pb-8 w-full lg:w-1/2" label="Payment_method">
             <option :value="null" />
             <option value="10">Gpay</option>

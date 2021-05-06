@@ -24,8 +24,8 @@
           <th class="px-6 pt-6 pb-4">Phone</th>
           <th class="px-6 pt-6 pb-4">Customer Order</th>
           <th class="px-6 pt-6 pb-4">Customer Address</th>
-           <th class="px-6 pt-6 pb-4">Restaurant Name</th>
-         <th class="px-6 pt-6 pb-4">Bill No</th>
+          <th class="px-6 pt-6 pb-4">Restaurant Name</th>
+          <th class="px-6 pt-6 pb-4">Bill No</th>
           <th class="px-6 pt-6 pb-4">Feedback</th>
           <th class="px-6 pt-6 pb-4">Payment Method</th>
         </tr>
