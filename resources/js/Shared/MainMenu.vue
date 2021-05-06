@@ -24,15 +24,14 @@
         <div :class="isUrl('banks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Bank Details</div>
       </inertia-link>
     </div>
-    
-    
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('tasks')">
         <icon name="dashboard" class="w-4 h-4 mr-2" :class="isUrl('tasks') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('tasks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Tasks</div>
       </inertia-link>
     </div>
-<div class="mb-4">
+    
+    <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('budgets')">
         <icon name="dashboard" class="w-4 h-4 mr-2" :class="isUrl('budgets') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('budgets') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Budgets</div>
@@ -66,7 +65,7 @@
       </inertia-link>
     </div>
 
-      
+
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('comments')">
         <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('comments') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
@@ -88,6 +87,12 @@
       </inertia-link>
     </div>
 
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('projects')">
+        <icon name="office" class="w-4 h-4 mr-2" :class="isUrl('projects') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('projects') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Projects</div>
+      </inertia-link>
+    </div>
 
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('contacts')">

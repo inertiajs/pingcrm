@@ -11,18 +11,28 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.id" :error="form.errors.id" class="pr-6 pb-8 w-full lg:w-1/2" label="Id" />
           <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
-          <text-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority" />
-          <text-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status" />
-          <text-input v-model="form.deu_date" :error="form.errors.deu_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due_date" />
+         
+          <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority">
+            <option :value="null" />
+            <option value="10">Low</option>
+            <option value="20">Normal</option>
+            <option value="30">High</option>
+            <option value="40">Urgent</option>
+          </select-input>
+          <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
+            <option :value="null" />
+            <option value="100">Pending</option>
+            <option value="200">Complete</option>
+          </select-input>
+          
+          <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due_date" />
           <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed_date" />
-          <text-input v-model="form.user_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
+          <text-input v-model="form.User_id" :error="form.errors.user_id" class="pr-6 pb-8 w-full lg:w-1/2" label="User_id" />
           <text-input v-model="form.task_id" :error="form.errors.task_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Task_id" />
           <text-input v-model="form.project_id" :error="form.errors.project_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Project_id" />
           <text-input v-model="form.team_id" :error="form.errors.team_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Team_id" />
-          
     
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
@@ -67,7 +77,7 @@ export default {
         description: this.task.description,
         priority: this.task.priority,
         status: this.task.status,
-        deu_date: this.task.deu_date,
+        due_date: this.task.due_date,
         completed_date: this.task.completed_date,
         user_id: this.task.user_id,
         task_id: this.task.task_id,

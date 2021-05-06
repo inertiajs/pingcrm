@@ -14,17 +14,17 @@ class CreateBudgetsTable extends Migration
     public function up()
     {
         Schema::create('budgets', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->foreignId('account_id')->nullable();
-            $table->foreignId('user_id')->nullable();
-            $table->string('annually_salary')->nullable();
-            $table->string('monthly_salary')->nullable();
-            $table->string('data_type')->nullable();
+            $table->increments('id');
+            $table->integer('account_id')->index();
+           
+            $table->string('project_name',50);
+            $table->string('resources', 100);
+            $table->string('cost', 50)->nullable();
+            $table->string('profit', 100)->nullable();
+            $table->string('loss', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
-        });
+              });
     }
 
     /**

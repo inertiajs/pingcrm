@@ -20,12 +20,14 @@
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Id</th>
           <th class="px-6 pt-6 pb-4">Title</th>
-          <th class="px-6 pt-6 pb-4">Custmer_name</th>
+          <th class="px-6 pt-6 pb-4">Customer Name</th>
           <th class="px-6 pt-6 pb-4">Phone</th>
-          <th class="px-6 pt-6 pb-4">Custmer_order</th>
-          <th class="px-6 pt-6 pb-4">Custmer_address</th>
-          <th class="px-6 pt-6 pb-4">Bill_no</th>
+          <th class="px-6 pt-6 pb-4">Customer Order</th>
+          <th class="px-6 pt-6 pb-4">Customer Address</th>
+          <th class="px-6 pt-6 pb-4">Restaurant Name</th>
+          <th class="px-6 pt-6 pb-4">Bill No</th>
           <th class="px-6 pt-6 pb-4">Feedback</th>
+          <th class="px-6 pt-6 pb-4">Payment Method</th>
         </tr>
         <tr v-for="restaurant in restaurants.data" :key="restaurant.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -61,7 +63,12 @@
 
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
-              {{ restaurant.Custmer_address }}
+              {{ restaurant.custmer_address }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.restaurant_name }}
             </inertia-link>
           </td>
 
@@ -74,6 +81,12 @@
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
               {{ restaurant.feedback }}
+            </inertia-link>
+          </td>
+
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('restaurants.edit', restaurant.id)" tabindex="-1">
+              {{ restaurant.payment_method }}
             </inertia-link>
           </td>
 
