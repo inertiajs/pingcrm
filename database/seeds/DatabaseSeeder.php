@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $account = Account::create(['name' => 'Acme Corporation']);
+        $account = Account::create(['name' => 'HMA Corporation']);
 
         factory(User::class)->create([
             'account_id' => $account->id,
