@@ -11,8 +11,7 @@ class EloquentController extends Controller
 {
     public function index()
     {
-        return Task::where('priority',10)->orderBy('description','desc')->get();
-        return Task::where('priority',10)->where('id',5)->first();
+        return Task::where('priority',10)->orderBy('description','desc')->pluck('title','status');
         return Task::where('priority',10)->where('id',5)->first();
         return Task::where('id',5)->first();
         return Task::where('id',5)->get();
