@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+include("web/eloquent.php");
 // Auth
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
