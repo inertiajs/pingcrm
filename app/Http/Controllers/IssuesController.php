@@ -21,7 +21,7 @@ class IssuesController extends Controller
                 ->withQueryString()
                 ->through(function ($issue) {
                     return [
-                        'id' => $project->id,
+                        'id' => $issue->id,
                         'issue' => $issue->issue,
                         'description' => $issue->description,
                         'status' => $issue->status,
