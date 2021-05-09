@@ -7,7 +7,6 @@ $factory->define(App\Models\Issue::class, function (Faker $faker) {
         'issue' => $faker->issue,
         'description' => $faker->text,
         'status' => 1,
-
         'priority' => 100,
         'fix' => null,
         'assign' => null,
