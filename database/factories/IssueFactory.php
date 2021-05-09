@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Issue::class, function (Faker $faker) {
     return [
-        'issue' => $faker->issue,
+        'issue' => $faker->text,
         'description' => $faker->text,
         'status' => 1,
         'priority' => 100,
