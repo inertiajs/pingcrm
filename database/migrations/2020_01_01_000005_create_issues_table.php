@@ -20,8 +20,8 @@ class CreateIssuesTable extends Migration
           $table->text('description')->nullable();
           $table->unsignedInteger('status')->default(100);
           $table->unsignedInteger('priority')->nullable();
-          $table->foreignId('fix')->nullable();
-          $table->foreignId('assign')->nullable();
+          $table->string('fix')->nullable();
+          $table->string('assign')->nullable();
           $table->timestamp('due_date')->nullable();
           $table->timestamp('completed_date')->nullable();
           $table->timestamps();
