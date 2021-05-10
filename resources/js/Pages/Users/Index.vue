@@ -90,11 +90,10 @@ export default {
   },
   watch: {
     form: {
-      handler: throttle(function() {
-        let query = pickBy(this.form)
-        this.$inertia.get(this.route('users'), Object.keys(query).length ? query : { remember: 'forget' }, { preserveState: true })
-      }, 150),
       deep: true,
+      handler: throttle(function() {
+        this.$inertia.get(this.route('users'), pickBy(this.form), { preserveState: true })
+      }, 150),
     },
   },
   methods: {

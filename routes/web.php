@@ -43,7 +43,7 @@ Route::get('/', [DashboardController::class, 'index'])
 
 Route::get('users', [UsersController::class, 'index'])
     ->name('users')
-    ->middleware('remember', 'auth');
+    ->middleware('auth');
 
 Route::get('users/create', [UsersController::class, 'create'])
     ->name('users.create')
@@ -73,7 +73,7 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
 
 Route::get('organizations', [OrganizationsController::class, 'index'])
     ->name('organizations')
-    ->middleware('remember', 'auth');
+    ->middleware('auth');
 
 Route::get('organizations/create', [OrganizationsController::class, 'create'])
     ->name('organizations.create')
@@ -103,7 +103,7 @@ Route::put('organizations/{organization}/restore', [OrganizationsController::cla
 
 Route::get('contacts', [ContactsController::class, 'index'])
     ->name('contacts')
-    ->middleware('remember', 'auth');
+    ->middleware('auth');
 
 Route::get('contacts/create', [ContactsController::class, 'create'])
     ->name('contacts.create')
