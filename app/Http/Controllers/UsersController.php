@@ -20,16 +20,14 @@ class UsersController extends Controller
                 ->orderByName()
                 ->filter(Request::only('search', 'role', 'trashed'))
                 ->get()
-                ->transform(function ($user) {
-                    return [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'owner' => $user->owner,
-                        'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
-                        'deleted_at' => $user->deleted_at,
-                    ];
-                }),
+                ->transform(fn ($user) => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'owner' => $user->owner,
+                    'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
+                    'deleted_at' => $user->deleted_at,
+                ]),
         ]);
     }
 

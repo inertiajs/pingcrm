@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use League\Glide\Server;
@@ -15,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Model::unguard();
+
         $this->app->bind(Server::class, function ($app) {
             return Server::create([
                 'source' => Storage::getDriver(),

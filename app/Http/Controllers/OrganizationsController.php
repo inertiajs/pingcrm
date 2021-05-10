@@ -17,17 +17,15 @@ class OrganizationsController extends Controller
             'organizations' => Auth::user()->account->organizations()
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
-                ->paginate()
+                ->paginate(10)
                 ->withQueryString()
-                ->through(function ($organization) {
-                    return [
-                        'id' => $organization->id,
-                        'name' => $organization->name,
-                        'phone' => $organization->phone,
-                        'city' => $organization->city,
-                        'deleted_at' => $organization->deleted_at,
-                    ];
-                }),
+                ->through(fn ($organization) => [
+                    'id' => $organization->id,
+                    'name' => $organization->name,
+                    'phone' => $organization->phone,
+                    'city' => $organization->city,
+                    'deleted_at' => $organization->deleted_at,
+                ]),
         ]);
     }
 
