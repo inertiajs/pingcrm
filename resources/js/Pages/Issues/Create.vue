@@ -28,7 +28,7 @@
             <option value="300">Lalit</option>
             <option value="400">Manju</option>
           </select-input>
-          <textarea-input v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1" label="Description" />
+          <textarea-input v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1" label="Solution" />
           <text-input type="date" v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
           <text-input type="date" v-model="form.completed_date" :error="form.errors.completed_date" class="date pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
