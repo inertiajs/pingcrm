@@ -22,8 +22,8 @@ class CreateIssuesTable extends Migration
           $table->unsignedInteger('priority')->nullable();
           $table->string('fix')->nullable();
           $table->string('assign')->nullable();
-          $table->date('due_date')->nullable();
-          $table->date('completed_date')->nullable();
+          $table->timestamp('due_date')->nullable();
+          $table->timestamp('completed_date')->nullable();
           $table->timestamps();
           $table->softDeletes();
         });

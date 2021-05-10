@@ -29,8 +29,8 @@
             <option value="300">Lalit</option>
             <option value="400">Manju</option>
           </select-input>
-          <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
-          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="date pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
+          <text-input type="date" v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
+          <text-input type="date" v-model="form.completed_date" :error="form.errors.completed_date" class="date pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Issue</loading-button>
