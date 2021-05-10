@@ -28,13 +28,13 @@
           <textarea v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1/2" label="Fix" />
           <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Assign">
             <option :value="null" />
-            <option value="100">Bhavuk</option>
-            <option value="200">Jasmeen</option>
-            <option value="300">Lalit</option>
-            <option value="400">Manju</option>
+            <option value="Bhavuk">Bhavuk</option>
+            <option value="Jasmeen">Jasmeen</option>
+            <option value="Lalit">Lalit</option>
+            <option value="Manju">Manju</option>
           </select-input>
-          <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
-          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
+          <text-input type="date" v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
+          <text-input type="date" v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!issue.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Issue</button>

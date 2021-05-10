@@ -30,7 +30,7 @@ issue<template>
         <tr v-for="issue in issues.data" :key="issue.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('issues.edit', issue.id)">
-              {{ issue.title }}
+              {{ issue.issue }}
               <icon v-if="issue.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
