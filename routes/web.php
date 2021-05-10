@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\TasksController;
@@ -99,6 +100,42 @@ Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     Route::put('projects/{project}/restore', [ProjectsController::class, 'restore'])
                 ->name('projects.restore')
                 ->middleware('auth');
+
+
+
+// Issues
+
+                Route::get('issues', [IssuesController::class, 'index'])
+                    ->name('issues')
+                    ->middleware('remember', 'auth');
+
+                Route::get('issues/create', [IssuesController::class, 'create'])
+                        ->name('issues.create')
+                        ->middleware('auth');
+
+                // Route::get('projects/create', [ProjectsController::class, 'create'])
+                //     ->name('Projects.create')
+                //     ->middleware('auth');
+
+                Route::post('issues', [IssuesController::class, 'store'])
+                    ->name('issues.store')
+                    ->middleware('auth');
+
+                Route::get('issues/{issue}/edit', [IssuesController::class, 'edit'])
+                    ->name('issues.edit')
+                    ->middleware('auth');
+
+                Route::delete('issues/{issue}', [IssuesController::class, 'destroy'])
+                        ->name('issues.destroy')
+                        ->middleware('auth');
+
+                Route::put('issues/{issue}', [IssuesController::class, 'update'])
+                            ->name('issues.update')
+                            ->middleware('auth');
+
+                Route::put('issues/{issue}/restore', [IssuesController::class, 'restore'])
+                            ->name('issues.restore')
+                            ->middleware('auth');
 
 
 // Dashboard
