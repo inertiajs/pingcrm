@@ -7,8 +7,8 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.issue" :error="form.errors.issue" class="pr-6 pb-8 w-full lg:w-1/2" label="Issue" />
-          <textarea v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" placeholder="Description" />
+          <text-input v-model="form.issue" :error="form.errors.issue" class="pr-6 pb-8 w-full lg:w-full" label="Title" />
+          <textarea-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-full" label="Description" />
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
             <option value="100">Pending</option>
@@ -21,14 +21,14 @@
             <option value="300">High</option>
             <option value="400">Urgent</option>
           </select-input>
-          <textarea v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1/2" placeholder="Fix" />
-          <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Assign">
+          <select-input v-model="form.assign" :error="form.errors.assign" class="pr-6 pb-8 w-full lg:w-full" label="Assign">
             <option :value="null" />
             <option value="100">Bhavuk</option>
             <option value="200">Jasmeen</option>
             <option value="300">Lalit</option>
             <option value="400">Manju</option>
           </select-input>
+          <textarea-input v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1" label="Description" />
           <text-input type="date" v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
           <text-input type="date" v-model="form.completed_date" :error="form.errors.completed_date" class="date pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
@@ -43,6 +43,7 @@
 <script>
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
+import TextareaInput from '@/Shared/TextareaInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
@@ -52,6 +53,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
+    TextareaInput
   },
   layout: Layout,
   remember: 'form',
