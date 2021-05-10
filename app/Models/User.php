@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\URL;
-use League\Glide\Server;
 
 class User extends Authenticatable
 {
@@ -35,13 +32,6 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
-    }
-
-    public function photoUrl(array $attributes)
-    {
-        if ($this->photo_path) {
-            return URL::to(App::make(Server::class)->fromPath($this->photo_path, $attributes));
-        }
     }
 
     public function isDemoUser()

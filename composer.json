@@ -16,7 +16,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.0",
-        "league/glide": "2.0.x-dev",
+        "league/glide-laravel": "^1.0",
         "tightenco/ziggy": "^0.8.0"
     },
     "require-dev": {
