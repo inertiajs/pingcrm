@@ -15,13 +15,12 @@ use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Api\Controllers\TasksController;
 use App\Http\Controllers\FollowupsController;
-use App\Http\Controllers\CommentsController;
+use App\Http\Api\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +41,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('task', TasksController::class);
 Route::put('task/{task}/restore', [TasksController::class, 'restore']);
+
+Route::resource('comment', CommentsController::class);
+Route::put('comment/{comment}/restore', [CommentsController::class, 'restore']);

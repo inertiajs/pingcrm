@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Api\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
@@ -10,9 +10,14 @@ use Inertia\Inertia;
 
 class CommentsController extends Controller
 {
+    public function __construct()
+    {
+        auth()->loginUsingId(1);
+    }
+
     public function index()
     {
-        return Inertia::render('Comments/Index', [
+        return [
             'filters' => Request::all('search', 'trashed'),
             'comments' => Auth::user()->account->comments()
                 ->orderBy('id')
@@ -29,17 +34,12 @@ class CommentsController extends Controller
                         'type'=>$comment->type
                     ];
                 }),
-        ]);
-    }
-
-    public function create()
-    {
-        return Inertia::render('Comments/Create');
+        ];
     }
 
     public function store()
     {
-        Auth::user()->account->comments()->create(
+        $comment=Auth::user()->account->comments()->create(
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'description' => ['nullable', 'max:300'],
@@ -49,8 +49,13 @@ class CommentsController extends Controller
                 'type' => ['nullable', 'max:50'],
             ])
         );
+        
+        return $comment->refresh();
+    }
 
-        return Redirect::route('comments')->with('success', 'Comments created.');
+    public function show(Comment $comment)
+    {
+        return $comment;
     }
 
     public function edit(Comment $comment)
@@ -83,20 +88,20 @@ class CommentsController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Comment updated.');
+        return $comment;
     }
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
 
-        return Redirect::back()->with('success', 'Comment deleted.');
+        return response()->json(['success' =>'Comment deleted.']);
     }
 
     public function restore(Comment $comment)
     {
         $comment->restore();
 
-        return Redirect::back()->with('success', 'Comment restored.');
+        return response()->json(['success' =>'Comment restored.']);
     }
 }
