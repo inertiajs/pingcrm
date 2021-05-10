@@ -72,8 +72,8 @@ export default {
   },
   layout: Layout,
   props: {
-    organizations: Object,
     filters: Object,
+    organizations: Object,
   },
   data() {
     return {

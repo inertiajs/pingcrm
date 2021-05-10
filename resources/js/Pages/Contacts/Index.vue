@@ -80,8 +80,8 @@ export default {
   },
   layout: Layout,
   props: {
-    contacts: Object,
     filters: Object,
+    contacts: Object,
   },
   data() {
     return {

@@ -76,8 +76,8 @@ export default {
   },
   layout: Layout,
   props: {
-    users: Array,
     filters: Object,
+    users: Array,
   },
   data() {
     return {
