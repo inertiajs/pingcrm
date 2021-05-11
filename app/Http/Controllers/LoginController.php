@@ -17,6 +17,11 @@ class LoginController extends Controller
 
     public function store()
     {
+        Request::validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+
         if (Auth::attempt(Request::only('email', 'password'), Request::boolean('remember'))) {
             Session::regenerate();
 
