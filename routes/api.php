@@ -18,7 +18,7 @@ use App\Http\Controllers\FollowupsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
-use App\Http\Controllers\EducationsController;
+use App\Http\Api\Controllers\EducationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 
@@ -42,3 +42,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('task', TasksController::class);
 Route::put('task/{task}/restore', [TasksController::class, 'restore']);
+
+Route::resource('education', EducationsController::class);
+Route::put('education/{education}/restore', [EducationsController::class, 'restore']);
+
+
