@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     login() {
-      this.form.post(this.route('login.attempt'))
+      this.form.post(this.route('login.store'))
     },
   },
 }
