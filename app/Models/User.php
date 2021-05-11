@@ -19,6 +19,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
+    }
+
     public function account()
     {
         return $this->belongsTo(Account::class);
