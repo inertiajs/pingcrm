@@ -7,7 +7,7 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.issue" :error="form.errors.issue" class="pr-6 pb-8 w-full lg:w-full" label="Title" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-full" label="Title" />
           <textarea-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-full" label="Description" />
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
@@ -28,7 +28,7 @@
             <option value="Lalit">Lalit</option>
             <option value="Manju">Manju</option>
           </select-input>
-          <textarea-input v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1" label="Solution" />
+          <textarea-input v-model="form.solution" :error="form.errors.solution" class="pr-6 pb-8 w-full lg:w-full" label="Solution" />
           <text-input type="date" v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
           <text-input type="date" v-model="form.completed_date" :error="form.errors.completed_date" class="date pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
@@ -48,7 +48,7 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { issue: 'Create Issue' },
+  metaInfo: { title: 'Create Issue' },
   components: {
     LoadingButton,
     SelectInput,
@@ -60,11 +60,11 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        issue: null,
+        title: null,
         description: null,
         status: null,
         priority: null,
-        fix: null,
+        solution: null,
         assign: null,
         due_date: null,
         completed_date: null,

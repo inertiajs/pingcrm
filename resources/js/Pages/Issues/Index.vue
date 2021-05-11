@@ -1,4 +1,4 @@
-issue<template>
+<template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">Issues</h1>
     <div class="mb-6 flex justify-between items-center">
@@ -18,11 +18,11 @@ issue<template>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Issue</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
           <th class="px-6 pt-6 pb-4">Description</th>
           <th class="px-6 pt-6 pb-4">Status</th>
           <th class="px-6 pt-6 pb-4">Priority</th>
-          <th class="px-6 pt-6 pb-4">Fix</th>
+          <th class="px-6 pt-6 pb-4">Solution</th>
           <th class="px-6 pt-6 pb-4">Assign</th>
           <th class="px-6 pt-6 pb-4">Due Date</th>
           <th class="px-6 pt-6 pb-4">Completed Date</th>
@@ -30,7 +30,7 @@ issue<template>
         <tr v-for="issue in issues.data" :key="issue.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('issues.edit', issue.id)">
-              {{ issue.issue }}
+              {{ issue.title }}
               <icon v-if="issue.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
@@ -51,7 +51,7 @@ issue<template>
           </td>
           <td class="border-t">
            <inertia-link class="px-6 py-4 flex items-center" :href="route('issues.edit', issue.id)" tabindex="-1">
-             {{ issue.fix }}
+             {{ issue.solution }}
            </inertia-link>
          </td>
          <td class="border-t">
@@ -94,7 +94,7 @@ import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
-  metaInfo: { issue: 'Issues' },
+  metaInfo: { title: 'Issues' },
   components: {
     Icon,
     Pagination,

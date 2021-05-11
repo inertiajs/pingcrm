@@ -11,7 +11,7 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.issue" :error="form.errors.issue" class="pr-6 pb-8 w-full lg:w-1/2" label="Issue" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
           <textarea v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
@@ -25,7 +25,7 @@
             <option value="300">High</option>
             <option value="400">Urgent</option>
           </select-input>
-          <textarea v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1/2" label="Fix" />
+          <textarea v-model="form.solution" :error="form.errors.solution" class="pr-6 pb-8 w-full lg:w-1/2" label="solution" />
           <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Assign">
             <option :value="null" />
             <option value="Bhavuk">Bhavuk</option>
@@ -56,7 +56,7 @@ import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   metaInfo() {
-    return { issue: this.form.name }
+    return { title: this.form.name }
   },
   components: {
     Icon,
@@ -73,11 +73,11 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        issue: this.issue.issue,
+        title: this.issue.title,
         description: this.issue.description,
         status: this.issue.status,
         priority: this.issue.priority,
-        fix: this.issue.fix,
+        solution: this.issue.solution,
         assign: this.issue.assign,
         due_date: this.issue.due_date,
         completed_date: this.issue.completed_date,
