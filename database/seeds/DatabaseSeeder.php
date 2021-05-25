@@ -45,12 +45,11 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
-            $issues = factory(Issue::class, 100)
+        $issues = factory(Issue::class, 100)
             ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)
             ->create(['account_id' => $account->id]);
-
 
         $projects = factory(Project::class, 100)
             ->create(['account_id' => $account->id]);
@@ -86,7 +85,7 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $profiles = factory(Profile::class, 100)
-        ->create(['account_id' => $account->id]);
+            ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)
             ->create(['account_id' => $account->id])
