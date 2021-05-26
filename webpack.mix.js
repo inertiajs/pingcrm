@@ -31,6 +31,10 @@ mix
         '@': path.resolve('resources/js'),
       },
     },
+    devServer: {
+      port: '8082'
+  },
+
   })
   .version()
   .sourceMaps()
