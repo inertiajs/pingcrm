@@ -24,7 +24,6 @@ mix
     require('tailwindcss'),
   ])
   .webpackConfig({
-    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
     resolve: {
       alias: {
         vue$: 'vue/dist/vue.runtime.esm.js',
