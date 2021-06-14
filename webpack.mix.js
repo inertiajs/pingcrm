@@ -17,18 +17,12 @@ const cssNesting = require('postcss-nesting')
 mix
   .js('resources/js/app.js', 'public/js')
   .vue({ runtimeOnly: true })
+  .alias({ '@': 'resources/js' })
   .postCss('resources/css/app.css', 'public/css', [
     // prettier-ignore
     cssImport(),
     cssNesting(),
     require('tailwindcss'),
   ])
-  .webpackConfig({
-    resolve: {
-      alias: {
-        '@': path.resolve('resources/js'),
-      },
-    },
-  })
   .version()
   .sourceMaps()
