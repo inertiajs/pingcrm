@@ -35,7 +35,7 @@ class UsersController extends Controller
 
     public function create()
     {
-        return Inertia::render('Users/Create');
+        return Inertia::dialog('Users/Create')->basePageRoute('users');
     }
 
     public function store()

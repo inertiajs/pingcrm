@@ -91,6 +91,10 @@ Route::put('organizations/{organization}', [OrganizationsController::class, 'upd
     ->name('organizations.update')
     ->middleware('auth');
 
+Route::get('organizations/{organization}/delete', [OrganizationsController::class, 'delete'])
+    ->name('organizations.delete')
+    ->middleware('auth');
+
 Route::delete('organizations/{organization}', [OrganizationsController::class, 'destroy'])
     ->name('organizations.destroy')
     ->middleware('auth');

@@ -31,7 +31,9 @@ mix.postCss('resources/css/app.css', 'public/css/app.css')
       ] : [],
     ],
   })
-  .js('resources/js/app.js', 'public/js').vue().webpackConfig({
+  .js('resources/js/app.js', 'public/js')
+  .vue(3)
+  .webpackConfig(webpack => ({
     output: { chunkFilename: 'js/[name].js[hash]' },
     resolve: {
       alias: {
@@ -39,6 +41,12 @@ mix.postCss('resources/css/app.css', 'public/css/app.css')
         vue: path.resolve('node_modules', 'vue'),
       },
     },
-  })
+    // plugins: [
+    //   new webpack.DefinePlugin({
+    //     __VUE_OPTIONS_API__: true,
+    //     __VUE_PROD_DEVTOOLS__: false,
+    //   }),
+    //  ],
+  }))
   .version()
   .sourceMaps()

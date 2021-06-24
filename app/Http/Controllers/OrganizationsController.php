@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\DashboardController;
 
@@ -14,7 +15,7 @@ class OrganizationsController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Organizations/Index', [
+        return Inertia::page('Organizations/Index', [
             'filters' => Request::all('search', 'trashed'),
             'organizations' => Auth::user()->account->organizations()
                 ->orderBy('name')
@@ -26,13 +27,8 @@ class OrganizationsController extends Controller
 
     public function create()
     {
-        return Inertia::render('Organizations/Create', [
-            'message' => 'Hey there Jonathan, it is '.Carbon::now('America/Toronto')->toTimeString(),
-        ])->inlineable('default');
-
-        // return Inertia::render('Organizations/Create', [
-        //     'message' => 'Hey there Jonathan, it is '.Carbon::now('America/Toronto')->toTimeString(),
-        // ])->inlineBase(fn () => $this->index());
+        return Inertia::dialog('Organizations/Create')
+            ->basePageRoute('organizations');
     }
 
     public function store()
@@ -50,13 +46,14 @@ class OrganizationsController extends Controller
             ])
         );
 
-        return Redirect::route('organizations.edit', $organization)->with('success', 'Organization created.');
+        // return Redirect::route('organizations.edit', $organization);
+        return Redirect::route('organizations.delete', $organization);
         // return Redirect::route('organizations')->with('success', 'Organization created.');
     }
 
     public function edit(Organization $organization)
     {
-        return Inertia::render('Organizations/Edit', [
+        return Inertia::dialog('Organizations/Edit', [
             'organization' => [
                 'id' => $organization->id,
                 'name' => $organization->name,
@@ -70,7 +67,7 @@ class OrganizationsController extends Controller
                 'deleted_at' => $organization->deleted_at,
                 'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
-        ])->inlineable('default');
+        ])->basePageRoute('organizations');
     }
 
     public function update(Organization $organization)
@@ -88,14 +85,24 @@ class OrganizationsController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Organization updated.');
+        return Redirect::route('organizations')->with('success', 'Organization updated.');
+    }
+
+    public function delete(Organization $organization)
+    {
+        return Inertia::dialog('Organizations/Delete', [
+            'organization' => [
+                'id' => $organization->id,
+                'name' => $organization->name,
+            ],
+        ])->basePageRoute('organizations.edit', $organization);
     }
 
     public function destroy(Organization $organization)
     {
         $organization->delete();
 
-        return Redirect::back()->with('success', 'Organization deleted.');
+        return Redirect::route('organizations')->with('success', 'Organization deleted.');
     }
 
     public function restore(Organization $organization)

@@ -1,8 +1,10 @@
 <template>
-  <teleport to="body">
-    <div class="px-2 sm:px-6 md-full:px-6 fixed top-0 right-0 w-1/3 h-full overflow-y-auto bg-white shadow-xl border-l">
-      <slot />
-    </div>
+  <teleport to="#content">
+    <transition name="slideout" :appear="$dialog.appear">
+      <div v-if="$dialog.open" class="slideout absolute px-2 sm:px-6 md-full:px-6 fixed top-0 right-0 w-1/3 h-full overflow-y-auto bg-white shadow-xl border-l" style="z-index: 100000;">
+        <slot />
+      </div>
+    </transition>
   </teleport>
 </template>
 
@@ -12,32 +14,11 @@ import { Inertia } from '@inertiajs/inertia'
 import { usePage } from '@inertiajs/inertia-vue3'
 
 export default {
-  props: {
-    closeUrl: {
-      type: String,
-    },
-  },
-  setup({ closeUrl }) {
-    const mask = ref(null)
-    const firstPage = usePage().url.value === usePage().inline?.value.url
-
+  dialogKey: 'slideout',
+  setup() {
     function escapeToClose(event) {
       if (event.keyCode == 27) {
-        close()
-      }
-    }
-
-    function clickToClose(event) {
-      if (mask.value === event.target) {
-        close()
-      }
-    }
-
-    function close() {
-      if (firstPage) {
-        Inertia.get(closeUrl)
-      } else {
-        window.history.back()
+        Inertia.closeDialog()
       }
     }
 
@@ -46,3 +27,20 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.slideout {
+  transition: all 0.2s ease, max-width 0.1s ease;
+}
+
+.slideout-enter-from,
+.slideout-leave-to {
+  opacity: 0;
+  margin-right: -100px;
+}
+
+.slideout-leave-from {
+  opacity: 1;
+  margin-right: 0;
+}
+</style>
