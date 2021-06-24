@@ -47,7 +47,7 @@ class EducationsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'name' => ['nullable', 'max:50'],
+                'name' => ['required', 'max:50'],
                 'email' => ['nullable', 'max:50','email'],
                 'phone' => ['nullable', 'max:50'],
                 'school' => ['nullable', 'max:50'],
@@ -87,7 +87,7 @@ class EducationsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'name' => ['nullable', 'max:50'],
+                'name' => ['required', 'max:50'],
                 'email' => ['nullable', 'max:50','email'],
                 'phone' => ['nullable', 'max:50'],
                 'school' => ['nullable', 'max:50'],

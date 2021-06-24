@@ -46,11 +46,11 @@ class IssuesController extends Controller
         Auth::user()->account->issues()->create(
             Request::validate([
                 'issue' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:100'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
-                'fix' => ['nullable', 'max:50'],
-                'assign' => ['nullable', 'max:50'],
+                'description' => ['required', 'max:100'],
+                'status' => ['required', 'max:4'],
+                'priority' => ['required', 'max:4'],
+                'fix' => ['required', 'max:50'],
+                'assign' => ['required', 'max:50'],
                 'due_date' => ['nullable', 'max:30'],
                 'completed_date' => ['nullable', 'max:30'],
             ])
@@ -81,15 +81,14 @@ class IssuesController extends Controller
     {
         $issue->update(
             Request::validate([
-              'issue' => ['required', 'max:100'],
-              'description' => ['nullable', 'max:100'],
-              'status' => ['nullable', 'max:4'],
-              'priority' => ['nullable', 'max:4'],
-              // 'status' => ['nullable', 'max:4'],
-              'fix' => ['nullable', 'max:50'],
-              'assign' => ['nullable', 'max:50'],
-              'due_date' => ['nullable', 'max:30'],
-              'completed_date' => ['nullable', 'max:30'],
+                'issue' => ['required', 'max:100'],
+                'description' => ['required', 'max:100'],
+                'status' => ['required', 'max:4'],
+                'priority' => ['required', 'max:4'],
+                'fix' => ['required', 'max:50'],
+                'assign' => ['required', 'max:50'],
+                'due_date' => ['nullable', 'max:30'],
+                'completed_date' => ['nullable', 'max:30'],
             ])
         );
 

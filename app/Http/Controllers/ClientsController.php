@@ -42,9 +42,9 @@ class ClientsController extends Controller
         Auth::user()->account->clients()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'phone' => ['nullable', 'max:20'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
+                'phone' => ['required', 'max:20'],
+                'status' => ['required', 'max:4'],
+                'priority' => ['required', 'max:4'],
             ])
         );
 
@@ -71,9 +71,9 @@ class ClientsController extends Controller
         $client->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'phone' => ['nullable', 'max:20'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
+                'phone' => ['required', 'max:20'],
+                'status' => ['required', 'max:4'],
+                'priority' => ['required', 'max:4'],
             ])
         );
 

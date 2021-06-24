@@ -45,12 +45,12 @@ class ProjectsController extends Controller
         Auth::user()->account->projects()->create(
             Request::validate([
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:100'],
-                'status' => ['nullable', 'max:4'],
-                'priority' => ['nullable', 'max:4'],
-                'creator' => ['nullable', 'max:50'],
-                'due_date' => ['nullable', 'max:30'],
-                'completed_date' => ['nullable', 'max:30'],
+                'description' => ['required', 'max:100'],
+                'status' => ['required', 'max:4'],
+                'priority' => ['required', 'max:4'],
+                'creator' => ['required', 'max:50'],
+                'due_date' => ['required', 'max:30'],
+                'completed_date' => ['required', 'max:30'],
             ])
         );
 
@@ -79,13 +79,12 @@ class ProjectsController extends Controller
         $project->update(
             Request::validate([
               'title' => ['required', 'max:100'],
-              'description' => ['nullable', 'max:100'],
-              'status' => ['nullable', 'max:4'],
-              'priority' => ['nullable', 'max:4'],
-              // 'status' => ['nullable', 'max:4'],
-              'creator' => ['nullable', 'max:50'],
-              'due_date' => ['nullable', 'max:30'],
-              'completed_date' => ['nullable', 'max:30'],
+              'description' => ['required', 'max:100'],
+              'status' => ['required', 'max:4'],
+              'priority' => ['required', 'max:4'],
+              'creator' => ['required', 'max:50'],
+              'due_date' => ['required', 'max:30'],
+              'completed_date' => ['required', 'max:30'],
             ])
         );
 

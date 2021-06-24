@@ -54,16 +54,16 @@ class ContactsController extends Controller
             Request::validate([
                 'first_name' => ['required', 'max:50'],
                 'last_name' => ['required', 'max:50'],
-                'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
+                'organization_id' => ['required', Rule::exists('organizations', 'id')->where(function ($query) {
                     $query->where('account_id', Auth::user()->account_id);
                 })],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'email' => ['required', 'max:50', 'email'],
+                'phone' => ['required', 'max:50'],
+                'address' => ['required', 'max:150'],
+                'city' => ['required', 'max:50'],
+                'region' => ['required', 'max:50'],
+                'country' => ['required', 'max:2'],
+                'postal_code' => ['required', 'max:25'],
             ])
         );
 
@@ -97,16 +97,16 @@ class ContactsController extends Controller
             Request::validate([
                 'first_name' => ['required', 'max:50'],
                 'last_name' => ['required', 'max:50'],
-                'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
+                'organization_id' => ['required', Rule::exists('organizations', 'id')->where(function ($query) {
                     $query->where('account_id', Auth::user()->account_id);
                 })],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'email' => ['required', 'max:50', 'email'],
+                'phone' => ['required', 'max:50'],
+                'address' => ['required', 'max:150'],
+                'city' => ['required', 'max:50'],
+                'region' => ['required', 'max:50'],
+                'country' => ['required', 'max:2'],
+                'postal_code' => ['required', 'max:25'],
             ])
         );
 

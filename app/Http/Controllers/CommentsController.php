@@ -42,11 +42,11 @@ class CommentsController extends Controller
         Auth::user()->account->comments()->create(
             Request::validate([
                 'id' => ['nullable', 'max:50'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'task_id' => ['nullable', 'max:50'],
-                'assigned_user_id' => ['nullable', 'max:50'],
-                'type' => ['nullable', 'max:50'],
+                'description' => ['required', 'max:300'],
+                'user_id' => ['required', 'max:50'],
+                'task_id' => ['required', 'max:50'],
+                'assigned_user_id' => ['required', 'max:50'],
+                'type' => ['required', 'max:50'],
             ])
         );
 
@@ -74,11 +74,11 @@ class CommentsController extends Controller
         $comment->update(
             Request::validate([
                 'id' => ['nullable', 'max:50'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'task_id' => ['nullable', 'max:50'],
-                'assigned_user_id' => ['nullable', 'max:50'],
-                'type' => ['nullable', 'max:50'],
+                'description' => ['required', 'max:300'],
+                'user_id' => ['required', 'max:50'],
+                'task_id' => ['required', 'max:50'],
+                'assigned_user_id' => ['required', 'max:50'],
+                'type' => ['required', 'max:50'],
 
             ])
         );

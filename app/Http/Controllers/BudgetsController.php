@@ -43,7 +43,7 @@ class BudgetsController extends Controller
         Auth::user()->account->budgets()->create(
             Request::validate([
                 
-                'project_name' => ['required', 'max:100'],
+                'project_name' => ['nullable', 'max:100'],
                 'resources' => ['nullable', 'max:300'],
                 'cost' => ['nullable', 'max:50'],
                 'profit' => ['nullable', 'max:50'],
@@ -76,7 +76,7 @@ class BudgetsController extends Controller
     {
         $budget->update(
             Request::validate([
-                'project_name' => ['required', 'max:100'],
+                'project_name' => ['nullable', 'max:100'],
           
                 'resources' => ['nullable', 'max:300'],
                 'cost' => ['nullable', 'max:50'],

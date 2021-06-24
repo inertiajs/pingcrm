@@ -44,10 +44,10 @@ class ProfilesController extends Controller
         Auth::user()->account->profiles()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'phone' => ['nullable', 'max:50'],
-                'city' => ['nullable','max:100'],
-                'job' => ['nullable','max:100'],
-                'nationality' => ['nullable','max:100']
+                'phone' => ['required', 'max:50'],
+                'city' => ['required','max:100'],
+                'job' => ['required','max:100'],
+                'nationality' => ['required','max:100']
                 
             ])
         );
@@ -75,10 +75,10 @@ class ProfilesController extends Controller
         $profile->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'phone' => ['nullable', 'max:50'],
-                'city' => ['nullable','max:100'],
-                'job' => ['nullable','max:100'],
-                'nationality' => ['nullable','max:100']
+                'phone' => ['required', 'max:50'],
+                'city' => ['required','max:100'],
+                'job' => ['required','max:100'],
+                'nationality' => ['required','max:100']
                ])
         
         );
