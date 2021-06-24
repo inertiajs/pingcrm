@@ -27,7 +27,7 @@ class BanksController extends Controller
                         'account_number' => $bank -> account_number,
                         'ifsc_code' => $bank -> ifsc_code,
                         'bank_name' =>$bank->bank_name,
-                      'email'=> $bank ->email,
+                        'email'=> $bank ->email,
                         'deleted_at' => $bank -> deleted_at,
                     ];
                 }),
@@ -44,11 +44,11 @@ class BanksController extends Controller
         Auth::user()->account->banks()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'phone' => ['nullable', 'max:50'],
-                'account_number' => ['nullable','max:100'],
-                'ifsc_code' => ['nullable','max:100'],
-                'bank_name' => ['nullable','max:100'],
-                'email' => ['nullable','max:100'],
+                'phone' => ['required', 'max:50'],
+                'account_number' => ['required','max:100'],
+                'ifsc_code' => ['required','max:100'],
+                'bank_name' => ['required','max:100'],
+                'email' => ['required','max:100'],
                 
                 
             ])
@@ -67,7 +67,7 @@ class BanksController extends Controller
                 'account_number' => $bank -> account_number,
                 'ifsc_code' => $bank -> ifsc_code,
                 'bank_name' =>$bank->bank_name,
-                      'email'=> $bank ->email,
+                'email'=> $bank ->email,
                 'deleted_at' => $bank -> deleted_at,
                 ],
         ]);
@@ -78,11 +78,11 @@ class BanksController extends Controller
         $bank->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'phone' => ['nullable', 'max:50'],
-                'account_number' => ['nullable','max:100'],
-                'ifsc_code' => ['nullable','max:100'],
-                'bank_name' => ['nullable','max:100'],
-                'email' => ['nullable','max:100'],
+                'phone' => ['required', 'max:50'],
+                'account_number' => ['required','max:100'],
+                'ifsc_code' => ['required','max:100'],
+                'bank_name' => ['required','max:100'],
+                'email' => ['required','max:100'],
                 
             ])
 

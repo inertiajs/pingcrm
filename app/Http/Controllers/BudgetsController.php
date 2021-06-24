@@ -22,7 +22,7 @@ class BudgetsController extends Controller
                 ->through(function ($budget) {
                     return [
                         'id' => $budget->id,
-                        'project-name' => $budget->project_name,
+                        'project_name' => $budget->project_name,
                         'resources' => $budget->resources,
                         'cost' => $budget->cost,
                         'profit' => $budget->profit,
@@ -61,7 +61,8 @@ class BudgetsController extends Controller
         return Inertia::render('Budgets/Edit', [
             'budget' => [
                 'id' => $budget->id,
-                'project-name' => $budget->project_name,
+               
+                'project_name' => $budget->project_name,
                 'resources' => $budget->resources,
                 'cost' => $budget->cost,
                 'profit' => $budget->profit,
@@ -76,6 +77,7 @@ class BudgetsController extends Controller
         $budget->update(
             Request::validate([
                 'project_name' => ['required', 'max:100'],
+          
                 'resources' => ['nullable', 'max:300'],
                 'cost' => ['nullable', 'max:50'],
                 'profit' => ['nullable', 'max:50'],
