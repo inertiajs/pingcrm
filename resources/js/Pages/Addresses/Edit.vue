@@ -13,8 +13,8 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
            <text-input v-model="form.phone" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address_line1" :error="form.errors.address_line1" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
-          <text-input v-model="form.address_line2" :error="form.errors.address_line2" class="pr-6 pb-8 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.address_line1" :error="form.errors.address_line1" class="pr-6 pb-8 w-full lg:w-1/2" label="Address_line1" />
+          <text-input v-model="form.address_line2" :error="form.errors.address_line2" class="pr-6 pb-8 w-full lg:w-1/2" label="Address_line2" />
          <text-input v-model="form.city" :error="form.errors.city" class="pr-6 pb-8 w-full lg:w-1/2" label="City" />
           <text-input v-model="form.region" :error="form.errors.region" class="pr-6 pb-8 w-full lg:w-1/2" label="Province/State" />
           <select-input v-model="form.country" :error="form.errors.country" class="pr-6 pb-8 w-full lg:w-1/2" label="Country">
