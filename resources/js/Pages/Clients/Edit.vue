@@ -72,7 +72,7 @@ export default {
     }
   },
   methods: {
-    update() {
+     update() {
       this.form.put(this.route('clients.update', this.client.id))
     },
     destroy() {

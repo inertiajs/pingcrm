@@ -25,7 +25,7 @@
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pr-6 pb-8 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!address.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Address</button>
+           <button v-if="!address.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Address</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Address</loading-button>
         </div>
       </form>
