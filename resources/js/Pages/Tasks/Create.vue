@@ -15,16 +15,16 @@
          
           <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Priority">
             <option :value="null" />
-            <option value="10">Low</option>
-            <option value="20">Normal</option>
-            <option value="30">High</option>
-            <option value="40">Urgent</option>
+            <option value="Low">Low</option>
+            <option value="Normal">Normal</option>
+            <option value="High">High</option>
+            <option value="Urgent">Urgent</option>
           </select-input>
 
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
-            <option value="100">Pending</option>
-            <option value="200">Complete</option>
+            <option value="Pending">Pending</option>
+            <option value="Complete">Complete</option>
           </select-input>
           
           <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due_date" />

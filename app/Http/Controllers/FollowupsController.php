@@ -49,16 +49,16 @@ class FollowupsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
+                'description' => ['required', 'max:300'],
                 'customer_name' => ['required', 'max:50'],
-                'team_id' => ['nullable', 'max:150'],
-                'priority' => ['nullable', 'max:25'],
-                'status' => ['nullable', 'max:25'],
-                'email' => ['nullable', 'max:25'],
-                'agreement' => ['nullable', 'max:25'],
-                'phone' => ['nullable', 'max:25'],
-                'maximum_time' => ['nullable', 'max:25'],
-                'meeting_schedule' => ['nullable', 'max:25'],
+                'team_id' => ['required', 'max:150'],
+                'priority' => ['required', 'max:25'],
+                'status' => ['required', 'max:25'],
+                'email' => ['required', 'max:25'],
+                'agreement' => ['required', 'max:25'],
+                'phone' => ['required', 'max:25'],
+                'maximum_time' => ['required', 'max:25'],
+                'meeting_schedule' => ['required', 'max:25'],
             ])
         );
 
@@ -92,16 +92,16 @@ class FollowupsController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
+                'description' => ['required', 'max:300'],
                 'customer_name' => ['required', 'max:50'],
-                'team_id' => ['nullable', 'max:150'],
-                'priority' => ['nullable', 'max:25'],
-                'status' => ['nullable', 'max:25'],
-                'email' => ['nullable', 'max:25'],
-                'agreement' => ['nullable', 'max:25'],
-                'phone' => ['nullable', 'max:25'],
-                'maximum_time' => ['nullable', 'max:25'],
-                'meeting_schedule' => ['nullable', 'max:25'],
+                'team_id' => ['required', 'max:150'],
+                'priority' => ['required', 'max:25'],
+                'status' => ['required', 'max:25'],
+                'email' => ['required', 'max:25'],
+                'agreement' => ['required', 'max:25'],
+                'phone' => ['required', 'max:25'],
+                'maximum_time' => ['required', 'max:25'],
+                'meeting_schedule' => ['required', 'max:25'],
             ])
         );
 
