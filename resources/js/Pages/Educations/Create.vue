@@ -17,10 +17,10 @@
           <text-input v-model="form.college" :error="form.errors.college" class="pr-6 pb-8 w-full lg:w-1/2" label="College" />
           <select-input v-model="form.higher_education" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Higher_education">
             <option :value="null" />
-            <option value="100">Diploma</option>
-            <option value="200">Graduation</option>
-            <option value="300">Matrix</option>
-            <option value="400">Post_Graduation</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Graduation">Graduation</option>
+            <option value="Matrix">Matrix</option>
+            <option value="Post_Graduation">Post_Graduation</option>
           </select-input>
           
           <text-input v-model="form.percentage" :error="form.errors.percentage" class="pr-6 pb-8 w-full lg:w-1/2" label="Percentage" />
