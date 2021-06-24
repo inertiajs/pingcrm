@@ -50,16 +50,16 @@ class TasksController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'task_id' => ['nullable', 'max:150'],
-                'team_id' => ['nullable', 'max:50'],
+                'description' => ['required', 'max:300'],
+                'user_id' => ['required', 'max:50'],
+                'task_id' => ['required', 'max:150'],
+                'team_id' => ['required', 'max:50'],
                 'project_id' => ['required', 'max:50'],
-                'priority' => ['nullable', 'max:2'],
-                'status' => ['nullable', 'max:25'],
-                'creator' => ['nullable', 'max:25'],
-                'due_date' => ['nullable', 'max:25'],
-                'completed_date' => ['nullable', 'max:25'],
+                'priority' => ['required', 'max:2'],
+                'status' => ['required', 'max:25'],
+                'creator' => ['required', 'max:25'],
+                'due_date' => ['required', 'max:25'],
+                'completed_date' => ['required', 'max:25'],
             ])
         );
 
@@ -93,16 +93,16 @@ class TasksController extends Controller
             Request::validate([
                 'id' => ['nullable', 'max:50'],
                 'title' => ['required', 'max:100'],
-                'description' => ['nullable', 'max:300'],
-                'user_id' => ['nullable', 'max:50'],
-                'task_id' => ['nullable', 'max:150'],
-                'team_id' => ['nullable', 'max:50'],
+                'description' => ['required', 'max:300'],
+                'user_id' => ['required', 'max:50'],
+                'task_id' => ['required', 'max:150'],
+                'team_id' => ['required', 'max:50'],
                 'project_id' => ['required', 'max:50'],
-                'priority' => ['nullable', 'max:2'],
-                'status' => ['nullable', 'max:25'],
-                'creator' => ['nullable', 'max:25'],
-                'due_date' => ['nullable', 'max:25'],
-                'completed_date' => ['nullable', 'max:25'],
+                'priority' => ['required', 'max:2'],
+                'status' => ['required', 'max:25'],
+                'creator' => ['required', 'max:25'],
+                'due_date' => ['required', 'max:25'],
+                'completed_date' => ['required', 'max:25'],
 
             ])
         );
