@@ -17,6 +17,7 @@ use App\Models\Restaurant;
 use App\Models\Document;
 use App\Models\Education;
 use App\Models\Issue;
+use App\Models\Holiday;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -86,6 +87,9 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $profiles = factory(Profile::class, 100)
+        ->create(['account_id' => $account->id]);
+
+        $holidays = factory(Holiday::class, 100)
         ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)

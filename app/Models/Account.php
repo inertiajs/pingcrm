@@ -36,13 +36,10 @@ class Account extends Model
         return $this->hasMany(Followup::class);
     }
 
-
-
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class);
     }
-
 
     public function tasks()
     {
@@ -87,5 +84,10 @@ class Account extends Model
     public function contacts()
     {
         return $this->hasMany(Contact::class);
+    }
+
+    public function holidays()
+    {
+        return $this->hasMany(Holiday::class);
     }
 }

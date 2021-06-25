@@ -19,6 +19,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
+use App\Http\Controllers\HolidaysController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,20 @@ Route::post('clients', [ClientsController::class, 'store'])
 Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     ->name('clients.edit')
     ->middleware('auth');
+
+Route::get('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
+    ->middleware('auth');
+
+Route::get('clients/{client}', [ClientsController::class, 'destroy'])
+    ->name('clients.destroy')
+    ->middleware('auth');
+
+Route::get('clients/{client}/restore', [ClientsController::class, 'restore'])
+    ->name('clients.restore')
+    ->middleware('auth');
+
+
 
 
 
@@ -174,34 +189,66 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
     ->middleware('auth');
 
-// Organizations
 
-Route::get('organizations', [OrganizationsController::class, 'index'])
-    ->name('organizations')
+
+// Holidays
+
+Route::get('holidays', [HolidaysController::class, 'index'])
+    ->name('holidays')
     ->middleware('remember', 'auth');
 
-Route::get('organizations/create', [OrganizationsController::class, 'create'])
-    ->name('organizations.create')
+Route::get('holidays/create', [HolidaysController::class, 'create'])
+    ->name('holidays.create')
     ->middleware('auth');
 
-Route::post('organizations', [OrganizationsController::class, 'store'])
-    ->name('organizations.store')
+Route::post('holidays', [HolidaysController::class, 'store'])
+    ->name('holidays.store')
     ->middleware('auth');
 
-Route::get('organizations/{organization}/edit', [OrganizationsController::class, 'edit'])
+Route::get('holidays/{holiday}/edit', [HolidaysController::class, 'edit'])
+    ->name('holidays.edit')
+    ->middleware('auth');
+
+Route::put('holidays/{holiday}', [HolidaysController::class, 'update'])
+    ->name('holidays.update')
+    ->middleware('auth');
+
+Route::delete('holidays/{holiday}', [HolidaysController::class, 'destroy'])
+    ->name('holidays.destroy')
+    ->middleware('auth');
+
+Route::put('holidays/{holiday}/restore', [HolidaysController::class, 'restore'])
+    ->name('holidays.restore')
+    ->middleware('auth');
+
+// Companys
+
+Route::get('companys', [CompanysController::class, 'index'])
+    ->name('companys')
+    ->middleware('remember', 'auth');
+
+Route::get('companys/create', [CompanysController::class, 'create'])
+    ->name('companys.create')
+    ->middleware('auth');
+
+Route::post('companys', [CompanysController::class, 'store'])
+    ->name('companys.store')
+    ->middleware('auth');
+
+Route::get('companys/{company}/edit', [CompanysController::class, 'edit'])
     ->name('organizations.edit')
     ->middleware('auth');
 
-Route::put('organizations/{organization}', [OrganizationsController::class, 'update'])
-    ->name('organizations.update')
+Route::put('companys/{company}', [CompanysController::class, 'update'])
+    ->name('companys.update')
     ->middleware('auth');
 
-Route::delete('organizations/{organization}', [OrganizationsController::class, 'destroy'])
-    ->name('organizations.destroy')
+Route::delete('companys/{company}', [CompanysController::class, 'destroy'])
+    ->name('companys.destroy')
     ->middleware('auth');
 
-Route::put('organizations/{organization}/restore', [OrganizationsController::class, 'restore'])
-    ->name('organizations.restore')
+Route::put('companys/{company}/restore', [CompanysController::class, 'restore'])
+    ->name('companys.restore')
     ->middleware('auth');
 
 // Tasks
