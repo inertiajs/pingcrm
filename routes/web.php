@@ -19,6 +19,8 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
+use App\Http\Controllers\HolidaysController;
+use App\Http\Controllers\LeavesController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -177,7 +179,74 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
 // Organizations
 
 Route::get('organizations', [OrganizationsController::class, 'index'])
-    ->name('organizations')
+    ->name('organizations');
+
+// Leaves
+
+Route::get('leaves',[LeavesController::class, 'index'])
+    ->name('leaves')
+    ->middleware('remember', 'auth');
+
+Route::get('leaves/create', [LeavesController::class, 'create'])
+    ->name('leaves.create')
+    ->middleware('auth');
+
+Route::post('leaves', [LeavesController::class, 'store'])
+    ->name('leaves.store')
+    ->middleware('auth');
+
+Route::get('leaves/{leave}/edit', [LeavesController::class, 'edit'])
+    ->name('leaves.edit')
+    ->middleware('auth');
+
+Route::put('leaves/{leave}', [LeavesController::class, 'update'])
+    ->name('leaves.update')
+    ->middleware('auth');
+
+Route::delete('leaves/{leave}', [LeavesController::class, 'destroy'])
+    ->name('leaves.destroy')
+    ->middleware('auth');
+
+Route::put('leaves/{leave}/restore', [LeavesController::class, 'restore'])
+    ->name('leaves.restore')
+    ->middleware('auth');
+
+
+
+// Holidays
+
+Route::get('holidays', [HolidaysController::class, 'index'])
+    ->name('holidays')
+    ->middleware('remember', 'auth');
+
+Route::get('holidays/create', [HolidaysController::class, 'create'])
+    ->name('holidays.create')
+    ->middleware('auth');
+
+Route::post('holidays', [HolidaysController::class, 'store'])
+    ->name('holidays.store')
+    ->middleware('auth');
+
+Route::get('holidays/{holiday}/edit', [HolidaysController::class, 'edit'])
+    ->name('holidays.edit')
+    ->middleware('auth');
+
+Route::put('holidays/{holiday}', [HolidaysController::class, 'update'])
+    ->name('holidays.update')
+    ->middleware('auth');
+
+Route::delete('holidays/{holiday}', [HolidaysController::class, 'destroy'])
+    ->name('holidays.destroy')
+    ->middleware('auth');
+
+Route::put('holidays/{holiday}/restore', [HolidaysController::class, 'restore'])
+    ->name('holidays.restore')
+    ->middleware('auth');
+
+// Companys
+
+Route::get('companys', [CompanysController::class, 'index'])
+    ->name('companys')
     ->middleware('remember', 'auth');
 
 Route::get('organizations/create', [OrganizationsController::class, 'create'])
