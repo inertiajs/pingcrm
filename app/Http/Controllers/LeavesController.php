@@ -26,7 +26,7 @@ class LeavesController extends Controller
                         'contact_no'=>$leave->contact_no,
                         'day' => $leave->day,
                         'date' => $leave->date,
-                        'reason_of_leave ' => $leave->reason_of_leave,
+                        'reason_of_leave' => $leave->reason_of_leave,
 
                     ];
                 }),
@@ -64,7 +64,7 @@ class LeavesController extends Controller
                 'contact_no'=>$leave->contact_no,
                 'day' => $leave->day,
                 'date' => $leave->date,
-                'reason_of_leave ' => $leave->reason_of_leave,
+                'reason_of_leave' => $leave->reason_of_leave,
 
                 //'contacts' => $leave->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],

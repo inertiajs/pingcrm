@@ -19,6 +19,7 @@
             <option value="Tommorow">Tommorow</option>
 
           </select-input>
+          
           <text-input v-model="form.date" :error="form.errors.date" class="pr-6 pb-8 w-full lg:w-1/2" label="Date"></text-input>
           <text-input v-model="form.reason_of_leave" :error="form.errors.reason_of_leave" class="pr-6 pb-8 w-full lg:w-1/2" label="Reason of Leave"></text-input>
         
