@@ -9,6 +9,12 @@ class Account extends Model
         return $this->hasMany(User::class);
     }
 
+    public function leaves()
+    {
+        return $this->hasMany(Leave::class);
+    }
+
+
     public function organizations()
     {
         return $this->hasMany(Organization::class);
@@ -36,13 +42,10 @@ class Account extends Model
         return $this->hasMany(Followup::class);
     }
 
-
-
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class);
     }
-
 
     public function tasks()
     {
@@ -87,5 +90,10 @@ class Account extends Model
     public function contacts()
     {
         return $this->hasMany(Contact::class);
+    }
+
+    public function holidays()
+    {
+        return $this->hasMany(Holiday::class);
     }
 }

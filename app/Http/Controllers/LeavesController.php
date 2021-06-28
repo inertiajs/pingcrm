@@ -22,10 +22,12 @@ class LeavesController extends Controller
                 ->through(function ($leave) {
                     return [
                         'id' => $leave->id,
-                        'month' => $leave->month,
-                        'week' => $leave->week,
+                        'name' => $leave->name,
+                        'contact_no'=>$leave->contact_no,
                         'day' => $leave->day,
                         'date' => $leave->date,
+                        'reason_of_leave ' => $leave->reason_of_leave,
+
                     ];
                 }),
         ]);
@@ -41,10 +43,11 @@ class LeavesController extends Controller
         Auth::user()->account->leaves()->create(
             Request::validate([
             
-                'month' => ['required', 'max:20'],
-                'week' => ['required', 'max:20'],
+                'name' => ['required', 'max:20'],
+                'contact_no' => ['required', 'max:20'],
                 'day' => ['required', 'max:20'],
                 'date' => ['required', 'max:20'],
+                'reason_of_leave' => ['required', 'max:20'],
             ])
         );
 
@@ -55,12 +58,14 @@ class LeavesController extends Controller
     {
         return Inertia::render('Leaves/Edit', [
             'leave' => [
+                
                 'id' => $leave->id,
-                      
-                        'month' => $leave->month,
-                        'week' => $leave->week,
-                        'day' => $leave->day,
-                        'date' => $leave->date,
+                'name' => $leave->name,
+                'contact_no'=>$leave->contact_no,
+                'day' => $leave->day,
+                'date' => $leave->date,
+                'reason_of_leave ' => $leave->reason_of_leave,
+
                 //'contacts' => $leave->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
             ],
         ]);
@@ -70,10 +75,11 @@ class LeavesController extends Controller
     {
         $leave->update(
             Request::validate([
-                'month' => ['required', 'max:20'],
-                'week' => ['required', 'max:20'],
+                'name' => ['required', 'max:20'],
+                'contact_no' => ['required', 'max:20'],
                 'day' => ['required', 'max:20'],
                 'date' => ['required', 'max:20'],
+                'reason_of_leave' => ['required', 'max:20'],
             ])
         );
 

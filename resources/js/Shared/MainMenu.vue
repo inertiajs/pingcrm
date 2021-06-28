@@ -24,6 +24,14 @@
         <div :class="isUrl('banks') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Bank Details</div>
       </inertia-link>
     </div>
+
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('leaves')">
+        <icon name="cash" class="w-4 h-4 mr-2" :class="isUrl('leaves') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('leaves') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Leaves</div>
+      </inertia-link>
+    </div>
+
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('tasks')">
         <icon name="clipboard-list" class="w-4 h-4 mr-2" :class="isUrl('tasks') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />

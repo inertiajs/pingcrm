@@ -181,6 +181,7 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
 Route::get('organizations', [OrganizationsController::class, 'index'])
     ->name('organizations');
 
+
 // Leaves
 
 Route::get('leaves',[LeavesController::class, 'index'])
@@ -210,7 +211,6 @@ Route::delete('leaves/{leave}', [LeavesController::class, 'destroy'])
 Route::put('leaves/{leave}/restore', [LeavesController::class, 'restore'])
     ->name('leaves.restore')
     ->middleware('auth');
-
 
 
 // Holidays

@@ -16,10 +16,11 @@ class CreateLeavesTable extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->index();
-            $table->string('month')->nullable();
-            $table->string('week')->nullable();
+            $table->string('name')->nullable();
+            $table->string('contact_no')->nullable();
             $table->string('day')->nullable();
             $table->string('date')->nullable();
+            $table->string('reason_of_leave')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -88,14 +88,14 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $profiles = factory(Profile::class, 100)
-        ->create(['account_id' => $account->id]);
+            ->create(['account_id' => $account->id]);
 
         $holidays = factory(Holiday::class, 100)
-        ->create(['account_id' => $account->id]);
+            ->create(['account_id' => $account->id]);
 
         
         $leaves = factory(Leave::class, 100)
-        ->create(['account_id' => $account->id]);
+            ->create(['account_id' => $account->id]);
 
 
         factory(Contact::class, 100)
