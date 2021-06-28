@@ -23,8 +23,8 @@
           <th class="px-6 pt-6 pb-4">Name</th>
           <th class="px-6 pt-6 pb-4">Contact No</th>
           <th class="px-6 pt-6 pb-4">Day</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Date</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Reason of Leave</th>
+          <th class="px-6 pt-6 pb-4">Date</th>
+          <th class="px-6 pt-6 pb-4">Reason of Leave</th>
         </tr>
         <tr v-for="leave in leaves.data" :key="leave.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           

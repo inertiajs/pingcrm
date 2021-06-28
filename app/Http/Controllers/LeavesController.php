@@ -47,7 +47,7 @@ class LeavesController extends Controller
                 'contact_no' => ['required', 'max:20'],
                 'day' => ['required', 'max:20'],
                 'date' => ['required', 'max:20'],
-                'reason_of_leave' => ['required', 'max:20'],
+                'reason_of_leave' => ['required', 'max:250'],
             ])
         );
 
@@ -79,7 +79,7 @@ class LeavesController extends Controller
                 'contact_no' => ['required', 'max:20'],
                 'day' => ['required', 'max:20'],
                 'date' => ['required', 'max:20'],
-                'reason_of_leave' => ['required', 'max:20'],
+                'reason_of_leave' => ['required', 'max:250'],
             ])
         );
 

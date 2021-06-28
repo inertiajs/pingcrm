@@ -11,7 +11,7 @@
           
           <text-input v-model="form.name" :error="form.errors.name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.contact_no" :error="form.errors.contact_no" class="pr-6 pb-8 w-full lg:w-1/2" label="Contact No"></text-input>
-        0 <select-input v-model="form.day" :error="form.errors.day" class="pr-6 pb-8 w-full lg:w-1/2" label="Day">
+          <select-input v-model="form.day" :error="form.errors.day" class="pr-6 pb-8 w-full lg:w-1/2" label="Day">
             
             <option :value="null" />
             <option value="Yesterday">Yesterday</option>
