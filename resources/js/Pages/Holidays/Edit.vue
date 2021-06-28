@@ -14,12 +14,12 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
            
           <text-input v-model="form.month" :error="form.errors.phone" class="pr-6 pb-8 w-full lg:w-1/2" label="Month" />
-          <select-input v-model="form.week" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Week">
+          <select-input v-model="form.week" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Weak">
             <option :value="null" />
-            <option value="first_week">First Week</option>
-            <option value="second_week">Second Week</option>
-            <option value="third_week">Third Week</option>
-            <option value="fourth_week">Fourth Week</option>
+            <option value="first_weak">First Weak</option>
+            <option value="second_weak">Second Weak</option>
+            <option value="third_weak">Third Weak</option>
+            <option value="fourth_weak">Fourth Weak</option>
           </select-input>
             <text-input v-model="form.day" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Day"></text-input>
             <text-input v-model="form.date" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Date"></text-input>
@@ -63,11 +63,10 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        name: this.holiday.name,
-        phone: this.holiday.phone,
-        status: this.holiday.status,
-        priority: this.holiday.priority,
-
+        month:this.holiday.month,
+        weak: this.holiday.weak,
+        day: this.holiday.day,
+        date: this.holiday.date,
       }),
     }
   },

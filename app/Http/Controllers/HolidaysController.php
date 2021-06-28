@@ -15,7 +15,7 @@ class HolidaysController extends Controller
         return Inertia::render('Holidays/Index', [
             'filters' => Request::all('search', 'trashed'),
             'holidays' => Auth::user()->account->holidays()
-                ->orderBy('name')
+                ->orderBy('month')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
@@ -23,7 +23,7 @@ class HolidaysController extends Controller
                     return [
                         'id' => $holiday->id,
                         'month' => $holiday->month,
-                        'week' => $holiday->week,
+                        'weak' => $holiday->weak,
                         'day' => $holiday->day,
                         'date' => $holiday->date,
                     ];
@@ -42,7 +42,7 @@ class HolidaysController extends Controller
             Request::validate([
             
                 'month' => ['required', 'max:20'],
-                'week' => ['required', 'max:20'],
+                'weak' => ['required', 'max:20'],
                 'day' => ['required', 'max:20'],
                 'date' => ['required', 'max:20'],
             ])
@@ -58,7 +58,7 @@ class HolidaysController extends Controller
                 'id' => $holiday->id,
                       
                         'month' => $holiday->month,
-                        'week' => $holiday->week,
+                        'weak' => $holiday->weak,
                         'day' => $holiday->day,
                         'date' => $holiday->date,
                 //'contacts' => $holiday->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
@@ -71,7 +71,7 @@ class HolidaysController extends Controller
         $holiday->update(
             Request::validate([
                 'month' => ['required', 'max:20'],
-                'week' => ['required', 'max:20'],
+                'weak' => ['required', 'max:20'],
                 'day' => ['required', 'max:20'],
                 'date' => ['required', 'max:20'],
             ])

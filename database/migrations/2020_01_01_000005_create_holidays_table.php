@@ -16,10 +16,10 @@ class CreateHolidaysTable extends Migration
         Schema::create('holidays', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('account_id')->index();
-            $table->string('month', 20);
-            $table->string('week')->nullable();
+            $table->string('month')->nullable();
+            $table->string('weak')->nullable();
             $table->string('day')->nullable();
-            $table->unsignedInteger('date')->nullable();
+            $table->string('date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
