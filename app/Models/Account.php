@@ -36,9 +36,9 @@ class Account extends Model
         return $this->hasMany(Followup::class);
     }
 
-    public function officerule()
+    public function officeRule()
     {
-        return $this->hasMany(Officerule::class);
+        return $this->hasMany(OfficeRule::class);
     }
 
 

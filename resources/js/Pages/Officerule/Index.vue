@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-8 font-bold text-3xl">Officerule</h1>
+    <h1 class="mb-8 font-bold text-3xl">OfficeRule</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-gray-700">Trashed:</label>
@@ -11,7 +11,7 @@
         </select>
       </search-filter>
 
-      <inertia-link class="btn-indigo" :href="route('clients.create')">
+      <inertia-link class="btn-indigo" :href="route('officerule.create')">
         <span>Create</span>
         <span class="hidden md:inline">Officerule</span>
       </inertia-link>
@@ -24,40 +24,40 @@
           <th class="px-6 pt-6 pb-4">Priority</th>
           <th class="px-6 pt-6 pb-4" colspan="2">Status</th>
         </tr>
-        <tr v-for="client in clients.data" :key="client.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="officerule in officerule.data" :key="officerule.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('clients.edit', client.id)">
-              {{ client.name }}
-              <icon v-if="client.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('officerule.edit', officerule.id)">
+              {{ officerule.name }}
+              <icon v-if="officerule.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('clients.edit', client.id)" tabindex="-1">
-              {{ client.phone }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
+              {{ officerule.phone }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('clients.edit', client.id)" tabindex="-1">
-              {{ client.priority }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
+              {{ officerule.priority }}
             </inertia-link>
           </td>
            <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('clients.edit', client.id)" tabindex="-1">
-              {{ client.status }}
+            <inertia-link class="px-6 py-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
+              {{ officerule.status }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('clients.edit', client.id)" tabindex="-1">
+            <inertia-link class="px-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </inertia-link>
           </td>
         </tr>
-        <tr v-if="clients.data.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No clients found.</td>
+        <tr v-if="officerule.data.length === 0">
+          <td class="border-t px-6 py-4" colspan="4">No officerule found.</td>
         </tr>
       </table>
     </div>
-    <pagination class="mt-6" :links="clients.links" />
+    <pagination class="mt-6" :links="officerule.links" />
   </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
   },
   layout: Layout,
   props: {
-    clients: Object,
+    officerule: Object,
     filters: Object,
   },
   data() {
@@ -94,7 +94,7 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.route('clients', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.route('officerule', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
     },

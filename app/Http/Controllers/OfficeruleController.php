@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Officerule;
+use App\Models\OfficeRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
