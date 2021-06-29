@@ -31,6 +31,14 @@
       </inertia-link>
     </div>
 
+
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('officerule')">
+        <icon name="scale" class="w-4 h-4 mr-2" :class="isUrl('officerule') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('officerule') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Office Rule</div>
+      </inertia-link>
+    </div>
+    
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('budgets')">
         <icon name="scale" class="w-4 h-4 mr-2" :class="isUrl('budgets') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />

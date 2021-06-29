@@ -19,6 +19,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
+use App\Http\Controllers\OfficeruleController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -234,6 +235,35 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+// Officerule
+
+Route::get('officerule', [OfficeruleController::class, 'index'])
+    ->name('officerule')
+    ->middleware('remember', 'auth');
+
+Route::get('officerule/create', [OfficeruleController::class, 'create'])
+    ->name('officerule.create')
+    ->middleware('auth');
+
+Route::post('officerule', [OfficeruleController::class, 'store'])
+    ->name('officerule.store')
+    ->middleware('auth');
+
+Route::get('officerule/{officerule}/edit', [OfficeruleController::class, 'edit'])
+    ->name('officerule.edit')
+    ->middleware('auth');
+
+Route::put('officerule/{task}', [OfficeruleController::class, 'update'])
+    ->name('officerule.update')
+    ->middleware('auth');
+
+Route::delete('officerule/{officerule}', [OfficeruleController::class, 'destroy'])
+    ->name('officerule.destroy')
+    ->middleware('auth');
+
+Route::put('officerule/{officerule}/restore', [OfficeruleController::class, 'restore'])
+    ->name('officerule.restore')
+    ->middleware('auth');
 
 // Followups
 

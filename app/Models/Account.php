@@ -36,6 +36,10 @@ class Account extends Model
         return $this->hasMany(Followup::class);
     }
 
+    public function officerule()
+    {
+        return $this->hasMany(Officerule::class);
+    }
 
 
     public function restaurants()
