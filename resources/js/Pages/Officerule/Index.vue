@@ -13,37 +13,37 @@
 
       <inertia-link class="btn-indigo" :href="route('officerule.create')">
         <span>Create</span>
-        <span class="hidden md:inline">Officerule</span>
+        <span class="hidden md:inline">OfficeRule</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-          <th class="px-6 pt-6 pb-4">Phone</th>
-          <th class="px-6 pt-6 pb-4">Priority</th>
-          <th class="px-6 pt-6 pb-4" colspan="2">Status</th>
+          <th class="px-6 pt-6 pb-4">Title</th>
+          <th class="px-6 pt-6 pb-4">Description</th>
+          <th class="px-6 pt-6 pb-4">Rule Category ID</th>
+          <th class="px-6 pt-6 pb-4">User ID</th>
         </tr>
         <tr v-for="officerule in officerule.data" :key="officerule.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('officerule.edit', officerule.id)">
-              {{ officerule.name }}
+              {{ officerule.title }}
               <icon v-if="officerule.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
-              {{ officerule.phone }}
+              {{ officerule.description }}
             </inertia-link>
           </td>
           <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
-              {{ officerule.priority }}
+              {{ officerule.user_id }}
             </inertia-link>
           </td>
            <td class="border-t">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('officerule.edit', officerule.id)" tabindex="-1">
-              {{ officerule.status }}
+              {{ officerule.rule_category_id }}
             </inertia-link>
           </td>
           <td class="border-t w-px">
@@ -53,7 +53,7 @@
           </td>
         </tr>
         <tr v-if="officerule.data.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No officerule found.</td>
+          <td class="border-t px-6 py-4" colspan="4">No officeRule found.</td>
         </tr>
       </table>
     </div>
@@ -71,7 +71,7 @@ import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
-  metaInfo: { title: 'officerule' },
+  metaInfo: { title: 'OfficeRule' },
   components: {
     Icon,
     Pagination,
@@ -79,7 +79,7 @@ export default {
   },
   layout: Layout,
   props: {
-    officerule: Object,
+    OfficeRule: Object,
     filters: Object,
   },
   data() {

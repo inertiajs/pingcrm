@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOfficerulesTable extends Migration
+class CreateOfficeRulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOfficerulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('officerules', function (Blueprint $table) {
+        Schema::create('office_rules', function (Blueprint $table) {
             $table->id();
             $table->integer('account_id')->index();
             $table->string('title');
@@ -32,6 +32,6 @@ class CreateOfficerulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('officerules');
+        Schema::dropIfExists('office_rules');
     }
 }

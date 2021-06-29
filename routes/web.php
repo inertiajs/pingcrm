@@ -253,7 +253,7 @@ Route::get('officerule/{officerule}/edit', [OfficeruleController::class, 'edit']
     ->name('officerule.edit')
     ->middleware('auth');
 
-Route::put('officerule/{task}', [OfficeruleController::class, 'update'])
+Route::put('officerule/{officerule}', [OfficeruleController::class, 'update'])
     ->name('officerule.update')
     ->middleware('auth');
 

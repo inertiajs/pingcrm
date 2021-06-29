@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
         $banks = factory(Bank::class, 100)
             ->create(['account_id' => $account->id]);
         
-        $officerule = factory(OfficeRule::class, 100)
+        $officeRule = factory(OfficeRule::class, 100)
             ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)

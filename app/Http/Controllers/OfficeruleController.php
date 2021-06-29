@@ -12,10 +12,10 @@ class OfficeRuleController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Officerule/Index', [
+        return Inertia::render('OfficeRule/Index', [
             'filters' => Request::all('search', 'trashed'),
             'officerule' => Auth::user()->account->officerule()
-                ->orderBy('name')
+                
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
