@@ -32,6 +32,13 @@
     </div>
 
     <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('rulecategory')">
+        <icon name="clipboard-list" class="w-4 h-4 mr-2" :class="isUrl('rulecategory') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('rulecategory') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Rule Category</div>
+      </inertia-link>
+    </div>
+
+    <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('budgets')">
         <icon name="scale" class="w-4 h-4 mr-2" :class="isUrl('budgets') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('budgets') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Budgets</div>
