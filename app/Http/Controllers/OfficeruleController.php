@@ -35,7 +35,7 @@ class OfficeRuleController extends Controller
 
     public function create()
     {
-        return Inertia::render('Officerule/Create');
+        return Inertia::render('OfficeRule/Create');
     }
 
     public function store()
@@ -43,7 +43,7 @@ class OfficeRuleController extends Controller
         Auth::user()->account->officerule()->create(
             Request::validate([
                 'id' => ['nullable', 'max:50'],
-                'title' => ['required', 'max:100'],
+                'title' => ['nullable', 'max:100'],
                 'description' => ['nullable', 'max:200'],
                 'user_id' => ['nullable', 'max:4'],
                 'rule_category_id' => ['nullable', 'max:4'],
@@ -55,7 +55,7 @@ class OfficeRuleController extends Controller
 
     public function edit(Officerule $officerule)
     {
-        return Inertia::render('Officerule/Edit', [
+        return Inertia::render('OfficeRule/Edit', [
             'officerule' => [
                 'id' => $officerule->id,
                 'title' => $officerule->name,
@@ -72,7 +72,7 @@ class OfficeRuleController extends Controller
         $officerule->update(
             Request::validate([
                 'id' => ['nullable', 'max:50'],
-                'title' => ['required', 'max:100'],
+                'title' => ['nullable', 'max:100'],
                 'description' => ['nullable', 'max:200'],
                 'user_id' => ['nullable', 'max:4'],
                 'rule_category_id' => ['nullable', 'max:4'],

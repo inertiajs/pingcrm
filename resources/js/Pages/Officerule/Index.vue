@@ -12,7 +12,7 @@
       </search-filter>
 
       <inertia-link class="btn-indigo" :href="route('officerule.create')">
-        <span>Create</span>
+
         <span class="hidden md:inline">OfficeRule</span>
       </inertia-link>
     </div>
@@ -79,7 +79,7 @@ export default {
   },
   layout: Layout,
   props: {
-    OfficeRule: Object,
+    officerule: Object,
     filters: Object,
   },
   data() {
@@ -94,7 +94,7 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.route('officerule', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.route('OfficeRule', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
     },

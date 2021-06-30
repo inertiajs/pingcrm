@@ -237,31 +237,31 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
 
 // Officerule
 
-Route::get('officerule', [OfficeruleController::class, 'index'])
+Route::get('officerule', [OfficeRuleController::class, 'index'])
     ->name('officerule')
     ->middleware('remember', 'auth');
 
-Route::get('officerule/create', [OfficeruleController::class, 'create'])
+Route::get('officerule/create', [OfficeRuleController::class, 'create'])
     ->name('officerule.create')
     ->middleware('auth');
 
-Route::post('officerule', [OfficeruleController::class, 'store'])
+Route::post('officerule', [OfficeRuleController::class, 'store'])
     ->name('officerule.store')
     ->middleware('auth');
 
-Route::get('officerule/{officerule}/edit', [OfficeruleController::class, 'edit'])
+Route::get('officerule/{officerule}/edit', [OfficeRuleController::class, 'edit'])
     ->name('officerule.edit')
     ->middleware('auth');
 
-Route::put('officerule/{officerule}', [OfficeruleController::class, 'update'])
+Route::put('officerule/{officerule}', [OfficeRuleController::class, 'update'])
     ->name('officerule.update')
     ->middleware('auth');
 
-Route::delete('officerule/{officerule}', [OfficeruleController::class, 'destroy'])
+Route::delete('officerule/{officerule}', [OfficeRuleController::class, 'destroy'])
     ->name('officerule.destroy')
     ->middleware('auth');
 
-Route::put('officerule/{officerule}/restore', [OfficeruleController::class, 'restore'])
+Route::put('officerule/{officerule}/restore', [OfficeRuleController::class, 'restore'])
     ->name('officerule.restore')
     ->middleware('auth');
 
