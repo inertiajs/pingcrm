@@ -45,6 +45,22 @@
       </inertia-link>
     </div>
 
+
+    <div class="mb-4">6
+      <inertia-link class="flex items-center group py-3" :href="route('comments')">
+        <icon name="pencil" class="w-4 h-4 mr-2" :class="isUrl('comments') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('comments') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Comments</div>
+      </inertia-link>
+    </div>
+
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('contacts')">
+        <icon name="phone" class="w-4 h-4 mr-2" :class="isUrl('contacts') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('contacts') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Contacts</div>
+      </inertia-link>
+    </div>
+
+
     
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('clients')">
@@ -80,12 +96,24 @@
       </inertia-link>
     </div>
 
+
+     <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('issues')">
+         <icon name="office-building" class="w-4 h-4 mr-2" :class="isUrl('followups') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('issues') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Issues</div>
+      </inertia-link>
+    </div>
+    
+   
+
+
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('leaves')">
         <icon name="cash" class="w-4 h-4 mr-2" :class="isUrl('leaves') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('leaves') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Leaves</div>
       </inertia-link>
     </div>
+
 
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('organizations')">
@@ -101,6 +129,28 @@
       </inertia-link>
     </div>
 
+
+    <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('organizations')">
+        <icon name="office-building" class="w-4 h-4 mr-2" :class="isUrl('organizations') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('organizations') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Company</div>
+      </inertia-link>
+    </div>
+
+     <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('projects')">
+        <icon name="briefcase" class="w-4 h-4 mr-2" :class="isUrl('projects') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('projects') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Projects</div>
+      </inertia-link>
+    </div>
+
+     <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('reports')">
+        <icon name="newspaper" class="w-4 h-4 mr-2" :class="isUrl('reports') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('reports') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Reports</div>
+      </inertia-link>
+    </div>
+
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('profiles')">
         <icon name="user-circle" class="w-4 h-4 mr-2" :class="isUrl('profiles') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
@@ -108,6 +158,7 @@
       </inertia-link>
     </div>
 
+  
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('restaurants')">
         <icon name="fire" class="w-4 h-4 mr-2" :class="isUrl('restaurants') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
@@ -163,6 +214,14 @@
         <div :class="isUrl('reports') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Reports</div>
       </inertia-link>
     </div>
+
+     <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('holidays')">
+        <icon name="newspaper" class="w-4 h-4 mr-2" :class="isUrl('holidays') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('holidays') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Holidays</div>
+      </inertia-link>
+    </div>
+
   </div>
 </template>
 

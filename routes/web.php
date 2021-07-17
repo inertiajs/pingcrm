@@ -21,9 +21,13 @@ use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
 
 use App\Http\Controllers\HolidaysController;
+
+
+use App\Http\Controllers\HolidaysController;
 use App\Http\Controllers\LeavesController;
 
 use App\Http\Controllers\OfficeruleController;
+
 
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
@@ -71,6 +75,20 @@ Route::post('clients', [ClientsController::class, 'store'])
 Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     ->name('clients.edit')
     ->middleware('auth');
+
+Route::get('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
+    ->middleware('auth');
+
+Route::get('clients/{client}', [ClientsController::class, 'destroy'])
+    ->name('clients.destroy')
+    ->middleware('auth');
+
+Route::get('clients/{client}/restore', [ClientsController::class, 'restore'])
+    ->name('clients.restore')
+    ->middleware('auth');
+
+
 
 
 
@@ -181,6 +199,7 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
     ->middleware('auth');
 
+
 // RuleCategory
 
 Route::get('rulecategory', [RuleCategoryController::class, 'index'])
@@ -248,6 +267,7 @@ Route::put('leaves/{leave}/restore', [LeavesController::class, 'restore'])
     ->middleware('auth');
 
 
+
 // Holidays
 
 Route::get('holidays', [HolidaysController::class, 'index'])
@@ -284,28 +304,28 @@ Route::get('companys', [CompanysController::class, 'index'])
     ->name('companys')
     ->middleware('remember', 'auth');
 
-Route::get('organizations/create', [OrganizationsController::class, 'create'])
-    ->name('organizations.create')
+Route::get('companys/create', [CompanysController::class, 'create'])
+    ->name('companys.create')
     ->middleware('auth');
 
-Route::post('organizations', [OrganizationsController::class, 'store'])
-    ->name('organizations.store')
+Route::post('companys', [CompanysController::class, 'store'])
+    ->name('companys.store')
     ->middleware('auth');
 
-Route::get('organizations/{organization}/edit', [OrganizationsController::class, 'edit'])
+Route::get('companys/{company}/edit', [CompanysController::class, 'edit'])
     ->name('organizations.edit')
     ->middleware('auth');
 
-Route::put('organizations/{organization}', [OrganizationsController::class, 'update'])
-    ->name('organizations.update')
+Route::put('companys/{company}', [CompanysController::class, 'update'])
+    ->name('companys.update')
     ->middleware('auth');
 
-Route::delete('organizations/{organization}', [OrganizationsController::class, 'destroy'])
-    ->name('organizations.destroy')
+Route::delete('companys/{company}', [CompanysController::class, 'destroy'])
+    ->name('companys.destroy')
     ->middleware('auth');
 
-Route::put('organizations/{organization}/restore', [OrganizationsController::class, 'restore'])
-    ->name('organizations.restore')
+Route::put('companys/{company}/restore', [CompanysController::class, 'restore'])
+    ->name('companys.restore')
     ->middleware('auth');
 
 // Tasks

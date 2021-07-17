@@ -50,6 +50,7 @@ class Account extends Model
 
 
 
+
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class);
