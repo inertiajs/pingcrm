@@ -19,9 +19,19 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
+
 use App\Http\Controllers\HolidaysController;
+
+
+use App\Http\Controllers\HolidaysController;
+use App\Http\Controllers\LeavesController;
+
+use App\Http\Controllers\OfficeruleController;
+
+
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RuleCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -190,6 +200,73 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->middleware('auth');
 
 
+// RuleCategory
+
+Route::get('rulecategory', [RuleCategoryController::class, 'index'])
+->name('rulecategory')
+->middleware('remember', 'auth');
+
+Route::get('rulecategory/create', [RuleCategoryController::class, 'create'])
+->name('rulecategory.create')
+->middleware('auth');
+
+Route::post('rulecategory', [RuleCategoryController::class, 'store'])
+->name('rulecategory.store')
+->middleware('auth');
+
+Route::get('rulecategory/{rulecategory}/edit', [RuleCategoryController::class, 'edit'])
+->name('rulecategory.edit')
+->middleware('auth');
+
+Route::put('rulecategory/{rulecategory}', [RuleCategoryController::class, 'update'])
+->name('rulecategory.update')
+->middleware('auth');
+
+Route::delete('rulecategory/{rulecategory}', [RuleCategoryController::class, 'destroy'])
+->name('rulecategory.destroy')
+->middleware('auth');
+
+Route::put('rulecategory/{rulecategory}/restore', [RuleCategoryController::class, 'restore'])
+->name('rulecategory.restore')
+->middleware('auth');
+
+// Organizations
+
+Route::get('organizations', [OrganizationsController::class, 'index'])
+    ->name('organizations');
+
+
+// Leaves
+
+Route::get('leaves',[LeavesController::class, 'index'])
+    ->name('leaves')
+    ->middleware('remember', 'auth');
+
+Route::get('leaves/create', [LeavesController::class, 'create'])
+    ->name('leaves.create')
+    ->middleware('auth');
+
+Route::post('leaves', [LeavesController::class, 'store'])
+    ->name('leaves.store')
+    ->middleware('auth');
+
+Route::get('leaves/{leave}/edit', [LeavesController::class, 'edit'])
+    ->name('leaves.edit')
+    ->middleware('auth');
+
+Route::put('leaves/{leave}', [LeavesController::class, 'update'])
+    ->name('leaves.update')
+    ->middleware('auth');
+
+Route::delete('leaves/{leave}', [LeavesController::class, 'destroy'])
+    ->name('leaves.destroy')
+    ->middleware('auth');
+
+Route::put('leaves/{leave}/restore', [LeavesController::class, 'restore'])
+    ->name('leaves.restore')
+    ->middleware('auth');
+
+
 
 // Holidays
 
@@ -281,6 +358,35 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+// Officerule
+
+Route::get('officerule', [OfficeRuleController::class, 'index'])
+    ->name('officerule')
+    ->middleware('remember', 'auth');
+
+Route::get('officerule/create', [OfficeRuleController::class, 'create'])
+    ->name('officerule.create')
+    ->middleware('auth');
+
+Route::post('officerule', [OfficeRuleController::class, 'store'])
+    ->name('officerule.store')
+    ->middleware('auth');
+
+Route::get('officerule/{officerule}/edit', [OfficeRuleController::class, 'edit'])
+    ->name('officerule.edit')
+    ->middleware('auth');
+
+Route::put('officerule/{officerule}', [OfficeRuleController::class, 'update'])
+    ->name('officerule.update')
+    ->middleware('auth');
+
+Route::delete('officerule/{officerule}', [OfficeRuleController::class, 'destroy'])
+    ->name('officerule.destroy')
+    ->middleware('auth');
+
+Route::put('officerule/{officerule}/restore', [OfficeRuleController::class, 'restore'])
+    ->name('officerule.restore')
+    ->middleware('auth');
 
 // Followups
 
