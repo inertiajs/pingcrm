@@ -42,6 +42,14 @@ class Account extends Model
         return $this->hasMany(Followup::class);
     }
 
+
+    public function officeRule()
+    {
+        return $this->hasMany(OfficeRule::class);
+    }
+
+
+
     public function restaurants()
     {
         return $this->hasMany(Restaurant::class);
@@ -70,6 +78,11 @@ class Account extends Model
     public function issues()
     {
         return $this->hasMany(Issue::class);
+    }
+
+    public function ruleCategory()
+    {
+        return $this->hasMany(RuleCategory::class);
     }
 
     public function addresses()

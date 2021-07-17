@@ -19,10 +19,15 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
+
 use App\Http\Controllers\HolidaysController;
 use App\Http\Controllers\LeavesController;
+
+use App\Http\Controllers\OfficeruleController;
+
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RuleCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -176,6 +181,36 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
     ->name('users.restore')
     ->middleware('auth');
 
+// RuleCategory
+
+Route::get('rulecategory', [RuleCategoryController::class, 'index'])
+->name('rulecategory')
+->middleware('remember', 'auth');
+
+Route::get('rulecategory/create', [RuleCategoryController::class, 'create'])
+->name('rulecategory.create')
+->middleware('auth');
+
+Route::post('rulecategory', [RuleCategoryController::class, 'store'])
+->name('rulecategory.store')
+->middleware('auth');
+
+Route::get('rulecategory/{rulecategory}/edit', [RuleCategoryController::class, 'edit'])
+->name('rulecategory.edit')
+->middleware('auth');
+
+Route::put('rulecategory/{rulecategory}', [RuleCategoryController::class, 'update'])
+->name('rulecategory.update')
+->middleware('auth');
+
+Route::delete('rulecategory/{rulecategory}', [RuleCategoryController::class, 'destroy'])
+->name('rulecategory.destroy')
+->middleware('auth');
+
+Route::put('rulecategory/{rulecategory}/restore', [RuleCategoryController::class, 'restore'])
+->name('rulecategory.restore')
+->middleware('auth');
+
 // Organizations
 
 Route::get('organizations', [OrganizationsController::class, 'index'])
@@ -303,6 +338,35 @@ Route::put('tasks/{task}/restore', [TasksController::class, 'restore'])
     ->name('tasks.restore')
     ->middleware('auth');
 
+// Officerule
+
+Route::get('officerule', [OfficeRuleController::class, 'index'])
+    ->name('officerule')
+    ->middleware('remember', 'auth');
+
+Route::get('officerule/create', [OfficeRuleController::class, 'create'])
+    ->name('officerule.create')
+    ->middleware('auth');
+
+Route::post('officerule', [OfficeRuleController::class, 'store'])
+    ->name('officerule.store')
+    ->middleware('auth');
+
+Route::get('officerule/{officerule}/edit', [OfficeRuleController::class, 'edit'])
+    ->name('officerule.edit')
+    ->middleware('auth');
+
+Route::put('officerule/{officerule}', [OfficeRuleController::class, 'update'])
+    ->name('officerule.update')
+    ->middleware('auth');
+
+Route::delete('officerule/{officerule}', [OfficeRuleController::class, 'destroy'])
+    ->name('officerule.destroy')
+    ->middleware('auth');
+
+Route::put('officerule/{officerule}/restore', [OfficeRuleController::class, 'restore'])
+    ->name('officerule.restore')
+    ->middleware('auth');
 
 // Followups
 
