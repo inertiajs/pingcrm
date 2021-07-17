@@ -15,18 +15,18 @@ class IssuesController extends Controller
         return Inertia::render('Issues/Index', [
             'filters' => Request::all('search', 'trashed'),
             'issues' => Auth::user()->account->issues()
-                ->orderBy('issue')
+                ->orderBy('title')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate()
                 ->withQueryString()
                 ->through(function ($issue) {
                     return [
                         'id' => $issue->id,
-                        'issue' => $issue->issue,
+                        'title' => $issue->title,
                         'description' => $issue->description,
                         'status' => $issue->status,
                         'priority' => $issue->priority,
-                        'fix' => $issue->fix,
+                        'solution' => $issue->solution,
                         'assign' => $issue->assign,
                         'due_date' =>$issue->due_date,
                         'completed_date' => $issue->completed_date,
@@ -45,11 +45,11 @@ class IssuesController extends Controller
     {
         Auth::user()->account->issues()->create(
             Request::validate([
-                'issue' => ['required', 'max:100'],
+                'title' => ['required', 'max:100'],
                 'description' => ['nullable', 'max:100'],
                 'status' => ['nullable', 'max:4'],
                 'priority' => ['nullable', 'max:4'],
-                'fix' => ['nullable', 'max:50'],
+                'solution' => ['nullable', 'max:50'],
                 'assign' => ['nullable', 'max:50'],
                 'due_date' => ['nullable', 'max:30'],
                 'completed_date' => ['nullable', 'max:30'],
@@ -64,11 +64,11 @@ class IssuesController extends Controller
         return Inertia::render('Issues/Edit', [
             'issue' => [
                 'id' => $issue->id,
-                        'issue' => $issue->issue,
+                        'title' => $issue->title,
                         'description' => $issue->description,
                         'status' => $issue->status,
                         'priority' => $issue->priority,
-                        'fix' => $issue->fix,
+                        'solution' => $issue->solution,
                         'assign' => $issue->assign,
                         'due_date' =>$issue->due_date,
                         'completed_date' => $issue->completed_date,
@@ -81,12 +81,12 @@ class IssuesController extends Controller
     {
         $issue->update(
             Request::validate([
-              'issue' => ['required', 'max:100'],
+              'title' => ['required', 'max:100'],
               'description' => ['nullable', 'max:100'],
               'status' => ['nullable', 'max:4'],
               'priority' => ['nullable', 'max:4'],
               // 'status' => ['nullable', 'max:4'],
-              'fix' => ['nullable', 'max:50'],
+              'solution' => ['nullable', 'max:50'],
               'assign' => ['nullable', 'max:50'],
               'due_date' => ['nullable', 'max:30'],
               'completed_date' => ['nullable', 'max:30'],

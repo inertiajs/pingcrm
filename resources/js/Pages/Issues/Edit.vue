@@ -11,8 +11,8 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.issue" :error="form.errors.issue" class="pr-6 pb-8 w-full lg:w-1/2" label="Issue" />
-          <text-input v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pr-6 pb-8 w-full lg:w-1/2" label="Title" />
+          <textarea v-model="form.description" :error="form.errors.description" class="pr-6 pb-8 w-full lg:w-1/2" label="Description" />
           <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full lg:w-1/2" label="Status">
             <option :value="null" />
             <option value="100">Pending</option>
@@ -25,10 +25,16 @@
             <option value="300">High</option>
             <option value="400">Urgent</option>
           </select-input>
-          <text-input v-model="form.fix" :error="form.errors.fix" class="pr-6 pb-8 w-full lg:w-1/2" label="Fix" />
-          <text-input v-model="form.assign" :error="form.errors.assign" class="pr-6 pb-8 w-full lg:w-1/2" label="Assign" />
-          <text-input v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
-          <text-input v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
+          <textarea v-model="form.solution" :error="form.errors.solution" class="pr-6 pb-8 w-full lg:w-1/2" label="solution" />
+          <select-input v-model="form.priority" :error="form.errors.priority" class="pr-6 pb-8 w-full lg:w-1/2" label="Assign">
+            <option :value="null" />
+            <option value="Bhavuk">Bhavuk</option>
+            <option value="Jasmeen">Jasmeen</option>
+            <option value="Lalit">Lalit</option>
+            <option value="Manju">Manju</option>
+          </select-input>
+          <text-input type="date" v-model="form.due_date" :error="form.errors.due_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Due Date" />
+          <text-input type="date" v-model="form.completed_date" :error="form.errors.completed_date" class="pr-6 pb-8 w-full lg:w-1/2" label="Completed Date" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!issue.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Issue</button>
@@ -50,7 +56,7 @@ import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   metaInfo() {
-    return { issue: this.form.name }
+    return { title: this.form.name }
   },
   components: {
     Icon,
@@ -67,11 +73,11 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        issue: this.issue.issue,
+        title: this.issue.title,
         description: this.issue.description,
         status: this.issue.status,
         priority: this.issue.priority,
-        fix: this.issue.fix,
+        solution: this.issue.solution,
         assign: this.issue.assign,
         due_date: this.issue.due_date,
         completed_date: this.issue.completed_date,
