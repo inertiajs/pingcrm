@@ -17,7 +17,11 @@ use App\Models\Restaurant;
 use App\Models\Document;
 use App\Models\Education;
 use App\Models\Issue;
+
+use App\Models\OfficeRule;
+
 use App\Models\RuleCategory;
+
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -82,6 +86,9 @@ class DatabaseSeeder extends Seeder
 
         $banks = factory(Bank::class, 100)
             ->create(['account_id' => $account->id]);
+        
+        $officeRule = factory(OfficeRule::class, 100)
+            ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)
             ->create(['account_id' => $account->id]);
@@ -90,7 +97,7 @@ class DatabaseSeeder extends Seeder
             ->create(['account_id' => $account->id]);
 
         $profiles = factory(Profile::class, 100)
-        ->create(['account_id' => $account->id]);
+            ->create(['account_id' => $account->id]);
 
         factory(Contact::class, 100)
             ->create(['account_id' => $account->id])
