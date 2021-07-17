@@ -17,6 +17,7 @@ use App\Models\Restaurant;
 use App\Models\Document;
 use App\Models\Education;
 use App\Models\Issue;
+use App\Models\RuleCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -45,7 +46,10 @@ class DatabaseSeeder extends Seeder
         $tasks = factory(Task::class, 100)
             ->create(['account_id' => $account->id]);
 
-            $issues = factory(Issue::class, 100)
+        $rulecategory = factory(RuleCategory::class, 100)
+            ->create(['account_id' => $account->id]);
+
+        $issues = factory(Issue::class, 100)
             ->create(['account_id' => $account->id]);
 
         $clients = factory(Client::class, 100)

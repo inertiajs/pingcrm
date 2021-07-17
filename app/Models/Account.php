@@ -69,6 +69,11 @@ class Account extends Model
         return $this->hasMany(Issue::class);
     }
 
+    public function ruleCategory()
+    {
+        return $this->hasMany(RuleCategory::class);
+    }
+
     public function addresses()
     {
         return $this->hasMany(Address::class);
