@@ -64,7 +64,7 @@
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 
@@ -91,7 +91,7 @@ export default {
   watch: {
     form: {
       deep: true,
-      handler: throttle(function() {
+      handler: debounce(function() {
         this.$inertia.get(this.route('users'), pickBy(this.form), { preserveState: true })
       }, 150),
     },
