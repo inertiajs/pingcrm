@@ -79,3 +79,40 @@ To run the Ping CRM tests, run:
 ```
 phpunit
 ```
+
+## Running with Laravel Sail
+
+Add the following to your .env
+
+```
+DB_DATABASE=pingcrm
+DB_USERNAME=pingcrm_user
+DB_PASSWORD=pingcrm_password
+DB_HOST=mysql // Make sure the host is now mysql
+```
+
+Run the containers:
+
+```
+./vendor/bin/sail up -d
+```
+
+Generate application key:
+
+```
+./vendor/bin/sail artisan key:generate
+```
+
+Run migrations and seeders:
+
+```
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
+```
+
+Run NPM:
+
+```
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run watch
+```
