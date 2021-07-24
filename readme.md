@@ -116,3 +116,5 @@ Run NPM:
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run watch
 ```
+
+You can now visit your browser via localhost
