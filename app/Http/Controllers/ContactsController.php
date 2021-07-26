@@ -15,7 +15,7 @@ class ContactsController extends Controller
     {
         return Inertia::render('Contacts/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'contacts' => Auth::user()->account->contacts()
+            'contacts' => Auth::user()->account->contacts()..........
                 ->with('organization')
                 ->orderByName()
                 ->filter(Request::only('search', 'trashed'))
@@ -71,17 +71,13 @@ class ContactsController extends Controller
         return Inertia::render('Contacts/Edit', [
             'contact' => [
                 'id' => $contact->id,
-                'first_name' => $contact->first_name,
-                'last_name' => $contact->last_name,
-                'organization_id' => $contact->organization_id,
-                'email' => $contact->email,
+                'name' => $contact->name,
                 'phone' => $contact->phone,
-                'address' => $contact->address,
+                'email' => $contact->email,
                 'city' => $contact->city,
-                'region' => $contact->region,
-                'country' => $contact->country,
-                'postal_code' => $contact->postal_code,
+                'organization' => $contact->organization ? $contact->organization->only('name') : null,
                 'deleted_at' => $contact->deleted_at,
+               
             ],
             'organizations' => Auth::user()->account->organizations()
                 ->orderBy('name')
