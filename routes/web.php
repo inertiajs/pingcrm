@@ -33,6 +33,105 @@ Route::post('login', [AuthenticatedSessionController::class, 'store'])
 Route::delete('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
+// Clients
+
+Route::get('clients', [ClientsController::class, 'index'])
+    ->name('clients')
+    ->middleware('remember', 'auth');
+
+Route::get('clients/create', [ClientsController::class, 'create'])
+    ->name('clients.create')
+    ->middleware('auth');
+
+Route::post('clients', [ClientsController::class, 'store'])
+    ->name('clients.store')
+    ->middleware('auth');
+
+Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
+    ->name('clients.edit')
+    ->middleware('auth');
+
+    Route::delete('clients/{client}', [ClientsController::class, 'destroy'])
+    ->name('clients.destroy')
+    ->middleware('auth');
+
+    Route::put('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
+    ->middleware('auth');
+
+
+
+// Projects
+
+    Route::get('projects', [ProjectsController::class, 'index'])
+        ->name('projects')
+        ->middleware('remember', 'auth');
+
+    Route::get('projects/create', [ProjectsController::class, 'create'])
+            ->name('projects.create')
+            ->middleware('auth');
+
+    // Route::get('projects/create', [ProjectsController::class, 'create'])
+    //     ->name('Projects.create')
+    //     ->middleware('auth');
+
+    Route::post('projects', [ProjectsController::class, 'store'])
+        ->name('projects.store')
+        ->middleware('auth');
+
+    Route::get('projects/{project}/edit', [ProjectsController::class, 'edit'])
+        ->name('projects.edit')
+        ->middleware('auth');
+
+    Route::delete('projects/{project}', [ProjectsController::class, 'destroy'])
+            ->name('projects.destroy')
+            ->middleware('auth');
+
+    Route::put('projects/{project}', [ProjectsController::class, 'update'])
+                ->name('projects.update')
+                ->middleware('auth');
+
+    Route::put('projects/{project}/restore', [ProjectsController::class, 'restore'])
+                ->name('projects.restore')
+                ->middleware('auth');
+
+
+
+// Issues
+
+                Route::get('issues', [IssuesController::class, 'index'])
+                    ->name('issues')
+                    ->middleware('remember', 'auth');
+
+                Route::get('issues/create', [IssuesController::class, 'create'])
+                        ->name('issues.create')
+                        ->middleware('auth');
+
+                // Route::get('projects/create', [ProjectsController::class, 'create'])
+                //     ->name('Projects.create')
+                //     ->middleware('auth');
+
+                Route::post('issues', [IssuesController::class, 'store'])
+                    ->name('issues.store')
+                    ->middleware('auth');
+
+                Route::get('issues/{issue}/edit', [IssuesController::class, 'edit'])
+                    ->name('issues.edit')
+                    ->middleware('auth');
+
+                Route::delete('issues/{issue}', [IssuesController::class, 'destroy'])
+                        ->name('issues.destroy')
+                        ->middleware('auth');
+
+                Route::put('issues/{issue}', [IssuesController::class, 'update'])
+                            ->name('issues.update')
+                            ->middleware('auth');
+
+                Route::put('issues/{issue}/restore', [IssuesController::class, 'restore'])
+                            ->name('issues.restore')
+                            ->middleware('auth');
+
+
 // Dashboard
 
 Route::get('/', [DashboardController::class, 'index'])
