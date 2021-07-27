@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         $organizations = Organization::factory(100)
             ->create(['account_id' => $account->id]);
 
-        Contact::factory(100)
+
 
         $experiences = factory(Experience::class, 100)
         ->create(['account_id' => $account->id]);
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
 
         $banks = factory(Bank::class, 100)
             ->create(['account_id' => $account->id]);
-        
+
         $officeRule = factory(OfficeRule::class, 100)
             ->create(['account_id' => $account->id]);
 
@@ -124,7 +124,7 @@ class DatabaseSeeder extends Seeder
         $holidays = factory(Holiday::class, 100)
             ->create(['account_id' => $account->id]);
 
-        
+
         $leaves = factory(Leave::class, 100)
             ->create(['account_id' => $account->id]);
 

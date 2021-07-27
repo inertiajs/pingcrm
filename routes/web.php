@@ -9,6 +9,9 @@ use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\ClientsController;
+
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
@@ -26,7 +29,7 @@ use App\Http\Controllers\EducationsController;
 use App\Http\Controllers\HolidaysController;
 
 
-use App\Http\Controllers\HolidaysController;
+
 use App\Http\Controllers\LeavesController;
 
 use App\Http\Controllers\OfficeruleController;
@@ -79,19 +82,13 @@ Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     ->name('clients.edit')
     ->middleware('auth');
 
-Route::get('clients/{client}', [ClientsController::class, 'update'])
-    ->name('clients.update')
-    ->middleware('auth');
-
-Route::get('clients/{client}', [ClientsController::class, 'destroy'])
+    Route::delete('clients/{client}', [ClientsController::class, 'destroy'])
     ->name('clients.destroy')
     ->middleware('auth');
 
-Route::get('clients/{client}/restore', [ClientsController::class, 'restore'])
-    ->name('clients.restore')
+    Route::put('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
     ->middleware('auth');
-
-
 
 
 
@@ -236,11 +233,9 @@ Route::put('rulecategory/{rulecategory}/restore', [RuleCategoryController::class
 // Organizations
 
 Route::get('organizations', [OrganizationsController::class, 'index'])
-
     ->name('organizations')
     ->middleware('auth');
 
-    ->name('organizations');
 
 
 // Leaves

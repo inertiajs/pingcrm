@@ -56,7 +56,6 @@ class ContactsTest extends TestCase
     {
         $this->actingAs($this->user)
             ->get('/contacts')
-
             ->assertInertia(fn ($assert) => $assert
                 ->component('Contacts/Index')
                 ->has('contacts.data', 2)
