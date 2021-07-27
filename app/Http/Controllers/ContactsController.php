@@ -15,13 +15,12 @@ class ContactsController extends Controller
     {
         return Inertia::render('Contacts/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'contacts' => Auth::user()->account->contacts()..........
+            'contacts' => Auth::user()->account->contacts()
                 ->with('organization')
                 ->orderByName()
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
                 ->withQueryString()
-
                 ->through(fn ($contact) => [
                     'id' => $contact->id,
                     'name' => $contact->name,
@@ -30,22 +29,6 @@ class ContactsController extends Controller
                     'deleted_at' => $contact->deleted_at,
                     'organization' => $contact->organization ? $contact->organization->only('name') : null,
                 ]),
-
-
-                ->through(function ($contact) {
-                    return [
-                        'id' => $contact->id,
-                        'name' => $contact->name,
-                        'phone' => $contact->phone,
-                        'email' => $contact->email,
-                        'city' => $contact->city,
-                         'organization' => $contact->organization ? $contact->organization->only('name') : null,
-                         'deleted_at' => $contact->deleted_at,
-
-                        ];
-                }),
-
-
         ]);
     }
 

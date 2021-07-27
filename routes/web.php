@@ -2,16 +2,12 @@
 
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\BanksController;
 use App\Http\Controllers\ProfilesController;
 use App\Http\Controllers\BudgetsController;
 use App\Http\Controllers\ClientsController;
-
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
@@ -25,16 +21,9 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\RestaurantsController;
 use App\Http\Controllers\EducationsController;
-
 use App\Http\Controllers\HolidaysController;
-
-
-
 use App\Http\Controllers\LeavesController;
-
 use App\Http\Controllers\OfficeruleController;
-
-
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RuleCategoryController;
