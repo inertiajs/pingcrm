@@ -13,7 +13,7 @@ class CreateEducationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('education', function (Blueprint $table) {
+        Schema::create('educations', function (Blueprint $table) {
             $table->id();
             $table->integer('account_id')->index();
             $table->string('title');
