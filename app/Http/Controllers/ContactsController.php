@@ -15,24 +15,20 @@ class ContactsController extends Controller
     {
         return Inertia::render('Contacts/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'contacts' => Auth::user()->account->contacts()
+            'contacts' => Auth::user()->account->contacts()..........
                 ->with('organization')
                 ->orderByName()
                 ->filter(Request::only('search', 'trashed'))
-                ->paginate()
+                ->paginate(10)
                 ->withQueryString()
-                ->through(function ($contact) {
-                    return [
-                        'id' => $contact->id,
-                        'name' => $contact->name,
-                        'phone' => $contact->phone,
-                        'email' => $contact->email,
-                        'city' => $contact->city,
-                         'organization' => $contact->organization ? $contact->organization->only('name') : null,
-                         'deleted_at' => $contact->deleted_at,
-                       
-                        ];
-                }),
+                ->through(fn ($contact) => [
+                    'id' => $contact->id,
+                    'name' => $contact->name,
+                    'phone' => $contact->phone,
+                    'city' => $contact->city,
+                    'deleted_at' => $contact->deleted_at,
+                    'organization' => $contact->organization ? $contact->organization->only('name') : null,
+                ]),
         ]);
     }
 
@@ -97,9 +93,10 @@ class ContactsController extends Controller
             Request::validate([
                 'first_name' => ['required', 'max:50'],
                 'last_name' => ['required', 'max:50'],
-                'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
-                    $query->where('account_id', Auth::user()->account_id);
-                })],
+                'organization_id' => [
+                    'nullable',
+                    Rule::exists('organizations', 'id')->where(fn ($query) => $query->where('account_id', Auth::user()->account_id)),
+                ],
                 'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
                 'address' => ['nullable', 'max:150'],

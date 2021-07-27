@@ -1,11 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\AddressesController;
-use App\Http\Controllers\BanksController;
-use App\Http\Controllers\ProfilesController;
-use App\Http\Controllers\BudgetsController;
-use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\DashboardController;
@@ -47,15 +42,15 @@ use Illuminate\Support\Facades\Route;
 
 // Auth
 
-Route::get('login', [LoginController::class, 'showLoginForm'])
+Route::get('login', [AuthenticatedSessionController::class, 'create'])
     ->name('login')
     ->middleware('guest');
 
-Route::post('login', [LoginController::class, 'login'])
-    ->name('login.attempt')
+Route::post('login', [AuthenticatedSessionController::class, 'store'])
+    ->name('login.store')
     ->middleware('guest');
 
-Route::post('logout', [LoginController::class, 'logout'])
+Route::delete('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 // Clients
@@ -76,19 +71,13 @@ Route::get('clients/{client}/edit', [ClientsController::class, 'edit'])
     ->name('clients.edit')
     ->middleware('auth');
 
-Route::get('clients/{client}', [ClientsController::class, 'update'])
-    ->name('clients.update')
-    ->middleware('auth');
-
-Route::get('clients/{client}', [ClientsController::class, 'destroy'])
+    Route::delete('clients/{client}', [ClientsController::class, 'destroy'])
     ->name('clients.destroy')
     ->middleware('auth');
 
-Route::get('clients/{client}/restore', [ClientsController::class, 'restore'])
-    ->name('clients.restore')
+    Route::put('clients/{client}', [ClientsController::class, 'update'])
+    ->name('clients.update')
     ->middleware('auth');
-
-
 
 
 
@@ -173,7 +162,7 @@ Route::get('/', [DashboardController::class, 'index'])
 
 Route::get('users', [UsersController::class, 'index'])
     ->name('users')
-    ->middleware('remember', 'auth');
+    ->middleware('auth');
 
 Route::get('users/create', [UsersController::class, 'create'])
     ->name('users.create')
@@ -233,14 +222,8 @@ Route::put('rulecategory/{rulecategory}/restore', [RuleCategoryController::class
 // Organizations
 
 Route::get('organizations', [OrganizationsController::class, 'index'])
-    ->name('organizations');
-
-
-// Leaves
-
-Route::get('leaves',[LeavesController::class, 'index'])
-    ->name('leaves')
-    ->middleware('remember', 'auth');
+    ->name('organizations')
+    ->middleware('auth');
 
 Route::get('leaves/create', [LeavesController::class, 'create'])
     ->name('leaves.create')
@@ -727,7 +710,7 @@ Route::put('budgets/{budget}/restore', [BudgetsController::class, 'restore'])
 
 Route::get('contacts', [ContactsController::class, 'index'])
     ->name('contacts')
-    ->middleware('remember', 'auth');
+    ->middleware('auth');
 
 Route::get('contacts/create', [ContactsController::class, 'create'])
     ->name('contacts.create')
@@ -761,15 +744,6 @@ Route::get('reports', [ReportsController::class, 'index'])
 
 // Images
 
-Route::get('/img/{path}', [ImagesController::class, 'show'])->where('path', '.*');
-
-// 500 error
-
-Route::get('500', function () {
-    // Force debug mode for this endpoint in the demo environment
-    if (App::environment('demo')) {
-        Config::set('app.debug', true);
-    }
-
-    echo $fail;
-});
+Route::get('/img/{path}', [ImagesController::class, 'show'])
+    ->where('path', '.*')
+    ->name('image');

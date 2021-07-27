@@ -7,11 +7,12 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "heroku-postbuild": "npm run prod"
     },
     "dependencies": {
-        "@inertiajs/inertia": "^0.8.5",
-        "@inertiajs/inertia-vue": "^0.5.5",
+        "@inertiajs/inertia": "^0.9.2",
+        "@inertiajs/inertia-vue": "^0.6.2",
         "@inertiajs/progress": "^0.2.4",
         "autoprefixer": "^10.2.4",
         "eslint": "^6.8.0",

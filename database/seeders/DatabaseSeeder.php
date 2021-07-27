@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Account;
 use App\Models\Address;
 use App\Models\Bank;
@@ -35,11 +37,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
     public function run()
     {
         $account = Account::create(['name' => 'Acme Corporation']);
 
-        factory(User::class)->create([
+        User::factory()->create([
             'account_id' => $account->id,
             'first_name' => 'John',
             'last_name' => 'Doe',
@@ -47,11 +54,12 @@ class DatabaseSeeder extends Seeder
             'owner' => true,
         ]);
 
-        factory(User::class, 5)->create(['account_id' => $account->id]);
+        User::factory(5)->create(['account_id' => $account->id]);
 
-        $organizations = factory(Organization::class, 100)
+        $organizations = Organization::factory(100)
             ->create(['account_id' => $account->id]);
 
+      
         $experiences = factory(Experience::class, 100)
         ->create(['account_id' => $account->id]);
 

@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Account;
 use App\Models\User;
-use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,73 +15,103 @@ class OrganizationsTest extends TestCase
     {
         parent::setUp();
 
-        $account = Account::create(['name' => 'Acme Corporation']);
-
-        $this->user = factory(User::class)->create([
-            'account_id' => $account->id,
+        $this->user = User::factory()->create([
+            'account_id' => Account::create(['name' => 'Acme Corporation'])->id,
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'johndoe@example.com',
             'owner' => true,
         ]);
+
+        $this->user->account->organizations()->createMany([
+            [
+                'name' => 'Apple',
+                'email' => 'info@apple.com',
+                'phone' => '647-943-4400',
+                'address' => '1600-120 Bremner Blvd',
+                'city' => 'Toronto',
+                'region' => 'ON',
+                'country' => 'CA',
+                'postal_code' => 'M5J 0A8',
+            ], [
+                'name' => 'Microsoft',
+                'email' => 'info@microsoft.com',
+                'phone' => '877-568-2495',
+                'address' => 'One Microsoft Way',
+                'city' => 'Redmond',
+                'region' => 'WA',
+                'country' => 'US',
+                'postal_code' => '98052',
+            ],
+        ]);
     }
 
     public function test_can_view_organizations()
     {
-        $this->user->account->organizations()->saveMany(
-            factory(Organization::class, 5)->make()
-        );
-
         $this->actingAs($this->user)
             ->get('/organizations')
-            ->assertStatus(200)
-            ->assertPropCount('organizations.data', 5)
-            ->assertPropValue('organizations.data', function ($organizations) {
-                $this->assertEquals(
-                    ['id', 'name', 'phone', 'city', 'deleted_at'],
-                    array_keys($organizations[0])
-                );
-            });
+            ->assertInertia(fn ($assert) => $assert
+                ->component('Organizations/Index')
+                ->has('organizations.data', 2)
+                ->has('organizations.data.0', fn ($assert) => $assert
+                    ->where('id', 1)
+                    ->where('name', 'Apple')
+                    ->where('phone', '647-943-4400')
+                    ->where('city', 'Toronto')
+                    ->where('deleted_at', null)
+                )
+                ->has('organizations.data.1', fn ($assert) => $assert
+                    ->where('id', 2)
+                    ->where('name', 'Microsoft')
+                    ->where('phone', '877-568-2495')
+                    ->where('city', 'Redmond')
+                    ->where('deleted_at', null)
+                )
+            );
     }
 
     public function test_can_search_for_organizations()
     {
-        $this->user->account->organizations()->saveMany(
-            factory(Organization::class, 5)->make()
-        )->first()->update(['name' => 'Some Big Fancy Company Name']);
-
         $this->actingAs($this->user)
-            ->get('/organizations?search=Some Big Fancy Company Name')
-            ->assertStatus(200)
-            ->assertPropValue('filters.search', 'Some Big Fancy Company Name')
-            ->assertPropCount('organizations.data', 1)
-            ->assertPropValue('organizations.data', function ($organizations) {
-                $this->assertEquals('Some Big Fancy Company Name', $organizations[0]['name']);
-            });
+            ->get('/organizations?search=Apple')
+            ->assertInertia(fn ($assert) => $assert
+                ->component('Organizations/Index')
+                ->where('filters.search', 'Apple')
+                ->has('organizations.data', 1)
+                ->has('organizations.data.0', fn ($assert) => $assert
+                    ->where('id', 1)
+                    ->where('name', 'Apple')
+                    ->where('phone', '647-943-4400')
+                    ->where('city', 'Toronto')
+                    ->where('deleted_at', null)
+                )
+            );
     }
 
     public function test_cannot_view_deleted_organizations()
     {
-        $this->user->account->organizations()->saveMany(
-            factory(Organization::class, 5)->make()
-        )->first()->delete();
+        $this->user->account->organizations()->firstWhere('name', 'Microsoft')->delete();
 
         $this->actingAs($this->user)
             ->get('/organizations')
-            ->assertStatus(200)
-            ->assertPropCount('organizations.data', 4);
+            ->assertInertia(fn ($assert) => $assert
+                ->component('Organizations/Index')
+                ->has('organizations.data', 1)
+                ->where('organizations.data.0.name', 'Apple')
+            );
     }
 
     public function test_can_filter_to_view_deleted_organizations()
     {
-        $this->user->account->organizations()->saveMany(
-            factory(Organization::class, 5)->make()
-        )->first()->delete();
+        $this->user->account->organizations()->firstWhere('name', 'Microsoft')->delete();
 
         $this->actingAs($this->user)
             ->get('/organizations?trashed=with')
-            ->assertStatus(200)
-            ->assertPropValue('filters.trashed', 'with')
-            ->assertPropCount('organizations.data', 5);
+            ->assertInertia(fn ($assert) => $assert
+                ->component('Organizations/Index')
+                ->has('organizations.data', 2)
+                ->where('organizations.data.0.name', 'Apple')
+                ->where('organizations.data.1.name', 'Microsoft')
+            );
     }
 }
