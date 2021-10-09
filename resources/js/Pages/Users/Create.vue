@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post(this.route('users.store'))
+      this.form.post(this.route('users.store').url())
     },
   },
 }
