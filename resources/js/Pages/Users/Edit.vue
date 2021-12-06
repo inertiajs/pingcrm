@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     update() {
-      this.form.post(this.route('users.update', this.user.id), {
+      this.form.post(this.route('users.update', this.user.id).url(), {
         onSuccess: () => this.form.reset('password', 'photo'),
       })
     },
