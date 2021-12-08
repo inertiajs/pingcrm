@@ -48,10 +48,10 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        first_name: null,
-        last_name: null,
-        email: null,
-        password: null,
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
         owner: false,
         photo: null,
       }),

@@ -57,16 +57,16 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        first_name: null,
-        last_name: null,
+        first_name: '',
+        last_name: '',
         organization_id: null,
-        email: null,
-        phone: null,
-        address: null,
-        city: null,
-        region: null,
-        country: null,
-        postal_code: null,
+        email: '',
+        phone: '',
+        address: '',
+        city: '',
+        region: '',
+        country: '',
+        postal_code: '',
       }),
     }
   },

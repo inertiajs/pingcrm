@@ -8,9 +8,7 @@ createInertiaApp({
   resolve: name => require(`./Pages/${name}`),
   title: title => `${title} - Ping CRM`,
   setup({ el, App, props, plugin }) {
-    createApp({
-      render: () => h(App, props),
-    })
+    createApp({ render: () => h(App, props) })
       .use(plugin)
       .mount(el)
   },

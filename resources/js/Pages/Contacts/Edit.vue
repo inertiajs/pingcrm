@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Head :title="`${form.first_name} ${form.last_name}`" />
     <h1 class="mb-8 font-bold text-3xl">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/contacts">Contacts</Link>
       <span class="text-indigo-400 font-medium">/</span>
@@ -39,7 +40,7 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
@@ -47,12 +48,8 @@ import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
-  metaInfo() {
-    return {
-      title: `${this.form.first_name} ${this.form.last_name}`,
-    }
-  },
   components: {
+    Head,
     Link,
     LoadingButton,
     SelectInput,
