@@ -19,7 +19,7 @@
       </search-filter>
       <Link class="btn-indigo" href="/users/create">
         <span>Create</span>
-        <span class="hidden md:inline">User</span>
+        <span class="hidden md:inline">&nbsp;User</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
