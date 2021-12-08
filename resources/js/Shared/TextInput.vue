@@ -27,6 +27,7 @@ export default {
     label: String,
     modelValue: String,
   },
+  emits: ['update:modelValue'],
   methods: {
     focus() {
       this.$refs.input.focus()

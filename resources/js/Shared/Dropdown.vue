@@ -3,8 +3,8 @@
     <slot />
     <teleport v-if="show" to="#dropdown">
       <div>
-        <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998; background: black; opacity: .2" @click="show = false" />
-        <div ref="dropdown" style="position: absolute; z-index: 99999;" @click.stop="show = !autoClose">
+        <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998; background: black; opacity: 0.2" @click="show = false" />
+        <div ref="dropdown" style="position: absolute; z-index: 99999" @click.stop="show = !autoClose">
           <slot name="dropdown" />
         </div>
       </div>
@@ -53,7 +53,7 @@ export default {
     },
   },
   mounted() {
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         this.show = false
       }

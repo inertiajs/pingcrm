@@ -3,6 +3,9 @@
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
+        "fix:eslint": "eslint --ext .js,.vue resources/js/ --fix",
+        "fix:prettier": "prettier --write --loglevel warn 'resources/js/**/*.vue'",
+        "fix-code-style": "npm run fix:prettier && npm run fix:eslint",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
@@ -23,6 +26,8 @@
         "postcss": "^8.4.4",
         "postcss-import": "^12.0.1",
         "postcss-nesting": "^7.0.1",
+        "prettier": "^2.5.1",
+        "prettier-plugin-tailwind": "^2.2.12",
         "tailwindcss": "^2.0.3",
         "uuid": "^8.3.2",
         "vue": "^3.2.24",

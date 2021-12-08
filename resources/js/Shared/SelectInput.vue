@@ -25,6 +25,7 @@ export default {
     label: String,
     modelValue: [String, Number, Boolean],
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       selected: this.modelValue,
