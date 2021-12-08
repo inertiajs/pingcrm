@@ -1,7 +1,9 @@
 const path = require('path')
+const process = require('process')
 const mix = require('laravel-mix')
 const cssImport = require('postcss-import')
 const cssNesting = require('postcss-nesting')
+const webpackConfig = require('./webpack.config')
 
 /*
  |--------------------------------------------------------------------------
@@ -16,8 +18,8 @@ const cssNesting = require('postcss-nesting')
 
 mix
   .js('resources/js/app.js', 'public/js')
-  .vue({ runtimeOnly: true })
-  .alias({ '@': 'resources/js' })
+  .vue({ runtimeOnly: (process.env.NODE_ENV || 'production') === 'production' })
+  .webpackConfig(webpackConfig)
   .postCss('resources/css/app.css', 'public/css', [
     // prettier-ignore
     cssImport(),

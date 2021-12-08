@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div :class="$attrs.class">
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
-    <select :id="id" ref="input" v-model="selected" v-bind="$attrs" class="form-select" :class="{ error: error }">
+    <select :id="id" ref="input" v-model="selected" v-bind="{ ...$attrs, class: null }" class="form-select" :class="{ error: error }">
       <slot />
     </select>
     <div v-if="error" class="form-error">{{ error }}</div>
@@ -9,27 +9,31 @@
 </template>
 
 <script>
+import { v4 as uuid } from 'uuid'
+
 export default {
   inheritAttrs: false,
   props: {
     id: {
       type: String,
       default() {
-        return `select-input-${this._uid}`
+        return `select-input-${uuid()}`
       },
     },
-    value: [String, Number, Boolean],
-    label: String,
+    class: String,
     error: String,
+    label: String,
+    modelValue: [String, Number, Boolean],
   },
+  emits: ['update:modelValue'],
   data() {
     return {
-      selected: this.value,
+      selected: this.modelValue,
     }
   },
   watch: {
     selected(selected) {
-      this.$emit('input', selected)
+      this.$emit('update:modelValue', selected)
     },
   },
   methods: {

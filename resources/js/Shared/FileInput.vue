@@ -3,18 +3,14 @@
     <label v-if="label" class="form-label">{{ label }}:</label>
     <div class="form-input p-0" :class="{ error: errors.length }">
       <input ref="file" type="file" :accept="accept" class="hidden" @change="change" />
-      <div v-if="!value" class="p-2">
-        <button type="button" class="px-4 py-1 bg-gray-500 hover:bg-gray-700 rounded-sm text-xs font-medium text-white" @click="browse">
-          Browse
-        </button>
+      <div v-if="!modelValue" class="p-2">
+        <button type="button" class="px-4 py-1 text-white text-xs font-medium bg-gray-500 hover:bg-gray-700 rounded-sm" @click="browse">Browse</button>
       </div>
       <div v-else class="flex items-center justify-between p-2">
         <div class="flex-1 pr-1">
-          {{ value.name }} <span class="text-gray-500 text-xs">({{ filesize(value.size) }})</span>
+          {{ modelValue.name }} <span class="text-gray-500 text-xs">({{ filesize(modelValue.size) }})</span>
         </div>
-        <button type="button" class="px-4 py-1 bg-gray-500 hover:bg-gray-700 rounded-sm text-xs font-medium text-white" @click="remove">
-          Remove
-        </button>
+        <button type="button" class="px-4 py-1 text-white text-xs font-medium bg-gray-500 hover:bg-gray-700 rounded-sm" @click="remove">Remove</button>
       </div>
     </div>
     <div v-if="errors.length" class="form-error">{{ errors[0] }}</div>
@@ -24,7 +20,7 @@
 <script>
 export default {
   props: {
-    value: File,
+    modelValue: File,
     label: String,
     accept: String,
     errors: {
@@ -32,8 +28,9 @@ export default {
       default: () => [],
     },
   },
+  emits: ['update:modelValue'],
   watch: {
-    value(value) {
+    modelValue(value) {
       if (!value) {
         this.$refs.file.value = ''
       }
@@ -48,10 +45,10 @@ export default {
       this.$refs.file.click()
     },
     change(e) {
-      this.$emit('input', e.target.files[0])
+      this.$emit('update:modelValue', e.target.files[0])
     },
     remove() {
-      this.$emit('input', null)
+      this.$emit('update:modelValue', null)
     },
   },
 }

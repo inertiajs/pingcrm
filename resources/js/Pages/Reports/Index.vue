@@ -1,14 +1,18 @@
 <template>
   <div>
-    <h1 class="mb-8 font-bold text-3xl">Reports</h1>
+    <Head title="Reports" />
+    <h1 class="mb-8 text-3xl font-bold">Reports</h1>
   </div>
 </template>
 
 <script>
+import { Head } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 
 export default {
-  metaInfo: { title: 'Reports' },
+  components: {
+    Head,
+  },
   layout: Layout,
 }
 </script>
