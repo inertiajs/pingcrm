@@ -22,7 +22,6 @@ export default {
       type: String,
       default: 'text',
     },
-    class: String,
     error: String,
     label: String,
     modelValue: String,

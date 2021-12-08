@@ -18,7 +18,6 @@ export default {
         return `textarea-input-${uuid()}`
       },
     },
-    class: String,
     error: String,
     label: String,
     modelValue: String,

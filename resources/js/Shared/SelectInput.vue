@@ -20,7 +20,6 @@ export default {
         return `select-input-${uuid()}`
       },
     },
-    class: String,
     error: String,
     label: String,
     modelValue: [String, Number, Boolean],
