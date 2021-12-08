@@ -1,7 +1,8 @@
 <template>
   <div>
+    <Head title="Create Contact" />
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('contacts')">Contacts</inertia-link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/contacts">Contacts</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
@@ -34,14 +35,16 @@
 </template>
 
 <script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create Contact' },
   components: {
+    Head,
+    Link,
     LoadingButton,
     SelectInput,
     TextInput,
@@ -69,7 +72,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post(this.route('contacts.store'))
+      this.form.post('/contacts')
     },
   },
 }

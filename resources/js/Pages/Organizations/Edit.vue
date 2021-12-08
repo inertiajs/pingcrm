@@ -1,7 +1,8 @@
 <template>
   <div>
+    <Head :title="form.name" />
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('organizations')">Organizations</inertia-link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/organizations">Organizations</Link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
@@ -40,25 +41,25 @@
         </tr>
         <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="`/contacts/${contact.id}/edit`">
               {{ contact.name }}
               <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-6 py-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               {{ contact.city }}
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-6 py-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               {{ contact.phone }}
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
+            </Link>
           </td>
         </tr>
         <tr v-if="organization.contacts.length === 0">
@@ -70,6 +71,7 @@
 </template>
 
 <script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
@@ -78,11 +80,10 @@ import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
-  metaInfo() {
-    return { title: this.form.name }
-  },
   components: {
+    Head,
     Icon,
+    Link,
     LoadingButton,
     SelectInput,
     TextInput,
@@ -109,16 +110,16 @@ export default {
   },
   methods: {
     update() {
-      this.form.put(this.route('organizations.update', this.organization.id))
+      this.form.put(`/organizations/${this.organization.id}`)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this organization?')) {
-        this.$inertia.delete(this.route('organizations.destroy', this.organization.id))
+        this.$inertia.delete(`/organizations/${this.organization.id}`)
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this organization?')) {
-        this.$inertia.put(this.route('organizations.restore', this.organization.id))
+        this.$inertia.put(`/organizations/${this.organization.id}/restore`)
       }
     },
   },

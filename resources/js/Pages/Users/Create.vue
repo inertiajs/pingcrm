@@ -1,7 +1,8 @@
 <template>
   <div>
+    <Head title="Create User" />
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('users')">Users</inertia-link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/users">Users</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import FileInput from '@/Shared/FileInput'
 import TextInput from '@/Shared/TextInput'
@@ -33,9 +35,10 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Create User' },
   components: {
     FileInput,
+    Head,
+    Link,
     LoadingButton,
     SelectInput,
     TextInput,
@@ -56,7 +59,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post(this.route('users.store'))
+      this.form.post('/users')
     },
   },
 }

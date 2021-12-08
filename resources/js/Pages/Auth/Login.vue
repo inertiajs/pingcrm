@@ -1,4 +1,5 @@
 <template>
+  <Head title="Login" />
   <div class="p-6 bg-indigo-800 min-h-screen flex justify-center items-center">
     <div class="w-full max-w-md">
       <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
@@ -22,13 +23,14 @@
 </template>
 
 <script>
+import { Head } from '@inertiajs/inertia-vue3'
 import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
-  metaInfo: { title: 'Login' },
   components: {
+    Head,
     LoadingButton,
     Logo,
     TextInput,
@@ -44,7 +46,7 @@ export default {
   },
   methods: {
     login() {
-      this.form.post(this.route('login.store'))
+      this.form.post('/login')
     },
   },
 }

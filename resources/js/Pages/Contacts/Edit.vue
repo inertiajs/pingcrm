@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">
-      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('contacts')">Contacts</inertia-link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/contacts">Contacts</Link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.first_name }} {{ form.last_name }}
     </h1>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
@@ -52,6 +53,7 @@ export default {
     }
   },
   components: {
+    Link,
     LoadingButton,
     SelectInput,
     TextInput,
@@ -81,16 +83,16 @@ export default {
   },
   methods: {
     update() {
-      this.form.put(this.route('contacts.update', this.contact.id))
+      this.form.put(`/contacts/${this.contact.id}`)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this contact?')) {
-        this.$inertia.delete(this.route('contacts.destroy', this.contact.id))
+        this.$inertia.delete(`/contacts/${this.contact.id}`)
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this contact?')) {
-        this.$inertia.put(this.route('contacts.restore', this.contact.id))
+        this.$inertia.put(`/contacts/${this.contact.id}/restore`)
       }
     },
   },

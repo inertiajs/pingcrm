@@ -1,8 +1,9 @@
 <template>
   <div>
+    <Head :title="`${form.first_name} ${form.last_name}`" />
     <div class="mb-8 flex justify-start max-w-3xl">
       <h1 class="font-bold text-3xl">
-        <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('users')">Users</inertia-link>
+        <Link class="text-indigo-400 hover:text-indigo-600" href="/users">Users</Link>
         <span class="text-indigo-400 font-medium">/</span>
         {{ form.first_name }} {{ form.last_name }}
       </h1>
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
@@ -42,13 +44,10 @@ import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
-  metaInfo() {
-    return {
-      title: `${this.form.first_name} ${this.form.last_name}`,
-    }
-  },
   components: {
     FileInput,
+    Head,
+    Link,
     LoadingButton,
     SelectInput,
     TextInput,
@@ -74,18 +73,18 @@ export default {
   },
   methods: {
     update() {
-      this.form.post(this.route('users.update', this.user.id), {
+      this.form.post(`/users/${this.user.id}`, {
         onSuccess: () => this.form.reset('password', 'photo'),
       })
     },
     destroy() {
       if (confirm('Are you sure you want to delete this user?')) {
-        this.$inertia.delete(this.route('users.destroy', this.user.id))
+        this.$inertia.delete(`/users/${this.user.id}`)
       }
     },
     restore() {
       if (confirm('Are you sure you want to restore this user?')) {
-        this.$inertia.put(this.route('users.restore', this.user.id))
+        this.$inertia.put(`/users/${this.user.id}/restore`)
       }
     },
   },

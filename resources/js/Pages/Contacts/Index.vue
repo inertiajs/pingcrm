@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Head title="Contacts" />
     <h1 class="mb-8 font-bold text-3xl">Contacts</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
@@ -10,10 +11,10 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="route('contacts.create')">
+      <Link class="btn-indigo" href="/contacts/create">
         <span>Create</span>
         <span class="hidden md:inline">Contact</span>
-      </inertia-link>
+      </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
@@ -25,32 +26,32 @@
         </tr>
         <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('contacts.edit', contact.id)">
+            <Link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="`/contacts/${contact.id}/edit`">
               {{ contact.name }}
               <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-6 py-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               <div v-if="contact.organization">
                 {{ contact.organization.name }}
               </div>
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-6 py-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               {{ contact.city }}
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-6 py-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               {{ contact.phone }}
-            </inertia-link>
+            </Link>
           </td>
           <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('contacts.edit', contact.id)" tabindex="-1">
+            <Link class="px-4 flex items-center" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
+            </Link>
           </td>
         </tr>
         <tr v-if="contacts.data.length === 0">
@@ -63,6 +64,7 @@
 </template>
 
 <script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
@@ -72,9 +74,10 @@ import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
-  metaInfo: { title: 'Contacts' },
   components: {
+    Head,
     Icon,
+    Link,
     Pagination,
     SearchFilter,
   },
@@ -95,7 +98,7 @@ export default {
     form: {
       deep: true,
       handler: throttle(function() {
-        this.$inertia.get(this.route('contacts'), pickBy(this.form), { preserveState: true })
+        this.$inertia.get('/contacts', pickBy(this.form), { preserveState: true })
       }, 150),
     },
   },
