@@ -25,9 +25,15 @@
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="pb-4 pt-6 px-6">Name</th>
-          <th class="pb-4 pt-6 px-6">Email</th>
-          <th class="pb-4 pt-6 px-6" colspan="2">Role</th>
+          <th class="pb-4 pt-6 px-6">
+            <sortable field="last_name" v-model="form.sortable">Name</sortable>
+          </th>
+          <th class="pb-4 pt-6 px-6">
+            <sortable field="email" v-model="form.sortable">Email</sortable>
+          </th>
+          <th class="pb-4 pt-6 px-6" colspan="2">
+            Role
+          </th>
         </tr>
         <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -69,6 +75,7 @@ import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
+import Sortable from '@/Shared/Sortable'
 
 export default {
   components: {
@@ -76,6 +83,7 @@ export default {
     Icon,
     Link,
     SearchFilter,
+    Sortable,
   },
   layout: Layout,
   props: {
@@ -88,6 +96,7 @@ export default {
         search: this.filters.search,
         role: this.filters.role,
         trashed: this.filters.trashed,
+        sortable: this.filters.sortable,
       },
     }
   },
