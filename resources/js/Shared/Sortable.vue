@@ -1,5 +1,5 @@
 <template>
-  <div :class="$attrs.class" class="cursor-pointer" @click="test" :id="id" ref="sortable">
+  <div :class="$attrs.class" class="cursor-pointer" @click="select">
     <slot/>
     <div v-if="$attrs.modelValue && field == $attrs.modelValue.field" class="inline-block align-middle ml-1">
       <icon v-if="$attrs.modelValue.direction === 'asc'" name="arrow-down" class="block w-4 h-4 fill-gray-400" />
@@ -9,8 +9,6 @@
 </template>
 
 <script>
-
-import { v4 as uuid } from 'uuid'
 import Icon from '@/Shared/Icon'
 
 export default {
@@ -26,7 +24,7 @@ export default {
   },
   emits: ['update:modelValue'],
   methods: {
-    test() {
+    select() {
       this.$emit('update:modelValue', {
         field: this.field,
         direction: (this.$attrs.modelValue && this.$attrs.modelValue.direction === 'asc') ? 'desc' : 'asc'
