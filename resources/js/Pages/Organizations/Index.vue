@@ -4,7 +4,7 @@
     <h1 class="mb-8 text-3xl font-bold">Organizations</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
-        <label class="block text-gray-700">Trashed:</label>
+        <label class="block text-slate-700">Trashed:</label>
         <select v-model="form.trashed" class="form-select mt-1 w-full">
           <option :value="null" />
           <option value="with">With Trashed</option>
@@ -26,11 +26,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="organization in organizations.data" :key="organization.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+          <tr v-for="organization in organizations.data" :key="organization.id" class="hover:bg-slate-100 focus-within:bg-slate-100">
             <td class="border-t">
               <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/organizations/${organization.id}/edit`">
                 {{ organization.name }}
-                <icon v-if="organization.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+                <icon v-if="organization.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-slate-400" />
               </Link>
             </td>
             <td class="border-t">
@@ -45,7 +45,7 @@
             </td>
             <td class="w-px border-t">
               <Link class="flex items-center px-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
-                <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+                <icon name="cheveron-right" class="block w-6 h-6 fill-slate-400" />
               </Link>
             </td>
           </tr>
