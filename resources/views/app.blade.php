@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100">
+<html class="h-full bg-slate-100">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +16,9 @@
     <script src="{{ mix('/js/app.js') }}" defer></script>
     @inertiaHead
 </head>
-<body class="font-sans leading-none text-gray-700 antialiased">
+
+<body class="font-sans leading-none text-slate-700 antialiased">
     @inertia
 </body>
+
 </html>

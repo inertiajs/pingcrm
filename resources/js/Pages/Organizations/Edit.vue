@@ -23,7 +23,7 @@
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />
         </div>
-        <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
+        <div class="flex items-center px-8 py-4 bg-slate-50 border-t border-slate-100">
           <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
         </div>
@@ -37,11 +37,11 @@
           <th class="pb-4 pt-6 px-6">City</th>
           <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
         </tr>
-        <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-slate-100 focus-within:bg-slate-100">
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/contacts/${contact.id}/edit`">
               {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-slate-400" />
             </Link>
           </td>
           <td class="border-t">
@@ -56,7 +56,7 @@
           </td>
           <td class="w-px border-t">
             <Link class="flex items-center px-4" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+              <icon name="cheveron-right" class="block w-6 h-6 fill-slate-400" />
             </Link>
           </td>
         </tr>

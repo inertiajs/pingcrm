@@ -28,7 +28,7 @@
           </select-input>
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />
         </div>
-        <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
+        <div class="flex items-center px-8 py-4 bg-slate-50 border-t border-slate-100">
           <button v-if="!contact.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Contact</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Contact</loading-button>
         </div>
