@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Inertia\Testing\Assert;
 use Tests\TestCase;
+use Inertia\Testing\AssertableInertia as Assert;
 
 class OrganizationsTest extends TestCase
 {
