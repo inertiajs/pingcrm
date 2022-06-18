@@ -1,3 +1,16 @@
+<script setup>
+import Dropdown from '@/Shared/Dropdown'
+
+const props = defineProps({
+  modelValue: String,
+  maxWidth: {
+    type: Number,
+    default: 300,
+  },
+})
+
+defineEmits(['update:modelValue', 'reset'])
+</script>
 <template>
   <div class="flex items-center">
     <div class="flex w-full bg-white rounded shadow">
@@ -21,21 +34,3 @@
     <button class="ml-3 text-gray-500 hover:text-gray-700 focus:text-indigo-500 text-sm" type="button" @click="$emit('reset')">Reset</button>
   </div>
 </template>
-
-<script>
-import Dropdown from '@/Shared/Dropdown'
-
-export default {
-  components: {
-    Dropdown,
-  },
-  props: {
-    modelValue: String,
-    maxWidth: {
-      type: Number,
-      default: 300,
-    },
-  },
-  emits: ['update:modelValue', 'reset'],
-}
-</script>

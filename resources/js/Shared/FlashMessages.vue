@@ -1,3 +1,16 @@
+<script setup>
+import { ref, watch } from 'vue'
+
+const show = ref(true)
+
+watch(
+  '$page.props.flash',
+  (value) => {
+    this.show = true
+  },
+  { deep: true },
+)
+</script>
 <template>
   <div>
     <div v-if="$page.props.flash.success && show" class="flex items-center justify-between mb-8 max-w-3xl bg-green-500 rounded">
@@ -24,21 +37,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      show: true,
-    }
-  },
-  watch: {
-    '$page.props.flash': {
-      handler() {
-        this.show = true
-      },
-      deep: true,
-    },
-  },
-}
-</script>

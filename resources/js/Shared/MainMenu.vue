@@ -1,3 +1,18 @@
+<script setup>
+import { computed } from 'vue'
+import { Link, usePage } from '@inertiajs/inertia-vue3'
+import Icon from '@/Shared/Icon'
+
+const url = usePage().url
+
+const isUrl = (...urls) => {
+  let currentUrl = url.value.substr(1)
+  if (urls[0] === '') {
+    return currentUrl === ''
+  }
+  return urls.filter((url) => currentUrl.startsWith(url)).length
+}
+</script>
 <template>
   <div>
     <div class="mb-4">
@@ -26,24 +41,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import { Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-
-export default {
-  components: {
-    Icon,
-    Link,
-  },
-  methods: {
-    isUrl(...urls) {
-      let currentUrl = this.$page.url.substr(1)
-      if (urls[0] === '') {
-        return currentUrl === ''
-      }
-      return urls.filter((url) => currentUrl.startsWith(url)).length
-    },
-  },
-}
-</script>

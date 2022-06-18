@@ -1,3 +1,8 @@
+<script setup>
+import Icon from '@/Shared/Icon'
+
+defineEmits(['restore'])
+</script>
 <template>
   <div class="flex items-center justify-between p-4 max-w-3xl bg-yellow-400 rounded">
     <div class="flex items-center">
@@ -9,14 +14,3 @@
     <button class="text-yellow-800 hover:underline text-sm" tabindex="-1" type="button" @click="$emit('restore')">Restore</button>
   </div>
 </template>
-
-<script>
-import Icon from '@/Shared/Icon'
-
-export default {
-  components: {
-    Icon,
-  },
-  emits: ['restore'],
-}
-</script>
