@@ -1,4 +1,3 @@
-const path = require('path')
 const process = require('process')
 const mix = require('laravel-mix')
 const cssImport = require('postcss-import')

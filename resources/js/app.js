@@ -6,7 +6,7 @@ InertiaProgress.init()
 
 createInertiaApp({
   resolve: name => require(`./Pages/${name}`),
-  title: title => `${title} - Ping CRM`,
+  title: title => title ? `${title} - Ping CRM` : 'Ping CRM',
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
