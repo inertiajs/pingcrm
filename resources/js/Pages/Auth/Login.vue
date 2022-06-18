@@ -1,3 +1,20 @@
+<script setup>
+import { reactive } from 'vue'
+import { Head, useForm } from '@inertiajs/inertia-vue3'
+import Logo from '@/Shared/Logo'
+import TextInput from '@/Shared/TextInput'
+import LoadingButton from '@/Shared/LoadingButton'
+
+const form = useForm({
+  email: 'johndoe@example.com',
+  password: 'secret',
+  remember: false,
+})
+
+const login = () => {
+  form.post('/login')
+}
+</script>
 <template>
   <Head title="Login" />
   <div class="flex items-center justify-center p-6 min-h-screen bg-indigo-800">
@@ -21,33 +38,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import { Head } from '@inertiajs/inertia-vue3'
-import Logo from '@/Shared/Logo'
-import TextInput from '@/Shared/TextInput'
-import LoadingButton from '@/Shared/LoadingButton'
-
-export default {
-  components: {
-    Head,
-    LoadingButton,
-    Logo,
-    TextInput,
-  },
-  data() {
-    return {
-      form: this.$inertia.form({
-        email: 'johndoe@example.com',
-        password: 'secret',
-        remember: false,
-      }),
-    }
-  },
-  methods: {
-    login() {
-      this.form.post('/login')
-    },
-  },
-}
-</script>
