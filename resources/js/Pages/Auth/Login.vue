@@ -1,5 +1,4 @@
 <script setup>
-import { reactive } from 'vue'
 import { Head, useForm } from '@inertiajs/inertia-vue3'
 import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
