@@ -1,6 +1,45 @@
+<script setup>
+import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Icon from '@/Shared/Icon'
+import Layout from '@/Shared/Layout'
+import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
+import TrashedMessage from '@/Shared/TrashedMessage'
+
+const props = defineProps({
+  organization: Object,
+})
+
+const form = useForm({
+  name: props.organization.name,
+  email: props.organization.email,
+  phone: props.organization.phone,
+  address: props.organization.address,
+  city: props.organization.city,
+  region: props.organization.region,
+  country: props.organization.country,
+  postal_code: props.organization.postal_code,
+})
+
+const update = () => {
+  form.put(`/organizations/${props.organization.id}`)
+}
+const destroy = () => {
+  if (confirm('Are you sure you want to delete this organization?')) {
+    Inertia.delete(`/organizations/${props.organization.id}`)
+  }
+}
+const restore = () => {
+  if (confirm('Are you sure you want to restore this organization?')) {
+    Inertia.put(`/organizations/${props.organization.id}/restore`)
+  }
+}
+</script>
 <template>
-  <div>
-    <Head :title="form.name" />
+  <Head :title="form.name" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/organizations">Organizations</Link>
       <span class="text-indigo-400 font-medium">/</span>
@@ -65,61 +104,5 @@
         </tr>
       </table>
     </div>
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import Layout from '@/Shared/Layout'
-import TextInput from '@/Shared/TextInput'
-import SelectInput from '@/Shared/SelectInput'
-import LoadingButton from '@/Shared/LoadingButton'
-import TrashedMessage from '@/Shared/TrashedMessage'
-
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    TrashedMessage,
-  },
-  layout: Layout,
-  props: {
-    organization: Object,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        name: this.organization.name,
-        email: this.organization.email,
-        phone: this.organization.phone,
-        address: this.organization.address,
-        city: this.organization.city,
-        region: this.organization.region,
-        country: this.organization.country,
-        postal_code: this.organization.postal_code,
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.put(`/organizations/${this.organization.id}`)
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this organization?')) {
-        this.$inertia.delete(`/organizations/${this.organization.id}`)
-      }
-    },
-    restore() {
-      if (confirm('Are you sure you want to restore this organization?')) {
-        this.$inertia.put(`/organizations/${this.organization.id}/restore`)
-      }
-    },
-  },
-}
-</script>

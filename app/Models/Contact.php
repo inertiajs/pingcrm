@@ -30,7 +30,7 @@ class Contact extends Model
     {
         $query->orderBy('last_name')->orderBy('first_name');
     }
-
+    
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
@@ -48,6 +48,8 @@ class Contact extends Model
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['sortable'] ?? null, function ($query, $sortable) {
+            $query->orderBy($sortable['field'], $sortable['direction']);
         });
     }
 }

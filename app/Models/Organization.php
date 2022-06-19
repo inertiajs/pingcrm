@@ -31,6 +31,9 @@ class Organization extends Model
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['sortable'] ?? null, function ($query, $sortable) {
+            $query->orderBy($sortable['field'], $sortable['direction']);
         });
     }
+
 }

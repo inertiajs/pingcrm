@@ -1,6 +1,41 @@
+<script setup>
+import { watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Layout from '@/Shared/Layout'
+import Icon from '@/Shared/Icon'
+import pickBy from 'lodash/pickBy'
+import throttle from 'lodash/throttle'
+import Pagination from '@/Shared/Pagination'
+import SearchFilter from '@/Shared/SearchFilter'
+import Sortable from '@/Shared/Sortable'
+
+const props = defineProps({
+  filters: Object,
+  contacts: Object,
+})
+
+const form = useForm({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+  sortable: props.filters.sortable,
+})
+
+watch(
+  form,
+  throttle(() => {
+    Inertia.get('/contacts', pickBy(form), { remember: 'forget', preserveState: true })
+  }, 150),
+  { deep: true },
+)
+
+const reset = () => {
+  form.reset()
+}
+</script>
 <template>
-  <div>
-    <Head title="Contacts" />
+  <Head title="Contacts" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">Contacts</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
@@ -19,10 +54,16 @@
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
-          <th class="pb-4 pt-6 px-6">Name</th>
+          <th class="pb-4 pt-6 px-6">
+            <sortable v-model="form.sortable" field="last_name">Name</sortable>
+          </th>
           <th class="pb-4 pt-6 px-6">Organization</th>
-          <th class="pb-4 pt-6 px-6">City</th>
-          <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
+          <th class="pb-4 pt-6 px-6">
+            <sortable v-model="form.sortable" field="city">City</sortable>
+          </th>
+          <th class="pb-4 pt-6 px-6" colspan="2">
+            <sortable v-model="form.sortable" field="phone">Phone</sortable>
+          </th>
         </tr>
         <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -60,52 +101,5 @@
       </table>
     </div>
     <pagination class="mt-6" :links="contacts.links" />
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
-import Pagination from '@/Shared/Pagination'
-import SearchFilter from '@/Shared/SearchFilter'
-
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-  },
-  layout: Layout,
-  props: {
-    filters: Object,
-    contacts: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/contacts', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
-}
-</script>

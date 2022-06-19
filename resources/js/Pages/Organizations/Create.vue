@@ -1,6 +1,28 @@
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Layout from '@/Shared/Layout'
+import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
+
+const form = useForm({
+  name: null,
+  email: null,
+  phone: null,
+  address: null,
+  city: null,
+  region: null,
+  country: null,
+  postal_code: null,
+})
+
+const store = () => {
+  form.post('/organizations')
+}
+</script>
 <template>
-  <div>
-    <Head title="Create Organization" />
+  <Head title="Create Organization" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/organizations">Organizations</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
@@ -26,44 +48,5 @@
         </div>
       </form>
     </div>
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Layout from '@/Shared/Layout'
-import TextInput from '@/Shared/TextInput'
-import SelectInput from '@/Shared/SelectInput'
-import LoadingButton from '@/Shared/LoadingButton'
-
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
-  layout: Layout,
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        name: null,
-        email: null,
-        phone: null,
-        address: null,
-        city: null,
-        region: null,
-        country: null,
-        postal_code: null,
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/organizations')
-    },
-  },
-}
-</script>

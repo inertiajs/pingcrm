@@ -1,63 +1,55 @@
+<script setup>
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+const props = defineProps({
+  placement: {
+    type: String,
+    default: 'right',
+  },
+  width: {
+    type: String,
+    default: 'w-48',
+  },
+  autoClose: {
+    type: Boolean,
+    default: true,
+  },
+})
+const closeOnEscape = (e) => {
+  if (open.value && e.key === 'Escape') {
+    open.value = false
+  }
+}
+
+const alignmentClasses = computed(() => {
+  if (props.placement === 'left') {
+    return 'origin-top-left left-0'
+  } else if (props.placement === 'right') {
+    return 'origin-top-right right-0'
+  } else {
+    return 'origin-top'
+  }
+})
+
+onMounted(() => document.addEventListener('keydown', closeOnEscape))
+onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
+
+const open = ref(false)
+</script>
 <template>
-  <button type="button" @click="show = true">
-    <slot />
-    <teleport v-if="show" to="#dropdown">
-      <div>
-        <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998; background: black; opacity: 0.2" @click="show = false" />
-        <div ref="dropdown" style="position: absolute; z-index: 99999" @click.stop="show = !autoClose">
+  <div class="relative">
+    <div class="flex w-full h-full cursor-pointer" @click="open = !open">
+      <slot />
+    </div>
+
+    <!-- Full Screen Dropdown Overlay -->
+    <div v-show="open" class="fixed z-40 inset-0" @click="open = false" />
+
+    <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+      <div v-show="open" class="absolute z-50 rounded-md shadow-lg" :class="[width, alignmentClasses]" style="display: none" @click.stop="open = !autoClose">
+        <div class="rounded-md ring-1 ring-black ring-opacity-5">
           <slot name="dropdown" />
         </div>
       </div>
-    </teleport>
-  </button>
+    </transition>
+  </div>
 </template>
-
-<script>
-import { createPopper } from '@popperjs/core'
-
-export default {
-  props: {
-    placement: {
-      type: String,
-      default: 'bottom-end',
-    },
-    autoClose: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  data() {
-    return {
-      show: false,
-    }
-  },
-  watch: {
-    show(show) {
-      if (show) {
-        this.$nextTick(() => {
-          this.popper = createPopper(this.$el, this.$refs.dropdown, {
-            placement: this.placement,
-            modifiers: [
-              {
-                name: 'preventOverflow',
-                options: {
-                  altBoundary: true,
-                },
-              },
-            ],
-          })
-        })
-      } else if (this.popper) {
-        setTimeout(() => this.popper.destroy(), 100)
-      }
-    },
-  },
-  mounted() {
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        this.show = false
-      }
-    })
-  },
-}
-</script>
