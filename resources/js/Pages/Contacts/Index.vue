@@ -1,6 +1,41 @@
+<script setup>
+import { watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Layout from '@/Shared/Layout'
+import Icon from '@/Shared/Icon'
+import pickBy from 'lodash/pickBy'
+import throttle from 'lodash/throttle'
+import Pagination from '@/Shared/Pagination'
+import SearchFilter from '@/Shared/SearchFilter'
+import Sortable from '@/Shared/Sortable'
+
+const props = defineProps({
+  filters: Object,
+  contacts: Object,
+})
+
+const form = useForm({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+  sortable: props.filters.sortable,
+})
+
+watch(
+  form,
+  throttle(() => {
+    Inertia.get('/contacts', pickBy(form), { remember: 'forget', preserveState: true })
+  }, 150),
+  { deep: true },
+)
+
+const reset = () => {
+  form.reset()
+}
+</script>
 <template>
-  <div>
-    <Head title="Contacts" />
+  <Head title="Contacts" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">Contacts</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
@@ -22,9 +57,7 @@
           <th class="pb-4 pt-6 px-6">
             <sortable field="last_name" v-model="form.sortable">Name</sortable>
           </th>
-          <th class="pb-4 pt-6 px-6">
-            Organization
-          </th>
+          <th class="pb-4 pt-6 px-6">Organization</th>
           <th class="pb-4 pt-6 px-6">
             <sortable field="city" v-model="form.sortable">City</sortable>
           </th>
@@ -68,55 +101,5 @@
       </table>
     </div>
     <pagination class="mt-6" :links="contacts.links" />
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
-import Pagination from '@/Shared/Pagination'
-import SearchFilter from '@/Shared/SearchFilter'
-import Sortable from '@/Shared/Sortable'
-
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-    Sortable,
-  },
-  layout: Layout,
-  props: {
-    filters: Object,
-    contacts: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-        sortable: this.filters.sortable,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/contacts', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
-}
-</script>

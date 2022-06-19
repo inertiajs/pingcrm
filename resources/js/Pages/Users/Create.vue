@@ -1,6 +1,28 @@
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Layout from '@/Shared/Layout'
+import FileInput from '@/Shared/FileInput'
+import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
+
+const form = useForm({
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: '',
+  owner: false,
+  photo: null,
+})
+
+const store = () => {
+  form.post('/users')
+};
+
+</script>
 <template>
-  <div>
-    <Head title="Create User" />
+  <Head title="Create User" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/users">Users</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
@@ -23,44 +45,5 @@
         </div>
       </form>
     </div>
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Layout from '@/Shared/Layout'
-import FileInput from '@/Shared/FileInput'
-import TextInput from '@/Shared/TextInput'
-import SelectInput from '@/Shared/SelectInput'
-import LoadingButton from '@/Shared/LoadingButton'
-
-export default {
-  components: {
-    FileInput,
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
-  layout: Layout,
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        owner: false,
-        photo: null,
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/users')
-    },
-  },
-}
-</script>

@@ -1,6 +1,47 @@
+<script setup>
+import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Layout from '@/Shared/Layout'
+import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
+import TrashedMessage from '@/Shared/TrashedMessage'
+
+const props = defineProps({
+  contact: Object,
+  organizations: Array,
+})
+
+const form = useForm({
+  first_name: props.contact.first_name,
+  last_name: props.contact.last_name,
+  organization_id: props.contact.organization_id,
+  email: props.contact.email,
+  phone: props.contact.phone,
+  address: props.contact.address,
+  city: props.contact.city,
+  region: props.contact.region,
+  country: props.contact.country,
+  postal_code: props.contact.postal_code,
+})
+
+const update = () => {
+  form.put(`/contacts/${props.contact.id}`)
+}
+const destroy = () => {
+  if (confirm('Are you sure you want to delete this contact?')) {
+    Inertia.delete(`/contacts/${props.contact.id}`)
+  }
+}
+const restore = () => {
+  if (confirm('Are you sure you want to restore this contact?')) {
+    Inertia.put(`/contacts/${props.contact.id}/restore`)
+  }
+}
+</script>
 <template>
-  <div>
-    <Head :title="`${form.first_name} ${form.last_name}`" />
+  <Head :title="`${form.first_name} ${form.last_name}`" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/contacts">Contacts</Link>
       <span class="text-indigo-400 font-medium">/</span>
@@ -34,62 +75,5 @@
         </div>
       </form>
     </div>
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Layout from '@/Shared/Layout'
-import TextInput from '@/Shared/TextInput'
-import SelectInput from '@/Shared/SelectInput'
-import LoadingButton from '@/Shared/LoadingButton'
-import TrashedMessage from '@/Shared/TrashedMessage'
-
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    TrashedMessage,
-  },
-  layout: Layout,
-  props: {
-    contact: Object,
-    organizations: Array,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        first_name: this.contact.first_name,
-        last_name: this.contact.last_name,
-        organization_id: this.contact.organization_id,
-        email: this.contact.email,
-        phone: this.contact.phone,
-        address: this.contact.address,
-        city: this.contact.city,
-        region: this.contact.region,
-        country: this.contact.country,
-        postal_code: this.contact.postal_code,
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.put(`/contacts/${this.contact.id}`)
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this contact?')) {
-        this.$inertia.delete(`/contacts/${this.contact.id}`)
-      }
-    },
-    restore() {
-      if (confirm('Are you sure you want to restore this contact?')) {
-        this.$inertia.put(`/contacts/${this.contact.id}/restore`)
-      }
-    },
-  },
-}
-</script>

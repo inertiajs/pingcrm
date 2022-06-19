@@ -1,6 +1,41 @@
+<script setup>
+import { watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import Icon from '@/Shared/Icon'
+import pickBy from 'lodash/pickBy'
+import Layout from '@/Shared/Layout'
+import throttle from 'lodash/throttle'
+import SearchFilter from '@/Shared/SearchFilter'
+import Sortable from '@/Shared/Sortable'
+
+const props = defineProps({
+  filters: Object,
+  users: Object,
+})
+
+const form = useForm({
+  search: props.filters.search,
+  role: props.filters.role,
+  trashed: props.filters.trashed,
+  sortable: props.filters.sortable,
+})
+
+watch(
+  form,
+  throttle(() => {
+    Inertia.get('/users', pickBy(form), { remember: 'forget', preserveState: true })
+  }, 150),
+  { deep: true },
+)
+
+const reset = () => {
+  form.reset()
+}
+</script>
 <template>
-  <div>
-    <Head title="Users" />
+  <Head title="Users" />
+  <Layout>
     <h1 class="mb-8 text-3xl font-bold">Users</h1>
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
@@ -31,9 +66,7 @@
           <th class="pb-4 pt-6 px-6">
             <sortable field="email" v-model="form.sortable">Email</sortable>
           </th>
-          <th class="pb-4 pt-6 px-6" colspan="2">
-            Role
-          </th>
+          <th class="pb-4 pt-6 px-6" colspan="2">Role</th>
         </tr>
         <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -64,54 +97,5 @@
         </tr>
       </table>
     </div>
-  </div>
+  </Layout>
 </template>
-
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout'
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
-import SearchFilter from '@/Shared/SearchFilter'
-import Sortable from '@/Shared/Sortable'
-
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    SearchFilter,
-    Sortable,
-  },
-  layout: Layout,
-  props: {
-    filters: Object,
-    users: Array,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        role: this.filters.role,
-        trashed: this.filters.trashed,
-        sortable: this.filters.sortable,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/users', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
-}
-</script>
