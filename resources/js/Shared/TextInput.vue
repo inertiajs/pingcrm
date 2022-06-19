@@ -4,10 +4,9 @@ export default {
 }
 </script>
 <script setup>
-import { ref } from 'vue'
 import { v4 as uuid } from 'uuid'
 
-const props = defineProps({
+defineProps({
   id: {
     type: String,
     default() {
@@ -21,21 +20,9 @@ const props = defineProps({
   error: String,
   label: String,
   modelValue: String,
-});
+})
 
-const emit = defineEmits(['update:modelValue'])
-
-const input = ref(null)
-
-const focus = () => {
-  input.value.focus()
-}
-const select = () => {
-  input.value.select()
-}
-const setSelectionRange = (start, end) => {
-  input.value.setSelectionRange(start, end)
-}
+defineEmits(['update:modelValue'])
 </script>
 <template>
   <div :class="$attrs.class">

@@ -56,13 +56,13 @@ const reset = () => {
         <thead>
           <tr class="text-left font-bold">
             <th class="pb-4 pt-6 px-6">
-              <sortable field="name" v-model="form.sortable">Name</sortable>
+              <sortable v-model="form.sortable" field="name">Name</sortable>
             </th>
             <th class="pb-4 pt-6 px-6">
-              <sortable field="city" v-model="form.sortable">City</sortable>
+              <sortable v-model="form.sortable" field="city">City</sortable>
             </th>
             <th class="pb-4 pt-6 px-6" colspan="2">
-              <sortable field="phone" v-model="form.sortable">Phone</sortable>
+              <sortable v-model="form.sortable" field="phone">Phone</sortable>
             </th>
           </tr>
         </thead>

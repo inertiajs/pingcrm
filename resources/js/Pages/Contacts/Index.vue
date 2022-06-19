@@ -55,14 +55,14 @@ const reset = () => {
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 px-6">
-            <sortable field="last_name" v-model="form.sortable">Name</sortable>
+            <sortable v-model="form.sortable" field="last_name">Name</sortable>
           </th>
           <th class="pb-4 pt-6 px-6">Organization</th>
           <th class="pb-4 pt-6 px-6">
-            <sortable field="city" v-model="form.sortable">City</sortable>
+            <sortable v-model="form.sortable" field="city">City</sortable>
           </th>
           <th class="pb-4 pt-6 px-6" colspan="2">
-            <sortable field="phone" v-model="form.sortable">Phone</sortable>
+            <sortable v-model="form.sortable" field="phone">Phone</sortable>
           </th>
         </tr>
         <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">

@@ -17,8 +17,7 @@ const form = useForm({
 
 const store = () => {
   form.post('/users')
-};
-
+}
 </script>
 <template>
   <Head title="Create User" />

@@ -8,7 +8,6 @@ import MainMenu from '@/Shared/MainMenu'
 import FlashMessages from '@/Shared/FlashMessages'
 
 const user = computed(() => usePage().props.value.auth.user)
-
 </script>
 <template>
   <div>
@@ -33,7 +32,7 @@ const user = computed(() => usePage().props.value.auth.user)
           </div>
           <div class="md:text-md flex items-center justify-between p-4 w-full text-sm bg-white border-b md:px-12 md:py-0">
             <div class="mr-4 mt-1">{{ user.account.name }}</div>
-            <dropdown class="mt-1" placement="bottom-end">
+            <dropdown class="mt-1" placement="right">
               <template #default>
                 <div class="group flex items-center cursor-pointer select-none">
                   <div class="mr-1 text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 whitespace-nowrap">

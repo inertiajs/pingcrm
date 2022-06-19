@@ -5,7 +5,7 @@ const show = ref(true)
 
 watch(
   '$page.props.flash',
-  (value) => {
+  () => {
     this.show = true
   },
   { deep: true },

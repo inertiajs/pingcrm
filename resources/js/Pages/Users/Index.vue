@@ -61,10 +61,10 @@ const reset = () => {
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 px-6">
-            <sortable field="last_name" v-model="form.sortable">Name</sortable>
+            <sortable v-model="form.sortable" field="last_name">Name</sortable>
           </th>
           <th class="pb-4 pt-6 px-6">
-            <sortable field="email" v-model="form.sortable">Email</sortable>
+            <sortable v-model="form.sortable" field="email">Email</sortable>
           </th>
           <th class="pb-4 pt-6 px-6" colspan="2">Role</th>
         </tr>

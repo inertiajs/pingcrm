@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 import { Link, usePage } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 

@@ -24,17 +24,9 @@ const emit = defineEmits(['update:modelValue'])
 const selected = ref(props.modelValue)
 const input = ref(null)
 
-watch(selected, selected => {
+watch(selected, (selected) => {
   emit('update:modelValue', selected)
 })
-
-const focus = () => {
-  input.value.focus()
-}
-
-const select = () => {
-  input.value.select()
-}
 </script>
 <template>
   <div :class="$attrs.class">
