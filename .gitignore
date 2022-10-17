@@ -1,8 +1,11 @@
+/bootstrap/ssr
 /node_modules
+/public/build
 /public/css
 /public/hot
 /public/js
-/public/mix-manifest.json
+/public/build/assets
+/public/build/manifest.json
 /public/storage
 /storage/*.key
 /vendor
