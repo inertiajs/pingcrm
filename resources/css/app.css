@@ -1,11 +1,11 @@
 /* Reset */
 @import 'tailwindcss/base';
-@import 'reset';
+@import 'reset.css';
 
 /* Components */
 @import 'tailwindcss/components';
-@import 'buttons';
-@import 'form';
+@import 'buttons.css';
+@import 'form.css';
 
 /* Utilities */
 @import 'tailwindcss/utilities';
