@@ -1,23 +1,26 @@
 <template>
   <div>
-    <Head title="Ajouter Agence" />
+    <Head title="Ajouter Panne" />
     <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-indigo-400 hover:text-indigo-600" href="/agences">Agences</Link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/pannes">Maintenances</Link>
       <span class="text-indigo-400 font-medium">/</span> Ajouter
     </h1>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <!-- Name -->
-          <text-input v-model="form.name" :error="form.errors.name" class="pb-8 pr-6 w-full lg:w-1/2" label="Nom" />
-          <!-- Type -->
-          <select-input v-model="form.centre" :error="form.errors.centre" class="pb-8 pr-6 w-full lg:w-1/2" label="Centre">
-            <option :value="null" />
-            <option value="commercial">Commercial</option>
-            <option value="tech">Technique</option>
-          </select-input>
-          <!-- Contact -->
-          <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" label="Contact" />
+          <!-- Intervention Date -->
+          <text-input v-model="form.intervention_date" :error="form.errors.intervention_date" class="pb-8 pr-6 w-full lg:w-1/2" label="Date d'Intervention" type="date" />
+          <div class="lg:w-1/2 hidden lg:block" />
+          <!-- From -->
+          <text-input v-model="form.from" :error="form.errors.from" class="pb-8 pr-6 w-full lg:w-1/2" label="Heure de début" type="time" />
+          <!-- To -->
+          <text-input v-model="form.to" :error="form.errors.to" class="pb-8 pr-6 w-full lg:w-1/2" label="Heure de fin" type="time" />
+
+          <div class="w-full border-b mb-3" />
+          <div class="w-full mt-8 mb-6">
+            <span class="font-bold">Zones concernées par les travaux:</span>
+          </div>
+
           <!-- Department -->
           <select-input v-model="form.department_id" :error="form.errors.department_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Département" @select-changed="getCommunes">
             <option :value="null" />
@@ -38,11 +41,17 @@
             <option :value="null" />
             <option v-for="area in areas" :key="area.id" :value="area.id">{{ area.lib_area }}</option>
           </select-input>
-          <!-- Address -->
-          <textarea-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full" label="Indication Précise" />
+
+          <div class="w-full border-b mb-3" />
+          <div class="w-full mt-8 mb-6">
+            <span class="font-bold">Description:</span>
+          </div>
+
+          <!-- Description -->
+          <textarea-input v-model="form.description" :error="form.errors.description" class="pb-8 pr-6 w-full" label="Détails sur les travaux" />
         </div>
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Ajouter Agence</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Ajouter Travaux</loading-button>
         </div>
       </form>
     </div>
@@ -75,10 +84,11 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        name: null,
-        phone: null,
-        address: null,
-        centre: null,
+        intervention_date: null,
+        from: null,
+        to: null,
+        type: 'maintenance',
+        description: null,
         department_id: null,
         commune_id: null,
         arrondissement_id: null,
@@ -91,7 +101,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post('/agences')
+      this.form.post('/pannes')
     },
     getCommunes(dep) {
       this.arrondissements = []

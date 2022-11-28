@@ -14,16 +14,16 @@ class CreateOrganizationsTable extends Migration
     public function up()
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('account_id')->index();
             $table->string('name', 100);
-            $table->string('email', 50)->nullable();
             $table->string('phone', 50)->nullable();
             $table->string('address', 150)->nullable();
-            $table->string('city', 50)->nullable();
-            $table->string('region', 50)->nullable();
-            $table->string('country', 2)->nullable();
-            $table->string('postal_code', 25)->nullable();
+            $table->enum('centre', ['commercial', 'tech'])->default('commercial');
+            $table->foreignId('department_id')->constrained('departments');
+            $table->foreignId('commune_id')->constrained('communes');
+            $table->foreignId('arrondissement_id')->nullable()->constrained('arrondissements');
+            $table->foreignId('area_id')->nullable()->constrained('areas');
             $table->timestamps();
             $table->softDeletes();
         });

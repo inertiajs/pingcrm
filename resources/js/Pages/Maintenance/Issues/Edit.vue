@@ -16,8 +16,8 @@
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" label="Contact" />
           <!-- Address -->
           <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2" label="Indication Précise" />
-<!-- Department -->
-<select-input v-model="form.department_id" :error="form.errors.department_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Département" @select-changed="getCommunes">
+          <!-- Department -->
+          <select-input v-model="form.department_id" :error="form.errors.department_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Département" @select-changed="getCommunes">
             <option :value="null" />
             <option v-for="dep in departments" :key="dep.id" :value="dep.id">{{ dep.lib_dep }}</option>
           </select-input>

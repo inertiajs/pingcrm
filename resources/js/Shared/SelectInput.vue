@@ -1,7 +1,7 @@
 <template>
   <div :class="$attrs.class">
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
-    <select :id="id" ref="input" v-model="selected" v-bind="{ ...$attrs, class: null }" class="form-select" :class="{ error: error }">
+    <select :id="id" ref="input" v-model="selected" @change="$emit('selectChanged', selected)" v-bind="{ ...$attrs, class: null }" class="form-select" :class="{ error: error }">
       <slot />
     </select>
     <div v-if="error" class="form-error">{{ error }}</div>
@@ -24,7 +24,7 @@ export default {
     label: String,
     modelValue: [String, Number, Boolean],
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'selectChanged'],
   data() {
     return {
       selected: this.modelValue,

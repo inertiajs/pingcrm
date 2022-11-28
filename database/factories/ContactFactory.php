@@ -18,11 +18,7 @@ class ContactFactory extends Factory
             'last_name' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->tollFreePhoneNumber,
-            'address' => $this->faker->streetAddress,
-            'city' => $this->faker->city,
-            'region' => $this->faker->state,
-            'country' => 'US',
-            'postal_code' => $this->faker->postcode,
+            'comment' => $this->faker->text(10),
         ];
     }
 }

@@ -25,7 +25,7 @@ class ContactsController extends Controller
                     'id' => $contact->id,
                     'name' => $contact->name,
                     'phone' => $contact->phone,
-                    'city' => $contact->city,
+                    'comment' => $contact->comment,
                     'deleted_at' => $contact->deleted_at,
                     'organization' => $contact->organization ? $contact->organization->only('name') : null,
                 ]),
@@ -55,15 +55,11 @@ class ContactsController extends Controller
                 })],
                 'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'comment' => ['nullable', 'max:150'],
             ])
         );
 
-        return Redirect::route('contacts')->with('success', 'Contact created.');
+        return Redirect::route('contacts.index')->with('success', 'Responsable ajouté.');
     }
 
     public function edit(Contact $contact)
@@ -76,12 +72,7 @@ class ContactsController extends Controller
                 'organization_id' => $contact->organization_id,
                 'email' => $contact->email,
                 'phone' => $contact->phone,
-                'address' => $contact->address,
-                'city' => $contact->city,
-                'region' => $contact->region,
-                'country' => $contact->country,
-                'postal_code' => $contact->postal_code,
-                'deleted_at' => $contact->deleted_at,
+                'comment' => $contact->comment,
             ],
             'organizations' => Auth::user()->account->organizations()
                 ->orderBy('name')
@@ -103,28 +94,24 @@ class ContactsController extends Controller
                 ],
                 'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'comment' => ['nullable', 'max:150'],
             ])
         );
 
-        return Redirect::back()->with('success', 'Contact updated.');
+        return Redirect::back()->with('success', 'Responsable infos mise à jour.');
     }
 
     public function destroy(Contact $contact)
     {
         $contact->delete();
 
-        return Redirect::back()->with('success', 'Contact deleted.');
+        return Redirect::back()->with('success', 'Responsable supprimé.');
     }
 
     public function restore(Contact $contact)
     {
         $contact->restore();
 
-        return Redirect::back()->with('success', 'Contact restored.');
+        return Redirect::back()->with('success', 'Responsable restauré.');
     }
 }

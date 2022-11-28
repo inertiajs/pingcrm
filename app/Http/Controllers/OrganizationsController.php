@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -22,8 +23,9 @@ class OrganizationsController extends Controller
                 ->through(fn ($organization) => [
                     'id' => $organization->id,
                     'name' => $organization->name,
+                    'centre' => $organization->centre,
                     'phone' => $organization->phone,
-                    'city' => $organization->city,
+                    'address' => $organization->address,
                     'deleted_at' => $organization->deleted_at,
                 ]),
         ]);
@@ -31,7 +33,9 @@ class OrganizationsController extends Controller
 
     public function create()
     {
-        return Inertia::render('Organizations/Create');
+        return Inertia::render('Organizations/Create', [
+            'departments' => Department::orderBy('lib_dep')->get()->map->only('id', 'lib_dep'),
+        ]);
     }
 
     public function store()
@@ -39,34 +43,35 @@ class OrganizationsController extends Controller
         Auth::user()->account->organizations()->create(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
                 'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'centre' => ['required', 'in:commercial,tech'],
+                'department_id' => ['required', 'exists:departments,id'],
+                'commune_id' => ['required', 'exists:communes,id'],
+                'arrondissement_id' => ['nullable', 'exists:arrondissements,id'],
+                'area_id' => ['nullable', 'exists:areas,id'],
             ])
         );
 
-        return Redirect::route('organizations')->with('success', 'Organization created.');
+        return Redirect::route('agences.index')->with('success', 'Agence ajoutée.');
     }
 
     public function edit(Organization $organization)
     {
         return Inertia::render('Organizations/Edit', [
+            'departments' => Department::orderBy('lib_dep')->get()->map->only('id', 'lib_dep'),
             'organization' => [
                 'id' => $organization->id,
                 'name' => $organization->name,
-                'email' => $organization->email,
                 'phone' => $organization->phone,
                 'address' => $organization->address,
-                'city' => $organization->city,
-                'region' => $organization->region,
-                'country' => $organization->country,
-                'postal_code' => $organization->postal_code,
+                'centre' => $organization->centre,
+                'department_id' => $organization->department->id,
+                'commune_id' => $organization->commune->id,
+                'arrondissement_id' => $organization->arrondissement->id ?? null,
+                'area_id' => $organization->area->id ?? null,
                 'deleted_at' => $organization->deleted_at,
-                'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'city', 'phone'),
+                'contacts' => $organization->contacts()->orderByName()->get()->map->only('id', 'name', 'support', 'phone'),
             ],
         ]);
     }
@@ -76,30 +81,30 @@ class OrganizationsController extends Controller
         $organization->update(
             Request::validate([
                 'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
                 'phone' => ['nullable', 'max:50'],
                 'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
+                'centre' => ['required', 'in:commercial,tech'],
+                'department_id' => ['required', 'exists:departments,id'],
+                'commune_id' => ['required', 'exists:communes,id'],
+                'arrondissement_id' => ['nullable', 'exists:arrondissements,id'],
+                'area_id' => ['nullable', 'exists:areas,id'],
             ])
         );
 
-        return Redirect::back()->with('success', 'Organization updated.');
+        return Redirect::back()->with('success', 'Agence modifiée.');
     }
 
     public function destroy(Organization $organization)
     {
         $organization->delete();
 
-        return Redirect::back()->with('success', 'Organization deleted.');
+        return Redirect::back()->with('success', 'Agence supprimée.');
     }
 
     public function restore(Organization $organization)
     {
         $organization->restore();
 
-        return Redirect::back()->with('success', 'Organization restored.');
+        return Redirect::back()->with('success', 'Agence Restaurée.');
     }
 }

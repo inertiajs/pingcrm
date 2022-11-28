@@ -7,15 +7,27 @@
       </Link>
     </div>
     <div class="mb-4">
-      <Link class="group flex items-center py-3" href="/organizations">
-        <icon name="office" class="mr-2 w-4 h-4" :class="isUrl('organizations') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
-        <div :class="isUrl('organizations') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Agences</div>
+      <Link class="group flex items-center py-3" href="/agences">
+        <icon name="office" class="mr-2 w-4 h-4" :class="isUrl('agences') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('agences') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Agences</div>
       </Link>
     </div>
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/contacts">
         <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('contacts') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
-        <div :class="isUrl('contacts') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Contacts</div>
+        <div :class="isUrl('contacts') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Responsables</div>
+      </Link>
+    </div>
+    <div class="mb-4">
+      <Link class="group flex items-center py-3" href="/pannes">
+        <icon name="office" class="mr-2 w-4 h-4" :class="isUrl('pannes') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('pannes') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Pannes</div>
+      </Link>
+    </div>
+    <div class="mb-4">
+      <Link class="group flex items-center py-3" href="/maintenances">
+        <icon name="office" class="mr-2 w-4 h-4" :class="isUrl('maintenances') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('maintenances') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Maintenances</div>
       </Link>
     </div>
     <div class="mb-4">

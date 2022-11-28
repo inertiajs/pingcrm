@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
+use App\Models\Arrondissement;
+use App\Models\Commune;
+use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrganizationFactory extends Factory
@@ -15,13 +19,13 @@ class OrganizationFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'email' => $this->faker->companyEmail,
             'phone' => $this->faker->tollFreePhoneNumber,
             'address' => $this->faker->streetAddress,
-            'city' => $this->faker->city,
-            'region' => $this->faker->state,
-            'country' => 'US',
-            'postal_code' => $this->faker->postcode,
+            'centre' => $this->faker->randomElement(['commercial', 'tech']),
+            'department_id' => 8,
+            'commune_id' => 48,
+            'arrondissement_id' => rand(342, 351),
+            'area_id' => rand(3361, 3471),
         ];
     }
 }
