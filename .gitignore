@@ -4,7 +4,6 @@
 /public/js
 /public/mix-manifest.json
 /public/storage
-/public/build
 /storage/*.key
 /vendor
 .DS_Store
@@ -20,4 +19,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/tools

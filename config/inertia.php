@@ -42,7 +42,7 @@ return [
 
         'page_paths' => [
 
-            resource_path('views/Pages'),
+            resource_path('js/Pages'),
 
         ],
 
