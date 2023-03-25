@@ -4,7 +4,7 @@
       <v-flex xs12 sm4 elevation-6>
         <v-toolbar class="red darken-2 overline text-center">
           <v-toolbar-title class="white--text text-center">
-            <h4>Terrentro Expediente</h4>
+            <h4>RENTA ETBSA</h4>
           </v-toolbar-title>
         </v-toolbar>
         <v-card>
@@ -59,10 +59,10 @@
 </template>
 
 <script>
-import Layout from '@/Shared/Basic'
+import Layout from "@/Shared/Basic";
 
 export default {
-  metaInfo: { title: 'Login' },
+  metaInfo: { title: "Login" },
   components: {},
   props: { errors: Object },
   layout: (h, page) => h(Layout, [page]),
@@ -76,7 +76,7 @@ export default {
         password: null,
         remember: null,
       },
-    }
+    };
   },
   methods: {
     submit() {
@@ -84,18 +84,18 @@ export default {
         email: this.form.email,
         password: this.form.password,
         remember: this.form.remember,
-      }
-      this.$inertia.post(this.route('login.attempt'), data, {
+      };
+      this.$inertia.post(this.route("login.attempt"), data, {
         onStart: () => (this.sending = true),
         onFinish: () => (this.sending = false),
-      })
+      });
     },
   },
-}
+};
 </script>
 <style>
 #login {
-  background-image: url('https://images.unsplash.com/photo-1497733942558-e74c87ef89db?dpr=1&auto=compress,format&fit=crop&w=1650&h=&q=80&cs=tinysrgb&crop=');
+  background-image: url("https://images.unsplash.com/photo-1497733942558-e74c87ef89db?dpr=1&auto=compress,format&fit=crop&w=1650&h=&q=80&cs=tinysrgb&crop=");
   background-size: cover;
   overflow: hidden;
 }

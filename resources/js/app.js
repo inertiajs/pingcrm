@@ -19,7 +19,7 @@ const page = JSON.parse(app.dataset.page)
 new Vue({
   vuetify,
   metaInfo: {
-    titleTemplate: title => (title ? `${title} - Expediente` : 'Expediente'),
+    titleTemplate: title => (title ? `${title} - Rentas` : 'Rentas'),
   },
   render: h =>
     h(App, {
