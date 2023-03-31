@@ -60,6 +60,7 @@ class HandleInertiaRequests extends Middleware
                 ['label' => 'Expedientes', 'route' => 'expedients', 'show' => true],
                 ['label' => 'Plantillas', 'route' => 'templates', 'show' =>  $request->user()->owner ?? false],
                 ['label' => 'Requisitos', 'route' => 'requirements', 'show' =>  $request->user()->owner ?? false],
+                ['label' => 'Maquinaria', 'route' => 'machineries', 'show' =>  $request->user()->owner ?? false],
                 ['label' => 'Usuarios', 'route' => 'users', 'show' =>  $request->user()->owner ?? false],
             ],
             'flash' => function () use ($request) {

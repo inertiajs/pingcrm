@@ -74,15 +74,15 @@
 
 <script>
 export default {
-  name: 'UserForm',
+  name: "UserForm",
 
   props: { form: { type: Object, required: true }, errors: Object },
 
   data: () => ({
     owner: [
-      { value: true, text: 'Si' },
-      { value: false, text: 'No' },
+      { value: true, text: "Si" },
+      { value: false, text: "No" },
     ],
   }),
-}
+};
 </script>

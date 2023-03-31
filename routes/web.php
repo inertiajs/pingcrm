@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ExpedientController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\MachineryController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RequirementController;
@@ -188,6 +189,18 @@ Route::prefix('documents')->name('documents')->middleware('auth')->group(
         Route::get('/{document}/downloadFilesZip', [DocumentController::class, 'downloadFilesZip'])->name('.downloadFilesZip');
         Route::put('/{document}/uploadFiles', [DocumentController::class, 'uploadFiles'])->name('.uploadFiles');
         Route::delete('/{file}/deleteFile', [DocumentController::class, 'deleteFile'])->name('.deleteFile');
+    }
+);
+// Machinery
+Route::prefix('machineries')->name('machineries')->middleware('auth', 'role:owner')->group(
+    function () {
+        Route::get('/', [MachineryController::class, 'index'])->middleware('remember');
+        Route::get('/create', [MachineryController::class, 'create'])->name('.create');
+        Route::post('/', [MachineryController::class, 'store'])->name('.store');
+        Route::get('/{machinery}/edit', [MachineryController::class, 'edit'])->name('.edit');
+        Route::put('/{machinery}', [MachineryController::class, 'update'])->name('.update');
+        Route::delete('/{machinery}', [MachineryController::class, 'destroy'])->name('.destroy');
+        Route::put('/{machinery}/restore', [MachineryController::class, 'restore'])->name('.restore');
     }
 );
 

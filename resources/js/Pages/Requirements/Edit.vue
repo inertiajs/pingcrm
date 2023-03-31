@@ -48,12 +48,12 @@
 </template>
 
 <script>
-import Layout from '@/Shared/Layout'
-import TrashedMessage from '@/Shared/TrashedMessage'
+import Layout from "@/Shared/Layout";
+import TrashedMessage from "@/Shared/TrashedMessage";
 
 export default {
   metaInfo() {
-    return { title: this.form.name }
+    return { title: this.form.name };
   },
   layout: Layout,
   components: {
@@ -63,7 +63,7 @@ export default {
     errors: Object,
     requirement: Object,
   },
-  remember: 'form',
+  remember: "form",
   data() {
     return {
       sending: false,
@@ -73,42 +73,42 @@ export default {
       },
       breadcrumbs: [
         {
-          text: 'Requisitos',
+          text: "Requisitos",
           disabled: false,
-          href: this.route('requirements'),
+          href: this.route("requirements"),
           exact: true,
         },
-        { text: 'Editar', disabled: true },
+        { text: "Editar", disabled: true },
       ],
-    }
+    };
   },
   methods: {
     submit() {
       this.$inertia.put(
-        this.route('requirements.update', this.requirement.id),
+        this.route("requirements.update", this.requirement.id),
         this.form,
         {
           onStart: () => (this.sending = true),
           onFinish: () => (this.sending = false),
         }
-      )
+      );
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this requirement?')) {
+      if (confirm("Are you sure you want to delete this requirement?")) {
         this.$inertia.delete(
-          this.route('requirements.destroy', this.requirement.id)
-        )
+          this.route("requirements.destroy", this.requirement.id)
+        );
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this requirement?')) {
+      if (confirm("Are you sure you want to restore this requirement?")) {
         this.$inertia.put(
-          this.route('requirements.restore', this.requirement.id)
-        )
+          this.route("requirements.restore", this.requirement.id)
+        );
       }
     },
   },
-}
+};
 </script>
 
 <style></style>

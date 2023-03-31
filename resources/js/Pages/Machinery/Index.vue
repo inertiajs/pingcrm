@@ -9,7 +9,7 @@
       <v-col cols="12" md="3" class="pa-1">
         <v-select
           v-model="form.trashed"
-          :items="items"
+          :items="options"
           label="Filtro Elminados:"
           dense
           hide-details
@@ -30,13 +30,13 @@
     </search-filter>
     <v-row class="text-end px-4" no-gutters justify="end" align="center">
       <v-col cols="12" md="3" class="pa-2">
-        <v-btn @click="create()">Crear Requisito</v-btn>
+        <v-btn @click="create()">Registrar Maquinaria</v-btn>
       </v-col>
     </v-row>
 
     <v-card-text>
       <data-table-wrapper
-        :items="requirements.data"
+        :items="items.data"
         :headers="headers"
         with-search
         sort-by="name"
@@ -47,8 +47,15 @@
               {{ item.id }}
             </td>
             <td class="text-no-wrap">
-              {{ item.name }}
+              {{ item.category }}
             </td>
+            <td class="text-no-wrap">
+              {{ item.no_serie }}
+            </td>
+            <td class="text-no-wrap">
+              {{ item.price }}
+            </td>
+
             <td class="text-right">
               <v-chip v-if="item.deleted_at" color="warning" outlined x-small>
                 Eliminado
@@ -63,10 +70,10 @@
       </data-table-wrapper>
     </v-card-text>
     <Pagination
-      v-if="requirements.links.length > 1"
-      :links="requirements.links"
+      v-if="items.links.length > 1"
+      :links="items.links"
       :page="form.page"
-      route="requirements"
+      route="machineries"
       @input="(v) => (form.page = v)"
     />
   </v-card>
@@ -82,15 +89,17 @@ import SearchFilter from "@/Shared/SearchFilter";
 import Pagination from "@/Shared/Pagination";
 
 export default {
-  metaInfo: { title: "Reports" },
+  metaInfo: { title: "Maquinaria" },
   layout: Layout,
   components: { DataTableWrapper, SearchFilter, Pagination },
-  props: { requirements: Object, filters: Object },
+  props: { items: Object, filters: Object },
   data() {
     return {
       headers: [
         { text: "ID", width: "75", value: "id" },
-        { text: "Nombre", value: "name" },
+        { text: "Categoria ", value: "category" },
+        { text: "No. Serie", value: "no_serie" },
+        { text: "Precio", value: "price" },
         {
           text: "",
           align: "end",
@@ -104,13 +113,13 @@ export default {
         trashed: this.filters.trashed,
         page: this.filters.page | 1,
       },
-      items: [
+      options: [
         { text: "(Vacio)", value: "" },
         { divider: true },
         { text: "Con", value: "with" },
         { text: "Solamente", value: "only" },
       ],
-      breadcrumbs: [{ text: "Requisitos", disabled: false }],
+      breadcrumbs: [{ text: "Inventario Maquinaria", disabled: false }],
     };
   },
 
@@ -120,7 +129,7 @@ export default {
         let query = pickBy(this.form);
         this.$inertia.replace(
           this.route(
-            "requirements",
+            "machineries",
             Object.keys(query).length ? query : { remember: "forget" }
           )
         );
@@ -138,10 +147,10 @@ export default {
       this.form.page = 1;
     },
     create() {
-      this.$inertia.visit(this.route("requirements.create"));
+      this.$inertia.visit(this.route("machineries.create"));
     },
-    edit(_requirement) {
-      this.$inertia.visit(this.route("requirements.edit", _requirement));
+    edit(_item_id) {
+      this.$inertia.visit(this.route("machineries.edit", _item_id));
     },
   },
 };

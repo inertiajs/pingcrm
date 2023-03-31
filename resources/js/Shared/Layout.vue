@@ -49,7 +49,7 @@
     <v-main class="grey lighten-3">
       <v-container>
         <v-row align="center" justify="center" class="ma-0">
-          <v-col cols="12" sm="10">
+          <v-col cols="12">
             <v-sheet rounded="lg">
               <!-- <h4>{{ url() }} {{ active }}</h4> -->
               <flash-messages />
