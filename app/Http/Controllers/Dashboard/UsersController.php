@@ -19,6 +19,7 @@ class UsersController extends Controller
     public function index()
     {
         return Inertia::render('Users/Index', [
+           
             'filters' => Request::all('search', 'role', 'trashed'),
             'users' => Auth::user()->account->users()
                 ->orderByName()
