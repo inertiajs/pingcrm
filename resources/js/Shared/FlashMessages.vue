@@ -26,16 +26,24 @@
 </template>
 
 <script>
+import { Inertia } from '@inertiajs/inertia'
+
 export default {
   data() {
     return {
-      show: true,
+      show: false,
     }
   },
   watch: {
     '$page.props.flash': {
       handler() {
-        this.show = true
+        this.show = false
+
+        Inertia.on('success', () => {
+          if (this.$page.props.flash.error !== null || this.$page.props.flash.success !== null) {
+            this.show = true
+          }
+        })
       },
       deep: true,
     },
