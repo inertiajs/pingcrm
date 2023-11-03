@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
-use App\Models\User;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -11,11 +12,14 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
+use App\Models\User;
+
 class UsersController extends Controller
 {
     public function index()
     {
         return Inertia::render('Users/Index', [
+           
             'filters' => Request::all('search', 'role', 'trashed'),
             'users' => Auth::user()->account->users()
                 ->orderByName()

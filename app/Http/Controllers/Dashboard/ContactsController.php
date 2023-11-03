@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Contact;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
+
+use App\Models\Contact;
+
 class ContactsController extends Controller
 {
+
     public function index()
     {
         return Inertia::render('Contacts/Index', [
@@ -32,6 +36,7 @@ class ContactsController extends Controller
         ]);
     }
 
+
     public function create()
     {
         return Inertia::render('Contacts/Create', [
@@ -43,6 +48,7 @@ class ContactsController extends Controller
                 ->only('id', 'name'),
         ]);
     }
+
 
     public function store()
     {
@@ -65,6 +71,13 @@ class ContactsController extends Controller
 
         return Redirect::route('contacts')->with('success', 'Contact created.');
     }
+
+
+    public function show($id)
+    {
+        //
+    }
+
 
     public function edit(Contact $contact)
     {
@@ -91,6 +104,7 @@ class ContactsController extends Controller
         ]);
     }
 
+
     public function update(Contact $contact)
     {
         $contact->update(
@@ -114,12 +128,13 @@ class ContactsController extends Controller
         return Redirect::back()->with('success', 'Contact updated.');
     }
 
+
     public function destroy(Contact $contact)
     {
         $contact->delete();
-
         return Redirect::back()->with('success', 'Contact deleted.');
     }
+
 
     public function restore(Contact $contact)
     {
