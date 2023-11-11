@@ -13,10 +13,9 @@ class OrganizationsController extends Controller
     public function index()
     {
         return Inertia::render('Organizations/Index', [
-            'filters' => Request::all('search', 'trashed'),
+            'filters' => Request::all('search', 'trashed', 'sortable'),
             'organizations' => Auth::user()->account->organizations()
-                ->orderBy('name')
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(Request::only('search', 'trashed', 'sortable'))
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn ($organization) => [

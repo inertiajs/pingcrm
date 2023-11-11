@@ -14,11 +14,10 @@ class ContactsController extends Controller
     public function index()
     {
         return Inertia::render('Contacts/Index', [
-            'filters' => Request::all('search', 'trashed'),
+            'filters' => Request::all('search', 'trashed', 'sortable'),
             'contacts' => Auth::user()->account->contacts()
                 ->with('organization')
-                ->orderByName()
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(Request::only('search', 'trashed', 'sortable'))
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn ($contact) => [

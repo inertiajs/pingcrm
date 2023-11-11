@@ -20,9 +20,15 @@
       <table class="w-full whitespace-nowrap">
         <thead>
           <tr class="text-left font-bold">
-            <th class="pb-4 pt-6 px-6">Name</th>
-            <th class="pb-4 pt-6 px-6">City</th>
-            <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
+            <th class="pb-4 pt-6 px-6">
+              <sortable field="name" v-model="form.sortable">Name</sortable>
+            </th>
+            <th class="pb-4 pt-6 px-6">
+              <sortable field="city" v-model="form.sortable">City</sortable>
+            </th>
+            <th class="pb-4 pt-6 px-6" colspan="2">
+              <sortable field="phone" v-model="form.sortable">Phone</sortable>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +74,7 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
+import Sortable from '@/Shared/Sortable'
 
 export default {
   components: {
@@ -76,6 +83,7 @@ export default {
     Link,
     Pagination,
     SearchFilter,
+    Sortable,
   },
   layout: Layout,
   props: {
@@ -87,6 +95,7 @@ export default {
       form: {
         search: this.filters.search,
         trashed: this.filters.trashed,
+        sortable: this.filters.sortable,
       },
     }
   },

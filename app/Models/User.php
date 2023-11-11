@@ -69,11 +69,6 @@ class User extends Authenticatable
         return $this->email === 'johndoe@example.com';
     }
 
-    public function scopeOrderByName($query)
-    {
-        $query->orderBy('last_name')->orderBy('first_name');
-    }
-
     public function scopeWhereRole($query, $role)
     {
         switch ($role) {
@@ -98,6 +93,8 @@ class User extends Authenticatable
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['sortable'] ?? null, function ($query, $sortable) {
+            $query->orderBy($sortable['field'], $sortable['direction']);
         });
     }
 }
