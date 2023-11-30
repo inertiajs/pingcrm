@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { Head } from '@inertiajs/inertia-vue3'
+import { Head } from "@inertiajs/vue3";
 import Logo from '@/Shared/Logo'
 import TextInput from '@/Shared/TextInput'
 import LoadingButton from '@/Shared/LoadingButton'

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
+import { Head, Link } from "@inertiajs/vue3";
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'

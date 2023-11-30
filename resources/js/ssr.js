@@ -1,6 +1,6 @@
 import { createSSRApp, h } from 'vue'
 import { renderToString } from '@vue/server-renderer'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { createInertiaApp } from "@inertiajs/vue3";
 import createServer from '@inertiajs/server'
 
 createServer((page) => createInertiaApp({
