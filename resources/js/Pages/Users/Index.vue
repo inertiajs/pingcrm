@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'

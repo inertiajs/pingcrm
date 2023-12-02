@@ -6,7 +6,6 @@
         "build": "vite build"
     },
     "dependencies": {
-        "@inertiajs/progress": "^0.1.2",
         "@inertiajs/vue3": "^1.0.14",
         "@popperjs/core": "^2.11.0",
         "laravel-vite-plugin": "^0.8.0",

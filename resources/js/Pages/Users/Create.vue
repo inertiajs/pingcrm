@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link } from '@inertiajs/vue3'
 import Layout from '@/Shared/Layout'
 import FileInput from '@/Shared/FileInput'
 import TextInput from '@/Shared/TextInput'
