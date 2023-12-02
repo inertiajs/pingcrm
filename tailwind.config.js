@@ -1,14 +1,14 @@
-const colors = require('tailwindcss/colors')
-const defaultTheme = require('tailwindcss/defaultTheme')
+import defaultTheme from 'tailwindcss/defaultTheme'
+import colors from 'tailwindcss/colors'
 
-module.exports = {
-  purge: [
+export default {
+  content: [
     // prettier-ignore
     './resources/**/*.blade.php',
     './resources/**/*.js',
     './resources/**/*.vue',
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     colors: {
       transparent: 'transparent',
@@ -19,7 +19,7 @@ module.exports = {
       orange: colors.orange,
       yellow: colors.yellow,
       green: colors.green,
-      gray: colors.blueGray,
+      gray: colors.slate,
       indigo: {
         100: '#e6e8ff',
         300: '#b2b7ff',
@@ -31,16 +31,16 @@ module.exports = {
       },
     },
     extend: {
-      borderColor: theme => ({
+      borderColor: (theme) => ({
         DEFAULT: theme('colors.gray.200', 'currentColor'),
       }),
       fontFamily: {
         sans: ['Cerebri Sans', ...defaultTheme.fontFamily.sans],
       },
-      boxShadow: theme => ({
+      boxShadow: (theme) => ({
         outline: '0 0 0 2px ' + theme('colors.indigo.500'),
       }),
-      fill: theme => theme('colors'),
+      fill: (theme) => theme('colors'),
     },
   },
   variants: {
