@@ -12,4 +12,5 @@ module.exports = {
   devServer: {
     allowedHosts: 'all',
   },
+  plugins: [require('unplugin-vue-define-options/webpack')()],
 }
