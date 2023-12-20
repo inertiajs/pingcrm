@@ -22,20 +22,16 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Dropdown from '@/Shared/Dropdown'
 
-export default {
-  components: {
-    Dropdown,
+defineProps({
+  modelValue: String,
+  maxWidth: {
+    type: Number,
+    default: 300,
   },
-  props: {
-    modelValue: String,
-    maxWidth: {
-      type: Number,
-      default: 300,
-    },
-  },
-  emits: ['update:modelValue', 'reset'],
-}
+})
+
+defineEmits(['update:modelValue', 'reset'])
 </script>
