@@ -59,49 +59,47 @@
   </div>
 </template>
 
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
+import { watch } from 'vue'
+import mapValues from 'lodash/mapValues'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-  },
+const props = defineProps({
+  filters: Object,
+  organizations: Object,
+})
+
+defineOptions({
   layout: Layout,
-  props: {
-    filters: Object,
-    organizations: Object,
+})
+
+const form = useForm({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+})
+
+const getOrganization = throttle(function () {
+  form.get('/organizations', pickBy(form.data()), { preserveState: true })
+}, 150)
+
+watch(
+  form,
+  (updated) => {
+    console.log({ updated })
+    getOrganization()
   },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
+  {
+    deep: true,
   },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/organizations', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+)
+
+const reset = () => {
+  form.reset('search')
 }
 </script>
