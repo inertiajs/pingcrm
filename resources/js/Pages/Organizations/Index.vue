@@ -60,15 +60,15 @@
 </template>
 
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
-import { watch } from 'vue'
-import mapValues from 'lodash/mapValues'
+import { reactive, watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 
 const props = defineProps({
   filters: Object,
@@ -79,19 +79,18 @@ defineOptions({
   layout: Layout,
 })
 
-const form = useForm({
+const form = reactive({
   search: props.filters.search,
   trashed: props.filters.trashed,
 })
 
 const getOrganization = throttle(function () {
-  form.get('/organizations', pickBy(form.data()), { preserveState: true })
+  Inertia.get('/organizations', pickBy(form), { preserveState: true })
 }, 150)
 
 watch(
   form,
-  (updated) => {
-    console.log({ updated })
+  () => {
     getOrganization()
   },
   {
@@ -100,6 +99,9 @@ watch(
 )
 
 const reset = () => {
-  form.reset('search')
+  Object.assign(form, {
+    search: null,
+    trashed: null,
+  })
 }
 </script>
