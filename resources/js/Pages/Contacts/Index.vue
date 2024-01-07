@@ -97,8 +97,8 @@ watch(
 
 const reset = () => {
   Object.assign(form, {
-    filters: null,
-    contacts: null,
+    search: null,
+    trashed: null,
   })
 }
 </script>

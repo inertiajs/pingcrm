@@ -88,7 +88,7 @@ const form = reactive({
 
 watch(
   form,
-  throttle(() => Inertia.get('/users', pickBy(this.form), { preserveState: true }), 150),
+  throttle(() => Inertia.get('/users', pickBy(form), { preserveState: true }), 150),
   { deep: true },
 )
 
