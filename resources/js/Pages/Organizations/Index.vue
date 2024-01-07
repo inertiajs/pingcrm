@@ -59,49 +59,49 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
+import { reactive, watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-  },
+const props = defineProps({
+  filters: Object,
+  organizations: Object,
+})
+
+defineOptions({
   layout: Layout,
-  props: {
-    filters: Object,
-    organizations: Object,
+})
+
+const form = reactive({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+})
+
+const getOrganization = throttle(function () {
+  Inertia.get('/organizations', pickBy(form), { preserveState: true })
+}, 150)
+
+watch(
+  form,
+  () => {
+    getOrganization()
   },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
+  {
+    deep: true,
   },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/organizations', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+)
+
+const reset = () => {
+  Object.assign(form, {
+    search: null,
+    trashed: null,
+  })
 }
 </script>

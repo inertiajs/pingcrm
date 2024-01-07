@@ -29,41 +29,29 @@
   </div>
 </template>
 
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
+defineOptions({
   layout: Layout,
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        name: null,
-        email: null,
-        phone: null,
-        address: null,
-        city: null,
-        region: null,
-        country: null,
-        postal_code: null,
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/organizations')
-    },
-  },
+})
+
+const form = useForm({
+  name: null,
+  email: null,
+  phone: null,
+  address: null,
+  city: null,
+  region: null,
+  country: null,
+  postal_code: null,
+})
+
+const store = () => {
+  form.post('/organizations')
 }
 </script>

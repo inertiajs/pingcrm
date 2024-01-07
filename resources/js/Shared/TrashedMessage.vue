@@ -10,13 +10,8 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Icon from '@/Shared/Icon'
 
-export default {
-  components: {
-    Icon,
-  },
-  emits: ['restore'],
-}
+defineEmits(['restore'])
 </script>

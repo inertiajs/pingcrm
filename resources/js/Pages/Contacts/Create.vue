@@ -34,46 +34,35 @@
   </div>
 </template>
 
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
-export default {
-  components: {
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-  },
+defineOptions({
   layout: Layout,
-  props: {
-    organizations: Array,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        first_name: '',
-        last_name: '',
-        organization_id: null,
-        email: '',
-        phone: '',
-        address: '',
-        city: '',
-        region: '',
-        country: '',
-        postal_code: '',
-      }),
-    }
-  },
-  methods: {
-    store() {
-      this.form.post('/contacts')
-    },
-  },
+})
+
+const props = defineProps({
+  organizations: Array,
+})
+
+const form = useForm({
+  first_name: '',
+  last_name: '',
+  organization_id: null,
+  email: '',
+  phone: '',
+  address: '',
+  city: '',
+  region: '',
+  country: '',
+  postal_code: '',
+})
+
+const store = () => {
+  form.post('/contacts')
 }
 </script>

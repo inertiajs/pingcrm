@@ -37,5 +37,9 @@
         "vue": "^3.2.27",
         "vue-loader": "^16.2.0",
         "webpack-node-externals": "^3.0.0"
+    },
+    "devDependencies": {
+        "@vue-macros/volar": "^0.17.4",
+        "unplugin-vue-define-options": "^1.4.0"
     }
 }
