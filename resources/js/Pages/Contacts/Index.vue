@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
@@ -72,40 +72,33 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
+import { reactive, watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-  },
+defineOptions({
   layout: Layout,
-  props: {
-    filters: Object,
-    contacts: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/contacts', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+})
+
+const props = defineProps({
+  filters: Object,
+  contacts: Object,
+})
+
+const form = reactive({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+})
+
+watch(
+  form,
+  throttle(() => Inertia.get('/contacts', pickBy(form), { preserveState: true }), 150),
+  { deep: true },
+)
+
+const reset = () => {
+  Object.assign(form, {
+    filters: null,
+    contacts: null,
+  })
 }
 </script>
