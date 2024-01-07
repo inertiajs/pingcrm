@@ -61,48 +61,42 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
+import { reactive, watch } from 'vue'
+import { Inertia } from '@inertiajs/inertia'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    SearchFilter,
-  },
+defineOptions({
   layout: Layout,
-  props: {
-    filters: Object,
-    users: Array,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        role: this.filters.role,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/users', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+})
+
+const props = defineProps({
+  filters: Object,
+  users: Array,
+})
+
+const form = reactive({
+  search: props.filters.search,
+  role: props.filters.role,
+  trashed: props.filters.trashed,
+})
+
+watch(
+  form,
+  throttle(() => Inertia.get('/users', pickBy(this.form), { preserveState: true }), 150),
+  { deep: true },
+)
+
+const reset = () => {
+  Object.assign(form, {
+    search: null,
+    role: null,
+    trashed: null,
+  })
 }
 </script>
