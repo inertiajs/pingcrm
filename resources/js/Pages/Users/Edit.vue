@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
@@ -41,50 +41,37 @@ import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
-export default {
-  components: {
-    FileInput,
-    Head,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    TrashedMessage,
-  },
+defineOptions({
   layout: Layout,
-  props: {
-    user: Object,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        _method: 'put',
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        password: '',
-        owner: this.user.owner,
-        photo: null,
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.post(`/users/${this.user.id}`, {
-        onSuccess: () => this.form.reset('password', 'photo'),
-      })
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this user?')) {
-        this.$inertia.delete(`/users/${this.user.id}`)
-      }
-    },
-    restore() {
-      if (confirm('Are you sure you want to restore this user?')) {
-        this.$inertia.put(`/users/${this.user.id}/restore`)
-      }
-    },
-  },
+})
+
+const props = defineProps({
+  user: Object,
+})
+
+const form = useForm({
+  _method: 'put',
+  first_name: props.user.first_name,
+  last_name: props.user.last_name,
+  email: props.user.email,
+  password: '',
+  owner: props.user.owner,
+  photo: null,
+})
+
+const update = () => {
+  form.post(`/users/${props.user.id}`, {
+    onSuccess: () => props.form.reset('password', 'photo'),
+  })
+}
+const destroy = () => {
+  if (confirm('Are you sure you want to delete this user?')) {
+    form.delete(`/users/${props.user.id}`)
+  }
+}
+const restore = () => {
+  if (confirm('Are you sure you want to restore this user?')) {
+    form.put(`/users/${props.user.id}/restore`)
+  }
 }
 </script>
