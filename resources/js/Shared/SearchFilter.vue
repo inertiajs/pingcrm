@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Dropdown from '@/Shared/Dropdown'
+import Dropdown from '@/Shared/Dropdown.vue'
 
 export default {
   components: {

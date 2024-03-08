@@ -25,8 +25,8 @@
               <template #default>
                 <div class="group flex items-center cursor-pointer select-none">
                   <div class="mr-1 text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 whitespace-nowrap">
-                    <span>{{ auth.user.first_name }}</span>
-                    <span class="hidden md:inline">&nbsp;{{ auth.user.last_name }}</span>
+                    <span>{{ auth.user.first_name  }}</span>
+                    <span class="hidden md:inline">&nbsp;{{ auth.user.last_name  }}</span>
                   </div>
                   <icon class="w-5 h-5 fill-gray-700 group-hover:fill-indigo-600 focus:fill-indigo-600" name="cheveron-down" />
                 </div>
@@ -55,11 +55,11 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import Logo from '@/Shared/Logo'
-import Dropdown from '@/Shared/Dropdown'
-import MainMenu from '@/Shared/MainMenu'
-import FlashMessages from '@/Shared/FlashMessages'
+import Icon from '@/Shared/Icon.vue'
+import Logo from '@/Shared/Logo.vue'
+import Dropdown from '@/Shared/Dropdown.vue'
+import MainMenu from '@/Shared/MainMenu.vue'
+import FlashMessages from '@/Shared/FlashMessages.vue'
 
 export default {
   components: {

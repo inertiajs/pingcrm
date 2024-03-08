@@ -16,6 +16,7 @@ class ImagesController extends Controller
             'source' => $filesystem->getDriver(),
             'cache' => $filesystem->getDriver(),
             'cache_path_prefix' => '.glide-cache',
+            'base_url' => 'img'
         ]);
 
         return $server->getImageResponse($path, $request->all());

@@ -70,12 +70,12 @@
 
 <script>
 import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import Layout from '@/Shared/Layout'
-import TextInput from '@/Shared/TextInput'
-import SelectInput from '@/Shared/SelectInput'
-import LoadingButton from '@/Shared/LoadingButton'
-import TrashedMessage from '@/Shared/TrashedMessage'
+import Icon from '@/Shared/Icon.vue'
+import Layout from '@/Shared/Layout.vue'
+import TextInput from '@/Shared/TextInput.vue'
+import SelectInput from '@/Shared/SelectInput.vue'
+import LoadingButton from '@/Shared/LoadingButton.vue'
+import TrashedMessage from '@/Shared/TrashedMessage.vue'
 
 export default {
   components: {
