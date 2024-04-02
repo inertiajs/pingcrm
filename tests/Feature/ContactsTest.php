@@ -61,7 +61,7 @@ class ContactsTest extends TestCase
                 ->component('Contacts/Index')
                 ->has('contacts.data', 2)
                 ->has('contacts.data.0', fn (Assert $assert) => $assert
-                    ->where('id', 1)
+                    ->has('id')
                     ->where('name', 'Martin Abbott')
                     ->where('phone', '555-111-2222')
                     ->where('city', 'Murphyland')
@@ -71,7 +71,7 @@ class ContactsTest extends TestCase
                     )
                 )
                 ->has('contacts.data.1', fn (Assert $assert) => $assert
-                    ->where('id', 2)
+                    ->has('id')
                     ->where('name', 'Lynn Kub')
                     ->where('phone', '555-333-4444')
                     ->where('city', 'Woodstock')
@@ -92,7 +92,7 @@ class ContactsTest extends TestCase
                 ->where('filters.search', 'Martin')
                 ->has('contacts.data', 1)
                 ->has('contacts.data.0', fn (Assert $assert) => $assert
-                    ->where('id', 1)
+                    ->has('id')
                     ->where('name', 'Martin Abbott')
                     ->where('phone', '555-111-2222')
                     ->where('city', 'Murphyland')

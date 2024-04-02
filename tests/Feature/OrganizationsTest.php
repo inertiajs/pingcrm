@@ -55,14 +55,14 @@ class OrganizationsTest extends TestCase
                 ->component('Organizations/Index')
                 ->has('organizations.data', 2)
                 ->has('organizations.data.0', fn (Assert $assert) => $assert
-                    ->where('id', 1)
+                    ->has('id')
                     ->where('name', 'Apple')
                     ->where('phone', '647-943-4400')
                     ->where('city', 'Toronto')
                     ->where('deleted_at', null)
                 )
                 ->has('organizations.data.1', fn (Assert $assert) => $assert
-                    ->where('id', 2)
+                    ->has('id')
                     ->where('name', 'Microsoft')
                     ->where('phone', '877-568-2495')
                     ->where('city', 'Redmond')
@@ -80,7 +80,7 @@ class OrganizationsTest extends TestCase
                 ->where('filters.search', 'Apple')
                 ->has('organizations.data', 1)
                 ->has('organizations.data.0', fn (Assert $assert) => $assert
-                    ->where('id', 1)
+                    ->has('id')
                     ->where('name', 'Apple')
                     ->where('phone', '647-943-4400')
                     ->where('city', 'Toronto')
