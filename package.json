@@ -10,10 +10,7 @@
         "build": "vite build && vite build --ssr"
     },
     "devDependencies": {
-        "@inertiajs/inertia": "^0.11.0",
-        "@inertiajs/inertia-vue3": "^0.6.0",
-        "@inertiajs/progress": "^0.2.7",
-        "@inertiajs/server": "^0.1.0",
+        "@inertiajs/vue3": "^1.0.15",
         "@popperjs/core": "^2.11.0",
         "@vitejs/plugin-vue": "^5.0.4",
         "@vue/server-renderer": "^3.2.27",

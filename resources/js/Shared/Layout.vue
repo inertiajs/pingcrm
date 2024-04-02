@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 import Logo from '@/Shared/Logo.vue'
 import Dropdown from '@/Shared/Dropdown.vue'

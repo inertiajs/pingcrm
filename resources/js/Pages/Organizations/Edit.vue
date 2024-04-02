@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 import Layout from '@/Shared/Layout.vue'
 import TextInput from '@/Shared/TextInput.vue'

@@ -61,8 +61,14 @@ jobs:
           COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
+      - name: Install node dependencies
+        run: npm ci
+
       - name: Generate application key
         run: php artisan key:generate
+
+      - name: Build assets
+        run: npm run build
 
       - name: Run tests
         run: php artisan test

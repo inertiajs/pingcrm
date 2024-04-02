@@ -1,9 +1,6 @@
 import '../css/app.css'
 import { createApp, h } from 'vue'
-import { InertiaProgress } from '@inertiajs/progress'
-import { createInertiaApp } from '@inertiajs/inertia-vue3'
-
-InertiaProgress.init()
+import { createInertiaApp } from '@inertiajs/vue3'
 
 createInertiaApp({
   resolve: name => {
