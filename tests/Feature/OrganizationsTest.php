@@ -47,7 +47,7 @@ class OrganizationsTest extends TestCase
         ]);
     }
 
-    public function test_can_view_organizations()
+    public function test_can_view_organizations(): void
     {
         $this->actingAs($this->user)
             ->get('/organizations')
@@ -71,7 +71,7 @@ class OrganizationsTest extends TestCase
             );
     }
 
-    public function test_can_search_for_organizations()
+    public function test_can_search_for_organizations(): void
     {
         $this->actingAs($this->user)
             ->get('/organizations?search=Apple')
@@ -89,7 +89,7 @@ class OrganizationsTest extends TestCase
             );
     }
 
-    public function test_cannot_view_deleted_organizations()
+    public function test_cannot_view_deleted_organizations(): void
     {
         $this->user->account->organizations()->firstWhere('name', 'Microsoft')->delete();
 
@@ -102,7 +102,7 @@ class OrganizationsTest extends TestCase
             );
     }
 
-    public function test_can_filter_to_view_deleted_organizations()
+    public function test_can_filter_to_view_deleted_organizations(): void
     {
         $this->user->account->organizations()->firstWhere('name', 'Microsoft')->delete();
 

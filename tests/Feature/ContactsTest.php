@@ -53,7 +53,7 @@ class ContactsTest extends TestCase
         ]);
     }
 
-    public function test_can_view_contacts()
+    public function test_can_view_contacts(): void
     {
         $this->actingAs($this->user)
             ->get('/contacts')
@@ -83,7 +83,7 @@ class ContactsTest extends TestCase
             );
     }
 
-    public function test_can_search_for_contacts()
+    public function test_can_search_for_contacts(): void
     {
         $this->actingAs($this->user)
             ->get('/contacts?search=Martin')
@@ -104,7 +104,7 @@ class ContactsTest extends TestCase
             );
     }
 
-    public function test_cannot_view_deleted_contacts()
+    public function test_cannot_view_deleted_contacts(): void
     {
         $this->user->account->contacts()->firstWhere('first_name', 'Martin')->delete();
 
@@ -117,7 +117,7 @@ class ContactsTest extends TestCase
             );
     }
 
-    public function test_can_filter_to_view_deleted_contacts()
+    public function test_can_filter_to_view_deleted_contacts(): void
     {
         $this->user->account->contacts()->firstWhere('first_name', 'Martin')->delete();
 

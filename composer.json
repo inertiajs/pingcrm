@@ -1,73 +1,73 @@
 {
-  "name": "laravel/laravel",
-  "type": "project",
-  "description": "The Laravel Framework.",
-  "keywords": [
-    "framework",
-    "laravel"
-  ],
-  "license": "MIT",
-  "require": {
-    "php": "^8.0.2",
-    "ext-exif": "*",
-    "ext-gd": "*",
-    "fakerphp/faker": "^1.9.1",
-    "guzzlehttp/guzzle": "^7.2",
-    "inertiajs/inertia-laravel": "^0.6.4",
-    "laravel/framework": "^9.52",
-    "laravel/sanctum": "^3.0",
-    "laravel/tinker": "^2.7",
-    "league/glide-laravel": "^1.0"
-  },
-  "require-dev": {
-    "larastan/larastan": "^1.0",
-    "laravel/sail": "^1.15",
-    "mockery/mockery": "^1.4.4",
-    "nunomaduro/collision": "^6.3",
-    "phpunit/phpunit": "^9.5.10",
-    "roave/security-advisories": "dev-latest",
-    "spatie/laravel-ignition": "^1.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "App\\": "app/",
-      "Database\\Factories\\": "database/factories/",
-      "Database\\Seeders\\": "database/seeders/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "post-autoload-dump": [
-      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php artisan package:discover --ansi"
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
     ],
-    "post-update-cmd": [
-      "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-    ],
-    "post-root-package-install": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ],
-    "post-create-project-cmd": [
-      "@php artisan key:generate --ansi"
-    ],
-    "compile": [
-      "@php artisan migrate:fresh --seed"
-    ]
-  },
-  "extra": {
-    "laravel": {
-      "dont-discover": []
-    }
-  },
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "ext-exif": "*",
+        "ext-gd": "*",
+        "fakerphp/faker": "^1.9.1",
+        "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^0.6.4",
+        "laravel/framework": "^10.48",
+        "laravel/sanctum": "^3.3",
+        "laravel/tinker": "^2.8",
+        "league/glide-laravel": "^1.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.4",
+        "laravel/sail": "^1.18",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.3",
+        "phpunit/phpunit": "^9.5.10",
+        "roave/security-advisories": "dev-latest",
+        "spatie/laravel-ignition": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "compile": [
+            "@php artisan migrate:fresh --seed"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
