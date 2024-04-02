@@ -6,7 +6,10 @@ import createServer from '@inertiajs/server'
 createServer((page) => createInertiaApp({
   page,
   render: renderToString,
-  resolve: name => require(`./Pages/${name}`),
+  resolve: name => {
+    const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+    return pages[`./Pages/${name}.vue`]
+  },
   title: title => title ? `${title} - Ping CRM` : 'Ping CRM',
   setup({ app, props, plugin }) {
     return createSSRApp({

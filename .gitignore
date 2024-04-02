@@ -1,8 +1,7 @@
+/bootstrap/ssr
 /node_modules
-/public/css
 /public/hot
-/public/js
-/public/mix-manifest.json
+/public/build
 /public/storage
 /storage/*.key
 /vendor
@@ -16,6 +15,5 @@ docker-compose.override.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
-yarn-error.log
 /.idea
 /.vscode

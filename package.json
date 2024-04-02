@@ -1,41 +1,33 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix && npm run ssr:build",
         "fix:eslint": "eslint --ext .js,.vue resources/js/ --fix",
         "fix:prettier": "prettier --write --loglevel warn 'resources/js/**/*.vue'",
         "fix-code-style": "npm run fix:prettier && npm run fix:eslint",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production && npm run ssr:build",
-        "heroku-postbuild": "npm run prod",
-        "ssr:build": "mix --production --mix-config=webpack.ssr.mix.js",
-        "ssr:serve": "node public/js/ssr.js"
+        "heroku-postbuild": "npm run build",
+        "dev": "vite",
+        "build": "vite build && vite build --ssr"
     },
-    "dependencies": {
+    "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
         "@inertiajs/inertia-vue3": "^0.6.0",
         "@inertiajs/progress": "^0.2.7",
         "@inertiajs/server": "^0.1.0",
         "@popperjs/core": "^2.11.0",
+        "@vitejs/plugin-vue": "^3.0.1",
         "@vue/server-renderer": "^3.2.27",
         "autoprefixer": "^10.4.0",
         "eslint": "^8.4.1",
         "eslint-plugin-vue": "^8.2.0",
-        "laravel-mix": "^6.0.41",
+        "laravel-vite-plugin": "^0.6.0",
         "lodash": "^4.17.21",
         "postcss": "^8.4.4",
-        "postcss-import": "^12.0.1",
-        "postcss-nesting": "^7.0.1",
+        "postcss-nesting": "^12.1.1",
         "prettier": "^2.5.1",
         "prettier-plugin-tailwind": "^2.2.12",
         "tailwindcss": "^2.0.3",
         "uuid": "^8.3.2",
-        "vue": "^3.2.27",
-        "vue-loader": "^16.2.0",
-        "webpack-node-externals": "^3.0.0"
+        "vite": "^3.0.2",
+        "vue": "^3.2.27"
     }
 }
