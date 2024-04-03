@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - '*.x'
   pull_request:
 
 permissions:

@@ -27,7 +27,7 @@ jobs:
         php-version:
           - '8.2'
 
-    name: php ${{ matrix.php-version }} on ${{ matrix.operating-system }}
+    name: PHP ${{ matrix.php-version }} on ${{ matrix.operating-system }}
 
     runs-on: ${{ matrix.operating-system }}
 
@@ -77,4 +77,3 @@ jobs:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           DB_USERNAME: root
           DB_DATABASE: test
-          DB_PASSWORD: null
