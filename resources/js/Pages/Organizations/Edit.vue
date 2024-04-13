@@ -41,7 +41,7 @@
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/contacts/${contact.id}/edit`">
               {{ contact.name }}
-              <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+              <icon v-if="contact.deleted_at" name="trash" class="shrink-0 ml-2 w-3 h-3 fill-gray-400" />
             </Link>
           </td>
           <td class="border-t">
@@ -69,13 +69,13 @@
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import Layout from '@/Shared/Layout'
-import TextInput from '@/Shared/TextInput'
-import SelectInput from '@/Shared/SelectInput'
-import LoadingButton from '@/Shared/LoadingButton'
-import TrashedMessage from '@/Shared/TrashedMessage'
+import { Head, Link } from '@inertiajs/vue3'
+import Icon from '@/Shared/Icon.vue'
+import Layout from '@/Shared/Layout.vue'
+import TextInput from '@/Shared/TextInput.vue'
+import SelectInput from '@/Shared/SelectInput.vue'
+import LoadingButton from '@/Shared/LoadingButton.vue'
+import TrashedMessage from '@/Shared/TrashedMessage.vue'
 
 export default {
   components: {

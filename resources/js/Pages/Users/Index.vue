@@ -34,7 +34,7 @@
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/users/${user.id}/edit`">
               <img v-if="user.photo" class="block -my-2 mr-2 w-5 h-5 rounded-full" :src="user.photo" />
               {{ user.name }}
-              <icon v-if="user.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+              <icon v-if="user.deleted_at" name="trash" class="shrink-0 ml-2 w-3 h-3 fill-gray-400" />
             </Link>
           </td>
           <td class="border-t">
@@ -62,13 +62,13 @@
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
+import { Head, Link } from '@inertiajs/vue3'
+import Icon from '@/Shared/Icon.vue'
 import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout'
+import Layout from '@/Shared/Layout.vue'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
-import SearchFilter from '@/Shared/SearchFilter'
+import SearchFilter from '@/Shared/SearchFilter.vue'
 
 export default {
   components: {

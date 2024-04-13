@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Account;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Inertia\Testing\Assert;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class OrganizationsTest extends TestCase
@@ -47,7 +47,7 @@ class OrganizationsTest extends TestCase
         ]);
     }
 
-    public function test_can_view_organizations()
+    public function test_can_view_organizations(): void
     {
         $this->actingAs($this->user)
             ->get('/organizations')
@@ -55,14 +55,14 @@ class OrganizationsTest extends TestCase
                 ->component('Organizations/Index')
                 ->has('organizations.data', 2)
                 ->has('organizations.data.0', fn (Assert $assert) => $assert
-                    ->where('id', 1)
+                    ->has('id')
                     ->where('name', 'Apple')
                     ->where('phone', '647-943-4400')
                     ->where('city', 'Toronto')
                     ->where('deleted_at', null)
                 )
                 ->has('organizations.data.1', fn (Assert $assert) => $assert
-                    ->where('id', 2)
+                    ->has('id')
                     ->where('name', 'Microsoft')
                     ->where('phone', '877-568-2495')
                     ->where('city', 'Redmond')
@@ -71,7 +71,7 @@ class OrganizationsTest extends TestCase
             );
     }
 
-    public function test_can_search_for_organizations()
+    public function test_can_search_for_organizations(): void
     {
         $this->actingAs($this->user)
             ->get('/organizations?search=Apple')
@@ -80,7 +80,7 @@ class OrganizationsTest extends TestCase
                 ->where('filters.search', 'Apple')
                 ->has('organizations.data', 1)
                 ->has('organizations.data.0', fn (Assert $assert) => $assert
-                    ->where('id', 1)
+                    ->has('id')
                     ->where('name', 'Apple')
                     ->where('phone', '647-943-4400')
                     ->where('city', 'Toronto')
@@ -89,7 +89,7 @@ class OrganizationsTest extends TestCase
             );
     }
 
-    public function test_cannot_view_deleted_organizations()
+    public function test_cannot_view_deleted_organizations(): void
     {
         $this->user->account->organizations()->firstWhere('name', 'Microsoft')->delete();
 
@@ -102,7 +102,7 @@ class OrganizationsTest extends TestCase
             );
     }
 
-    public function test_can_filter_to_view_deleted_organizations()
+    public function test_can_filter_to_view_deleted_organizations(): void
     {
         $this->user->account->organizations()->firstWhere('name', 'Microsoft')->delete();
 

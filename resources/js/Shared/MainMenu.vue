@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
+import { Link } from '@inertiajs/vue3'
+import Icon from '@/Shared/Icon.vue'
 
 export default {
   components: {

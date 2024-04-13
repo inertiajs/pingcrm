@@ -3,8 +3,8 @@
     <div id="dropdown" />
     <div class="md:flex md:flex-col">
       <div class="md:flex md:flex-col md:h-screen">
-        <div class="md:flex md:flex-shrink-0">
-          <div class="flex items-center justify-between px-6 py-4 bg-indigo-900 md:flex-shrink-0 md:justify-center md:w-56">
+        <div class="md:flex md:shrink-0">
+          <div class="flex items-center justify-between px-6 py-4 bg-indigo-900 md:shrink-0 md:justify-center md:w-56">
             <Link class="mt-1" href="/">
               <logo class="fill-white" width="120" height="28" />
             </Link>
@@ -41,8 +41,8 @@
             </dropdown>
           </div>
         </div>
-        <div class="md:flex md:flex-grow md:overflow-hidden">
-          <main-menu class="hidden flex-shrink-0 p-12 w-56 bg-indigo-800 overflow-y-auto md:block" />
+        <div class="md:flex md:grow md:overflow-hidden">
+          <main-menu class="hidden shrink-0 p-12 w-56 bg-indigo-800 overflow-y-auto md:block" />
           <div class="px-4 py-8 md:flex-1 md:p-12 md:overflow-y-auto" scroll-region>
             <flash-messages />
             <slot />
@@ -54,12 +54,12 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue3'
-import Icon from '@/Shared/Icon'
-import Logo from '@/Shared/Logo'
-import Dropdown from '@/Shared/Dropdown'
-import MainMenu from '@/Shared/MainMenu'
-import FlashMessages from '@/Shared/FlashMessages'
+import { Link } from '@inertiajs/vue3'
+import Icon from '@/Shared/Icon.vue'
+import Logo from '@/Shared/Logo.vue'
+import Dropdown from '@/Shared/Dropdown.vue'
+import MainMenu from '@/Shared/MainMenu.vue'
+import FlashMessages from '@/Shared/FlashMessages.vue'
 
 export default {
   components: {
