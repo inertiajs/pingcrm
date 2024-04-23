@@ -5,7 +5,7 @@
     <div class="flex items-center justify-between mb-6">
       <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
         <label class="block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="form-select mt-1 w-full">
+        <select v-model="form.trashed" @change="getData" class="form-select mt-1 w-full">
           <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
@@ -63,49 +63,39 @@
   </div>
 </template>
 
-<script>
-import { Head, Link } from '@inertiajs/vue3'
+
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
-import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout.vue'
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
+import { debounce } from 'lodash'
+import { watch } from 'vue'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    Pagination,
-    SearchFilter,
-  },
-  layout: Layout,
-  props: {
-    filters: Object,
-    contacts: Object,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/contacts', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+const props = defineProps({
+  filters: Object,
+  contacts: Object,
+})
+
+const form = useForm({
+  search: props.filters.search,
+  trashed: props.filters.trashed,
+})
+
+const getData = () => {
+  form.transform((data) => {
+    return Object.fromEntries(Object.entries(data).filter(([_, value]) => value != null || value !== ''))
+  }).get('/contacts', { preserveState: true })
+}
+const debouncedGetData = debounce(getData, 500)
+
+watch([() => form.search], () => {
+  debouncedGetData()
+})
+
+const reset = () => {
+  form.search = null
+  form.trashed = null
+  getData()
 }
 </script>

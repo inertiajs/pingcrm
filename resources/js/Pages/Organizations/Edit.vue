@@ -6,26 +6,35 @@
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.name }}
     </h1>
-    <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore"> This organization has been deleted. </trashed-message>
+    <trashed-message v-if="organization.deleted_at" class="mb-6" @restore="restore"> This organization has been
+      deleted.
+    </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
           <text-input v-model="form.name" :error="form.errors.name" class="pb-8 pr-6 w-full lg:w-1/2" label="Name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" />
           <text-input v-model="form.phone" :error="form.errors.phone" class="pb-8 pr-6 w-full lg:w-1/2" label="Phone" />
-          <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2" label="Address" />
+          <text-input v-model="form.address" :error="form.errors.address" class="pb-8 pr-6 w-full lg:w-1/2"
+                      label="Address" />
           <text-input v-model="form.city" :error="form.errors.city" class="pb-8 pr-6 w-full lg:w-1/2" label="City" />
-          <text-input v-model="form.region" :error="form.errors.region" class="pb-8 pr-6 w-full lg:w-1/2" label="Province/State" />
-          <select-input v-model="form.country" :error="form.errors.country" class="pb-8 pr-6 w-full lg:w-1/2" label="Country">
+          <text-input v-model="form.region" :error="form.errors.region" class="pb-8 pr-6 w-full lg:w-1/2"
+                      label="Province/State" />
+          <select-input v-model="form.country" :error="form.errors.country" class="pb-8 pr-6 w-full lg:w-1/2"
+                        label="Country">
             <option :value="null" />
             <option value="CA">Canada</option>
             <option value="US">United States</option>
           </select-input>
-          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />
+          <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2"
+                      label="Postal code" />
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Organization</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization</loading-button>
+          <button v-if="!organization.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button"
+                  @click="destroy">Delete Organization
+          </button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Organization
+          </loading-button>
         </div>
       </form>
     </div>
@@ -37,7 +46,8 @@
           <th class="pb-4 pt-6 px-6">City</th>
           <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
         </tr>
-        <tr v-for="contact in organization.contacts" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="contact in organization.contacts" :key="contact.id"
+            class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/contacts/${contact.id}/edit`">
               {{ contact.name }}
@@ -68,58 +78,40 @@
   </div>
 </template>
 
-<script>
-import { Head, Link } from '@inertiajs/vue3'
+<script setup>
+import { Head, Link, router, useForm } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
-import Layout from '@/Shared/Layout.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import SelectInput from '@/Shared/SelectInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
 import TrashedMessage from '@/Shared/TrashedMessage.vue'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    LoadingButton,
-    SelectInput,
-    TextInput,
-    TrashedMessage,
-  },
-  layout: Layout,
-  props: {
-    organization: Object,
-  },
-  remember: 'form',
-  data() {
-    return {
-      form: this.$inertia.form({
-        name: this.organization.name,
-        email: this.organization.email,
-        phone: this.organization.phone,
-        address: this.organization.address,
-        city: this.organization.city,
-        region: this.organization.region,
-        country: this.organization.country,
-        postal_code: this.organization.postal_code,
-      }),
-    }
-  },
-  methods: {
-    update() {
-      this.form.put(`/organizations/${this.organization.id}`)
-    },
-    destroy() {
-      if (confirm('Are you sure you want to delete this organization?')) {
-        this.$inertia.delete(`/organizations/${this.organization.id}`)
-      }
-    },
-    restore() {
-      if (confirm('Are you sure you want to restore this organization?')) {
-        this.$inertia.put(`/organizations/${this.organization.id}/restore`)
-      }
-    },
-  },
+const props = defineProps({
+  organization: Object,
+})
+const form = useForm({
+  name: props.organization.name,
+  email: props.organization.email,
+  phone: props.organization.phone,
+  address: props.organization.address,
+  city: props.organization.city,
+  region: props.organization.region,
+  country: props.organization.country,
+  postal_code: props.organization.postal_code,
+})
+
+const update = () => {
+  this.form.put(`/organizations/${props.organization.id}`)
 }
+const destroy = () => {
+  if (confirm('Are you sure you want to delete this organization?')) {
+    router.delete(`/organizations/${props.organization.id}`)
+  }
+}
+const restore = () => {
+  if (confirm('Are you sure you want to restore this organization?')) {
+    router.put(`/organizations/${props.organization.id}/restore`)
+  }
+}
+
 </script>

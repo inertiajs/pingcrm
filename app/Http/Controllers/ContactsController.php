@@ -20,7 +20,7 @@ class ContactsController extends Controller
             'contacts' => Auth::user()->account->contacts()
                 ->with('organization')
                 ->orderByName()
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(Request::only(['search', 'trashed']))
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn ($contact) => [

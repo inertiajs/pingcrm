@@ -18,7 +18,7 @@ class OrganizationsController extends Controller
             'filters' => Request::all('search', 'trashed'),
             'organizations' => Auth::user()->account->organizations()
                 ->orderBy('name')
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(Request::only(['search', 'trashed']))
                 ->paginate(10)
                 ->withQueryString()
                 ->through(fn ($organization) => [
