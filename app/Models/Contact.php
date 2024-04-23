@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,23 +33,29 @@ class Contact extends Model
         $query->orderBy('last_name')->orderBy('first_name');
     }
 
-    public function scopeFilter($query, array $filters): void
+    public function scopeFilter(Builder $query, array $filters): Builder
     {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where(function ($query) use ($search) {
-                $query->where('first_name', 'like', '%'.$search.'%')
-                    ->orWhere('last_name', 'like', '%'.$search.'%')
-                    ->orWhere('email', 'like', '%'.$search.'%')
-                    ->orWhereHas('organization', function ($query) use ($search) {
-                        $query->where('name', 'like', '%'.$search.'%');
+        if (!count($filters)) {
+            return $query;
+        }
+
+        if (@$filters['search']) {
+            $query->where(function (Builder $query) use ($filters) {
+                $query->whereAny(['first_name','last_name','email'], 'like', '%'.$filters['search'].'%')
+                    ->orWhereHas('organization', function (Builder $query) use ($filters) {
+                        $query->where('name', 'like', '%'.$filters['search'].'%');
                     });
             });
-        })->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'with') {
+        }
+
+        if (@$filters['trashed']) {
+            if ($filters['trashed'] === 'with') {
                 $query->withTrashed();
-            } elseif ($trashed === 'only') {
+            } elseif ($filters['trashed'] === 'only') {
                 $query->onlyTrashed();
             }
-        });
+        }
+
+        return $query;
     }
 }

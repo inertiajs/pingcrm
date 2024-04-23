@@ -21,7 +21,7 @@ class UsersController extends Controller
             'filters' => Request::all('search', 'role', 'trashed'),
             'users' => Auth::user()->account->users()
                 ->orderByName()
-                ->filter(Request::only('search', 'role', 'trashed'))
+                ->filter(Request::only(['search', 'role', 'trashed']))
                 ->get()
                 ->transform(fn ($user) => [
                     'id' => $user->id,
