@@ -22,12 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 // Auth
 Route::controller(AuthenticatedSessionController::class)
-    ->group(function(){
+    ->group(function () {
         Route::get('login', 'create')->name('login')->middleware('guest');
         Route::post('login', 'store')->name('login.store')->middleware('guest');
         Route::delete('logout', 'destroy')->name('logout')->middleware('auth');
     });
-
 
 // Dashboard
 Route::get('/', [DashboardController::class, 'index'])
@@ -39,7 +38,7 @@ Route::controller(UsersController::class)
     ->middleware('auth')
     ->prefix('users')
     ->as('users.')
-    ->group(function(){
+    ->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('', 'store')->name('store');
@@ -53,7 +52,7 @@ Route::controller(OrganizationsController::class)
     ->middleware('auth')
     ->prefix('organizations')
     ->as('organizations.')
-    ->group(function(){
+    ->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('', 'store')->name('store');
@@ -69,7 +68,7 @@ Route::controller(ContactsController::class)
     ->middleware('auth')
     ->prefix('contacts')
     ->as('contacts.')
-    ->group(function(){
+    ->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('create', 'create')->name('create');
         Route::post('', 'store')->name('store');
@@ -78,7 +77,6 @@ Route::controller(ContactsController::class)
         Route::delete('{contact}', 'destroy')->name('destroy');
         Route::put('{contact}/restore', 'restore')->name('restore');
     });
-
 
 // Reports
 

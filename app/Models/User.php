@@ -79,9 +79,9 @@ class User extends Authenticatable
         $query->orderBy('last_name')->orderBy('first_name');
     }
 
-    public function scopeWhereRole(Builder $query, $role):Builder
+    public function scopeWhereRole(Builder $query, $role): Builder
     {
-        return  match ($role) {
+        return match ($role) {
             'user' => $query->where('owner', false),
             'owner' => $query->where('owner', true),
         };
@@ -89,12 +89,12 @@ class User extends Authenticatable
 
     public function scopeFilter(Builder $query, array $filters): Builder
     {
-        if (!count($filters)) {
+        if (! count($filters)) {
             return $query;
         }
 
         if (@$filters['search']) {
-            $query->whereAny(['first_name','last_name','email'],'like', '%'.$filters['search'].'%');
+            $query->whereAny(['first_name', 'last_name', 'email'], 'like', '%'.$filters['search'].'%');
         }
 
         if (@$filters['role']) {

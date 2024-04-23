@@ -25,19 +25,20 @@ class Organization extends Model
 
     public function scopeFilter(Builder $query, array $filters): Builder
     {
-        if (!count($filters)) {
+        if (! count($filters)) {
             return $query;
         }
         if (@$filters['search']) {
             $query->where('name', 'like', '%'.$filters['search'].'%');
         }
-        if(@$filters['trashed']) {
+        if (@$filters['trashed']) {
             if ($filters['trashed'] === 'with') {
                 $query->withTrashed();
             } elseif ($filters['trashed'] === 'only') {
                 $query->onlyTrashed();
             }
         }
+
         return $query;
     }
 }

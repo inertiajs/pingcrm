@@ -35,13 +35,13 @@ class Contact extends Model
 
     public function scopeFilter(Builder $query, array $filters): Builder
     {
-        if (!count($filters)) {
+        if (! count($filters)) {
             return $query;
         }
 
         if (@$filters['search']) {
             $query->where(function (Builder $query) use ($filters) {
-                $query->whereAny(['first_name','last_name','email'], 'like', '%'.$filters['search'].'%')
+                $query->whereAny(['first_name', 'last_name', 'email'], 'like', '%'.$filters['search'].'%')
                     ->orWhereHas('organization', function (Builder $query) use ($filters) {
                         $query->where('name', 'like', '%'.$filters['search'].'%');
                     });
