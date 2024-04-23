@@ -58,22 +58,22 @@ class User extends Authenticatable
         return $this->belongsTo(Account::class);
     }
 
-    public function getNameAttribute()
+    public function getNameAttribute(): string
     {
         return $this->first_name.' '.$this->last_name;
     }
 
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password): void
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
 
-    public function isDemoUser()
+    public function isDemoUser(): bool
     {
         return $this->email === 'johndoe@example.com';
     }
 
-    public function scopeOrderByName($query)
+    public function scopeOrderByName($query): void
     {
         $query->orderBy('last_name')->orderBy('first_name');
     }
@@ -86,7 +86,7 @@ class User extends Authenticatable
         }
     }
 
-    public function scopeFilter($query, array $filters)
+    public function scopeFilter($query, array $filters): void
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {

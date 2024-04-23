@@ -22,17 +22,17 @@ class Contact extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function getNameAttribute()
+    public function getNameAttribute(): string
     {
         return $this->first_name.' '.$this->last_name;
     }
 
-    public function scopeOrderByName($query)
+    public function scopeOrderByName($query): void
     {
         $query->orderBy('last_name')->orderBy('first_name');
     }
 
-    public function scopeFilter($query, array $filters)
+    public function scopeFilter($query, array $filters): void
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
