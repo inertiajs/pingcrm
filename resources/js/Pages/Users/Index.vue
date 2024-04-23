@@ -3,20 +3,20 @@
     <Head title="Users" />
     <h1 class="mb-8 text-3xl font-bold">Users</h1>
     <div class="flex items-center justify-between mb-6">
-      <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
+      <SearchFilter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
         <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="form-select mt-1 w-full">
+        <select v-model="form.role" @change="getData" class="form-select mt-1 w-full">
           <option :value="null" />
           <option value="user">User</option>
           <option value="owner">Owner</option>
         </select>
         <label class="block mt-4 text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="form-select mt-1 w-full">
+        <select v-model="form.trashed" @change="getData" class="form-select mt-1 w-full">
           <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
         </select>
-      </search-filter>
+      </SearchFilter>
       <Link class="btn-indigo" href="/users/create">
         <span>Create</span>
         <span class="hidden md:inline">&nbsp;User</span>
@@ -61,48 +61,39 @@
   </div>
 </template>
 
-<script>
-import { Head, Link } from '@inertiajs/vue3'
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
-import pickBy from 'lodash/pickBy'
-import Layout from '@/Shared/Layout.vue'
-import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter.vue'
+import { debounce } from 'lodash'
+import { watch } from 'vue'
 
-export default {
-  components: {
-    Head,
-    Icon,
-    Link,
-    SearchFilter,
-  },
-  layout: Layout,
-  props: {
-    filters: Object,
-    users: Array,
-  },
-  data() {
-    return {
-      form: {
-        search: this.filters.search,
-        role: this.filters.role,
-        trashed: this.filters.trashed,
-      },
-    }
-  },
-  watch: {
-    form: {
-      deep: true,
-      handler: throttle(function () {
-        this.$inertia.get('/users', pickBy(this.form), { preserveState: true })
-      }, 150),
-    },
-  },
-  methods: {
-    reset() {
-      this.form = mapValues(this.form, () => null)
-    },
-  },
+const props=defineProps({
+  filters: Object,
+  users: Array,
+})
+const form=useForm({
+  search: props.filters.search,
+  role: props.filters.role,
+  trashed: props.filters.trashed,
+})
+
+const getData = () => {
+  form.transform((data) => {
+    return Object.fromEntries(Object.entries(data).filter(([_, value]) => value != null))
+  }).get('/users', { preserveState: true })
 }
+const debouncedGetData = debounce(getData, 500)
+
+watch([() => form.search], () => {
+  debouncedGetData()
+})
+
+const  reset = () => {
+  form.search = null
+  form.role = null
+  form.trashed = null
+  getData()
+}
+
 </script>
