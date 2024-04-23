@@ -1,31 +1,34 @@
 {
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "fix:eslint": "eslint --ext .js,.vue resources/js/ --fix",
-        "fix:prettier": "prettier --write --loglevel warn 'resources/js/**/*.vue'",
-        "fix-code-style": "npm run fix:prettier && npm run fix:eslint",
-        "heroku-postbuild": "npm run build",
-        "dev": "vite",
-        "build": "vite build && vite build --ssr"
-    },
-    "devDependencies": {
-        "@inertiajs/vue3": "^1.0.15",
-        "@popperjs/core": "^2.11.0",
-        "@vitejs/plugin-vue": "^5.0.4",
-        "@vue/server-renderer": "^3.2.27",
-        "autoprefixer": "^10.4.19",
-        "eslint": "^8.4.1",
-        "eslint-plugin-vue": "^8.2.0",
-        "laravel-vite-plugin": "^1.0.2",
-        "lodash": "^4.17.21",
-        "postcss": "^8.4.38",
-        "postcss-import": "^16.1.0",
-        "prettier": "^2.5.1",
-        "prettier-plugin-tailwind": "^2.2.12",
-        "tailwindcss": "^3.4.3",
-        "uuid": "^8.3.2",
-        "vite": "^5.2.7",
-        "vue": "^3.2.27"
-    }
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fix:eslint": "eslint --ext .js,.vue resources/js/ --fix",
+    "fix:prettier": "prettier --write --loglevel warn 'resources/js/**/*.vue'",
+    "fix-code-style": "npm run fix:prettier && npm run fix:eslint",
+    "heroku-postbuild": "npm run build",
+    "dev": "vite",
+    "build": "vite build && vite build --ssr"
+  },
+  "devDependencies": {
+    "@inertiajs/vue3": "^1.0.15",
+    "@popperjs/core": "^2.11.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/server-renderer": "^3.2.27",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.4.1",
+    "eslint-plugin-vue": "^8.2.0",
+    "laravel-vite-plugin": "^1.0.2",
+    "lodash": "^4.17.21",
+    "postcss": "^8.4.38",
+    "postcss-import": "^16.1.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwind": "^2.2.12",
+    "tailwindcss": "^3.4.3",
+    "uuid": "^8.3.2",
+    "vite": "^5.2.7",
+    "vue": "^3.4.24"
+  },
+  "dependencies": {
+    "node": "^18.20.2"
+  }
 }

@@ -22,32 +22,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Head } from '@inertiajs/vue3'
 import Logo from '@/Shared/Logo.vue'
 import TextInput from '@/Shared/TextInput.vue'
 import LoadingButton from '@/Shared/LoadingButton.vue'
+import { useForm } from '@inertiajs/vue3'
 
-export default {
-  components: {
-    Head,
-    LoadingButton,
-    Logo,
-    TextInput,
-  },
-  data() {
-    return {
-      form: this.$inertia.form({
-        email: 'johndoe@example.com',
-        password: 'secret',
-        remember: false,
-      }),
-    }
-  },
-  methods: {
-    login() {
-      this.form.post('/login')
-    },
-  },
+const form = useForm({
+  email: 'johndoe@example.com',
+  password: 'secret',
+  remember: false,
+})
+
+const login = () => {
+  form.post('/login',{
+    preserveState: true,
+  })
 }
 </script>
