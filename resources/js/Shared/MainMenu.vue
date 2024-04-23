@@ -27,23 +27,17 @@
   </div>
 </template>
 
-<script>
-import { Link } from '@inertiajs/vue3'
+<script setup>
+import { Link, usePage } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 
-export default {
-  components: {
-    Icon,
-    Link,
-  },
-  methods: {
-    isUrl(...urls) {
-      let currentUrl = this.$page.url.substr(1)
-      if (urls[0] === '') {
-        return currentUrl === ''
-      }
-      return urls.filter((url) => currentUrl.startsWith(url)).length
-    },
-  },
+const pageProps=usePage()
+const isUrl=(...urls)=> {
+  let currentUrl = pageProps.url.substr(1)
+  if (urls[0] === '') {
+    return currentUrl === ''
+  }
+  return urls.filter((url) => currentUrl.startsWith(url)).length
 }
+
 </script>

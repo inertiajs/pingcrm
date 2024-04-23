@@ -6,17 +6,15 @@
         <slot />
       </div>
     </div>
-    <button class="text-yellow-800 hover:underline text-sm" tabindex="-1" type="button" @click="$emit('restore')">Restore</button>
+    <button class="text-yellow-800 hover:underline text-sm" tabindex="-1" type="button" @click="handleRestore">Restore</button>
   </div>
 </template>
 
-<script>
+<script setup>
 import Icon from '@/Shared/Icon.vue'
+const  emit=defineEmits(['restore'])
 
-export default {
-  components: {
-    Icon,
-  },
-  emits: ['restore'],
+const handleRestore = () => {
+  emit('restore')
 }
 </script>

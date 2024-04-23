@@ -9,15 +9,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { Link } from '@inertiajs/vue3'
 
-export default {
-  components: {
-    Link,
-  },
-  props: {
-    links: Array,
-  },
-}
+const  props=defineProps({
+  links: Array,
+})
+
 </script>

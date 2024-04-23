@@ -5,10 +5,8 @@
   </button>
 </template>
 
-<script>
-export default {
-  props: {
-    loading: Boolean,
-  },
-}
+<script setup>
+const props = defineProps({
+  loading: Boolean,
+})
 </script>
