@@ -1,3 +1,44 @@
+<script setup>
+import { ref, watch } from 'vue';
+
+const props = defineProps({
+  modelValue: File,
+  label: String,
+  accept: String,
+  errors: {
+    type: Array,
+    default: () => [],
+  },
+});
+
+const file = ref(null);
+
+const emit = defineEmits(['update:modelValue']);
+
+watch(() => props.modelValue, (value) => {
+  if (!value) {
+    file.value = '';
+  }
+}, { immediate: true });
+
+const filesize = (size) => {
+  var i = Math.floor(Math.log(size) / Math.log(1024))
+  return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
+};
+
+const browse = () => {
+  file.value.click()
+};
+
+const change = (e) => {
+  emit('update:modelValue', e.target.files[0])
+};
+
+const remove = () => {
+  emit('update:modelValue', null)
+};
+
+</script>
 <template>
   <div>
     <label v-if="label" class="form-label">{{ label }}:</label>
@@ -16,40 +57,3 @@
     <div v-if="errors.length" class="form-error">{{ errors[0] }}</div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    modelValue: File,
-    label: String,
-    accept: String,
-    errors: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  emits: ['update:modelValue'],
-  watch: {
-    modelValue(value) {
-      if (!value) {
-        this.$refs.file.value = ''
-      }
-    },
-  },
-  methods: {
-    filesize(size) {
-      var i = Math.floor(Math.log(size) / Math.log(1024))
-      return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
-    },
-    browse() {
-      this.$refs.file.click()
-    },
-    change(e) {
-      this.$emit('update:modelValue', e.target.files[0])
-    },
-    remove() {
-      this.$emit('update:modelValue', null)
-    },
-  },
-}
-</script>
