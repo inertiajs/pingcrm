@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3'
 
 defineProps({
   links: Array,
-});
+})
 </script>
 <template>
   <div v-if="links.length > 3">

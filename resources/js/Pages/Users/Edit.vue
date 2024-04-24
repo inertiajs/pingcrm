@@ -9,7 +9,7 @@ import TrashedMessage from '@/Shared/TrashedMessage.vue'
 
 const props = defineProps({
   user: Object,
-});
+})
 
 const form = useForm({
   _method: 'put',
@@ -19,25 +19,25 @@ const form = useForm({
   password: '',
   owner: props.user.owner,
   photo: null,
-});
+})
 
 const update = () => {
   form.post(`/users/${props.user.id}`, {
     onSuccess: () => form.reset('password', 'photo'),
   })
-};
+}
 
 const destroy = () => {
   if (confirm('Are you sure you want to delete this user?')) {
     router.delete(`/users/${props.user.id}`)
   }
-};
+}
 
 const restore = () => {
   if (confirm('Are you sure you want to restore this user?')) {
     router.put(`/users/${props.user.id}/restore`)
   }
-};
+}
 </script>
 <template>
   <Layout>

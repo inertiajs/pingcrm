@@ -9,7 +9,7 @@ import TrashedMessage from '@/Shared/TrashedMessage.vue'
 const props = defineProps({
   contact: Object,
   organizations: Array,
-});
+})
 
 const form = useForm({
   first_name: props.contact.first_name,
@@ -22,23 +22,23 @@ const form = useForm({
   region: props.contact.region,
   country: props.contact.country,
   postal_code: props.contact.postal_code,
-});
+})
 
 const update = () => {
   form.put(`/contacts/${props.contact.id}`)
-};
+}
 
 const destroy = () => {
   if (confirm('Are you sure you want to delete this contact?')) {
     router.delete(`/contacts/${props.contact.id}`)
   }
-};
+}
 
 const restore = () => {
   if (confirm('Are you sure you want to restore this contact?')) {
     router.put(`/contacts/${props.contact.id}/restore`)
   }
-};
+}
 </script>
 <template>
   <Layout>

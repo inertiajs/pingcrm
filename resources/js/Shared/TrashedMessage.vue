@@ -1,7 +1,7 @@
 <script setup>
 import Icon from '@/Shared/Icon.vue'
 
-defineEmits(['restore']);
+defineEmits(['restore'])
 </script>
 <template>
   <div class="flex items-center justify-between p-4 max-w-3xl bg-yellow-400 rounded">

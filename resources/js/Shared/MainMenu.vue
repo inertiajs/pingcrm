@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 
-const url = ref(usePage().url);
+const url = ref(usePage().url)
 
 const isUrl = (...urls) => {
   let currentUrl = url.value.substr(1)

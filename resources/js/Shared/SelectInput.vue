@@ -1,10 +1,10 @@
 <script setup>
-import { ref, watch } from 'vue';
-import { v4 as uuid } from 'uuid';
+import { ref, watch } from 'vue'
+import { v4 as uuid } from 'uuid'
 
 defineOptions({
-  inheritAttrs: false
-});
+  inheritAttrs: false,
+})
 
 const props = defineProps({
   id: {
@@ -16,17 +16,17 @@ const props = defineProps({
   error: String,
   label: String,
   modelValue: [String, Number, Boolean],
-});
+})
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
-const selected = ref(props.modelValue);
+const selected = ref(props.modelValue)
 
-const input = ref(null);
+const input = ref(null)
 
 watch(selected, (selected) => {
   emit('update:modelValue', selected)
-});
+})
 </script>
 <template>
   <div :class="$attrs.class">

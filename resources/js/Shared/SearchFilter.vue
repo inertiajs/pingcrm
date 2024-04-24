@@ -7,9 +7,9 @@ defineProps({
     type: Number,
     default: 300,
   },
-});
+})
 
-defineEmits(['update:modelValue', 'reset']);
+defineEmits(['update:modelValue', 'reset'])
 </script>
 <template>
   <div class="flex items-center">

@@ -13,11 +13,11 @@ const form = useForm({
   password: '',
   owner: false,
   photo: null,
-});
+})
 
 const store = () => {
   form.post('/users')
-};
+}
 </script>
 <template>
   <Layout>

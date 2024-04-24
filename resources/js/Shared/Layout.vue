@@ -6,7 +6,7 @@ import Dropdown from '@/Shared/Dropdown.vue'
 import MainMenu from '@/Shared/MainMenu.vue'
 import FlashMessages from '@/Shared/FlashMessages.vue'
 
-const auth = usePage().props.auth;
+const auth = usePage().props.auth
 </script>
 <template>
   <div>

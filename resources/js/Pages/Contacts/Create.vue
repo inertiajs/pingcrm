@@ -7,7 +7,7 @@ import LoadingButton from '@/Shared/LoadingButton.vue'
 
 defineProps({
   organizations: Array,
-});
+})
 
 const form = useForm({
   first_name: '',
@@ -20,11 +20,11 @@ const form = useForm({
   region: '',
   country: '',
   postal_code: '',
-});
+})
 
 const store = () => {
   form.post('/contacts')
-};
+}
 </script>
 <template>
   <Layout>

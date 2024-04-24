@@ -8,11 +8,11 @@ const form = useForm({
   email: 'johndoe@example.com',
   password: 'secret',
   remember: false,
-});
+})
 
 const login = () => {
   form.post('/login')
-};
+}
 </script>
 <template>
   <Head title="Login" />

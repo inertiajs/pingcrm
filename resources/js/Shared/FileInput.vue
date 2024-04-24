@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: File,
@@ -9,35 +9,38 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-});
+})
 
-const file = ref(null);
+const file = ref(null)
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue'])
 
-watch(() => props.modelValue, (value) => {
-  if (!value) {
-    file.value = '';
-  }
-}, { immediate: true });
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (!value) {
+      file.value = ''
+    }
+  },
+  { immediate: true },
+)
 
 const filesize = (size) => {
   var i = Math.floor(Math.log(size) / Math.log(1024))
   return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
-};
+}
 
 const browse = () => {
   file.value.click()
-};
+}
 
 const change = (e) => {
   emit('update:modelValue', e.target.files[0])
-};
+}
 
 const remove = () => {
   emit('update:modelValue', null)
-};
-
+}
 </script>
 <template>
   <div>

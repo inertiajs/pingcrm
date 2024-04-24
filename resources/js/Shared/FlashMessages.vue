@@ -2,14 +2,16 @@
 import { ref, computed, watch } from 'vue'
 import { usePage } from '@inertiajs/vue3'
 
-const show = ref(false);
+const show = ref(false)
 const flash = computed(() => usePage().props.flash)
 
-watch(flash, () => {
-    show.value = true;
+watch(
+  flash,
+  () => {
+    show.value = true
   },
   { deep: true },
-);
+)
 </script>
 <template>
   <div>

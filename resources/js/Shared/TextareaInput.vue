@@ -1,9 +1,9 @@
 <script setup>
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid'
 
 defineOptions({
-  inheritAttrs: false
-});
+  inheritAttrs: false,
+})
 
 defineProps({
   id: {
@@ -15,9 +15,9 @@ defineProps({
   error: String,
   label: String,
   modelValue: String,
-});
+})
 
-defineEmits(['update:modelValue']);
+defineEmits(['update:modelValue'])
 </script>
 <template>
   <div :class="$attrs.class">

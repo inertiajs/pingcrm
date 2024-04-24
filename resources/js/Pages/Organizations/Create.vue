@@ -14,11 +14,11 @@ const form = useForm({
   region: null,
   country: null,
   postal_code: null,
-});
+})
 
 const store = () => {
   form.post('/organizations')
-};
+}
 </script>
 <template>
   <Layout>

@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   loading: Boolean,
-});
+})
 </script>
 <template>
   <button :disabled="loading" class="flex items-center">

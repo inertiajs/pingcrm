@@ -10,12 +10,12 @@ import SearchFilter from '@/Shared/SearchFilter.vue'
 const props = defineProps({
   filters: Object,
   organizations: Object,
-});
+})
 
 const form = useForm({
   search: props.filters.search,
   trashed: props.filters.trashed,
-});
+})
 
 watch(
   form,
@@ -23,11 +23,11 @@ watch(
     router.get('/organizations', form, { preserveState: true })
   }, 150),
   { deep: true },
-);
+)
 
 const reset = () => {
-  form.reset();
-};
+  form.reset()
+}
 </script>
 <template>
   <Layout>
