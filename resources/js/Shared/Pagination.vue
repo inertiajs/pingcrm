@@ -1,5 +1,5 @@
 <template>
-  <div v-if="links.length > 3">
+  <div v-if="links && links.length > 0">
     <div class="flex flex-wrap -mb-1">
       <template v-for="(link, key) in links">
         <div v-if="link.url === null" :key="key" class="mb-1 mr-1 px-4 py-3 text-gray-400 text-sm leading-4 border rounded" v-html="link.label" />
@@ -17,7 +17,15 @@ export default {
     Link,
   },
   props: {
-    links: Array,
+    links: {
+      type: Array,
+      default: () => []
+    },
   },
 }
 </script>
+
+<style scoped>
+/* Add any specific styles here */
+</style>
+

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organization;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -15,43 +15,43 @@ class ProductsController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Organizations/Index', [
-            'filters' => Request::all('search', 'trashed'),
-            'organizations' => Auth::user()->account->organizations()
-                ->orderBy('name')
-                ->filter(Request::only('search', 'trashed'))
-                ->paginate(10)
-                ->withQueryString()
-                ->through(fn ($organization) => [
-                    'id' => $organization->id,
-                    'name' => $organization->name,
-                    'phone' => $organization->phone,
-                    'city' => $organization->city,
-                    'deleted_at' => $organization->deleted_at,
-                ]),
+        $products = Product::orderBy('name')
+            ->paginate(10)
+            ->withQueryString()
+            ->through(fn ($product) => [
+                'id' => $product->id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'price' => $product->price,
+                'quantity' => $product->quantity,
+            ]);
+
+        return Inertia::render('Products/Index', [
+            'products' => $products,
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Organizations/Create');
+        return Inertia::render('Products/Create');
     }
 
     public function store(): RedirectResponse
     {
-        Auth::user()->account->organizations()->create(
-            Request::validate([
-                'name' => ['required', 'max:100'],
-                'email' => ['nullable', 'max:50', 'email'],
-                'phone' => ['nullable', 'max:50'],
-                'address' => ['nullable', 'max:150'],
-                'city' => ['nullable', 'max:50'],
-                'region' => ['nullable', 'max:50'],
-                'country' => ['nullable', 'max:2'],
-                'postal_code' => ['nullable', 'max:25'],
-            ])
-        );
+        Request::validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+            'price' => ['required', 'numeric'],
+            'quantity' => ['required', 'numeric'],
+        ]);
 
-        return Redirect::route('organizations')->with('success', 'Organization created.');
+        Product::create([
+            'name' => Request::get('name'),
+            'description' => Request::get('description'),
+            'price' => Request::get('price'),
+            'quantity' => Request::get('quantity'),
+        ]);
+
+        return Redirect::route('products')->with('success', 'Product created.');
     }
 }

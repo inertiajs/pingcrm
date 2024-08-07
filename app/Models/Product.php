@@ -10,4 +10,9 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $fillable = ['name', 'description', 'price', 'quantity'];
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where($field ?? 'id', $value)->firstOrFail();
+    }
 }
