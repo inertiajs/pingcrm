@@ -30,6 +30,13 @@
         <div :class="isUrl('products') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Products</div>
       </Link>
     </div>
+    <div class="mb-4">
+  <Link class="group flex items-center py-3" href="/invoices">
+    <icon name="invoice" class="mr-2 w-4 h-4" :class="isUrl('Invoices') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+    <div :class="isUrl('invoices') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Invoices</div>
+  </Link>
+</div>
+
   </div>
 </template>
 

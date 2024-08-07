@@ -8,6 +8,7 @@ use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\InvoicesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -161,4 +162,19 @@ Route::get('products/{product}/edit', [ProductsController::class, 'edit'])
 
 Route::put('products/{product}', [ProductsController::class, 'update'])
     ->name('products.update')
+    ->middleware('auth');
+
+
+// Invoices
+Route::get('invoices', [InvoicesController::class, 'index'])
+    ->name('invoices')
+    ->middleware('auth');
+Route::get('invoices/create', [InvoicesController::class, 'create'])
+    ->name('invoices.create')
+    ->middleware('auth');
+Route::post('invoices', [InvoicesController::class, 'store'])
+    ->name('invoices.store')
+    ->middleware('auth');
+Route::get('organizations/{organizationId}/contacts', [InvoicesController::class, 'getContacts'])
+    ->name('organizations.contacts')
     ->middleware('auth');
