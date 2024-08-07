@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Contact;
+use App\Models\Organization;
 use App\Models\Product;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -37,7 +38,7 @@ class InvoicesController extends Controller
                 ->get()
                 ->map
                 ->only('id', 'name'),
-            'products' => Product::all(['id', 'name', 'price']),
+            'products' => Product::all(['id', 'name', 'price', 'quantity']),
         ]);
     }
 
@@ -50,13 +51,34 @@ class InvoicesController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'number' => 'required',
+            'amount' => 'required',
+            'organization_id' => 'required|exists:organizations,id',
+            'contact_id' => 'required|exists:contacts,id',
+            'added_products' => 'required|array',
+            'added_products.*.id' => 'required|exists:products,id',
+            'added_products.*.quantity' => 'required|integer|min:1',
+        ]);
+
+        $organization = Organization::findOrFail($request->organization_id);
+        $contact = Contact::findOrFail($request->contact_id);
+
         $invoice = Invoice::create([
             'number' => $request->number,
             'amount' => $request->amount,
             'organization_id' => $request->organization_id,
             'contact_id' => $request->contact_id,
+            'organization_name' => $organization->name,
+            'contact_first_name' => $contact->first_name,
+            'contact_last_name' => $contact->last_name,
         ]);
 
-        return redirect()->route('invoices')->with('success', 'Invoice created.');
+        foreach ($request->added_products as $productData) {
+            $product = Product::findOrFail($productData['id']);
+            $product->decrement('quantity', $productData['quantity0']);
+        }
+
+        return redirect()->route('invoices')->with('success', 'Invoice created successfully.');
     }
 }

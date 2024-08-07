@@ -26,25 +26,25 @@
             <th class="pb-4 pt-6 px-6">Amount</th>
             <th class="pb-4 pt-6 px-6">Organization</th>
             <th class="pb-4 pt-6 px-6">Contact</th>
-            <th class="pb-4 pt-6 px-6" colspan="2">Actions</th>
+            <!-- <th class="pb-4 pt-6 px-6" colspan="2">Actions</th> -->
           </tr>
         </thead>
         <tbody>
           <tr v-for="invoice in invoices.data" :key="invoice.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
             <td class="border-t px-6 py-4">{{ invoice.number }}</td>
             <td class="border-t px-6 py-4">৳{{ invoice.amount }}</td>
-            <td class="border-t px-6 py-4">{{ invoice.organization.name }}</td>
-            <!-- <td class="border-t px-6 py-4">{{ invoice.contact.name }}</td> -->
-            <td class="w-px border-t">
+            <td class="border-t px-6 py-4">{{ invoice.organization_name }}</td>
+            <td class="border-t px-6 py-4">{{ invoice.contact_first_name + " " + invoice.contact_last_name }}</td>
+            <!-- <td class="w-px border-t">
               <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}/edit`" tabindex="-1">
                 <icon name="edit" class="block w-6 h-6 fill-gray-400" />
               </Link>
-            </td>
-            <td class="w-px border-t">
+            </td> -->
+            <!-- <td class="w-px border-t">
               <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}`" tabindex="-1">
                 <icon name="view" class="block w-6 h-6 fill-gray-400" />
               </Link>
-            </td>
+            </td> -->
           </tr>
           <tr v-if="invoices.data.length === 0">
             <td class="px-6 py-4 border-t" colspan="6">No invoices found.</td>
