@@ -27,7 +27,7 @@
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/products">
         <icon name="product" class="mr-2 w-4 h-4" :class="isUrl('Products') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
-        <div :class="isUrl('Products') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Products</div>
+        <div :class="isUrl('products') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Products</div>
       </Link>
     </div>
   </div>
