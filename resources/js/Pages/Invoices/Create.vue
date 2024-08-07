@@ -160,7 +160,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      this.form.number = Math.floor(Math.random() * 90000) + 10000;
+      this.form.number = this.generateRandomString(8);
       this.form.amount = this.totalAmount;
 
       try {
@@ -178,7 +178,7 @@ export default {
 
       var opt = {
         margin: 1,
-        filename: 'myfile.pdf',
+        filename: `${this.form.number}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -187,7 +187,18 @@ export default {
     },
     removeProduct(index) {
       this.addedProducts.splice(index, 1)
+    },
+
+    generateRandomString(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
     }
+
   }
 }
 </script>
