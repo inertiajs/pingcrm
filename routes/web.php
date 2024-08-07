@@ -7,6 +7,7 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -140,3 +141,17 @@ Route::get('reports', [ReportsController::class, 'index'])
 Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->where('path', '.*')
     ->name('image');
+
+
+
+// Products
+
+Route::get('products', [ProductsController::class, 'index'])
+    ->name('products')
+    ->middleware('auth');
+Route::get('products/create', [ProductsController::class, 'create'])
+    ->name('products.create')
+    ->middleware('auth');
+Route::post('products', [ProductsController::class, 'store'])
+    ->name('products.store')
+    ->middleware('auth');
