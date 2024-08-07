@@ -6,52 +6,70 @@ use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
+// use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\Request;
 
 
 class ProductsController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $products = Product::orderBy('name')
-            ->paginate(10)
-            ->withQueryString()
-            ->through(fn ($product) => [
-                'id' => $product->id,
-                'name' => $product->name,
-                'description' => $product->description,
-                'price' => $product->price,
-                'quantity' => $product->quantity,
-            ]);
+        $query = Product::query();
+
+        if ($request->has('search') && $search = $request->input('search')) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $products = $query->paginate(10);
+
+        // Manually add query string to pagination links
+        $products->appends(['search' => $request->input('search')]);
 
         return Inertia::render('Products/Index', [
             'products' => $products,
         ]);
     }
 
+
     public function create(): Response
     {
         return Inertia::render('Products/Create');
     }
 
-    public function store(): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        Request::validate([
+        $validateData = $request->validate([
             'name' => ['required', 'max:50'],
             'description' => ['required', 'max:255'],
             'price' => ['required', 'numeric'],
             'quantity' => ['required', 'numeric'],
         ]);
 
-        Product::create([
-            'name' => Request::get('name'),
-            'description' => Request::get('description'),
-            'price' => Request::get('price'),
-            'quantity' => Request::get('quantity'),
-        ]);
+        Product::create($validateData);
 
         return Redirect::route('products')->with('success', 'Product created.');
+    }
+
+    public function edit(Product $product): Response
+    {
+        return Inertia::render('Products/Edit', [
+            'product' => $product,
+        ]);
+    }
+
+    public function update(Product $product): RedirectResponse
+    {
+        $validateData = request()->validate([
+            'name' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
+            'price' => ['required', 'numeric'],
+            'quantity' => ['required', 'numeric'],
+        ]);
+
+        $product->update($validateData);
+
+        return Redirect::back()->with('success', 'Product updated.');
     }
 }

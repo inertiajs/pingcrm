@@ -155,3 +155,10 @@ Route::get('products/create', [ProductsController::class, 'create'])
 Route::post('products', [ProductsController::class, 'store'])
     ->name('products.store')
     ->middleware('auth');
+Route::get('products/{product}/edit', [ProductsController::class, 'edit'])
+    ->name('products.edit')
+    ->middleware('auth');
+
+Route::put('products/{product}', [ProductsController::class, 'update'])
+    ->name('products.update')
+    ->middleware('auth');
