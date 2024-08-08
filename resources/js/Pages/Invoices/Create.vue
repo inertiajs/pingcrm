@@ -160,7 +160,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      this.form.number = this.generateRandomString(15);
+      this.form.number = this.generateRandomString(8)
       this.form.amount = this.totalAmount;
 
       try {
@@ -176,7 +176,8 @@ export default {
 
     generateRandomString(length) {
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
+      const selectedOrg = this.organizations.find(org => org.id === this.form.organization_id);
+      let result = selectedOrg.name.substring(0, 3).toUpperCase() + '-';
       const charactersLength = characters.length;
       for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));

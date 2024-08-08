@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto" ref="invoiceContent">
+  <div class="overflow-x-auto bg-white" ref="invoiceContent">
     <hr>
     <div class="px-8 py-4">
       <p class="flex justify-end px-8 py-4 text-sm italic">Issued Date: {{ new
