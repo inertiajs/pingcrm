@@ -33,12 +33,7 @@
             <td class="border-t px-6 py-4">{{ invoice.organization_name }}</td>
             <td class="border-t px-6 py-4">{{ invoice.contact_first_name + " " + invoice.contact_last_name }}</td>
             <td class="w-px border-t">
-              <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}/edit`" tabindex="-1">
-              <icon name="edit" class="block w-6 h-6 fill-gray-400" />
-              </Link>
-            </td>
-            <td class="w-px border-t">
-              <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}`" tabindex="-1">
+              <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}/view`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
               </Link>
             </td>

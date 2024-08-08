@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Contact;
+use App\Models\InvoiceItem;
 use App\Models\Organization;
 use App\Models\Product;
 use Inertia\Inertia;
@@ -77,8 +78,26 @@ class InvoicesController extends Controller
         foreach ($request->added_products as $productData) {
             $product = Product::findOrFail($productData['id']);
             $product->decrement('quantity', $productData['quantity0']);
+
+            $item = InvoiceItem::create([
+                'invoice_id' => $invoice->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => $productData['quantity0'],
+            ]);
         }
 
         return redirect()->route('invoices')->with('success', 'Invoice created successfully.');
+    }
+
+    public function view(Invoice $invoice): Response
+    {
+        $invoice = Invoice::with('items')->findOrFail($invoice->id);
+        $contact = Contact::findOrFail($invoice->contact_id);
+        Log::info($contact);
+        return Inertia::render('Invoices/View', [
+            'invoice' => $invoice,
+            'contact' => $contact,
+        ]);
     }
 }
