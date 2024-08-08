@@ -36,6 +36,7 @@ class InvoicesController extends Controller
     {
         return Inertia::render('Invoices/Create', [
             'organizations' => Auth::user()->account->organizations()
+                ->has('contacts')
                 ->get()
                 ->map
                 ->only('id', 'name'),
