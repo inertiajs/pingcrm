@@ -178,6 +178,9 @@ Route::post('invoices', [InvoicesController::class, 'store'])
 Route::get('invoices/{invoice}/view', [InvoicesController::class, 'view'])
     ->name('invoices.view')
     ->middleware('auth');
+Route::get('invoices/{invoice}/download', [InvoicesController::class, 'download'])
+    ->name('invoices.download')
+    ->middleware('auth');
 Route::get('organizations/{organizationId}/contacts', [InvoicesController::class, 'getContacts'])
     ->name('organizations.contacts')
     ->middleware('auth');

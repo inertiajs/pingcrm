@@ -8,10 +8,13 @@ use App\Models\Contact;
 use App\Models\InvoiceItem;
 use App\Models\Organization;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Http\JsonResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class InvoicesController extends Controller
 {
@@ -99,6 +102,17 @@ class InvoicesController extends Controller
         return Inertia::render('Invoices/View', [
             'invoice' => $invoice,
             'contact' => $contact,
+        ]);
+    }
+
+    public function download(Invoice $invoice)
+    {
+        $localinvoice = Invoice::with('items')->findOrFail($invoice->id);
+        $localcontact = Contact::findOrFail($invoice->contact_id);
+
+        return response()->json([
+            'localinvoice' => $localinvoice,
+            'localcontact' => $localcontact,
         ]);
     }
 }
