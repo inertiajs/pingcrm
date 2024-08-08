@@ -160,30 +160,15 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      this.form.number = this.generateRandomString(8);
+      this.form.number = this.generateRandomString(15);
       this.form.amount = this.totalAmount;
 
       try {
         await this.form.post('/invoices')
-        this.generatePDF()
         this.addedProducts = []
       } catch (error) {
         console.error('Failed to create invoice:', error)
       }
-    },
-    generatePDF() {
-      const element = this.$refs.invoiceContent
-      console.log(element)
-      console.log("Hello PDF")
-
-      var opt = {
-        margin: 1,
-        filename: `${this.form.number}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-      };
-      html2pdf(element, opt);
     },
     removeProduct(index) {
       this.addedProducts.splice(index, 1)
