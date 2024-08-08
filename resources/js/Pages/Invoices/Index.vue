@@ -1,21 +1,18 @@
 <template>
   <div>
+
     <Head title="Invoices" />
     <h1 class="mb-8 text-3xl font-bold">Invoices</h1>
     <div class="flex items-center justify-between mb-6">
       <!-- Search Field -->
       <div class="flex-1 max-w-md mr-4">
-        <input
-          type="search"
-          v-model="search"
-          placeholder="Search invoices..."
-          class="form-input w-1/2 px-4 py-2 border rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-        />
+        <input type="search" v-model="search" placeholder="Search invoices..."
+          class="form-input w-1/2 px-4 py-2 border rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
       </div>
       <!-- Create Button -->
       <Link class="btn-indigo" href="/invoices/create">
-        <span>Create</span>
-        <span class="hidden md:inline">&nbsp;Invoice</span>
+      <span>Create</span>
+      <span class="hidden md:inline">&nbsp;Invoice</span>
       </Link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
@@ -35,16 +32,16 @@
             <td class="border-t px-6 py-4">৳{{ invoice.amount }}</td>
             <td class="border-t px-6 py-4">{{ invoice.organization_name }}</td>
             <td class="border-t px-6 py-4">{{ invoice.contact_first_name + " " + invoice.contact_last_name }}</td>
-            <!-- <td class="w-px border-t">
+            <td class="w-px border-t">
               <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}/edit`" tabindex="-1">
-                <icon name="edit" class="block w-6 h-6 fill-gray-400" />
+              <icon name="edit" class="block w-6 h-6 fill-gray-400" />
               </Link>
-            </td> -->
-            <!-- <td class="w-px border-t">
+            </td>
+            <td class="w-px border-t">
               <Link class="flex items-center px-4" :href="`/invoices/${invoice.id}`" tabindex="-1">
-                <icon name="view" class="block w-6 h-6 fill-gray-400" />
+              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
               </Link>
-            </td> -->
+            </td>
           </tr>
           <tr v-if="invoices.data.length === 0">
             <td class="px-6 py-4 border-t" colspan="6">No invoices found.</td>
