@@ -25,7 +25,10 @@ class OrganizationsController extends Controller
 
         $columnsToSelect = array_intersect($allColumns, $visibleColumns);
 
-        //if visible column does not exist in all columns, then set default columns
+        if (!in_array('id', $columnsToSelect)) {
+            $columnsToSelect[] = 'id';
+        }
+
         if (empty($visibleColumns) || empty($columnsToSelect)) {
             $columnsToSelect = Organization::defaultColumns();
         }
@@ -39,7 +42,10 @@ class OrganizationsController extends Controller
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
                 ->withQueryString()
-                ->through(fn($organization) => $organization->only($columnsToSelect)),
+                ->through(
+                    fn($organization) =>
+                    $organization->only($columnsToSelect)
+                ),
         ]);
     }
 
