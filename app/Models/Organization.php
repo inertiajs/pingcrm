@@ -20,7 +20,6 @@ class Organization extends Model
     public static function allColumns(): array
     {
         return [
-            'id',
             'name',
             'phone',
             'city',
@@ -36,7 +35,6 @@ class Organization extends Model
     public static function defaultColumns(): array
     {
         return [
-            'id',
             'name',
             'phone',
             'city',
