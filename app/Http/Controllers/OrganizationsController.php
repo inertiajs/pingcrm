@@ -40,7 +40,7 @@ class OrganizationsController extends Controller
                 ->select($columnsToSelect)
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
-                ->paginate(10)
+                ->paginate(25)
                 ->withQueryString()
                 ->through(
                     fn($organization) =>

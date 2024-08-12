@@ -44,12 +44,12 @@
       <span class="hidden md:inline">&nbsp;Organization</span>
       </Link>
     </div>
-    <div class="bg-white rounded-md shadow overflow-x-auto">
+    <div class="bg-white rounded-md shadow overflow-x-auto max-h-96">
       <table class="w-full whitespace-nowrap">
-        <thead>
-          <draggable v-model="columns" tag="tr" class="cursor-pointer text-left font-bold text-sm hover:cursor-grab ">
+        <thead class="bg-white sticky top-0 z-10">
+          <draggable v-model="columns" tag="tr" class="cursor-pointer text-left font-bold text-sm hover:cursor-grab">
             <template #item="{ element: column }">
-              <th v-if="isVisible(column.name)" class="pb-4 pt-6 pl-3">
+              <th v-if="isVisible(column.name)" class="pb-4 pt-6 pl-3 sticky top-0 z-10">
                 <font-awesome-icon icon="grip-vertical" />
                 {{ column.label }}
               </th>
