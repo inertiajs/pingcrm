@@ -48,65 +48,63 @@
       <table class="w-full whitespace-nowrap">
         <thead>
           <tr class="text-left font-bold text-sm">
-            <th class="pb-4 pt-6 pl-3">Name</th>
-            <th class="pb-4 pt-6 pl-3">Phone</th>
-            <th class="pb-4 pt-6 pl-3">Email</th>
-            <th class="pb-4 pt-6 pl-3">Address</th>
-            <th class="pb-4 pt-6 pl-3">City</th>
-            <th class="pb-4 pt-6 pl-3">Region</th>
-            <th class="pb-4 pt-6 pl-3">Country</th>
-            <th class="pb-4 pt-6 pl-6">Postal Code</th>
-
-
+            <th v-if="isVisible('name')" class="pb-4 pt-6 pl-3">Name</th>
+            <th v-if="isVisible('phone')" class="pb-4 pt-6 pl-3">Phone</th>
+            <th v-if="isVisible('email')" class="pb-4 pt-6 pl-3">Email</th>
+            <th v-if="isVisible('address')" class="pb-4 pt-6 pl-3">Address</th>
+            <th v-if="isVisible('city')" class="pb-4 pt-6 pl-3">City</th>
+            <th v-if="isVisible('region')" class="pb-4 pt-6 pl-3">Region</th>
+            <th v-if="isVisible('country')" class="pb-4 pt-6 pl-3">Country</th>
+            <th v-if="isVisible('postal_code')" class="pb-4 pt-6 pl-6">Postal Code</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="organization in organizations.data" :key="organization.id"
             class="hover:bg-gray-100 focus-within:bg-gray-100 text-sm">
-            <td class="border-t">
+            <td v-if="isVisible('name')" class="border-t">
               <Link class="flex items-center pl-3 py-4 focus:text-indigo-500"
                 :href="`/organizations/${organization.id}/edit`">
               {{ organization.name }}
               <icon v-if="organization.deleted_at" name="trash" class="shrink-0 ml-2 w-3 h-3 fill-gray-400" />
               </Link>
             </td>
-            <td class="border-t">
+            <td v-if="isVisible('phone')" class="border-t">
               <Link class="flex items-center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.phone }}
               </Link>
             </td>
-            <td class="border-t">
+            <td v-if="isVisible('email')" class="border-t">
               <Link class="flex items-center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.email }}
               </Link>
             </td>
-            <td class="border-t">
+            <td v-if="isVisible('address')" class="border-t">
               <Link class="flex items-center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.address }}
               </Link>
             </td>
-            <td class="border-t">
+            <td v-if="isVisible('city')" class="border-t">
               <Link class="flex items-center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.city }}
               </Link>
             </td>
-            <td class="border-t">
+            <td v-if="isVisible('region')" class="border-t">
               <Link class="flex items-center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.region }}
               </Link>
             </td>
-            <td class="border-t">
-              <Link class="flex items center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
+            <td v-if="isVisible('country')" class="border-t">
+              <Link class="flex items-center pl-3 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.country }}
               </Link>
             </td>
-            <td class="border-t">
+            <td v-if="isVisible('postal_code')" class="border-t">
               <Link class="flex items-start pl-6 py-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               {{ organization.postal_code }}
               </Link>
             </td>
-            <td class="w-px border-t">
-              <Link class="flex items-center pl-3" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
+            <td class="border-t">
+              <Link class="flex items-center px-4" :href="`/organizations/${organization.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
               </Link>
             </td>
@@ -175,6 +173,9 @@ export default {
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
+    },
+    isVisible(columnName) {
+      return this.columns.find(column => column.name === columnName).visible
     },
     applyChanges() {
       this.showModal = false
