@@ -15,9 +15,9 @@
       <thead>
         <tr>
           <th class="pb-4 pt-6 px-6">Product</th>
-          <th class="pb-4 pt-6 px-6">Price</th>
+          <th class="pb-4 pt-6 px-6">Unit Price</th>
           <th class="pb-4 pt-6 px-6">Quantity</th>
-          <th class="pb-4 pt-6 px-6">Action</th>
+          <th class="pb-4 pt-6 px-6">Product Total</th>
         </tr>
       </thead>
       <tbody>
