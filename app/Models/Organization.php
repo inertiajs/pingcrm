@@ -17,6 +17,33 @@ class Organization extends Model
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
+    public static function allColumns(): array
+    {
+        return [
+            'id',
+            'name',
+            'phone',
+            'city',
+            'email',
+            'address',
+            'region',
+            'country',
+            'postal_code',
+            'deleted_at'
+        ];
+    }
+
+    public static function defaultColumns(): array
+    {
+        return [
+            'id',
+            'name',
+            'phone',
+            'city',
+            'email'
+        ];
+    }
+
     public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class);
@@ -25,7 +52,7 @@ class Organization extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'like', '%'.$search.'%');
+            $query->where('name', 'like', '%' . $search . '%');
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();

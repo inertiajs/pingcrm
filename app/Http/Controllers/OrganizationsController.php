@@ -20,26 +20,26 @@ class OrganizationsController extends Controller
         $path = "org/column/{$userId}";
         $settings = Settings::where('path', $path)->first();
         $visibleColumns = $settings ? json_decode($settings->value, true) : [];
+
+        $allColumns = Organization::allColumns();
+
+        $columnsToSelect = array_intersect($allColumns, $visibleColumns);
+
+        //if visible column does not exist in all columns, then set default columns
+        if (empty($visibleColumns) || empty($columnsToSelect)) {
+            $columnsToSelect = Organization::defaultColumns();
+        }
+
         return Inertia::render('Organizations/Index', [
             'visibleColumns' => $visibleColumns,
             'filters' => Request::all('search', 'trashed'),
             'organizations' => Auth::user()->account->organizations()
+                ->select($columnsToSelect)
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
                 ->withQueryString()
-                ->through(fn($organization) => [
-                    'id' => $organization->id,
-                    'name' => $organization->name,
-                    'phone' => $organization->phone,
-                    'city' => $organization->city,
-                    'email' => $organization->email,
-                    'address' => $organization->address,
-                    'region' => $organization->region,
-                    'country' => $organization->country,
-                    'postal_code' => $organization->postal_code,
-                    'deleted_at' => $organization->deleted_at,
-                ]),
+                ->through(fn($organization) => $organization->only($columnsToSelect)),
         ]);
     }
 

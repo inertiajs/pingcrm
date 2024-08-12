@@ -26,7 +26,7 @@
 
             <div class="grid grid-cols-2 gap-4">
               <div v-for="column in columns" :key="column.name" class="flex items-center">
-                <input type="checkbox" v-model="column.visible" class="mr-2" />
+                <input type="checkbox" v-model="column.visible" class="mr-2" :disabled="column.disabled" />
                 <label>{{ column.label }}</label>
               </div>
             </div>
@@ -128,7 +128,6 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
-// import route from 'ziggy-js'
 
 export default {
   components: {
@@ -152,11 +151,11 @@ export default {
       },
       showModal: false,
       columns: [
-        { name: 'name', label: 'Name', visible: this.visibleColumns.includes('name') },
-        { name: 'phone', label: 'Phone', visible: this.visibleColumns.includes('phone') },
-        { name: 'email', label: 'Email', visible: this.visibleColumns.includes('email') },
+        { name: 'name', label: 'Name', visible: this.visibleColumns.includes('name') || true, disabled: true },
+        { name: 'phone', label: 'Phone', visible: this.visibleColumns.includes('phone') || true, disabled: true },
+        { name: 'email', label: 'Email', visible: this.visibleColumns.includes('email') || true, disabled: true },
         { name: 'address', label: 'Address', visible: this.visibleColumns.includes('address') },
-        { name: 'city', label: 'City', visible: this.visibleColumns.includes('city') },
+        { name: 'city', label: 'City', visible: this.visibleColumns.includes('city') || true, disabled: true },
         { name: 'region', label: 'Region', visible: this.visibleColumns.includes('region') },
         { name: 'country', label: 'Country', visible: this.visibleColumns.includes('country') },
         { name: 'postal_code', label: 'Postal Code', visible: this.visibleColumns.includes('postal_code') },
