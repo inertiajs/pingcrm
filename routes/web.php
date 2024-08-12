@@ -184,3 +184,8 @@ Route::get('invoices/{invoice}/download', [InvoicesController::class, 'download'
 Route::get('organizations/{organizationId}/contacts', [InvoicesController::class, 'getContacts'])
     ->name('organizations.contacts')
     ->middleware('auth');
+
+//Column Visibility
+Route::post('organizations/column', [OrganizationsController::class, 'saveColumnVisibility'])
+    ->name('organizations.column')
+    ->middleware('auth');

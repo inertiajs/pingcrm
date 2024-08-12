@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link, } from '@inertiajs/vue3'
 import Icon from '@/Shared/Icon.vue'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout.vue'
@@ -128,6 +128,7 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
+// import route from 'ziggy-js'
 
 export default {
   components: {
@@ -141,6 +142,7 @@ export default {
   props: {
     filters: Object,
     organizations: Object,
+    visibleColumns: Array,
   },
   data() {
     return {
@@ -150,14 +152,14 @@ export default {
       },
       showModal: false,
       columns: [
-        { name: 'name', label: 'Name', visible: true },
-        { name: 'phone', label: 'Phone', visible: true },
-        { name: 'email', label: 'Email', visible: true },
-        { name: 'address', label: 'Address', visible: true },
-        { name: 'city', label: 'City', visible: true },
-        { name: 'region', label: 'Region', visible: true },
-        { name: 'country', label: 'Country', visible: true },
-        { name: 'postal_code', label: 'Postal Code', visible: true },
+        { name: 'name', label: 'Name', visible: this.visibleColumns.includes('name') },
+        { name: 'phone', label: 'Phone', visible: this.visibleColumns.includes('phone') },
+        { name: 'email', label: 'Email', visible: this.visibleColumns.includes('email') },
+        { name: 'address', label: 'Address', visible: this.visibleColumns.includes('address') },
+        { name: 'city', label: 'City', visible: this.visibleColumns.includes('city') },
+        { name: 'region', label: 'Region', visible: this.visibleColumns.includes('region') },
+        { name: 'country', label: 'Country', visible: this.visibleColumns.includes('country') },
+        { name: 'postal_code', label: 'Postal Code', visible: this.visibleColumns.includes('postal_code') },
       ],
 
     }
@@ -178,7 +180,16 @@ export default {
       return this.columns.find(column => column.name === columnName).visible
     },
     applyChanges() {
-      this.showModal = false
+      this.showModal = false;
+
+      const selectedColumns = this.columns
+        .filter(column => column.visible)
+        .map(column => column.name);
+
+
+      this.$inertia.post('/organizations/column', {
+        columns: selectedColumns,
+      });
     },
   },
 }
