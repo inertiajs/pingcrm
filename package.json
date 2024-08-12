@@ -29,6 +29,10 @@
         "vue": "^3.2.27"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/free-brands-svg-icons": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "axios": "^1.7.3",
         "html2pdf.js": "^0.10.2"
     }

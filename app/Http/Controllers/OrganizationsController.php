@@ -21,11 +21,16 @@ class OrganizationsController extends Controller
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
                 ->withQueryString()
-                ->through(fn ($organization) => [
+                ->through(fn($organization) => [
                     'id' => $organization->id,
                     'name' => $organization->name,
                     'phone' => $organization->phone,
                     'city' => $organization->city,
+                    'email' => $organization->email,
+                    'address' => $organization->address,
+                    'region' => $organization->region,
+                    'country' => $organization->country,
+                    'postal_code' => $organization->postal_code,
                     'deleted_at' => $organization->deleted_at,
                 ]),
         ]);
