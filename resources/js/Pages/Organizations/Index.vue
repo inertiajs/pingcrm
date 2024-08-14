@@ -79,6 +79,41 @@
         </div>
 
 
+        <div v-if="PreviewModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+          <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl">
+            <h2 class="text-xl font-bold mb-4">Preview Data</h2>
+
+            <!-- Preview Table -->
+            <table class="w-full table-auto border-collapse">
+              <thead>
+                <tr>
+                  <!-- Render DB Column Headers -->
+                  <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
+                    <span v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</span>
+                    <span v-else>
+                      {{ selectedDbColumns[csvColumn] || 'Not Mapped' }}
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <!-- Render Values -->
+                  <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
+                    <span>{{ getValueForColumn(csvColumn) }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Buttons -->
+            <div class="flex justify-end mt-6">
+              <button @click="applyPreviewChanges" class="btn-green px-4 py-2">Apply</button>
+              <button @click="PreviewModal = false" class="ml-4 btn-red px-4 py-2">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+
         <Link class="btn-indigo mx-4" href="/organizations/create" title="Create Organization">
         <font-awesome-icon icon="plus" />
         </Link>
@@ -159,6 +194,7 @@ export default {
       },
       showModal: false,
       showCsvModal: false,
+      PreviewModal: false,
       columns: [
         { name: 'name', label: 'Name', visible: this.visibleColumns.includes('name') || true, disabled: true },
         { name: 'phone', label: 'Phone', visible: this.visibleColumns.includes('phone') || true, disabled: true },
@@ -246,7 +282,20 @@ export default {
     applyCsvChanges() {
       const dataToInsert = this.mapCsvToDbColumns();
       console.log(dataToInsert)
-    }
+      this.showCsvModal = false
+      this.PreviewModal = true
+    },
+
+    getValueForColumn(csvColumn) {
+      // Get the first row of CSV data for preview
+      const firstRow = this.csvData[4];
+      return firstRow ? firstRow[csvColumn] : '';
+    },
+    applyPreviewChanges() {
+      this.insertData();
+      this.PreviewModal = false;
+
+    },
 
   },
 }
