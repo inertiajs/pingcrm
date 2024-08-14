@@ -13,12 +13,9 @@
         </select>
       </search-filter>
       <div>
-        <!-- Button to trigger the modal -->
         <button @click="showModal = true" class="btn-indigo mx-4" title="Visible Columns">
           <font-awesome-icon icon="table-cells" />
         </button>
-
-        <!-- Modal pop-up -->
         <div v-if="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
           <div class="bg-white rounded-lg shadow-lg p-6 w-96">
             <h2 class="text-xl font-bold mb-4">Select Columns</h2>
@@ -41,6 +38,24 @@
           <font-awesome-icon icon="file-import" />
         </button>
         <input type="file" ref="fileInput" accept=".csv" @change="handleFileUpload" style="display: none;" />
+
+        <div v-if="showCsvModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+          <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 class="text-xl font-bold mb-4">CSV Columns</h2>
+
+            <div class="grid grid-cols-1 gap-4">
+              <div v-for="csvColumn in csvColumns" :key="csvColumn" class="flex items-center">
+                <label>{{ csvColumn }}</label>
+              </div>
+
+            </div>
+
+            <div class="flex justify-end mt-6">
+              <button @click="applyCsvChanges" class="btn-green px-4 py-2">Apply</button>
+              <button @click="showCsvModal = false" class="ml-4 btn-red px-4 py-2">Cancel</button>
+            </div>
+          </div>
+        </div>
 
         <Link class="btn-indigo mx-4" href="/organizations/create" title="Create Organization">
         <font-awesome-icon icon="plus" />
@@ -97,6 +112,7 @@ import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
 import draggable from 'vuedraggable'
+import Papa from 'papaparse'
 
 export default {
   components: {
@@ -120,6 +136,7 @@ export default {
         trashed: this.filters.trashed,
       },
       showModal: false,
+      showCsvModal: false,
       columns: [
         { name: 'name', label: 'Name', visible: this.visibleColumns.includes('name') || true, disabled: true },
         { name: 'phone', label: 'Phone', visible: this.visibleColumns.includes('phone') || true, disabled: true },
@@ -130,6 +147,7 @@ export default {
         { name: 'country', label: 'Country', visible: this.visibleColumns.includes('country') },
         { name: 'postal_code', label: 'Postal Code', visible: this.visibleColumns.includes('postal_code') },
       ],
+      csvColumns: [],
 
     }
   },
@@ -166,8 +184,17 @@ export default {
     handleFileUpload(event) {
       const file = event.target.files[0];
       if (file) {
-        // Handle the CSV file upload logic here
-        console.log("CSV file selected:", file);
+        Papa.parse(file, {
+          header: true,
+          complete: (results) => {
+            console.log("CSV file contents:", results.meta.fields);
+            this.csvColumns = results.meta.fields;
+            this.showCsvModal = true
+          },
+          error: (error) => {
+            console.error("Error parsing CSV file:", error);
+          }
+        });
       }
     }
   },
