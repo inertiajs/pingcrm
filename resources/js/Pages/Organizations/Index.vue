@@ -43,12 +43,33 @@
           <div class="bg-white rounded-lg shadow-lg p-6 w-96">
             <h2 class="text-xl font-bold mb-4">CSV Columns</h2>
 
-            <div class="grid grid-cols-1 gap-4">
-              <div v-for="csvColumn in csvColumns" :key="csvColumn" class="flex items-center">
-                <label>{{ csvColumn }}</label>
-              </div>
-
-            </div>
+            <table class="w-full table-auto border-collapse">
+              <thead>
+                <tr>
+                  <th class="border-b font-bold text-left p-2">CSV Column</th>
+                  <th class="border-b font-bold text-left p-2">DB Column</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="csvColumn in csvColumns" :key="csvColumn" :class="{
+                  'bg-green-500': matchingColumn(csvColumn),
+                  'bg-yellow-500': !matchingColumn(csvColumn)
+                }">
+                  <td class="border-b p-2">{{ csvColumn }}</td>
+                  <td class="border-b p-2 w-1/2">
+                    <label v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</label>
+                    <select v-else v-model="selectedDbColumns[csvColumn]"
+                      style="width: 120px; background-color:transparent; ">
+                      <option value="" disabled>Select DB Column</option>
+                      <option v-for="dbColumn in availableDbColumns(csvColumn)" :key="dbColumn.name"
+                        :value="dbColumn.name">
+                        {{ dbColumn.name }}
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             <div class="flex justify-end mt-6">
               <button @click="applyCsvChanges" class="btn-green px-4 py-2">Apply</button>
@@ -56,6 +77,7 @@
             </div>
           </div>
         </div>
+
 
         <Link class="btn-indigo mx-4" href="/organizations/create" title="Create Organization">
         <font-awesome-icon icon="plus" />
@@ -148,7 +170,8 @@ export default {
         { name: 'postal_code', label: 'Postal Code', visible: this.visibleColumns.includes('postal_code') },
       ],
       csvColumns: [],
-
+      selectedDbColumns: {},
+      csvData: []
     }
   },
   watch: {
@@ -189,14 +212,42 @@ export default {
           complete: (results) => {
             console.log("CSV file contents:", results.meta.fields);
             this.csvColumns = results.meta.fields;
+            this.csvData = results.data;
             this.showCsvModal = true
+            console.log(this.csvData)
           },
           error: (error) => {
             console.error("Error parsing CSV file:", error);
           }
         });
       }
+    },
+    matchingColumn(csvColumn) {
+      return this.columns.find(col => col.name === csvColumn);
+    },
+    availableDbColumns(csvColumn) {
+      const selected = new Set(Object.values(this.selectedDbColumns));
+      return this.columns.filter(col => !selected.has(col.name) || col.name === this.selectedDbColumns[csvColumn]);
+    },
+
+    mapCsvToDbColumns() {
+      return this.csvData.map(row => {
+        let mappedRow = {};
+        for (let csvColumn of this.csvColumns) {
+          let dbColumn = this.selectedDbColumns[csvColumn];
+          if (dbColumn) {
+            mappedRow[dbColumn] = row[csvColumn];
+          }
+        }
+        return mappedRow;
+      });
+    },
+
+    applyCsvChanges() {
+      const dataToInsert = this.mapCsvToDbColumns();
+      console.log(dataToInsert)
     }
+
   },
 }
 </script>
