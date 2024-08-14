@@ -14,9 +14,8 @@
       </search-filter>
       <div>
         <!-- Button to trigger the modal -->
-        <button @click="showModal = true" class="btn-indigo-light ml-24 px-4">
-          <font-awesome-icon icon="table-cells" fade />
-          Visible Columns
+        <button @click="showModal = true" class="btn-indigo mx-4" title="Visible Columns">
+          <font-awesome-icon icon="table-cells" />
         </button>
 
         <!-- Modal pop-up -->
@@ -38,11 +37,17 @@
           </div>
         </div>
 
+        <button class="btn-indigo mx-4" title="Visible Columns" @click="triggerFileInput">
+          <font-awesome-icon icon="file-import" />
+        </button>
+        <input type="file" ref="fileInput" accept=".csv" @change="handleFileUpload" style="display: none;" />
+
+        <Link class="btn-indigo mx-4" href="/organizations/create" title="Create Organization">
+        <font-awesome-icon icon="plus" />
+        </Link>
       </div>
-      <Link class="btn-indigo" href="/organizations/create">
-      <span>Create</span>
-      <span class="hidden md:inline">&nbsp;Organization</span>
-      </Link>
+
+
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto max-h-96">
       <table class="w-full whitespace-nowrap">
@@ -155,6 +160,16 @@ export default {
         columns: selectedColumns,
       });
     },
+    triggerFileInput() {
+      this.$refs.fileInput.click();
+    },
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        // Handle the CSV file upload logic here
+        console.log("CSV file selected:", file);
+      }
+    }
   },
 }
 </script>
