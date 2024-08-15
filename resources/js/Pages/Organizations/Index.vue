@@ -78,33 +78,36 @@
           </div>
         </div>
 
-
         <div v-if="PreviewModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-          <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl">
-            <h2 class="text-xl font-bold mb-4">Preview Data</h2>
-
+          <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl relative">
+            <!-- Back Button -->
+            <button @click="goBack" class="absolute top-2 right-2 btn-red px-3 py-1 mr-2" title="Go Back">
+              <font-awesome-icon icon="arrow-left" class="text-white" />
+            </button>
+            <h2 class="text-xl font-bold mb-4">Preview Data <span class="text-xs">(Upto 100 Rows)</span></h2>
             <!-- Preview Table -->
-            <table class="w-full table-auto border-collapse">
-              <thead>
-                <tr>
-                  <!-- Render DB Column Headers -->
-                  <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
-                    <span v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</span>
-                    <span v-else>
-                      {{ selectedDbColumns[csvColumn] || 'Not Mapped' }}
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <!-- Render Values -->
-                  <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
-                    <span>{{ getValueForColumn(csvColumn) }}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="bg-white rounded-md shadow overflow-x-auto max-h-64">
+              <table class="w-full table-auto border-collapse">
+                <thead>
+                  <tr>
+                    <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
+                      <span v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</span>
+                      <span v-else>
+                        {{ selectedDbColumns[csvColumn] || 'Not Mapped' }}
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(row, rowIndex) in csvData.slice(0, 100)" :key="rowIndex">
+                    <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
+                      <span v-if="getValueForColumn(row, csvColumn) != 'N/A'">{{ getValueForColumn(row, csvColumn)
+                        }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <!-- Buttons -->
             <div class="flex justify-end mt-6">
               <button @click="applyPreviewChanges" class="btn-green px-4 py-2">Apply</button>
@@ -112,6 +115,7 @@
             </div>
           </div>
         </div>
+
 
 
         <Link class="btn-indigo mx-4" href="/organizations/create" title="Create Organization">
@@ -286,16 +290,20 @@ export default {
       this.PreviewModal = true
     },
 
-    getValueForColumn(csvColumn) {
-      // Get the first row of CSV data for preview
-      const firstRow = this.csvData[4];
-      return firstRow ? firstRow[csvColumn] : '';
+    getValueForColumn(row, csvColumn) {
+      return row[csvColumn] || 'N/A';
     },
+
     applyPreviewChanges() {
       this.insertData();
       this.PreviewModal = false;
 
     },
+
+    goBack() {
+      this.PreviewModal = false;
+      this.showCsvModal = true;
+    }
 
   },
 }

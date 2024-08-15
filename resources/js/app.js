@@ -3,9 +3,9 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faTableCells , faGripVertical, faPlus, faFileImport} from '@fortawesome/free-solid-svg-icons'
+import { faTableCells , faGripVertical, faPlus, faFileImport, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTableCells,faGripVertical,faPlus,faFileImport)
+library.add(faTableCells,faGripVertical,faPlus,faFileImport,faArrowLeft)
 
 createInertiaApp({
   resolve: name => {
