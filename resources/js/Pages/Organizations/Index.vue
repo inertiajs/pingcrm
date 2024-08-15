@@ -43,8 +43,8 @@
           <div class="bg-white rounded-lg shadow-lg p-6 w-1/3 max-w-4xl relative">
 
             <h2 class="text-xl font-bold mb-4">CSV Columns</h2>
-            <button @click="handleCancel" class="absolute top-2 right-2 btn-red px-3 py-1 mr-2" title="Go Back">
-              <font-awesome-icon icon="xmark" class="text-white" />
+            <button @click="handleCancel" class="absolute top-2 right-2 bg-transparent px-3 py-1 mr-2" title="Go Back">
+              <font-awesome-icon icon="xmark" class="text-black" />
             </button>
 
             <table class="w-full table-auto border-collapse">
@@ -77,8 +77,9 @@
             </table>
 
             <div class="flex justify-end mt-6">
-              <button @click="applyCsvChanges" class="btn-green px-4 py-2">Continue</button>
-              <button @click="handleCancel" class="ml-4 btn-red px-4 py-2">Cancel</button>
+              <button @click="handleCancel" class="btn-red px-4 py-2">Cancel</button>
+              <button @click="applyCsvChanges" class="ml-4 btn-green px-4 py-2">Continue</button>
+
             </div>
           </div>
         </div>
@@ -86,8 +87,8 @@
         <div v-if="PreviewModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
           <div class="bg-white rounded-lg shadow-lg p-6 w-auto min-h-1/2 max-w-4xl relative">
             <!-- Back Button -->
-            <button @click="handleCancel" class="absolute top-2 right-2 btn-red px-3 py-1 mr-2">
-              <font-awesome-icon icon="xmark" class="text-white" />
+            <button @click="handleCancel" class="absolute top-2 right-2 bg-transparent px-3 py-1 mr-2">
+              <font-awesome-icon icon="xmark" class="text-black" />
             </button>
             <h2 class="text-xl font-bold mb-4">Preview Data <span class="text-xs">(Upto 100 Rows)</span></h2>
             <!-- Preview Table -->
@@ -116,11 +117,12 @@
             </div>
             <!-- Buttons -->
             <div class="flex justify-end mt-6">
-              <button @click="goBack" class="btn-yellow px-4 py-2">
+              <button @click="goBack" class="btn-yellow px-4 py-2 mr-56">
                 Back
               </button>
-              <button @click="applyPreviewChanges" class="btn-green px-4 py-2 ml-4">Apply</button>
+
               <button @click="handleCancel" class="ml-4 btn-red px-4 py-2">Cancel</button>
+              <button @click="applyPreviewChanges" class="btn-green px-4 py-2 ml-4">Import</button>
             </div>
           </div>
         </div>
