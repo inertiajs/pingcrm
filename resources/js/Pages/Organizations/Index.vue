@@ -13,7 +13,7 @@
         </select>
       </search-filter>
       <div>
-        <button @click="showModal = true" class="btn-indigo mx-4 p-3" title="Visible Columns">
+        <button @click="showModal = true" class="btn-indigo mx-4 px-3 py-2" title="Visible Columns">
           <font-awesome-icon icon="table-cells" />
         </button>
         <div v-if="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <button class="btn-indigo mx-4 p-3" title="Import CSV" @click="triggerFileInput">
+        <button class="btn-indigo mr-4  px-3 py-2" title="Import CSV" @click="triggerFileInput">
           <font-awesome-icon icon="file-import" />
         </button>
         <input type="file" ref="fileInput" accept=".csv" @change="handleFileUpload" style="display: none;" />
@@ -99,7 +99,7 @@
                     <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         matchingColumn(csvColumn) ? matchingColumn(csvColumn).name : selectedDbColumns[csvColumn]
-                        }}</span>
+                      }}</span>
                     </th>
                   </tr>
                 </thead>
@@ -108,7 +108,7 @@
                     <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         getValueForColumn(row, csvColumn) !== 'N/A' ? getValueForColumn(row, csvColumn) : ''
-                      }}</span>
+                        }}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -127,14 +127,14 @@
           </div>
         </div>
 
+        <button @click="downloadCSV" class="btn-indigo  px-3 py-2" title="Export as CSV">
+          <font-awesome-icon icon="file-export" />
+        </button>
 
-
-        <Link class="btn-indigo mx-4 p-3" href="/organizations/create" title="Create Organization">
+        <Link class="btn-indigo mx-4  px-3 py-2" href="/organizations/create" title="Create Organization">
         <font-awesome-icon icon="plus" />
         </Link>
       </div>
-
-
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto max-h-96">
       <table class="w-full whitespace-nowrap">
@@ -328,7 +328,43 @@ export default {
     },
     handleCancel() {
       window.location.reload();
-    }
+    },
+
+
+    //export as csv
+    convertToCSV(data, columns) {
+      const header = columns
+        .filter(column => this.isVisible(column.name))
+        .map(column => column.label)
+        .join(',');
+
+      const rows = data.map(row =>
+        columns
+          .filter(column => this.isVisible(column.name))
+          .map(column => `"${row[column.name] || ''}"`)
+          .join(',')
+      );
+
+      return [header, ...rows].join('\n');
+    },
+
+    downloadCSV() {
+      const csv = this.convertToCSV(this.organizations.data, this.columns);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'organizations.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    },
+
+
   },
 
 }
