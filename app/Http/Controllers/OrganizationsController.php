@@ -135,4 +135,36 @@ class OrganizationsController extends Controller
 
         return Redirect::back();
     }
+
+    public function importCsv(): RedirectResponse
+    {
+        $data = Request::input('data');
+
+        $filteredData = array_filter($data, function ($row) {
+            if (empty($row['name'])) {
+                return false;
+            }
+            foreach ($row as $key => $value) {
+                if ($key !== 'name' && ($value === null || $value === 'N/A')) {
+                    $row[$key] = null;
+                }
+            }
+            return true;
+        });
+
+        foreach ($filteredData as $row) {
+            auth()->user()->account->organizations()->create([
+                'name' => $row['name'],
+                'email' => $row['email'] ?? null,
+                'phone' => $row['phone'] ?? null,
+                'address' => $row['address'] ?? null,
+                'city' => $row['city'] ?? null,
+                'region' => $row['region'] ?? null,
+                'country' => $row['country'] ?? null,
+                'postal_code' => $row['postal_code'] ?? null,
+            ]);
+        }
+
+        return Redirect::route('organizations')->with('success', 'Organizations imported.');
+    }
 }

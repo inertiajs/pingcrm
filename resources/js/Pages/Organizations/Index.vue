@@ -294,9 +294,17 @@ export default {
       return row[csvColumn] || 'N/A';
     },
 
-    applyPreviewChanges() {
-      this.insertData();
-      this.PreviewModal = false;
+    async applyPreviewChanges() {
+      const dataToInsert = this.mapCsvToDbColumns();
+
+      this.$inertia.post('/organizations/import-csv', { data: dataToInsert }, {
+        onSuccess: () => {
+          this.PreviewModal = false;
+        },
+        onError: (error) => {
+          console.error("Error occurred while processing data:", error);
+        }
+      });
 
     },
 

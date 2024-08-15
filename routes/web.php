@@ -101,6 +101,10 @@ Route::put('organizations/{organization}/restore', [OrganizationsController::cla
     ->name('organizations.restore')
     ->middleware('auth');
 
+Route::post('organizations/import-csv', [OrganizationsController::class, 'importCsv'])
+    ->name('organizations.import-csv')
+    ->middleware('auth');
+
 // Contacts
 
 Route::get('contacts', [ContactsController::class, 'index'])
