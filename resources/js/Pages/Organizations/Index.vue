@@ -13,7 +13,7 @@
         </select>
       </search-filter>
       <div>
-        <button @click="showModal = true" class="btn-indigo mx-4" title="Visible Columns">
+        <button @click="showModal = true" class="btn-indigo mx-4 p-3" title="Visible Columns">
           <font-awesome-icon icon="table-cells" />
         </button>
         <div v-if="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <button class="btn-indigo mx-4" title="Visible Columns" @click="triggerFileInput">
+        <button class="btn-indigo mx-4 p-3" title="Import CSV" @click="triggerFileInput">
           <font-awesome-icon icon="file-import" />
         </button>
         <input type="file" ref="fileInput" accept=".csv" @change="handleFileUpload" style="display: none;" />
@@ -46,8 +46,8 @@
             <table class="w-full table-auto border-collapse">
               <thead>
                 <tr>
-                  <th class="border-b font-bold text-left p-2">CSV Column</th>
-                  <th class="border-b font-bold text-left p-2">DB Column</th>
+                  <th class="border font-bold text-left p-2">CSV Column</th>
+                  <th class="border font-bold text-left p-2">DB Column</th>
                 </tr>
               </thead>
               <tbody>
@@ -55,8 +55,8 @@
                   'bg-green-500': matchingColumn(csvColumn),
                   'bg-yellow-500': !matchingColumn(csvColumn)
                 }">
-                  <td class="border-b p-2">{{ csvColumn }}</td>
-                  <td class="border-b p-2 w-1/2">
+                  <td class="border p-2">{{ csvColumn }}</td>
+                  <td class="border p-2 w-1/2">
                     <label v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</label>
                     <select v-else v-model="selectedDbColumns[csvColumn]"
                       style="width: 120px; background-color:transparent; ">
@@ -72,8 +72,8 @@
             </table>
 
             <div class="flex justify-end mt-6">
-              <button @click="applyCsvChanges" class="btn-green px-4 py-2">Apply</button>
-              <button @click="showCsvModal = false" class="ml-4 btn-red px-4 py-2">Cancel</button>
+              <button @click="applyCsvChanges" class="btn-green px-4 py-2">Continue</button>
+              <button @click="handleCancel" class="ml-4 btn-red px-4 py-2">Cancel</button>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
 
 
 
-        <Link class="btn-indigo mx-4" href="/organizations/create" title="Create Organization">
+        <Link class="btn-indigo mx-4 p-3" href="/organizations/create" title="Create Organization">
         <font-awesome-icon icon="plus" />
         </Link>
       </div>
@@ -311,8 +311,11 @@ export default {
     goBack() {
       this.PreviewModal = false;
       this.showCsvModal = true;
+    },
+    handleCancel() {
+      window.location.reload();
     }
-
   },
+
 }
 </script>
