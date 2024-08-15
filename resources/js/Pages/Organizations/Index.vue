@@ -91,27 +91,28 @@
                 <thead>
                   <tr>
                     <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
-                      <span v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</span>
-                      <span v-else>
-                        {{ selectedDbColumns[csvColumn] || 'Not Mapped' }}
-                      </span>
+                      <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
+                        matchingColumn(csvColumn) ? matchingColumn(csvColumn).name : selectedDbColumns[csvColumn]
+                        }}</span>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(row, rowIndex) in csvData.slice(0, 100)" :key="rowIndex">
                     <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
-                      <span v-if="getValueForColumn(row, csvColumn) != 'N/A'">{{ getValueForColumn(row, csvColumn)
-                        }}</span>
+                      <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
+                        getValueForColumn(row, csvColumn) !== 'N/A' ? getValueForColumn(row, csvColumn) : ''
+                      }}</span>
                     </td>
                   </tr>
                 </tbody>
               </table>
+
             </div>
             <!-- Buttons -->
             <div class="flex justify-end mt-6">
               <button @click="applyPreviewChanges" class="btn-green px-4 py-2">Apply</button>
-              <button @click="PreviewModal = false" class="ml-4 btn-red px-4 py-2">Cancel</button>
+              <button @click="handleCancel" class="ml-4 btn-red px-4 py-2">Cancel</button>
             </div>
           </div>
         </div>
