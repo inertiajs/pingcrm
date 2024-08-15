@@ -14,6 +14,10 @@
     @apply px-6 py-3 rounded bg-red-600 text-white text-sm leading-4 font-bold whitespace-nowrap hover:bg-red-400 focus:bg-red-400;
   }
 
+  .btn-yellow {
+    @apply px-6 py-3 rounded bg-yellow-600 text-white text-sm leading-4 font-bold whitespace-nowrap hover:bg-yellow-400 focus:bg-yellow-400;
+  }
+
 .btn-spinner,
 .btn-spinner:after {
   border-radius: 50%;

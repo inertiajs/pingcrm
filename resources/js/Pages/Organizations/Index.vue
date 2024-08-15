@@ -40,8 +40,12 @@
         <input type="file" ref="fileInput" accept=".csv" @change="handleFileUpload" style="display: none;" />
 
         <div v-if="showCsvModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-          <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+          <div class="bg-white rounded-lg shadow-lg p-6 w-1/3 max-w-4xl relative">
+
             <h2 class="text-xl font-bold mb-4">CSV Columns</h2>
+            <button @click="handleCancel" class="absolute top-2 right-2 btn-red px-3 py-1 mr-2" title="Go Back">
+              <font-awesome-icon icon="xmark" class="text-white" />
+            </button>
 
             <table class="w-full table-auto border-collapse">
               <thead>
@@ -57,15 +61,16 @@
                 }">
                   <td class="border p-2">{{ csvColumn }}</td>
                   <td class="border p-2 w-1/2">
-                    <label v-if="matchingColumn(csvColumn)">{{ matchingColumn(csvColumn).name }}</label>
-                    <select v-else v-model="selectedDbColumns[csvColumn]"
-                      style="width: 120px; background-color:transparent; ">
-                      <option value="" disabled>Select DB Column</option>
-                      <option v-for="dbColumn in availableDbColumns(csvColumn)" :key="dbColumn.name"
+                    <select v-model="selectedDbColumns[csvColumn]" style="width: 120px; background-color:transparent;">
+                      <option v-if="matchingColumn(csvColumn)">
+                        {{ matchingColumn(csvColumn).name }}
+                      </option>
+                      <option v-else v-for="dbColumn in availableDbColumns(csvColumn)" :key="dbColumn.name"
                         :value="dbColumn.name">
                         {{ dbColumn.name }}
                       </option>
                     </select>
+
                   </td>
                 </tr>
               </tbody>
@@ -79,10 +84,10 @@
         </div>
 
         <div v-if="PreviewModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-          <div class="bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-4xl relative">
+          <div class="bg-white rounded-lg shadow-lg p-6 w-auto min-h-1/2 max-w-4xl relative">
             <!-- Back Button -->
-            <button @click="goBack" class="absolute top-2 right-2 btn-red px-3 py-1 mr-2" title="Go Back">
-              <font-awesome-icon icon="arrow-left" class="text-white" />
+            <button @click="handleCancel" class="absolute top-2 right-2 btn-red px-3 py-1 mr-2">
+              <font-awesome-icon icon="xmark" class="text-white" />
             </button>
             <h2 class="text-xl font-bold mb-4">Preview Data <span class="text-xs">(Upto 100 Rows)</span></h2>
             <!-- Preview Table -->
@@ -111,7 +116,10 @@
             </div>
             <!-- Buttons -->
             <div class="flex justify-end mt-6">
-              <button @click="applyPreviewChanges" class="btn-green px-4 py-2">Apply</button>
+              <button @click="goBack" class="btn-yellow px-4 py-2">
+                Back
+              </button>
+              <button @click="applyPreviewChanges" class="btn-green px-4 py-2 ml-4">Apply</button>
               <button @click="handleCancel" class="ml-4 btn-red px-4 py-2">Cancel</button>
             </div>
           </div>
@@ -175,6 +183,7 @@ import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
 import draggable from 'vuedraggable'
 import Papa from 'papaparse'
+import { data } from 'autoprefixer'
 
 export default {
   components: {
@@ -297,10 +306,12 @@ export default {
 
     async applyPreviewChanges() {
       const dataToInsert = this.mapCsvToDbColumns();
+      console.log(dataToInsert)
 
       this.$inertia.post('/organizations/import-csv', { data: dataToInsert }, {
         onSuccess: () => {
           this.PreviewModal = false;
+          window.location.reload();
         },
         onError: (error) => {
           console.error("Error occurred while processing data:", error);
