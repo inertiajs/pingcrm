@@ -117,7 +117,7 @@
             </div>
             <!-- Buttons -->
             <div class="flex justify-end mt-6">
-              <button @click="goBack" class="btn-yellow px-4 py-2 mr-56">
+              <button @click="goBack" class="btn-yellow px-4 py-2 mr-auto">
                 Back
               </button>
 
