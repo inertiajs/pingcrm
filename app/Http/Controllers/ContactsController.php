@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Organization;
+use App\Models\ContactCustomColumns;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -20,6 +21,7 @@ class ContactsController extends Controller
         return Inertia::render('Contacts/Index', [
             'filters' => Request::all('search', 'trashed'),
             'organizations' => Organization::all(),
+            'additionalColumns' => Auth::user()->account->contactCustomColumns()->get(),
             'contacts' => Auth::user()->account->contacts()
                 ->with('organization')
                 ->orderByName()
@@ -33,6 +35,7 @@ class ContactsController extends Controller
                     'city' => $contact->city,
                     'deleted_at' => $contact->deleted_at,
                     'organization' => $contact->organization ? $contact->organization->only('name') : null,
+                    'additional_data' => $contact->additional_data,
                 ]),
         ]);
     }
@@ -183,6 +186,7 @@ class ContactsController extends Controller
     public function updateCustomColumns(Contact $contact): RedirectResponse
     {
         $columns = Request::input('columns');
+        $additionalData = json_decode($contact->additional_data, true) ?: [];
 
         foreach ($columns as $column) {
             if (isset($column['value']) && $column['value'] !== null) {
@@ -190,8 +194,14 @@ class ContactsController extends Controller
                     ['column_id' => $column['id']],
                     ['value' => $column['value']]
                 );
+
+                $columnName = ContactCustomColumns::where('id', $column['id'])->value('name');
+                $additionalData[$columnName] = $column['value'];
             }
         }
+        $contact->update([
+            'additional_data' => json_encode($additionalData),
+        ]);
 
 
         return Redirect::back()->with('success', 'Contact updated.');

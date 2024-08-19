@@ -158,7 +158,8 @@
           <th class="pb-4 pt-6 px-6">Name</th>
           <th class="pb-4 pt-6 px-6">Organization</th>
           <th class="pb-4 pt-6 px-6">City</th>
-          <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
+          <th class="pb-4 pt-6 px-6">Phone</th>
+          <th v-for="column in additionalColumns" :key="column.id" class="pb-4 pt-6 px-6">{{ column.name }}</th>
         </tr>
         <tr v-for="contact in contacts.data" :key="contact.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -182,6 +183,11 @@
           <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
             {{ contact.phone }}
+            </Link>
+          </td>
+          <td v-for="column in additionalColumns" :key="column.id" class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
+            {{ getValue(column.name, contact) }}
             </Link>
           </td>
           <td class="w-px border-t">
@@ -209,6 +215,7 @@ import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination.vue'
 import SearchFilter from '@/Shared/SearchFilter.vue'
 import Papa from 'papaparse'
+import { get } from 'lodash'
 
 export default {
   components: {
@@ -222,7 +229,8 @@ export default {
   props: {
     filters: Object,
     contacts: Object,
-    organizations: Object
+    organizations: Object,
+    additionalColumns: Object,
   },
   data() {
     return {
@@ -354,6 +362,14 @@ export default {
       });
 
     },
+
+    getValue(columnName, contact) {
+      // Ensure additional_data is parsed or initialized
+      const additionalData = JSON.parse(contact.additional_data || '{}');
+
+      // Return the value for the specified column name, or an empty string if the key doesn't exist
+      return additionalData[columnName] || '';
+    }
 
   },
 }
