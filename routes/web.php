@@ -140,6 +140,10 @@ Route::post('contacts/import-csv', [ContactsController::class, 'importCsv'])
     ->name('contacts.import-csv')
     ->middleware('auth');
 
+Route::post('contacts/add-column', [ContactsController::class, 'addColumn'])
+    ->name('contacts.column')
+    ->middleware('auth');
+
 // Reports
 
 Route::get('reports', [ReportsController::class, 'index'])

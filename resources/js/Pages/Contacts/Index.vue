@@ -13,6 +13,38 @@
         </select>
       </search-filter>
       <div>
+        <button @click="showModal = true" class="btn-indigo mx-4 px-3 py-2" title="Add New Columns">
+          <font-awesome-icon icon="table-cells" />
+        </button>
+        <div v-if="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+          <div class="bg-white rounded-lg shadow-lg p-4 w-72">
+            <h2 class="text-xl font-bold mb-4">Add New Columns</h2>
+            <div class="flex flex-col">
+              <div class="flex items-center justify-between">
+                <label for="name" class="block text-sm font-medium text-gray-700">Column Name</label>
+                <input type="text" id="name"
+                  class="mt-1 block w-1/2 py-1  px-2 text-base border-2 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" />
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <label for="type" class="block text-sm font-medium text-gray-700">Data Type</label>
+                <select id="type"
+                  class="mt-1 block w-1/2 py-2text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                  <option>string</option>
+                  <option>number</option>
+                  <option>date</option>
+                  <option>boolean</option>
+                </select>
+              </div>
+            </div>
+
+
+
+            <div class="flex justify-end mt-6">
+              <button @click="applyChanges" class="btn-green px-4 py-2">Apply</button>
+              <button @click="showModal = false" class="ml-4 btn-red px-4 py-2">Cancel</button>
+            </div>
+          </div>
+        </div>
         <button class="btn-indigo mr-4  px-3 py-2" title="Import CSV" @click="triggerFileInput">
           <font-awesome-icon icon="file-import" />
         </button>
@@ -78,7 +110,7 @@
                     <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         matchingColumn(csvColumn) ? matchingColumn(csvColumn).name : selectedDbColumns[csvColumn]
-                        }}</span>
+                      }}</span>
                     </th>
                   </tr>
                 </thead>
@@ -87,7 +119,7 @@
                     <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         getValueForColumn(row, csvColumn) !== 'N/A' ? getValueForColumn(row, csvColumn) : ''
-                        }}</span>
+                      }}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -198,6 +230,7 @@ export default {
         search: this.filters.search,
         trashed: this.filters.trashed,
       },
+      showModal: false,
       showCsvModal: false,
       PreviewModal: false,
       csvData: [],
@@ -304,6 +337,22 @@ export default {
     },
     handleCancel() {
       window.location.reload()
+    },
+
+    applyChanges() {
+      const name = document.getElementById('name').value;
+      const type = document.getElementById('type').value;
+
+      this.$inertia.post('/contacts/add-column', { name, type }, {
+        onSuccess: () => {
+          this.showModal = false;
+          window.location.reload();
+        },
+        onError: (error) => {
+          console.error("Error occurred while adding column:", error);
+        }
+      });
+
     },
 
   },

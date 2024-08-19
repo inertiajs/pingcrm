@@ -163,4 +163,16 @@ class ContactsController extends Controller
 
         return Redirect::route('contacts')->with('success', 'Contacts imported.');
     }
+
+    public function addColumn()
+    {
+        $column = Request::validate([
+            'name' => ['required', 'max:50'],
+            'type' => ['required', 'in:string,number,date'],
+        ]);
+
+        Auth::user()->account->contactCustomColumns()->create($column);
+
+        return Redirect::back()->with('success', 'Column added.');
+    }
 }

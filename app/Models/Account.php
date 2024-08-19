@@ -21,4 +21,9 @@ class Account extends Model
     {
         return $this->hasMany(Contact::class);
     }
+
+    public function contactCustomColumns(): HasMany
+    {
+        return $this->hasMany(ContactCustomColumns::class);
+    }
 }
