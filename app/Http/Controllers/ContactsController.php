@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
+use Mockery\Undefined;
 
 class ContactsController extends Controller
 {
@@ -92,6 +93,9 @@ class ContactsController extends Controller
                 ->get()
                 ->map
                 ->only('id', 'name'),
+
+            'customColumns' => Auth::user()->account->contactCustomColumns()->get(),
+            'customData' => $contact->contactsCustomData()->get()->map->only('column_id', 'value'),
         ]);
     }
 
@@ -174,5 +178,22 @@ class ContactsController extends Controller
         Auth::user()->account->contactCustomColumns()->create($column);
 
         return Redirect::back()->with('success', 'Column added.');
+    }
+
+    public function updateCustomColumns(Contact $contact): RedirectResponse
+    {
+        $columns = Request::input('columns');
+
+        foreach ($columns as $column) {
+            if (isset($column['value']) && $column['value'] !== null) {
+                $contact->contactsCustomData()->updateOrCreate(
+                    ['column_id' => $column['id']],
+                    ['value' => $column['value']]
+                );
+            }
+        }
+
+
+        return Redirect::back()->with('success', 'Contact updated.');
     }
 }
