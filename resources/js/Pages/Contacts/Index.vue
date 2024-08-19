@@ -78,7 +78,7 @@
                     <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         matchingColumn(csvColumn) ? matchingColumn(csvColumn).name : selectedDbColumns[csvColumn]
-                      }}</span>
+                        }}</span>
                     </th>
                   </tr>
                 </thead>
@@ -87,7 +87,7 @@
                     <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         getValueForColumn(row, csvColumn) !== 'N/A' ? getValueForColumn(row, csvColumn) : ''
-                      }}</span>
+                        }}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -286,15 +286,15 @@ export default {
       const dataToInsert = this.mapCsvToDbColumns();
       console.log(dataToInsert)
 
-      // this.$inertia.post('/organizations/import-csv', { data: dataToInsert }, {
-      //   onSuccess: () => {
-      //     this.PreviewModal = false;
-      //     window.location.reload();
-      //   },
-      //   onError: (error) => {
-      //     console.error("Error occurred while processing data:", error);
-      //   }
-      // });
+      this.$inertia.post('/contacts/import-csv', { data: dataToInsert }, {
+        onSuccess: () => {
+          this.PreviewModal = false;
+          window.location.reload();
+        },
+        onError: (error) => {
+          console.error("Error occurred while processing data:", error);
+        }
+      });
 
     },
 

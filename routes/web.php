@@ -135,6 +135,11 @@ Route::put('contacts/{contact}/restore', [ContactsController::class, 'restore'])
     ->name('contacts.restore')
     ->middleware('auth');
 
+
+Route::post('contacts/import-csv', [ContactsController::class, 'importCsv'])
+    ->name('contacts.import-csv')
+    ->middleware('auth');
+
 // Reports
 
 Route::get('reports', [ReportsController::class, 'index'])

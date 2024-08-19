@@ -131,4 +131,36 @@ class ContactsController extends Controller
 
         return Redirect::back()->with('success', 'Contact restored.');
     }
+
+    public function importCsv(): RedirectResponse
+    {
+        $data = Request::input('data');
+
+        $filteredData = array_filter($data, function ($row) {
+            if (empty($row['name'])) {
+                return false;
+            }
+
+            foreach ($row as $key => $value) {
+                if ($key !== 'name' && ($value === null || $value === 'N/A')) {
+                    $row[$key] = null;
+                }
+            }
+
+            return true;
+        });
+
+        foreach ($filteredData as $row) {
+            auth()->user()->account->contacts()->create([
+                'first_name' => explode(' ', $row['name'])[0],
+                'last_name' => explode(' ', $row['name'])[1],
+                'phone' => $row['phone'] ?? null,
+                'city' => $row['city'] ?? null,
+                'organization_id' => $row['organization_id'] ?? null,
+
+            ]);
+        }
+
+        return Redirect::route('contacts')->with('success', 'Contacts imported.');
+    }
 }
