@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
-use Mockery\Undefined;
+use App\Events\CustomColumnsUpdated;
 
 class ContactsController extends Controller
 {
@@ -186,7 +186,6 @@ class ContactsController extends Controller
     public function updateCustomColumns(Contact $contact): RedirectResponse
     {
         $columns = Request::input('columns');
-        $additionalData = json_decode($contact->additional_data, true) ?: [];
 
         foreach ($columns as $column) {
             if (isset($column['value']) && $column['value'] !== null) {
@@ -194,15 +193,10 @@ class ContactsController extends Controller
                     ['column_id' => $column['id']],
                     ['value' => $column['value']]
                 );
-
-                $columnName = ContactCustomColumns::where('id', $column['id'])->value('name');
-                $additionalData[$columnName] = $column['value'];
             }
         }
-        $contact->update([
-            'additional_data' => json_encode($additionalData),
-        ]);
 
+        event(new CustomColumnsUpdated($contact, $columns));
 
         return Redirect::back()->with('success', 'Contact updated.');
     }
