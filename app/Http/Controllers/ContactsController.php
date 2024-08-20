@@ -184,10 +184,7 @@ class ContactsController extends Controller
 
             Auth::user()->account->contactCustomColumns()->create($column);
 
-            //send status 200 code
-            return response()->json([], 200);
-
-            return Redirect::back()->with('success', 'Column added.')->json([], 200);
+            return Redirect::back()->with('success', 'Column added.');
         }
     }
 
