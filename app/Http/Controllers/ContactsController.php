@@ -178,9 +178,17 @@ class ContactsController extends Controller
             'type' => ['required', 'in:string,number,date'],
         ]);
 
-        Auth::user()->account->contactCustomColumns()->create($column);
+        if (Auth::user()->account->contactCustomColumns()->where('name', $column['name'])->exists()) {
+            return Redirect::back()->with('error', 'Column already exists.');
+        } else {
 
-        return Redirect::back()->with('success', 'Column added.');
+            Auth::user()->account->contactCustomColumns()->create($column);
+
+            //send status 200 code
+            return response()->json([], 200);
+
+            return Redirect::back()->with('success', 'Column added.')->json([], 200);
+        }
     }
 
     public function updateCustomColumns(Contact $contact): RedirectResponse

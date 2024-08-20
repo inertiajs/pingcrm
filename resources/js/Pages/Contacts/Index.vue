@@ -28,7 +28,7 @@
               <div class="flex items-center justify-between mt-4">
                 <label for="type" class="block text-sm font-medium text-gray-700">Data Type</label>
                 <select id="type"
-                  class="mt-1 block w-1/2 py-2text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                  class="mt-1 block w-1/2 py-1 border-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                   <option>string</option>
                   <option>number</option>
                   <option>date</option>
@@ -110,7 +110,7 @@
                     <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         matchingColumn(csvColumn) ? matchingColumn(csvColumn).name : selectedDbColumns[csvColumn]
-                      }}</span>
+                        }}</span>
                     </th>
                   </tr>
                 </thead>
@@ -119,7 +119,7 @@
                     <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         getValueForColumn(row, csvColumn) !== 'N/A' ? getValueForColumn(row, csvColumn) : ''
-                      }}</span>
+                        }}</span>
                     </td>
                   </tr>
                 </tbody>
