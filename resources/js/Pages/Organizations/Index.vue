@@ -46,36 +46,37 @@
             <button @click="handleCancel" class="absolute top-2 right-2 bg-transparent px-3 py-1 mr-2" title="Go Back">
               <font-awesome-icon icon="xmark" class="text-black" />
             </button>
+            <div class="overflow-y-auto max-h-64">
+              <table class="w-full table-auto border-collapse">
+                <thead>
+                  <tr>
+                    <th class="border font-bold text-left p-2">CSV Column</th>
+                    <th class="border font-bold text-left p-2">DB Column</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="csvColumn in csvColumns" :key="csvColumn" :class="{
+                    'bg-green-500': matchingColumn(csvColumn),
+                    'bg-yellow-500': !matchingColumn(csvColumn)
+                  }">
+                    <td class="border p-2">{{ csvColumn }}</td>
+                    <td class="border p-2 w-1/2">
+                      <select v-model="selectedDbColumns[csvColumn]"
+                        style="width: 120px; background-color:transparent;">
+                        <option v-if="matchingColumn(csvColumn)">
+                          {{ matchingColumn(csvColumn).name }}
+                        </option>
+                        <option v-else v-for="dbColumn in availableDbColumns(csvColumn)" :key="dbColumn.name"
+                          :value="dbColumn.name">
+                          {{ dbColumn.name }}
+                        </option>
+                      </select>
 
-            <table class="w-full table-auto border-collapse">
-              <thead>
-                <tr>
-                  <th class="border font-bold text-left p-2">CSV Column</th>
-                  <th class="border font-bold text-left p-2">DB Column</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="csvColumn in csvColumns" :key="csvColumn" :class="{
-                  'bg-green-500': matchingColumn(csvColumn),
-                  'bg-yellow-500': !matchingColumn(csvColumn)
-                }">
-                  <td class="border p-2">{{ csvColumn }}</td>
-                  <td class="border p-2 w-1/2">
-                    <select v-model="selectedDbColumns[csvColumn]" style="width: 120px; background-color:transparent;">
-                      <option v-if="matchingColumn(csvColumn)">
-                        {{ matchingColumn(csvColumn).name }}
-                      </option>
-                      <option v-else v-for="dbColumn in availableDbColumns(csvColumn)" :key="dbColumn.name"
-                        :value="dbColumn.name">
-                        {{ dbColumn.name }}
-                      </option>
-                    </select>
-
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="flex justify-end mt-6">
               <button @click="handleCancel" class="btn-red px-4 py-2">Cancel</button>
               <button @click="applyCsvChanges" class="ml-4 btn-green px-4 py-2">Continue</button>
@@ -99,7 +100,7 @@
                     <th v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b font-bold text-left p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         matchingColumn(csvColumn) ? matchingColumn(csvColumn).name : selectedDbColumns[csvColumn]
-                      }}</span>
+                        }}</span>
                     </th>
                   </tr>
                 </thead>
@@ -108,7 +109,7 @@
                     <td v-for="csvColumn in csvColumns" :key="csvColumn" class="border-b p-2">
                       <span v-if="selectedDbColumns[csvColumn] || matchingColumn(csvColumn)">{{
                         getValueForColumn(row, csvColumn) !== 'N/A' ? getValueForColumn(row, csvColumn) : ''
-                        }}</span>
+                      }}</span>
                     </td>
                   </tr>
                 </tbody>
