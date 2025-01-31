@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+// Reset demo environment daily at midnight
+Schedule::command('migrate:fresh')->dailyAt('00:00');
+Schedule::command('db:seed')->dailyAt('00:00');
