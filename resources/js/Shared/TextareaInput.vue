@@ -1,3 +1,24 @@
+<script setup>
+import { v4 as uuid } from 'uuid'
+
+defineOptions({
+  inheritAttrs: false,
+})
+
+defineProps({
+  id: {
+    type: String,
+    default() {
+      return `textarea-input-${uuid()}`
+    },
+  },
+  error: String,
+  label: String,
+  modelValue: String,
+})
+
+defineEmits(['update:modelValue'])
+</script>
 <template>
   <div :class="$attrs.class">
     <label v-if="label" class="form-label" :for="id">{{ label }}:</label>
@@ -5,31 +26,3 @@
     <div v-if="error" class="form-error">{{ error }}</div>
   </div>
 </template>
-
-<script>
-import { v4 as uuid } from 'uuid'
-
-export default {
-  inheritAttrs: false,
-  props: {
-    id: {
-      type: String,
-      default() {
-        return `textarea-input-${uuid()}`
-      },
-    },
-    error: String,
-    label: String,
-    modelValue: String,
-  },
-  emits: ['update:modelValue'],
-  methods: {
-    focus() {
-      this.$refs.input.focus()
-    },
-    select() {
-      this.$refs.input.select()
-    },
-  },
-}
-</script>
